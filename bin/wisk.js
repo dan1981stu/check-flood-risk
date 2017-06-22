@@ -1,10 +1,10 @@
 module.exports = [{
-  paths: ['client/**/*.js', 'client/**/*.html'],
+  paths: ['assets/**/*.js', 'assets/**/*.html'],
   on: {
     all: ['npm run build:js']
   }
 }, {
-  paths: ['client/**/*.scss'],
+  paths: ['assets/**/*.scss'],
   on: {
     all: ['npm run build:css']
   }
