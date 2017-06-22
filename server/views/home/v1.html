@@ -1,0 +1,105 @@
+<section class="breadcrumbs">
+  <ol>
+    <li><a href="/">Flooding</a></li>
+  </ol>
+</section>
+
+<div id="banner" style="display: none;">
+  <a href="#" class="message warning">
+    <img src="/public/images/flood-warnings-icon.gif" alt="flood-alerts">
+    There is currently a severe flood warning in force.&nbsp;<span class="pseudo-link">View details</span>
+  </a>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <main>
+      <h1 class="heading-xlarge">Flood information service</h1>
+      <p class="lede">
+        Check your risk of flooding: get current flood warnings, river and sea levels, check the 5-day forecast or use flood risk maps
+      </p>
+      <h1 class="heading-large">Are you at risk now?</h1>
+      <form class="find-location-for-service" method="get" action="/check-flood-risk">
+        <fieldset>
+          <legend class="visuallyhidden">Location lookup</legend>
+          <div class="ask_location">
+            <label class="instruction" for="location">Enter area of interest</label>
+            <p>For example "Newcastle" or "SW1A 2AA" or "River Severn"</p>
+            <p>
+              <input class="form-control" id="location" name="location" type="text">
+              <button type="submit" class="button">Find</button>
+            </p>
+            <p>
+              <a target="_blank" id="postcode-finder-link" rel="external" href="http://www.royalmail.com/find-a-postcode">You can find a postcode on Royal Mail's postcode finder</a>
+            </p>
+          </div>
+        </fieldset>
+      </form>
+      <br>
+      <br>
+      <br>
+      {{> common/flood-help}}    
+      {{> common/floodline-warnings}}
+      <!--<h2 class="heading-medium" tabindex="0">
+        {{> 'common/regional-title'}}
+      </h2>
+      {{> 'common/regional-links'}}-->
+    </main>    
+  </div>  
+  <div class="column-third">
+    <div class="related">
+      <aside class="govuk-related-items">
+        <h2>
+          Options
+        </h2>
+            <nav role="navigation">
+              <ul>
+                <li>
+                  <a href="/live-warnings">Live flood warnings</a>
+                </li>
+                <li>
+                  <a href="/live-warnings">River level information</a>
+                </li>
+                <li>
+                  <a href="/live-warnings">5 day flood forecast</a>
+                </li>
+                <li>
+                  <a href="/live-warnings">Long term flood risk</a>
+                </li>
+                <li>
+                  <a href="/live-warnings">Planning a build?</a>
+                </li>
+                <li class="related-items-more">
+                  <a href="#">
+                    More
+                      <span class="visuallyhidden">
+                        in Flood information services
+                      </span>
+                  </a>            
+                </li>
+              </ul>
+            </nav>
+        <h2>
+          Other ways to get flood warning information
+        </h2>
+        <nav role="navigation">
+          <ul>
+            <li>
+              <a href="http://www.nidirect.gov.uk/" rel="external">Northern Ireland Direct</a>
+            </li>
+            <li>
+              <a href="http://www.sepa.org.uk/" rel="external">Scottish Environment Protection Agency</a>
+            </li>
+            <li>
+              <a href="https://naturalresources.wales/flooding?lang=en" rel="external">Natural Resources Wales</a>
+            </li>
+          </ul>
+        </nav>
+        </aside>      
+    </div>    
+  </div>
+</div>
+
+<script>
+  $('#banner').slideDown()
+</script>

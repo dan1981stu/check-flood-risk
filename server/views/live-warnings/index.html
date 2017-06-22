@@ -1,0 +1,102 @@
+<section class="breadcrumbs">
+  <ol>
+    <li><a href="/">Flooding</a></li>
+    <li>Live Warnings</li>
+  </ol>
+</section>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <main>
+      <h1 class="heading-xlarge">Flood warnings currently issued for England</h1>
+      <section class="notifications-banner">
+        <h2 class="heading-medium" tabindex="0">Flood warnings currently issued for England</h2>
+        <span tabindex="0" class="sr-fix">There are currently 4 flood alerts in force in England.</span>
+        <div class="grid-row">
+          <div class="column-third">
+            <a class="severity severity-1" href="/warnings">
+              <h3 class="heading-xlarge ">
+                <img src="/public/images/severe-flood-warnings-icon.gif" alt="Severe Flood Warnings">0
+              </h3>
+              <div class="details">
+                <div class="title">Severe Flood Warnings</div>
+                <div class="tagline">Severe flooding</div>
+                <div class="description" title="danger to life">danger to life</div>
+              </div>
+            </a>
+          </div>
+          <div class="column-third">
+            <a class="severity severity-2" href="/warnings">
+              <h3 class="heading-xlarge">
+                <img src="/public/images/flood-warnings-icon.gif" alt="Flood Warnings">0
+              </h3>
+              <div class="details">
+                <div class="title">Flood Warnings</div>
+                <div class="tagline">Flooding is expected</div>
+                <div class="description" title="immediate action required">immediate action required</div>
+              </div>
+            </a>
+          </div>
+          <div class="column-third">
+            <a class="severity severity-3" href="/warnings#flood-alerts">
+              <h3 class="heading-xlarge">
+                <img src="/public/images/flood-alerts-icon.gif" alt="Flood Alerts">4
+              </h3>
+              <div class="details">
+                <div class="title">Flood Alerts</div>
+                <div class="tagline">Flooding is possible</div>
+                <div class="description" title="be prepared">be prepared</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="grid-row">
+          <div class="column-third">
+            <h3 class="heading-medium at-risk">Are you at risk now?</h3>
+          </div>
+          <div class="column-two-thirds">
+            <form id="entry-form" class="form-group search-warnings" method="get" action="/warnings" name="entry">
+              <label for="location" id="search-label" title="Search warnings and river levels in your location" class="sr-fix">Search warnings and river levels in your location</label>
+              <input id="location" class="form-control" type="text" placeholder="Enter a postcode or place in England" name="location" autocomplete="off">
+              <p id="error-message"></p>
+              <button type="submit" id="start-button" class="button button-get-started">Check a location</button>
+            </form>
+          </div>
+        </div>
+      </section>    
+    </main>    
+  </div>  
+  <div class="column-third">
+    <div class="related">        
+      <h2>
+        Map of the Area
+      </h2>
+      <aside class="govuk-related-items" role="complementary">
+        <div id="map" style="height: 180px;"></div>
+      </aside>      
+    </div>    
+  </div>
+</div>
+<script>
+  var map = L.map('map', {
+    fullscreenControl: {
+      pseudoFullscreen: false // if true, fullscreen to page width and height
+    }
+  }).setView([53.466, -2.254], 11)
+
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map)
+
+  L.marker([53.466, -2.254]).addTo(map)
+      .bindPopup('M15 5TN, Hulme, Manchester')
+      .openPopup()
+
+var bounds = [[53.462, -2.262], [53.470, -2.245]];
+
+// create an orange rectangle
+var boundingBox = L.rectangle(bounds, {
+  color: "#000",
+  weight: 1
+}).addTo(map);
+// map.addLayer(boundingBox);      
+</script>

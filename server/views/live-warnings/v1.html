@@ -1,0 +1,45 @@
+<section class="breadcrumbs">
+  <ol>
+    <li><a href="/">Flooding</a></li>
+    <li>Live Warnings</li>
+    <li>M15 5TN</li>
+  </ol>
+</section>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <main>
+      <h1 class="heading-xlarge">Flood risk for:<br><span class="heading-large">M15 5TN</span></h1>
+    </main>    
+  </div>  
+  <div class="column-third">
+    <div class="related">        
+      <h2 data-track-count="sidebarRelatedItemSection">
+        Map of the Area
+      </h2>
+      <aside class="govuk-related-items" data-module="track-click" role="complementary">
+        <div id="map" style="height: 180px;"></div>
+      </aside>      
+    </div>    
+  </div>
+</div>
+<script>
+  var map = L.map('map', {
+    fullscreenControl: {
+      pseudoFullscreen: false // if true, fullscreen to page width and height
+    }
+  }).setView([53.466, -2.254], 11)
+
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map)
+
+  L.marker([53.466, -2.254]).addTo(map)
+      .bindPopup('M15 5TN, Hulme, Manchester')
+      .openPopup()
+
+var bounds = [[53.462, -2.262], [53.470, -2.245]];
+
+// create an orange rectangle
+var boundingBox = L.rectangle(bounds, {color: "#000", weight: 1}).addTo(map);
+// map.addLayer(boundingBox);      
+</script>
