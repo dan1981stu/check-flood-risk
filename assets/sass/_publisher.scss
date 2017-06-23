@@ -1,0 +1,30 @@
+/*
+ * Transactions and local transactions styles
+ */
+
+.location-search {
+  background-color: $panel-colour;
+  min-height: 2em;
+  line-height: 2;
+  margin: 2em 0;
+  padding: 1em 0.75em 1em 1em;
+  position: relative;
+
+  @include media(mobile) {
+    margin: 1.2em 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    .postcode {
+      margin-left: 0;
+    }
+  }
+
+  p {
+    line-height:1.25;
+  }
+
+  button + p {
+    margin-top:1em;
+  }
+  
+}

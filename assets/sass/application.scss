@@ -3,7 +3,10 @@ $path: "/public/";
 @import 'govuk-elements';
 @import 'banner';
 @import 'message';
+@import 'publisher';
+@import 'related-items';
 
+/*
 .related {
   padding-top: 5px;
   margin-top: 40px;
@@ -52,3 +55,4 @@ $path: "/public/";
       font-weight: bold;
     }
 }
+*/
