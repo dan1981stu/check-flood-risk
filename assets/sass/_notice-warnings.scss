@@ -1,0 +1,39 @@
+$path: "/public/";
+
+.notice-warnings {
+    margin-top:2em;
+    margin-bottom:1em;
+    &:last-of-type {
+        margin-bottom:2em;
+    }
+    strong {
+        margin:0;
+        padding:0;
+        display:block;
+    }
+    p {
+        margin-bottom:0.5em;
+    }
+    li {
+        margin-bottom:10px;
+    }
+    a {
+        padding-left: 65px;
+        margin-left: -15px;
+        display:inline-block;
+    }
+}
+
+.icon-warning {
+    width:35px;
+    height:35px;
+    background-image:url('#{$path}icon-flood-alert-2x.gif');
+    background-position:center center;
+    background-size:100%;
+    @include media(mobile) {
+        background-size:80%;
+    }
+}
+
+
+
