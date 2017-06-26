@@ -1,0 +1,86 @@
+$path: "/public/";
+
+.map {
+  position:relative;
+  height:450px;
+}
+.map.map-full {
+  background-color: #fff;
+  height:100%;
+  width:100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1
+}
+
+// Map controls zoom
+
+.map-controls-zoom {
+  position:absolute;
+  left:10px;
+  top:10px;
+  z-index:1;
+}
+.map-control-zoomReset,
+.map-control-zoomIn,
+.map-control-zoomOut {
+  background-color: $link-colour;
+  display: block;
+  height: 30px;
+  position: relative;
+  width: 30px;
+  overflow: hidden;
+  text-indent: -5000px;
+  white-space: nowrap;
+  background-image:url('#{$path}map-controls-2x.png');
+  background-size:100%;
+}
+.map-control-zoomReset {
+  background-position:0% 0%;
+}
+.map-control-zoomIn {
+  background-position:0% 25%;
+}
+.map-control-zoomOut {
+  background-position:0% 50%;
+}
+.map-control:hover {
+  background-color:$focus-colour;
+}
+
+// Map controls main
+
+.map-controls-main {
+  position:absolute;
+  right:10px;
+  top:10px;
+  z-index:1;
+}
+.map-control-toggleSize {
+  background-color: $link-colour;
+  float:right;
+  height: 30px;
+  position: relative;
+  width: 30px;
+  overflow: hidden;
+  text-indent: -5000px;
+  white-space: nowrap;
+  background-image:url('#{$path}map-controls-2x.png');
+  background-size:100%;
+  background-position:0% 75%;
+}
+.map-control-satelliteView {
+  background-color: $link-colour;
+  float:right;  
+  height: 30px;
+  position: relative;
+  color:white !important;
+  text-decoration:none;
+  font-size:16px;
+  line-height:30px;
+  padding:0 6px;
+  margin-right:10px;
+}
