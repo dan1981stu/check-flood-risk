@@ -17,7 +17,7 @@ $path: "/public/";
     li {
         margin-bottom:10px;
     }
-    a {
+    a, span {
         padding-left: 55px;
         @include media(tablet) {
             padding-left: 60px;
@@ -67,6 +67,3 @@ $path: "/public/";
     height:50px;
     margin-top:-25px;
 }
-
-
-
