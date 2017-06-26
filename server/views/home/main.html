@@ -14,13 +14,13 @@
 			<h1 class="heading-xlarge">Find out if you're at risk of flooding</h1>
 			
 			<div class="location-search">
-				<form method="post" class="location-search-form">
+				<form method="post" class="location-search-form" action="/mytholmroyd" onsubmit="window.location.href='/mytholmroyd';return false">
 					<fieldset>
 						<legend class="visuallyhidden">Location lookup</legend>
 						<div class="ask_location">
-							<label class="heading-medium" for="postcode">Enter a location</label>
+							<label class="heading-medium" for="location">Enter a location</label>
 							<p>For example SW1A 2AA or Newcastle</p>
-							<input class="form-control" name="postcode" type="text" value="">
+							<input class="form-control" name="location" type="text" value="Mytholmroyd">
 							<button type="submit" class="button">Find</button>
 							<p><a rel="external" href="http://www.royalmail.com/find-a-postcode">Find a postcode on Royal Mail's postcode finder</a></p>
 						</div>

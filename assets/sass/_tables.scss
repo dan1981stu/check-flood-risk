@@ -15,3 +15,15 @@ table th, table td {
     }
 }
 
+// Get flood warnings
+table.select-areas {
+    .icon-tick {
+        width:16px;
+        height:16px;
+        margin-right:5px;
+        background-image:url('#{$path}icon-tick.png');
+        background-position:center center;
+        background-size:100%;
+    }
+}
+

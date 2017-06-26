@@ -16,7 +16,9 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const location = request.params.location.toLowerCase()
-				return reply.view('location/' + location)
+				return reply.view('location/' + location, {
+					'pageTitle' : 'Mytholmroyd - Current flood risk - GOV.UK'
+				})
 			}
 		}
 	}

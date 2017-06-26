@@ -18,21 +18,54 @@ $path: "/public/";
         margin-bottom:10px;
     }
     a {
-        padding-left: 65px;
+        padding-left: 55px;
+        @include media(tablet) {
+            padding-left: 60px;
+        }
         margin-left: -15px;
         display:inline-block;
     }
 }
 
-.icon-warning {
+.notice-alert, .notice-warning {
+    margin-bottom:2em;
+    @include media(tablet) {
+        margin-bottom:3em;
+    }
+    strong {
+        padding-top:0;
+        @include media(tablet) {
+            padding-left:76px;
+        }
+    }
+}
+
+.notice .icon-alert {
     width:35px;
     height:35px;
     background-image:url('#{$path}icon-flood-alert-2x.gif');
     background-position:center center;
-    background-size:100%;
-    @include media(mobile) {
-        background-size:80%;
+    background-size:80%;
+    @include media(tablet) {
+        background-size:100%;
     }
+}
+
+.notice .icon-warning {
+    width:35px;
+    height:35px;
+    background-image:url('#{$path}icon-flood-warning-2x.gif');
+    background-position:center center;
+    background-size:80%;
+    @include media(tablet) {
+        background-size:100%;
+    }
+}
+
+.notice .icon-large {
+    width:50px;
+    height:50px;
+    margin-top:-25px;
 }
 
 
