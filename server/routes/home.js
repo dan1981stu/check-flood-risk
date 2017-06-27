@@ -18,10 +18,9 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const location = request.params.location.toLowerCase()
-				const data = modelData[location]
 				return reply.view('home/risk-summary', {
-					'model': data,
-					'pageTitle' : data.name + ' - Current flood risk - GOV.UK'
+					'model': modelData.getSummary(location, 'a'),
+					'pageTitle' : ' data.name' + ' - Current flood risk - GOV.UK'
 				})
 			}
 		}

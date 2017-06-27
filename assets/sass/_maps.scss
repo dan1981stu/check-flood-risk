@@ -3,7 +3,13 @@ $path: "/public/";
 .map {
   position:relative;
   height:450px;
+  border:1px solid $border-colour;
 }
+
+.map-small {
+  height:275px;
+}
+
 .map.map-full {
   background-color: #fff;
   height:100%;
@@ -13,7 +19,8 @@ $path: "/public/";
   right: 0;
   bottom: 0;
   top: 0;
-  z-index: 1
+  z-index: 1;
+  border: none
 }
 
 // Map controls zoom

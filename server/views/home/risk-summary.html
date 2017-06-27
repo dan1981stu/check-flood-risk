@@ -17,8 +17,16 @@
 
 			<h1 class="heading-xlarge" style="margin-bottom:1em">
 				Current flood risk
-				<span class="heading-secondary">{{ model.name }}</span>
+				<span class="heading-secondary">{{ model.town.name }}</span>
 			</h1>
+
+		</div>
+
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
 
 			<!--
 			<div class="panel panel-warnings">
@@ -70,11 +78,25 @@
 				</div>
 			</div>
 			
-			<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>
+		</div>
+
+		<div class="column-third">
+
+			<div id="map" class="map map-small"></div>
+			<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
+
+		</div>
+	
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
 
 			<h2 class="heading-medium">Things you should do now</h2>
 			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.</p>
-			<p>Get uptodate warnings for the area around Mytholmroyd by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
+			<p>Get uptodate warnings for this area by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
 			<p>River levels on the River Calder and Hebdon Water forecast possible flooding in the next 36 hours. <a href="/river-and-sea-levels?location=mytholmroyd">Monitor local river levels</a>.</p>
 
 			<details style="margin-top:2em" role="group">
@@ -95,26 +117,21 @@
 
 		</div>
 
+		<!--
 		<div class="column-third">
 			<div class="related">
 				<aside class="govuk-related-items">
 					<h2>Weather forecast</h2>
 					<p class="font-xsmall">There is an <a href="">amber warning for rain</a> in the north of England for 23-24 June. <a href="">Check the local weather forecast</a>.</p>
-					<h2 style="margin-top:2em">Flooding and extreme weather</h2>
-					<nav role="navigation">
-						<ul>
-							<li>
-								<a href="">Check your long term flood risk</a>
-							</li>
-							<li>
-								<a href="">Check your flood risk for planning</a>
-							</li>
-						</ul>
-					</nav>
 				</aside>      
 			</div>    
 		</div>
+		-->
 
 	</div>
 
 </main>
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+<script src="/public/javascripts/map.js" type="text/javascript"></script>
