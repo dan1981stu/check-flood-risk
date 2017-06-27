@@ -1,3 +1,5 @@
+const modelData = require('../models/risk-summary')
+
 module.exports = [
 	{
 		method: 'GET',
@@ -16,8 +18,10 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const location = request.params.location.toLowerCase()
-				return reply.view('location/' + location, {
-					'pageTitle' : 'Mytholmroyd - Current flood risk - GOV.UK'
+				const data = modelData[location]
+				return reply.view('home/risk-summary', {
+					'model': data,
+					'pageTitle' : data.name + ' - Current flood risk - GOV.UK'
 				})
 			}
 		}

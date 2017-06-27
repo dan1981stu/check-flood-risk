@@ -15,9 +15,9 @@
 
 		<div class="column-two-thirds">
 
-			<h1 class="heading-xlarge">
+			<h1 class="heading-xlarge" style="margin-bottom:1em">
 				Current flood risk
-				<span class="heading-secondary">Mytholmroyd</span>
+				<span class="heading-secondary">{{ model.name }}</span>
 			</h1>
 
 			<!--
@@ -30,40 +30,44 @@
 			</div>
 			-->
 
-			<div class="notice notice-warnings">
-				<p>
-					<strong class="bold-medium">Flood warnings in force</strong>
-					Flooding is expected – immediate action required
-				</p>
-				<ul class="list">
-					<li class="notice">
-						<i class="icon icon-warning">
-							<span class="visually-hidden">Warning</span>
-						</i>
-						<a href="/warnings/central-mytholmroyd-river-calder">Central Mytholmroyd (River Calder)</a>
-					</li>
-					<li class="notice">
-						<i class="icon icon-warning">
-							<span class="visually-hidden">Warning</span>
-						</i>
-						<span>Hebden Bridge (River Calder and Hebden Water)</span>
-					</li>
-				</ul>
+			<div class="panel panel-border-warnings">
+				<div class="notice notice-warnings">
+					<p>
+						<strong class="bold-medium">2 flood warnings in force</strong>
+						Flooding is expected – immediate action required
+					</p>
+					<ul class="list">
+						<li class="notice">
+							<i class="icon icon-warning">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<a href="/warnings/central-mytholmroyd-river-calder">Central Mytholmroyd (River Calder)</a>
+						</li>
+						<li class="notice">
+							<i class="icon icon-warning">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<span>Hebden Bridge (River Calder and Hebden Water)</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 
-			<div class="notice notice-warnings">
-				<p>
-					<strong class="bold-medium">Flood alert in force</strong>
-					Flooding is possible – be prepared
-				</p>
-				<ul class="list">
-					<li class="notice">
-						<i class="icon icon-alert">
-							<span class="visually-hidden">Warning</span>
-						</i>
-						<span>Hebden Bridge - Old Gate (Hebden Water)</span>
-					</li>
-				</ul>
+			<div class="panel panel-border-alerts">
+				<div class="notice notice-warnings">
+					<p>
+						<strong class="bold-medium">1 flood alert in force</strong>
+						Flooding is possible – be prepared
+					</p>
+					<ul class="list">
+						<li class="notice">
+							<i class="icon icon-alert">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<span>Hebden Bridge - Old Gate (Hebden Water)</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 			
 			<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>
@@ -72,7 +76,6 @@
 			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.</p>
 			<p>Get uptodate warnings for the area around Mytholmroyd by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
 			<p>River levels on the River Calder and Hebdon Water forecast possible flooding in the next 36 hours. <a href="/river-and-sea-levels?location=mytholmroyd">Monitor local river levels</a>.</p>
-			<p>There is an <a href="">amber warning for rain</a> in the north of England for 23-24 June. <a href="">Check the local weather forecast</a>.</p>
 
 			<details style="margin-top:2em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Other ways to get flood warning information</span></summary>
@@ -95,7 +98,9 @@
 		<div class="column-third">
 			<div class="related">
 				<aside class="govuk-related-items">
-					<h2>Flooding and extreme weather</h2>
+					<h2>Weather forecast</h2>
+					<p class="font-xsmall">There is an <a href="">amber warning for rain</a> in the north of England for 23-24 June. <a href="">Check the local weather forecast</a>.</p>
+					<h2 style="margin-top:2em">Flooding and extreme weather</h2>
 					<nav role="navigation">
 						<ul>
 							<li>

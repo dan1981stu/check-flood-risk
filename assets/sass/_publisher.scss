@@ -9,12 +9,17 @@
   margin: 2em 0;
   padding: 1em 0.75em 1em 1em;
   position: relative;
+  
+  label {
+    display:block;
+    margin-top:0.5em;
+  }
 
   @include media(mobile) {
     margin: 1.2em 0;
     padding-left: 1em;
     padding-right: 1em;
-    .postcode {
+    .location {
       margin-left: 0;
     }
   }

@@ -1,0 +1,12 @@
+{
+    "mytholmroyd": {
+        "name" : "Mytholmroyd",
+        "path" : "mytholmroyd",  
+        "scenario" : "a"
+    },
+    "gloucester": {
+        "name" : "Gloucester",
+        "path" : "gloucester",  
+        "scenario" : "b"
+    }
+}

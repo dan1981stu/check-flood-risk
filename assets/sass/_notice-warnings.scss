@@ -1,11 +1,22 @@
 $path: "/public/";
 
-.notice-warnings {
+.panel-border-warnings {
+    border-left-width: 5px;
+    padding-bottom:1em;
+    padding-left:1em;
+    border-color:#e3000f;
     margin-bottom:1em;
-    &:last-of-type {
-        margin-top:2em;
-        margin-bottom:2em;
-    }
+}
+
+.panel-border-alerts {
+    border-left-width: 5px;
+    padding-bottom:1em;
+    padding-left:1em;
+    border-color:#f18700;
+    margin-bottom:1em;
+}
+
+.notice-warnings {
     strong {
         margin:0;
         padding:0;
@@ -35,7 +46,7 @@ $path: "/public/";
     strong {
         padding-top:0;
         @include media(tablet) {
-            padding-left:76px;
+            padding-left:70px;
         }
     }
 }
@@ -46,6 +57,7 @@ $path: "/public/";
     background-image:url('#{$path}icon-flood-alert-2x.gif');
     background-position:center center;
     background-size:80%;
+    margin-top:-17px;
     @include media(tablet) {
         background-size:100%;
     }
@@ -57,13 +69,14 @@ $path: "/public/";
     background-image:url('#{$path}icon-flood-warning-2x.gif');
     background-position:center center;
     background-size:80%;
+    margin-top:-17px;
     @include media(tablet) {
         background-size:100%;
     }
 }
 
 .notice .icon-large {
-    width:50px;
-    height:50px;
-    margin-top:-25px;
+    width:44px;
+    height:44px;
+    margin-top:-22px;
 }
