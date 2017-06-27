@@ -29,7 +29,7 @@ exports.getSummary = function(name, scenario) {
 	// Add relevant warnings for postcode and scenario
 	if (postcodes) {
 		
-		var warningsByScenario = data.warning.filter(x =>x.scenario.indexOf(scenario) > -1)
+		var warningsByScenario = data.targetArea.filter(x =>x.scenario.indexOf(scenario) > -1)
 		for (var key in warningsByScenario) {
 			var warning = warningsByScenario[key]
 			for (var key in postcodes) {

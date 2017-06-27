@@ -2,82 +2,45 @@
     "firstLine" : [
         {
             "id" : 1,
-            "name" : "3 Hewitt Street",
-            "postcodeId" : 1
-        },
-        {
-            "id" : 2,
-            "name" : "15 Palmyra Square South",
-            "postcodeId" : 2
-        },
-        {
-            "id" : 3,
             "name" : "5 Ribstone Street, Hebden Bridge",
-            "postcodeId" : 3
+            "postcodeId" : 1
         }
     ],
     "postcode" : [
         {
             "id" : 1,
-            "name" : "WA4 1BG",
-            "townId" : 1,
-            "warnings" : [1,3]
-        },
-        {
-            "id" : 2,
-            "name" : "WA1 1BL",
-            "townId" : 1,
-            "warnings" : [2]
-        },
-        {
-            "id" : 3,
             "name" : "HX7 5NR",
-            "townId" : 3,
-            "warnings" : []
+            "townId" : 1,
+            "warnings" : [1,2,3]
         }
     ],
     "town" : [
         {
             "id" : 1,
-            "name" : "Warrington"
-        },
-        {
-            "id" : 2,
-            "name" : "Manchester"
-        },
-        {
-            "id" : 3,
             "name" : "Mytholmroyd"
         }
     ],
-    "warning" : [
+    "targetArea" : [
         {
             "id" : 1,
-            "title" : "Cheetham Hill (River Irk)",
-            "path" : "cheetham-hill-river-irk",  
+            "title" : "Central Mytholmroyd (River Calder)",
+            "path" : "central-mytholmroyd-river-calder)",  
             "severity" : 2,
-            "scenario" : ["a","b"]
+            "scenario" : ["a"]
         },
         {
             "id" : 2,
-            "title" : "Crumpsall Hospital (River Irk)",
-            "path" : "crumpsall-hospital-river-irk",
+            "title" : "Hebden Bridge (River Calder and Hebden Water)",
+            "path" : "hebden-bridge-river-calder-and-hebden-water)",  
             "severity" : 2,
             "scenario" : ["a"]
         },
         {
             "id" : 3,
-            "title" : "Vale Park Industrial Estate (River Irk)",
-            "path" : "vale-park-industrial-estate-river-irk",
+            "title" : "Hebden Bridge - Old Gate (Hebden Water)",
+            "path" : "hebden-bridge-old-gate-hebden-water",  
             "severity" : 3,
-            "scenario" : ["a"]  
-        },
-        {
-            "id" : 4,
-            "title" : "Ardwick, Linton Grove and parts of Harding Street, Tutbury Street (River Medlock)",
-            "path" : "ardwick-linton-grove-harding-street-tutbury-street-river-medlock",
-            "severity" : 4,
-            "scenario" : ["c"]  
+            "scenario" : ["a"]
         }
     ]
 }
