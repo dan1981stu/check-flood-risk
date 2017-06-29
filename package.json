@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index",
     "clean": "bin/clean-public",
-    "copy": "npm run copy:gov && npm run copy:assets",
+    "copy": "npm run copy:assets",
     "copy:gov": "bin/copy-gov && bin/fix-layout.js",
     "copy:assets": "bin/copy-assets",
     "build:js": "bin/build-js",
