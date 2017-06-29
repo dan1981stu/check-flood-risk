@@ -9,15 +9,15 @@
 </div>
 -->
 
+{{#if trace }}
+<p class="font-xsmall">{{ json model }}<p>
+{{/if }}
+
 <main>
 
 	<div class="grid-row">
 
 		<div class="column-two-thirds">
-
-			{{#if trace }}
-			<p>{{ json model }}<p>
-			{{/if }}
 
 			<h1 class="heading-xlarge" style="margin-bottom:1em">
 				Current flood risk
@@ -35,7 +35,7 @@
 		<div class="column-two-thirds">
 
 			{{#if model.hasWarnings }}
-			{{#if model.intersectingWarning.id }}
+			{{#if model.hasIntersectWarning }}
 			<div class="panel panel-border-warning">
 				<p class="notice notice-warning">
 					<i class="icon icon-warning icon-warning-large">
@@ -50,7 +50,7 @@
 					Flooding is expected - immediate action required
 				</p>
 			</div>
-			{{else if model.intersectingAlert.id }}
+			{{else if model.hasIntersectAlert }}
 			<div class="panel panel-border-alert">
 				<p class="notice notice-warning">
 					<i class="icon icon-alert icon-alert-large">
@@ -68,7 +68,7 @@
 			{{/if }}
 
 			{{#if model.warnings }}
-			<div class="panel {{#if model.hasIntersect }}panel-border-warning-nearby{{ else }}panel-border-warning{{/if}}">
+			<div class="panel {{#if model.hasIntersectAlertOrWarning }}panel-border-warning-nearby{{ else }}panel-border-warning{{/if}}">
 				<div class="notice notice-warnings">
 					<p>
 						<strong class="{{#if model.intersectingWarning.id }}bold-small{{ else }}bold-medium{{/if}}">{{ model.warnings.length }} flood warning{{#isPlural model.warnings.length}}s{{/isPlural}} {{#if model.intersectingWarning.id }}nearby{{ else }}in this area{{/if}}</strong>
@@ -146,7 +146,7 @@
 			<p>Actions for someone who lives within or on the boundary of a flood warning area that is currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a></p>
 			<p>Get updates to {{ model.intersectingWarning.name }} and nearby warnings by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
 			{{ else }}
-			{{#if hasWarnings }}
+			{{#if model.hasWarnings }}
 			<p>
 				<a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.
 			</p>
@@ -156,7 +156,7 @@
 			</p>
 			{{/if }}
 			<p>
-				Get {{#if hasWarnings }}uptodate{{else }}flood{{/if }} warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a>
+				Get {{#if model.hasWarnings }}uptodate{{else }}flood{{/if }} warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a>
 			</p>
 			{{/if }}
 
