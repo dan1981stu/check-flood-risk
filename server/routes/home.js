@@ -23,7 +23,7 @@ module.exports = [
 				return reply.view('home/risk-summary', {
 					'model': modelData.getSummary(location, scenario),
 					'trace' : trace,
-					'pageTitle' : ' data.name' + ' - Current flood risk - GOV.UK'
+					'pageTitle' : modelData.getSummary(location, scenario).location + ' - Current flood risk - GOV.UK'
 				})
 			}
 		}
