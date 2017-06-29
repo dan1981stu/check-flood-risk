@@ -4,6 +4,10 @@ const manifest = {
   server: {
     connections: {
       routes: {
+        auth: {
+          mode: 'required',
+          strategy: 'simple'
+        },
         validate: {
           options: {
             abortEarly: false
@@ -29,6 +33,16 @@ const manifest = {
     }
   ],
   registrations: [
+    {
+      plugin: {
+        register: 'hapi-auth-basic'
+      }
+    },
+    {
+      plugin: {
+        register: './plugins/auth'
+      }
+    },
     {
       plugin: {
         register: 'inert'

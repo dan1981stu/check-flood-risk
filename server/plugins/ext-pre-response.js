@@ -19,8 +19,10 @@ exports.register = function (server, options, next) {
         message: response.message
       })
 
-      // The return the `500` view
-      return reply.view('500').code(statusCode)
+      if (statusCode !== 401) {
+        // The return the `500` view
+        return reply.view('500').code(statusCode)
+      }
     }
 
     return reply.continue()
