@@ -18,8 +18,11 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const location = request.params.location.toLowerCase()
+				const scenario = request.query.s ? request.query.s : 'a'
+				const trace = request.query.t ? request.query.t : false
 				return reply.view('home/risk-summary', {
-					'model': modelData.getSummary(location, 'a'),
+					'model': modelData.getSummary(location, scenario),
+					'trace' : trace,
 					'pageTitle' : ' data.name' + ' - Current flood risk - GOV.UK'
 				})
 			}

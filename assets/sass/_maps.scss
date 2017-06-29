@@ -1,5 +1,19 @@
 $path: "/public/";
 
+.map-outer {
+  @include media(tablet) {
+    width:100%;
+    position:relative;
+  }
+}
+
+.map-inner {
+  @include media(tablet) {
+    position:absolute;
+    width:100%;
+  }
+}
+
 .map {
   position:relative;
   height:450px;

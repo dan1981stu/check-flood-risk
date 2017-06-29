@@ -13,7 +13,7 @@ module.exports = [
 		path: '/warnings/central-mytholmroyd-river-calder',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('warnings/central-mytholmroyd-river-calder', {
+				return reply.view('warnings/detail', {
 					'pageTitle' : 'Central Mytholmroyd (River Calder) - Flood warning - GOV.UK'
 				})
 			}

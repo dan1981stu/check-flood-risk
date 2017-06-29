@@ -15,9 +15,15 @@
 
 		<div class="column-two-thirds">
 
+			{{#if trace }}
+			<p>{{ json model }}<p>
+			{{/if }}
+
 			<h1 class="heading-xlarge" style="margin-bottom:1em">
 				Current flood risk
-				<span class="heading-secondary">{{ model.postcode.name }}, {{ model.town.name }}</span>
+				<span class="heading-secondary">
+					{{ model.location }}
+				</span>
 			</h1>
 
 		</div>
@@ -28,62 +34,96 @@
 
 		<div class="column-two-thirds">
 
-			<!--
-			<div class="panel panel-warnings">
-				<p>
-					<strong class="bold-medium">Alert in force - River Calder at Central Mytholmroyd</strong><br/>
-					Flooding is possible – be prepared
+			{{#if model.hasWarnings }}
+			{{#if model.intersectingWarning.id }}
+			<div class="panel panel-border-warning">
+				<p class="notice notice-warning">
+					<i class="icon icon-warning icon-warning-large">
+						<span class="visually-hidden">Warning</span>
+					</i>
+					<strong class="bold-medium">
+						Flood warning
+					</strong>					
 				</p>
-				<p>The time and date of the forecast high water is 7:30 am on 24/06/2017. The forecast tide level is 6.14 m AOD. The forecast wind strength is Force 3 from the direction of west south west. Please note all tide times are in local time and refer to the high water time at Hinkley Point. The conditions only just reach our flood alert threshold for Saturday morning. However peak tides are currently rising and we will re-issue this flood alert, which is likely to remain in force for the weekend.</p>
+				<p class="font-medium">
+					<a href="/warnings/{{ model.intersectingWarning.path }}">{{ model.intersectingWarning.name }}</a><br/>
+					Flooding is expected - immediate action required
+				</p>
 			</div>
-			-->
+			{{else if model.intersectingAlert.id }}
+			<div class="panel panel-border-alert">
+				<p class="notice notice-warning">
+					<i class="icon icon-alert icon-alert-large">
+						<span class="visually-hidden">Alert</span>
+					</i>
+					<strong class="bold-medium">
+						Flood alert
+					</strong>					
+				</p>
+				<p class="font-medium">
+					<a href="/warnings/{{ model.intersectingAlert.path }}">{{ model.intersectingAlert.name }}</a><br/>
+					Flooding is possible - be prepared
+				</p>
+			</div>
+			{{/if }}
 
-			<div class="panel panel-border-warnings">
+			{{#if model.warnings }}
+			<div class="panel {{#if model.hasIntersect }}panel-border-warning-nearby{{ else }}panel-border-warning{{/if}}">
 				<div class="notice notice-warnings">
 					<p>
-						<strong class="bold-medium">2 flood warnings in force</strong>
+						<strong class="{{#if model.intersectingWarning.id }}bold-small{{ else }}bold-medium{{/if}}">{{ model.warnings.length }} flood warning{{#isPlural model.warnings.length}}s{{/isPlural}} {{#if model.intersectingWarning.id }}nearby{{ else }}in this area{{/if}}</strong>
 						Flooding is expected – immediate action required
 					</p>
 					<ul class="list">
+						{{#each model.warnings }}
 						<li class="notice">
 							<i class="icon icon-warning">
 								<span class="visually-hidden">Warning</span>
 							</i>
-							<a href="/warnings/central-mytholmroyd-river-calder">Central Mytholmroyd (River Calder)</a>
+							<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
 						</li>
-						<li class="notice">
-							<i class="icon icon-warning">
-								<span class="visually-hidden">Warning</span>
-							</i>
-							<span>Hebden Bridge (River Calder and Hebden Water)</span>
-						</li>
+						{{/each }}
 					</ul>
 				</div>
 			</div>
+			{{/if}}
 
-			<div class="panel panel-border-alerts">
+			{{#if model.alerts}}
+			<div class="panel {{#if model.warnings }}panel-border-warning-nearby{{ else }}panel-border-alert{{/if}}">
 				<div class="notice notice-warnings">
 					<p>
-						<strong class="bold-medium">1 flood alert in force</strong>
+						<strong class="{{#if model.intersectingWarning.id }}bold-small{{ else }}bold-medium{{/if}}">{{ model.alerts.length }} flood alert{{#isPlural model.alerts.length}}s{{/isPlural}} in this area</strong>
 						Flooding is possible – be prepared
 					</p>
 					<ul class="list">
+						{{#each model.alerts }}
 						<li class="notice">
 							<i class="icon icon-alert">
 								<span class="visually-hidden">Warning</span>
 							</i>
-							<span>Hebden Bridge - Old Gate (Hebden Water)</span>
+							<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
 						</li>
+						{{/each }}
 					</ul>
 				</div>
 			</div>
+			{{/if}}
+			{{else}}
+			<p class="lede">No warnings</p>
+			{{/if}}
 			
 		</div>
 
 		<div class="column-third">
 
-			<div id="map" class="map map-small"></div>
-			<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
+			<div class="map-outer">
+				<div class="map-inner">
+					<div id="map" class="map map-small"></div>
+					<p style="margin-top:0.5em">Potential affected areas</p>
+					<p>Weather component<p>
+					<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
+				</div>
+			</div>
 
 		</div>
 	
@@ -93,11 +133,32 @@
 
 		<div class="column-two-thirds">
 
+			<h2 class="heading-medium">How might current river levels impact this area?</h2>
+			<p>Current river levels in the Upper Calder catchment are above normal range. Be aware of the following potential impacts.</p>
+			<ul class="list list-bullet">
+				<li>Overtopping of the River Calder at the junction of Longfellows Crecent and Burnley Road</li>
+				<li>Flooding of low-lying land around St Michaels church</li>
+			</ul>
+			<p><a href="/river-and-sea-levels?location=mytholmroyd">Monitor river levels in the Upper Calder catchment</a>.</p>
 
 			<h2 class="heading-medium">Things you should do now</h2>
-			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.</p>
-			<p>Get uptodate warnings for this area by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
-			<p>River levels on the River Calder and Hebdon Water forecast possible flooding in the next 36 hours. <a href="/river-and-sea-levels?location=mytholmroyd">Monitor local river levels</a>.</p>
+			{{#if model.intersectingWarning.id }}
+			<p>Actions for someone who lives within or on the boundary of a flood warning area that is currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a></p>
+			<p>Get updates to {{ model.intersectingWarning.name }} and nearby warnings by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
+			{{ else }}
+			{{#if hasWarnings }}
+			<p>
+				<a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.
+			</p>
+			{{else }}
+			<p>
+				<a href="https://www.gov.uk/prepare-for-flooding/future-flooding">Protect yourself from future flooding</a>.
+			</p>
+			{{/if }}
+			<p>
+				Get {{#if hasWarnings }}uptodate{{else }}flood{{/if }} warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a>
+			</p>
+			{{/if }}
 
 			<details style="margin-top:2em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Other ways to get flood warning information</span></summary>

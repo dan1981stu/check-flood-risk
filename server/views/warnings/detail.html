@@ -20,22 +20,39 @@
 				<span class="heading-secondary">Central Mytholmroyd (River Calder)</span>
 			</h1>
 
-			<div class="panel panel-border-warnings" style="margin-bottom:2em">
-				<p class="notice notice-warning">
-					<i class="icon icon-warning icon-large">
-						<span class="visually-hidden">Warning</span>
-					</i>
-					<strong class="font-medium">
-						Flooding expected - immediate action required
-					</strong>
+		</div>
+
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<div class="panel panel-border-warning" style="margin-bottom:2em">
+				<p class="bold-medium">
+					Flooding expected - immediate action required
 				</p>
 			</div>
 
-			<p>
-				Message text
-			</p>
+			<p>This message has been issued because of the rainfall overnight and during this morning affecting this area. This means that river levels are expected to continue to rise over the next new hours.</p></p>
+			<p>The forecast is for showers throughout the day which will keep rivers fluctuating. We are expecting river levels to remain responsive to further rainfall.</p>
+			<p>We will continue to closely monitor levels and update this message as necessary.</p>
 
-			<p><a href="/map?location=central-mytholmroyd-river-calder">View map showing possible affected areas</a></p>
+		</div>
+
+		<div class="column-third">
+
+			<div id="map" class="map map-small"></div>
+			<p style="margin-top:0.5em">Potential affected areas</p>
+			<!--<p><a href="/map?location=central-mytholmroyd-river-calder">View map showing possible affected areas</a></p>-->
+
+		</div>
+
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
 
 			<p>Get updates to this warning by phone, text message or email.<br/><a href="/get-flood-warnings/add-your-contact-details?single=true">Add your contact details</a></p>
 
@@ -55,21 +72,10 @@
 
 		</div>
 
-		<div class="column-third">
-			<div class="related">
-				<aside class="govuk-related-items">
-					<h2>Flooding and extreme weather</h2>
-					<nav role="navigation">
-						<ul>
-							<li>
-								<a href="">Item</a>
-							</li>
-						</ul>
-					</nav>
-				</aside>      
-			</div>    
-		</div>
-
 	</div>
 
 </main>
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+<script src="/public/javascripts/map.js" type="text/javascript"></script>

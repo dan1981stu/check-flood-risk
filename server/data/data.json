@@ -2,16 +2,31 @@
     "firstLine" : [
         {
             "id" : 1,
-            "name" : "5 Ribstone Street, Hebden Bridge",
+            "name" : "28 Westfield Terrace",
+            "postcodeId" : 1
+        },
+        {
+            "id" : 2,
+            "name" : "11 Albert Street",
             "postcodeId" : 1
         }
     ],
     "postcode" : [
         {
             "id" : 1,
-            "name" : "HX7 5NR",
+            "name" : "HX7 5DL",
             "townId" : 1,
-            "warnings" : [1,2,3]
+            "intersectingWarning" : 1,
+            "intersectingAlert" : 101,
+            "targetAreas" : [1,2,3,4,5,101]
+        },
+        {
+            "id" : 2,
+            "name" : "HX7 5NN",
+            "townId" : 1,
+            "intersectingWarning" : -1,
+            "intersectingAlert" : 101,
+            "targetAreas" : [1,2,3,4,5,101]
         }
     ],
     "town" : [
@@ -23,22 +38,49 @@
     "targetArea" : [
         {
             "id" : 1,
-            "title" : "Central Mytholmroyd (River Calder)",
-            "path" : "central-mytholmroyd-river-calder)",  
+            "type" : "warning",
+            "name" : "Central Mytholmroyd (River Calder)",
+            "path" : "central-mytholmroyd-river-calder",  
             "severity" : 2,
             "scenario" : ["a"]
         },
         {
             "id" : 2,
-            "title" : "Hebden Bridge (River Calder and Hebden Water)",
-            "path" : "hebden-bridge-river-calder-and-hebden-water)",  
-            "severity" : 2,
+            "type" : "warning",
+            "name" : "Mytholmroyd (River Calder and Cragg Brook)",
+            "path" : "mytholmroyd-river-calder-and-cragg-brook",  
+            "severity" : -1,
             "scenario" : ["a"]
         },
         {
             "id" : 3,
-            "title" : "Hebden Bridge - Old Gate (Hebden Water)",
+            "type" : "warning",
+            "name" : "Brearley and Luddenden Foot (River Calder)",
+            "path" : "brearley-and-luddenden-foot-river-calder",  
+            "severity" : 2,
+            "scenario" : ["a"]
+        },
+        {
+            "id" : 4,
+            "type" : "warning",
+            "name" : "Hebden Bridge (River Calder and Hebden Water)",
+            "path" : "hebden-bridge-river-calder-and-hebden-water)",  
+            "severity" : -1,
+            "scenario" : []
+        },
+        {
+            "id" : 5,
+            "type" : "warning",
+            "name" : "Hebden Bridge - Old Gate (Hebden Water)",
             "path" : "hebden-bridge-old-gate-hebden-water",  
+            "severity" : -1,
+            "scenario" : []
+        },
+        {
+            "id" : 101,
+            "type" : "alert",
+            "name" : "River Calder Upper Catchment",
+            "path" : "river-calder-upper-catchment",  
             "severity" : 3,
             "scenario" : ["a"]
         }
