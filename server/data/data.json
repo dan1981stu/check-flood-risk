@@ -41,48 +41,146 @@
             "type" : "warning",
             "name" : "Central Mytholmroyd (River Calder)",
             "path" : "central-mytholmroyd-river-calder",  
-            "severity" : 2,
-            "scenario" : ["a"]
+            "scenario" : [
+                {
+                    "a" : 2,
+                    "b" : -1
+                }
+            ]
         },
         {
             "id" : 2,
             "type" : "warning",
             "name" : "Mytholmroyd (River Calder and Cragg Brook)",
             "path" : "mytholmroyd-river-calder-and-cragg-brook",  
-            "severity" : -1,
-            "scenario" : ["a"]
+            "scenario" : [
+                {
+                    "a" : -1
+                }
+            ]
         },
         {
             "id" : 3,
             "type" : "warning",
             "name" : "Brearley and Luddenden Foot (River Calder)",
             "path" : "brearley-and-luddenden-foot-river-calder",  
-            "severity" : 2,
-            "scenario" : ["a"]
+            "scenario" : [
+                {
+                    "a" : 2
+                }
+            ]
         },
         {
             "id" : 4,
             "type" : "warning",
             "name" : "Hebden Bridge (River Calder and Hebden Water)",
             "path" : "hebden-bridge-river-calder-and-hebden-water)",  
-            "severity" : -1,
-            "scenario" : []
+            "scenario" : [
+                {
+                    "a" : -1
+                }
+            ]
         },
         {
             "id" : 5,
             "type" : "warning",
             "name" : "Hebden Bridge - Old Gate (Hebden Water)",
             "path" : "hebden-bridge-old-gate-hebden-water",  
-            "severity" : -1,
-            "scenario" : []
+            "scenario" : [
+                {
+                    "a" : -1
+                }
+            ]
         },
         {
             "id" : 101,
             "type" : "alert",
             "name" : "River Calder Upper Catchment",
             "path" : "river-calder-upper-catchment",  
-            "severity" : 3,
-            "scenario" : ["a"]
+            "scenario" : [
+                {
+                    "a" : 3
+                }
+            ]
+        }
+    ],
+    "riverLevel" : [
+        {
+            "id" : 1,
+            "name" : "Mytholmroyd Dauber Bridge",
+            "river" : "Cragg Brook",
+            "path" : "mytholmroyd-dauber-bridge-cragg-brook",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 2,
+            "name" : "Brearley",
+            "river" : "River Calder",
+            "path" : "brearley-river-calder",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 3,
+            "name" : "Mytholmroyd",
+            "river" : "River Calder",
+            "path" : "mytholmroyd-river-calder",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 4,
+            "name" : "Hebden Bridge",
+            "river" : "River Calder",
+            "path" : "hebden-bridge-river-calder",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 5,
+            "name" : "Todmorden Callis Bridge",
+            "river" : "River Calder",
+            "path" : "todmorden-callis-bridge-river-calder",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 6,
+            "name" : "Todmorden",
+            "river" : "River Calder",
+            "path" : "todmorden-river-calder",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
+        },
+        {
+            "id" : 7,
+            "name" : "Nutclough",
+            "river" : "Hebden Water",
+            "path" : "nutclough-hebdon-water",  
+            "scenario" : [
+                {
+                    "a" : "normal"       
+                }
+            ]
         }
     ]
 }
