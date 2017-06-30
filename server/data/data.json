@@ -8,7 +8,12 @@
         {
             "id" : 2,
             "name" : "11 Albert Street",
-            "postcodeId" : 1
+            "postcodeId" : 2
+        },
+        {
+            "id" : 3,
+            "name" : "12 Hullet Close",
+            "postcodeId" : 3
         }
     ],
     "postcode" : [
@@ -26,6 +31,14 @@
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
+            "targetAreas" : [1,2,3,4,5,101]
+        },
+        {
+            "id" : 3,
+            "name" : "HX7 5QP",
+            "townId" : 1,
+            "intersectingWarning" : -1,
+            "intersectingAlert" : -1,
             "targetAreas" : [1,2,3,4,5,101]
         }
     ],

@@ -34,7 +34,6 @@
 
 		<div class="column-two-thirds">
 
-			{{#if model.hasWarnings }}
 			{{#if model.hasIntersectWarning }}
 			<div class="panel panel-border-warning">
 				<p class="notice notice-warning">
@@ -108,68 +107,42 @@
 				</div>
 			</div>
 			{{/if}}
-			{{else}}
-			<p class="lede">Flooding is not currently forecast for this area</p>
-			{{#if model.hasTargetAreas}}
-
-				<p class="notice notice-warnings">
-					<i class="icon icon-warning">
-						<span class="visually-hidden">Warning</span>
-					</i>
-					<strong class="bold-small notice-copy">Some properties in this area might be at risk from future flooding</strong>
-				</p>
-				<p>Find out what factors could cause or contribute to potential flooding and how likely it is to flood in the future. <a href="">Check your properties long term flood risk</a>.</p>
-			<h2 class="heading-medium">Protect yourself from future flooding</h2>
-			<p><a href="">Get insurance</a> and <a href="https://www.gov.uk/prepare-for-flooding/future-flooding">Protect your property</a>.</p>
-			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
-			<p>When flooding in this area is forecast warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
-			<h2 class="heading-medium">Report a flood</h2>
-			<p>To report a flood contact your <a href="">local council</a>.</p>
-			<h2 class="heading-medium">Check local river levels</h2>
-			<p>Current river levels in the Upper Calder catchment are within normal range. No flooding is expected in this area. <a href="">Monitor river levels in the Upper Calder catchment</a>.</p>
-			{{/if}}
-			{{/if}}
 			
 		</div>
 
 		<div class="column-third">
-
 			<div class="map-outer">
 				<div class="map-inner">
 					<div id="map" class="map map-small"></div>
 					<p style="margin-top:0.5em">Potential affected areas</p>
-					<p>Weather component<p>
 					<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
 				</div>
 			</div>
-
+			<p>Weather component<p>
 		</div>
 	
 	</div>
 
-	{{#if model.hasWarnings }}
 	<div class="grid-row">
 
 		<div class="column-two-thirds">
 
-			<h2 class="heading-medium">Things you should do now</h2>
+			<h2 class="heading-medium">Prepare for flooding</h2>
 			{{#if model.intersectingWarning.id }}
-			<p>Actions for someone who lives within or on the boundary of a flood warning area that is currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a></p>
-			<p>Get updates to {{ model.intersectingWarning.name }} and nearby warnings by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
-			{{ else }}
-			{{#if model.hasWarnings }}
-			<p>
-				<a href="https://gov.uk/prepare-for-flooding">Prepare for a flood</a>.
-			</p>
+			<p>Actions for someone who lives within or on the boundary of a flood warning area that is currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a></p>
+			{{else if model.intersectingAlert.id}}
+			<p>Actions for someone who lives within or on the boundary of a flood alert area that is currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
 			{{else }}
-			<p>
-				<a href="https://www.gov.uk/prepare-for-flooding/future-flooding">Protect your property</a>.
-			</p>
+			<p>Actions for someone who lives near a flood alert or warning area in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
 			{{/if }}
-			<p>
-				Get {{#if model.hasWarnings }}uptodate{{else }}flood{{/if }} warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a>
-			</p>
+
+			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
+			{{#if model.intersectingWarning.id }}
+			<p>Get updates to {{ model.intersectingWarning.name }} area and nearby warnings by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
+			{{else }}
+			<p>Get flood warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
 			{{/if }}
+
 
 			<details style="margin-top:2em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Other ways to get flood warning information</span></summary>
@@ -192,23 +165,11 @@
 				<li>Overtopping of the River Calder at the junction of Longfellows Crecent and Burnley Road</li>
 				<li>Flooding of low-lying land around St Michaels church</li>
 			</ul>
-			<p><a href="/river-and-sea-levels?location=mytholmroyd">Monitor river levels in the Upper Calder catchment</a>.</p>
+			<p><a href="/river-and-sea-levels?location=mytholmroyd">Check river levels in the Upper Calder catchment</a>.</p>
 
 			<p style="margin-top:2em"><a href="">Change location</a></p>
 
 		</div>
-		{{/if }}
-
-		<!--
-		<div class="column-third">
-			<div class="related">
-				<aside class="govuk-related-items">
-					<h2>Weather forecast</h2>
-					<p class="font-xsmall">There is an <a href="">amber warning for rain</a> in the north of England for 23-24 June. <a href="">Check the local weather forecast</a>.</p>
-				</aside>      
-			</div>    
-		</div>
-		-->
 
 	</div>
 

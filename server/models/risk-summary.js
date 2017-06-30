@@ -26,7 +26,8 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectTarget = false,
 		hasIntersectWarning = false,
 		hasIntersectAlert = false,
-		hasIntersectAlertOrWarning = false
+		hasIntersectAlertOrWarning = false,
+		hasRisk = true
 
 	// Find in towns
 	town = data.town.find(
@@ -63,6 +64,7 @@ exports.getSummary = function(name, scenario) {
 		intersectingTargetWarning = allTargetAreas.find(x => x.id == postcode.intersectingWarning)
 		intersectingTargetAlert = allTargetAreas.find(x => x.id == postcode.intersectingAlert)
 		if (intersectingTargetWarning) {
+			hasIntersectTarget = true;
 			if (intersectingTargetWarning.scenario.find(x => x[scenario] === 2)) {
 				intersectingWarning = intersectingTargetWarning
 				hasIntersectAlertOrWarning = true
@@ -70,6 +72,7 @@ exports.getSummary = function(name, scenario) {
 			}
 		}
 		if (intersectingTargetAlert) {
+			hasIntersectTarget = true;
 			if (intersectingTargetAlert.scenario.find(x => x[scenario] === 3)) {
 				intersectingAlert = intersectingTargetAlert
 				hasIntersectAlertOrWarning = true
@@ -102,6 +105,11 @@ exports.getSummary = function(name, scenario) {
 		}
 	}
 
+	// Set risk boolean
+	if (postcode && !hasIntersectTarget) {
+		hasRisk = false
+	}
+
 	// Build model and return
 	return {
 		location,
@@ -118,7 +126,8 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectTarget,
 		hasIntersectWarning,
 		hasIntersectAlert,
-		hasIntersectAlertOrWarning
+		hasIntersectAlertOrWarning,
+		hasRisk
 	}
 
 }

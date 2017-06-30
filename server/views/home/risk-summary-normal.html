@@ -1,0 +1,82 @@
+<!--
+<div class="breadcrumbs">
+	<ol>
+		<li><a href="/">Flooding</a></li>
+		<li><a href="/">Environment and countryside</a></li>
+		<li><a href="/">Flooding and extreme weather</a></li>
+		<li><a href="/">Current flood risk</a></li>
+	</ol>
+</div>
+-->
+
+{{#if trace }}
+<p class="font-xsmall">{{ json model }}<p>
+{{/if }}
+
+<main>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<h1 class="heading-xlarge">
+				Current flood risk
+				<span class="heading-secondary">
+					{{ model.location }}
+				</span>
+			</h1>
+			
+			{{#if model.hasRisk}}
+			<p class="lede">Flooding is not currently forecast for this area</p>
+			{{else }}
+			<p class="lede">This area is at very low risk of flooding</p>
+			{{/if }}
+			<details style="margin-top:2em" role="group">
+                <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Were you expecting to see a flood warning or alert at this location?</span></summary>
+                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+					<p>Text</p>
+                </div>
+            </details>
+
+			{{#if model.hasRisk}}
+			<p class="notice notice-warnings" style="margin-top:2.25em">
+				<i class="icon icon-warning">
+					<span class="visually-hidden">Warning</span>
+				</i>
+				<strong class="bold-small notice-copy">Your property might be at risk from future flooding</strong>
+			</p>
+			<p>Some properties in this area might be at risk from future flooding. Find out what factors could cause or contribute to potential flooding and how likely it is to flood in the future. <a href="">Check your properties long term flood risk</a>.</p>
+			<h2 class="heading-medium">Protect yourself from future flooding</h2>
+			<p><a href="">Get insurance</a> and <a href="https://www.gov.uk/prepare-for-flooding/future-flooding">Protect your property</a>.</p>
+			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
+			<p>When flooding in this area is forecast warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
+			{{/if}}
+			
+			<h2 class="heading-medium">Report a flood or possible cause of flooding</h2>
+			<p>Who you need to contact depends on what’s flooding. <a href="">Report a flood or possible cause of flooding</a>.</p>
+			
+		</div>
+
+		<div class="column-third">
+			<div class="related">
+				<aside class="govuk-related-items">
+					<h2 class="heading-small">Check your flood risk</h2>
+					<ul class="list">
+						{{#unless model.hasRisk}}
+						<li><a href="">Check a properties long term flood risk</a></li>
+						<li><a href="">Get flood warnings for by phone, text or email</a></li>
+						{{/unless }}
+						<li><a href="">Check river levels</a></li>
+					</ul>
+				</aside>      
+			</div>  
+			<p>Weather component<p>
+		</div>
+	
+	</div>
+
+</main>
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+<script src="/public/javascripts/map.js" type="text/javascript"></script>
