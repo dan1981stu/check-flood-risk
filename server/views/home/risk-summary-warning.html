@@ -1,0 +1,231 @@
+<!--
+<div class="breadcrumbs">
+	<ol>
+		<li><a href="/">Flooding</a></li>
+		<li><a href="/">Environment and countryside</a></li>
+		<li><a href="/">Flooding and extreme weather</a></li>
+		<li><a href="/">Current flood risk</a></li>
+	</ol>
+</div>
+-->
+
+{{#if trace }}
+<p class="font-xsmall">{{ json model }}<p>
+<p class="font-xsmall">{{ json level }}<p>
+{{/if }}
+
+<main>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<h1 class="heading-xlarge">
+				Current flood risk
+				<span class="heading-secondary">
+					{{ model.location }}
+				</span>
+			</h1>
+
+		</div>
+
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<!-- Immediate location -->
+
+			{{#unless model.hasRisk}}
+			<p class="lede" style="margin-top:0">
+				This location is at low risk from river and coastal flooding.
+				{{#if model.hasAlertOrWarning}}
+				{{#if model.hasWarningSevere }}Severe flooding{{else }}Flooding{{/if }} is forecast in the surrounding area.
+				{{/if }}
+			</p>
+			{{/unless }}
+
+			{{#if model.hasIntersectAlertOrWarning }}
+			<div class="panel {{#if model.hasIntersectAlert}}panel-border-alert{{else }}panel-border-warning{{/if }}" style="margin-bottom:2em">
+				<p class="notice notice-warning">
+					<i class="icon {{getIconClass model.intersectingTarget.scenario model.scenario}}">
+						<span class="visually-hidden">Warning</span>
+					</i>
+					<strong class="bold-medium notice-copy">
+						{{#if model.hasIntersectWarningSevere}}
+						Severe flood warning
+						{{else if model.hasIntersectWarning}}
+						Flood warning
+						{{else}}
+						Flood alert
+						{{/if}}
+					</strong>					
+				</p>
+				<p class="font-medium">
+					<a href="/warnings/{{ model.intersectingTarget.path }}">{{ model.intersectingTarget.name }}</a><br/>
+					{{#if model.hasIntersectWarningSevere}}
+					Severe flooding - danger to life
+					{{else if model.hasIntersectWarning}}
+					Flooding is expected - Immediate action required
+					{{else}}
+					Flooding is possible - Be prepared
+					{{/if}}
+					</p>
+			</div>
+			{{/if }}
+
+			<!-- Larger or nearby area -->
+
+			{{#if model.warningsSevere }}
+			<div class="panel panel-warning {{#if model.hasIntersectAlertOrWarning }}panel-border-warning-nearby{{ else }}panel-border-warning{{/if}}">
+				<div class="notice notice-warnings">
+					<p>
+						<strong class="{{#if model.hasPostcode }}bold-small{{ else }}bold-medium{{/if}}">{{ model.warningsSevere.length }} severe flood warning{{#isPlural model.warningsSevere.length}}s{{/isPlural}} {{#if model.hasPostcode }}nearby{{ else }}in this area{{/if}}</strong>
+						Severe flooding – danger to life
+					</p>
+					<ul class="list">
+						{{#each model.warningsSevere }}
+						<li class="notice">
+							<i class="icon icon-flood-warning-severe">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<a class="notice-copy" href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+				</div>
+			</div>
+			{{/if}}
+
+			{{#if model.warnings }}
+			<div class="panel panel-warning {{#isOr model.hasIntersectAlertOrWarning model.hasWarningSevere }}panel-border-warning-nearby{{ else }}panel-border-warning{{/isOr}}">
+				<div class="notice notice-warnings">
+					<p>
+						<strong class="{{#if model.hasPostcode }}bold-small{{ else }}bold-medium{{/if}}">{{ model.warnings.length }} flood warning{{#isPlural model.warnings.length}}s{{/isPlural}} {{#if model.hasPostcode }}nearby{{ else }}in this area{{/if}}</strong>
+						Flooding is expected – immediate action required
+					</p>
+					<ul class="list">
+						{{#each model.warnings }}
+						<li class="notice">
+							<i class="icon icon-flood-warning">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<a class="notice-copy" href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+				</div>
+			</div>
+			{{/if}}
+
+			{{#if model.alerts}}
+			<div class="panel panel-warning {{#if model.warnings }}panel-border-warning-nearby{{ else }}panel-border-alert{{/if}}">
+				<div class="notice notice-warnings">
+					<p>
+						<strong class="{{#if model.hasPostcode }}bold-small{{ else }}bold-medium{{/if}}">{{ model.alerts.length }} flood alert{{#isPlural model.alerts.length}}s{{/isPlural}} {{#if model.hasPostcode }}nearby{{ else }}in this area{{/if}}</strong>
+						Flooding is possible – be prepared
+					</p>
+					<ul class="list">
+						{{#each model.alerts }}
+						<li class="notice">
+							<i class="icon icon-flood-alert">
+								<span class="visually-hidden">Warning</span>
+							</i>
+							<a class="notice-copy" href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+				</div>
+			</div>
+			{{/if}}
+			
+		</div>
+
+		<div class="column-third">
+			<div class="map-outer">
+				<div class="map-inner">
+					<div id="map" class="map map-small"></div>
+					<p style="margin-top:0.5em">Potential affected areas</p>
+					<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
+				</div>
+			</div>
+			<p>Weather component<p>
+		</div>
+	
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<!-- Guidance -->
+
+			{{#if model.hasPostcode}}
+			{{#if model.hasIntersectWarningSevere }}
+			<h2 class="heading-medium">Prepare for flooding</h2>
+			<p>Actions for someone who lives within or on the boundary of a severe flood warning currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a></p>
+			{{else if model.hasIntersectWarning }}
+			<h2 class="heading-medium">Prepare for flooding</h2>
+			<p>Actions for someone who lives within or on the boundary of a flood warning currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a></p>
+			{{else if model.hasIntersectingAlert}}
+			<h2 class="heading-medium">Prepare for flooding</h2>
+			<p>Actions for someone who lives outside a warning area but within the boundary of a flood alert currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			{{else }}
+			<h2 class="heading-medium">Prepare for flooding</h2>
+			<p>Actions for someone who lives near but outside a flood alert or warning area in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			{{/if }}
+			{{else }}
+			<h2 class="heading-medium">Prepare for flooding</h2>
+			<p>Actions for someone who is interseted in a larger area and may live within one of its alert or warning areas currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			{{/if }}
+
+			<!-- Get flood warnings -->
+
+			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
+			{{#if model.hasIntersectAlertOrWarning }}
+			<p>Get updates to {{ model.intersectingTarget.name }} and nearby warnings by phone, text message or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
+			{{else }}
+			<p>Get flood warnings for this area by phone, text message or email.<br/><a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Select warning areas</a></p>
+			{{/if }}
+
+			<!-- Other ways to get this information -->
+
+			<details style="margin-top:2em" role="group">
+                <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Other ways to get flood warning information</span></summary>
+                <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
+					<p>
+						<strong class="bold-small">Floodline</strong><br/>
+						Telephone: 0345 988 1188<br/>
+						24-hour service
+					</p>
+					<p>
+						<a href="">Learn more about call charges</a>
+					</p>
+                </div>
+            </details>
+
+			<!-- Impacts and river levels -->
+
+			<h2 class="heading-medium">How current river levels might impact {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area?</h2>
+			<p>River levels that impact this area are currently {{model.levelState}} range. Be aware of the following potential impacts.</p>
+			{{#if model.hasImpacts}}
+			<ul class="list list-bullet">
+				{{#each model.impacts }}
+				<li>{{this.description }}</li>
+				{{/each }}
+			</ul>
+			{{/if }}
+			<p><a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
+
+			<p style="margin-top:2em"><a href="">Change location</a></p>
+
+		</div>
+
+	</div>
+
+</main>
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+<script src="/public/javascripts/map.js" type="text/javascript"></script>

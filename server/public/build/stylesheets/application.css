@@ -2409,12 +2409,16 @@ a.banner {
 .panel-border-warning {
   border-left-width: 5px;
   border-color: #e3000f;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .panel-border-warning-nearby {
   border-left-width: 5px;
   margin-bottom: 1em;
+}
+
+.panel-warning:last-child {
+  margin-bottom: 0.5em;
 }
 
 .panel-border-alert {
@@ -2476,6 +2480,24 @@ a.banner {
   }
 }
 
+.notice .icon-flood-warning,
+.notice .icon-flood-warning-severe {
+  width: 32px;
+  height: 32px;
+  background-image: url("/public/icon-flood-warning-small-2x.png");
+  background-position: center center;
+  background-size: 80%;
+  margin-top: -16px;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .notice .icon-flood-warning,
+  .notice .icon-flood-warning-severe {
+    background-size: 100%;
+  }
+}
+
 .notice .icon-flood-alert {
   width: 32px;
   height: 32px;
@@ -2492,20 +2514,11 @@ a.banner {
   }
 }
 
-.notice .icon-flood-warning {
-  width: 32px;
-  height: 32px;
-  background-image: url("/public/icon-flood-warning-small-2x.png");
-  background-position: center center;
-  background-size: 80%;
-  margin-top: -16px;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .notice .icon-flood-warning {
-    background-size: 100%;
-  }
+.notice .icon-flood-warning-severe-large {
+  width: 56px;
+  height: 56px;
+  margin-top: -30px;
+  background-image: url("/public/icon-flood-warning-severe-2x.gif");
 }
 
 .notice .icon-flood-warning-large {
@@ -2552,8 +2565,13 @@ table.select-areas th {
   font-weight: bold;
 }
 
+.map-outer {
+  margin-top: 2em;
+}
+
 @media (min-width: 641px) {
   .map-outer {
+    margin-top: 0;
     width: 100%;
     position: relative;
   }

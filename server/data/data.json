@@ -54,11 +54,12 @@
             "type" : "warning",
             "name" : "Central Mytholmroyd (River Calder)",
             "path" : "central-mytholmroyd-river-calder",  
+            "levels" : [1,3,4,5,6,7],
             "scenario" : [
-                {
-                    "a" : 2,
-                    "b" : -1
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : 2 },
+                { "id" : "d", "severity" : 1 }
             ]
         },
         {
@@ -66,10 +67,12 @@
             "type" : "warning",
             "name" : "Mytholmroyd (River Calder and Cragg Brook)",
             "path" : "mytholmroyd-river-calder-and-cragg-brook",  
+            "levels" : [1,3,4,5,6,7],
             "scenario" : [
-                {
-                    "a" : -1
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : 2 },
+                { "id" : "d", "severity" : 2 }
             ]
         },
         {
@@ -77,10 +80,12 @@
             "type" : "warning",
             "name" : "Brearley and Luddenden Foot (River Calder)",
             "path" : "brearley-and-luddenden-foot-river-calder",  
+            "levels" : [1,2,3,4,5,6,7],
             "scenario" : [
-                {
-                    "a" : 2
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : 2 },
+                { "id" : "d", "severity" : 2 }
             ]
         },
         {
@@ -88,10 +93,12 @@
             "type" : "warning",
             "name" : "Hebden Bridge (River Calder and Hebden Water)",
             "path" : "hebden-bridge-river-calder-and-hebden-water)",  
+            "levels" : [4,5,6,7],
             "scenario" : [
-                {
-                    "a" : -1
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : -1 },
+                { "id" : "d", "severity" : 2 }
             ]
         },
         {
@@ -99,101 +106,132 @@
             "type" : "warning",
             "name" : "Hebden Bridge - Old Gate (Hebden Water)",
             "path" : "hebden-bridge-old-gate-hebden-water",  
+            "levels" : [4,5,6,7],
             "scenario" : [
-                {
-                    "a" : -1
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : 2 },
+                { "id" : "d", "severity" : 2 }
             ]
         },
         {
             "id" : 101,
             "type" : "alert",
             "name" : "River Calder Upper Catchment",
-            "path" : "river-calder-upper-catchment",  
+            "path" : "river-calder-upper-catchment", 
+            "levels" : [1,2,3,4,5,6,7], 
             "scenario" : [
-                {
-                    "a" : 3
-                }
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : 3 },
+                { "id" : "c", "severity" : 3 },
+                { "id" : "d", "severity" : 3 }
             ]
         }
     ],
-    "riverLevel" : [
+    "level" : [
         {
             "id" : 1,
             "name" : "Mytholmroyd Dauber Bridge",
             "river" : "Cragg Brook",
-            "path" : "mytholmroyd-dauber-bridge-cragg-brook",  
+            "path" : "cragg-brook-mytholmroyd-dauber-bridge",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "above", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 2,
             "name" : "Brearley",
             "river" : "River Calder",
-            "path" : "brearley-river-calder",  
+            "path" : "river-calder-brearley",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 3,
             "name" : "Mytholmroyd",
             "river" : "River Calder",
-            "path" : "mytholmroyd-river-calder",  
+            "path" : "river-calder-mytholmroyd",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "normal", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 4,
             "name" : "Hebden Bridge",
             "river" : "River Calder",
-            "path" : "hebden-bridge-river-calder",  
+            "path" : "river-calder-hebden-bridge",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 5,
             "name" : "Todmorden Callis Bridge",
             "river" : "River Calder",
-            "path" : "todmorden-callis-bridge-river-calder",  
+            "path" : "river-calder-todmorden-callis-bridge",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 6,
             "name" : "Todmorden",
             "river" : "River Calder",
-            "path" : "todmorden-river-calder",  
+            "path" : "river-calder-todmorden",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
         {
             "id" : 7,
             "name" : "Nutclough",
             "river" : "Hebden Water",
-            "path" : "nutclough-hebdon-water",  
+            "path" : "hebdon-water-nutclough",  
             "scenario" : [
-                {
-                    "a" : "normal"       
-                }
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
+        }
+    ],
+    "impact" : [
+        {
+            "id" : 1,
+            "levelId" : 1,
+            "targetAreaId" : 1,
+            "description" : "Flooding of low-lying land around St Michaels church"
+        },    
+        {
+            "id" : 2,
+            "levelId" : 4,
+            "targetAreaId" : 1,
+            "description" : "Overtopping of the River Calder at the junction of Longfellows Crecent and Burnley Road"
+        },    
+        {
+            "id" : 3,
+            "levelId" : 3,
+            "targetAreaId" : 1,
+            "description" : "Caldene Bridge may become impassible"
         }
     ]
 }

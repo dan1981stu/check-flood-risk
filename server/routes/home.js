@@ -1,4 +1,4 @@
-const modelData = require('../models/risk-summary')
+const modelData = require('../models/home')
 
 module.exports = [
 	{
@@ -22,8 +22,8 @@ module.exports = [
 				const model = modelData.getSummary(location, scenario)
 				const pageTitle = model.location + ' - Current flood risk - GOV.UK'
 				const trace = request.query.t ? request.query.t : false
-				if (model.hasWarnings) {
-					return reply.view('home/risk-summary-warnings', {
+				if (model.hasAlertOrWarning) {
+					return reply.view('home/risk-summary-warning', {
 						'model': model,
 						'trace' : trace,
 						'pageTitle' : pageTitle

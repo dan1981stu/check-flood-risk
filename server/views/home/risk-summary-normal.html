@@ -26,10 +26,17 @@
 				</span>
 			</h1>
 			
+			<!-- Imediate location -->
+
 			{{#if model.hasRisk}}
 			<p class="lede">Flooding is not currently forecast for this area</p>
 			{{else }}
-			<p class="lede">This area is at very low risk of flooding</p>
+			<p class="lede">
+				This location is at low risk from river and coastal flooding.
+				{{#unless model.hasAlertOrWarning}}
+				Flooding is not currently forecast nearby
+				{{/unless }}
+			</p>
 			{{/if }}
 			<details style="margin-top:2em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Were you expecting to see a flood warning or alert at this location?</span></summary>
@@ -37,6 +44,7 @@
 					<p>Text</p>
                 </div>
             </details>
+
 
 			{{#if model.hasRisk}}
 			<p class="notice notice-warnings" style="margin-top:2.25em">
@@ -48,10 +56,15 @@
 			<p>Some properties in this area might be at risk from future flooding. Find out what factors could cause or contribute to potential flooding and how likely it is to flood in the future. <a href="">Check your properties long term flood risk</a>.</p>
 			<h2 class="heading-medium">Protect yourself from future flooding</h2>
 			<p><a href="">Get insurance</a> and <a href="https://www.gov.uk/prepare-for-flooding/future-flooding">Protect your property</a>.</p>
-			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
-			<p>When flooding in this area is forecast warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
 			{{/if}}
+
+			<!-- Get flood warnings -->
+
+			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
+			<p>When flooding {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }} is forecast warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
 			
+			<!-- Report a flood -->
+
 			<h2 class="heading-medium">Report a flood or possible cause of flooding</h2>
 			<p>Who you need to contact depends on what’s flooding. <a href="">Report a flood or possible cause of flooding</a>.</p>
 			

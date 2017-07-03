@@ -1,7 +1,9 @@
 $path: "/public/";
 
 .map-outer {
+  margin-top:2em;
   @include media(tablet) {
+    margin-top:0;
     width:100%;
     position:relative;
   }
