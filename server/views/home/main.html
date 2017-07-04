@@ -15,13 +15,13 @@
 			<h1 class="heading-xlarge">Find out if you're at risk of flooding (England)</h1>
 			
 			<div class="location-search">
-				<form method="post" class="location-search-form" action="/mytholmroyd" onsubmit="window.location.href='/mytholmroyd';return false">
+				<form method="post" class="location-search-form" action="/start">
 					<fieldset>
 						<legend class="visuallyhidden">Location lookup</legend>
 						<div class="ask_location">
 							<strong class="heading-medium">Are you at risk now?</strong>
 							<label for="location">Enter a location</label>
-							<input class="form-control" name="location" type="text" placeholder="eg. SW1A 2AA or Newcastle" value="Mytholmroyd">
+							<input class="form-control" id="location" name="location" type="text" placeholder="eg. SW1A 2AA or Newcastle" value="{{ model.location }}" autocomplete="off" autocorrect="off" autocapitalize="off">
 							<button type="submit" class="button">Find</button>
 							<p><a rel="external" href="http://www.royalmail.com/find-a-postcode">Find a postcode on Royal Mail's postcode finder</a></p>
 						</div>

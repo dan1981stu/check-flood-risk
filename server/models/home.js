@@ -1,6 +1,6 @@
 var data = require('../data/data.json')
 
-// Get a location by its name
+// Get risk summary by location and scenario
 exports.getSummary = function(name, scenario) {
 
 	var
@@ -218,5 +218,29 @@ exports.getSummary = function(name, scenario) {
 		lonLat
 
 	}
+
+}
+
+
+// Get a location by its name and scenario
+exports.getLocation = function(name, scenario) {
+
+	var location
+
+	// Find in towns
+	location = data.town.find(
+		x => x.name.toLowerCase() === name.toLowerCase()
+	)
+	// If not a town check postcodes
+	if (!location) {
+		location = data.postcode.find(
+			x => x.name.toLowerCase() === name.toLowerCase()
+		)
+	}
+	// If location exists build model and return
+	if (location) {	
+		return location.path
+	}
+	return ''
 
 }

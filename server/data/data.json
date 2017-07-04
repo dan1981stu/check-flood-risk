@@ -20,6 +20,7 @@
         {
             "id" : 1,
             "name" : "HX7 5QP",
+            "path" : "hx7-5qp",
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : -1,
@@ -29,6 +30,7 @@
         {
             "id" : 2,
             "name" : "HX7 5DL",
+            "path" : "hx7-5dl",
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
@@ -38,6 +40,7 @@
         {
             "id" : 3,
             "name" : "HX7 5AF",
+            "path" : "hx7-5af",
             "townId" : 1,
             "intersectingWarning" : 1,
             "intersectingAlert" : 101,
@@ -49,6 +52,7 @@
         {
             "id" : 1,
             "name" : "Mytholmroyd",
+            "path" : "mytholmroyd",
             "lonLat" : [-1.9837091, 53.730928]
         }
     ],
