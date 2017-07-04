@@ -67,6 +67,15 @@ exports.getSummary = function(name, scenario) {
 	if (postcode) {
 		var intersectingTargetWarning = data.targetArea.find(x => x.id == postcode.intersectingWarning)
 		var intersectingTargetAlert = data.targetArea.find(x => x.id == postcode.intersectingAlert)
+		if (intersectingTargetAlert) {
+			hasIntersectTarget = true
+			if (intersectingTargetAlert.scenario.find(x => x.id == scenario && x.severity == 3)) {
+				intersectingTarget = intersectingTargetAlert
+				hasIntersectAlertOrWarning = true
+				hasIntersectAlert = true
+				hasAlertOrWarning = true
+			}	
+		}
 		if (intersectingTargetWarning) {
 			hasIntersectTarget = true
 			if (intersectingTargetWarning.scenario.find(x => x.id == scenario && x.severity == 1)) {
@@ -81,15 +90,6 @@ exports.getSummary = function(name, scenario) {
 				hasAlertOrWarning = true
 			}
 		}
-		if (intersectingTargetAlert) {
-			hasIntersectTarget = true
-			if (intersectingTargetAlert.scenario.find(x => x.id == scenario && x.severity == 3)) {
-				intersectingTarget = intersectingTargetAlert
-				hasIntersectAlertOrWarning = true
-				hasIntersectAlert = true
-				hasAlertOrWarning = true
-			}	
-		}
 	}
 
 	// Add nearby targets, severe warnings, warnings and alerts for postcodes
@@ -98,26 +98,29 @@ exports.getSummary = function(name, scenario) {
 			var targetArea = data.targetArea[key]
 			for (var key in postcodes) {
 				if (postcodes[key].targetAreas.indexOf(targetArea.id) > -1) {
-					// Add targetArea
-					targetAreas.push(targetArea)
-					hasTargetArea = true
 					// Add nearby severe warning, excluding intersecting severe warning
 					if (warningsSevere.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 1)) {
 						warningsSevere.push(targetArea)
 						hasWarningSevere = true
 						hasAlertOrWarning = true
+						targetAreas.push(targetArea)
+						hasTargetArea = true
 					}
 					// Add nearby warning, excluding intersecting warning
 					if (warnings.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 2)) {
 						warnings.push(targetArea)
 						hasWarning = true
 						hasAlertOrWarning = true
+						targetAreas.push(targetArea)
+						hasTargetArea = true
 					}
 					// Add nearby alert, excluding 1/4 scenario 
 					if (alerts.indexOf(targetArea) == -1 && targetArea.scenario.find(x => x.id == scenario && x.severity == 3) && !(!hasIntersectWarning && !hasIntersectWarningSevere && hasIntersectAlert)) {
 						alerts.push(targetArea)
 						hasAlert = true
 						hasAlertOrWarning = true
+						targetAreas.push(targetArea)
+						hasTargetArea = true
 					}
 				}
 			}

@@ -47,7 +47,7 @@
 			{{/unless }}
 
 			{{#if model.hasIntersectAlertOrWarning }}
-			<div class="panel {{#if model.hasIntersectAlert}}panel-border-alert{{else }}panel-border-warning{{/if }}" style="margin-bottom:2em">
+			<div class="panel panel-warning {{#isOr model.hasIntersectWarning model.hasIntersectWarningSevere }}panel-border-warning{{else }}panel-border-alert{{/isOr }}" {{#if model.hasTargetArea }}style="margin-bottom:2em"{{/if}}>
 				<p class="notice notice-warning">
 					<i class="icon {{getIconClass model.intersectingTarget.scenario model.scenario}}">
 						<span class="visually-hidden">Warning</span>
