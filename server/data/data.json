@@ -1,33 +1,33 @@
 {
     "firstLine" : [
         {
-            "id" : 1,
-            "name" : "28 Westfield Terrace",
+            "id" : 3,
+            "name" : "12 Hullet Close",
             "postcodeId" : 1
         },
         {
-            "id" : 2,
-            "name" : "11 Albert Street",
+            "id" : 1,
+            "name" : "28 Westfield Terrace",
             "postcodeId" : 2
         },
         {
-            "id" : 3,
-            "name" : "12 Hullet Close",
+            "id" : 2,
+            "name" : "14 Caldene Avenue",
             "postcodeId" : 3
         }
     ],
     "postcode" : [
         {
             "id" : 1,
-            "name" : "HX7 5DL",
+            "name" : "HX7 5QP",
             "townId" : 1,
-            "intersectingWarning" : 1,
-            "intersectingAlert" : 101,
+            "intersectingWarning" : -1,
+            "intersectingAlert" : -1,
             "targetAreas" : [1,2,3,4,5,101]
         },
         {
             "id" : 2,
-            "name" : "HX7 5NN",
+            "name" : "HX7 5DL",
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
@@ -35,12 +35,13 @@
         },
         {
             "id" : 3,
-            "name" : "HX7 5QP",
+            "name" : "HX7 5AF",
             "townId" : 1,
-            "intersectingWarning" : -1,
-            "intersectingAlert" : -1,
+            "intersectingWarning" : 1,
+            "intersectingAlert" : 101,
             "targetAreas" : [1,2,3,4,5,101]
         }
+
     ],
     "town" : [
         {
