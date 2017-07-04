@@ -39,7 +39,9 @@
 			</p>
 			{{/if }}
 			<details style="margin-top:2em" role="group">
-                <summary role="button" aria-controls="details-content-0" aria-expanded="false"><span class="summary">Were you expecting to see a flood warning or alert at this location?</span></summary>
+                <summary role="button" aria-controls="details-content-0" aria-expanded="false">
+					<span class="summary">Were you expecting to see a flood warning or alert {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }}?</span>
+				</summary>
                 <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
 					<p>Text</p>
                 </div>
