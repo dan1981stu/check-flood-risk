@@ -84,7 +84,7 @@
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
-                { "id" : "c", "severity" : 2 },
+                { "id" : "c", "severity" : -1 },
                 { "id" : "d", "severity" : 2 }
             ]
         },
@@ -110,7 +110,7 @@
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
-                { "id" : "c", "severity" : 2 },
+                { "id" : "c", "severity" : -1 },
                 { "id" : "d", "severity" : 2 }
             ]
         },

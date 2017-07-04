@@ -177,7 +177,7 @@
 			{{/if }}
 			{{else }}
 			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who is interseted in a larger area and may live within one of its alert or warning areas currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			<p>Actions for someone who is interested in a larger area and may live within one of its alert or warning areas currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
 			{{/if }}
 
 			<!-- Get flood warnings -->
@@ -207,16 +207,19 @@
 
 			<!-- Impacts and river levels -->
 
+			{{#if model.hasImpacts}}
 			<h2 class="heading-medium">How current river levels might impact {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area?</h2>
 			<p>River levels that impact this area are currently {{model.levelState}} range. Be aware of the following potential impacts.</p>
-			{{#if model.hasImpacts}}
 			<ul class="list list-bullet">
 				{{#each model.impacts }}
 				<li>{{this.description }}</li>
 				{{/each }}
 			</ul>
-			{{/if }}
 			<p><a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
+			{{else }}
+			<h2 class="heading-medium">River levels in {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area</h2>
+			<p>River levels that impact this area are currently {{model.levelState}} range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
+			{{/if }}
 
 			<p style="margin-top:2em"><a href="">Change location</a></p>
 
