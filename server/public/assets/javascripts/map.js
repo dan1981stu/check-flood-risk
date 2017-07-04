@@ -48,6 +48,7 @@ main.appendChild(satelliteView)
 mapContainer.appendChild(zoom)
 mapContainer.appendChild(main)
 
+
 // Toggle size event
 toggleSize.addEventListener('click', function(e) {
     e.preventDefault()
@@ -55,6 +56,7 @@ toggleSize.addEventListener('click', function(e) {
     map.updateSize()
 })
 
+/*
 var iconFeature = new ol.Feature({
     geometry: new ol.geom.Point(
         ol.proj.fromLonLat([-1.98221629139491,53.7296721399487])
@@ -90,3 +92,4 @@ map = new ol.Map({
         zoom: 14
     })
 });
+*/

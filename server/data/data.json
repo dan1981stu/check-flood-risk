@@ -23,7 +23,8 @@
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : -1,
-            "targetAreas" : [1,2,3,4,5,101]
+            "targetAreas" : [1,2,3,4,5,101],
+            "lonLat" : [-1.9737381, 53.734015]
         },
         {
             "id" : 2,
@@ -31,7 +32,8 @@
             "townId" : 1,
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
-            "targetAreas" : [1,2,3,4,5,101]
+            "targetAreas" : [1,2,3,4,5,101],
+            "lonLat" : [-1.9845318, 53.731968]
         },
         {
             "id" : 3,
@@ -39,13 +41,15 @@
             "townId" : 1,
             "intersectingWarning" : 1,
             "intersectingAlert" : 101,
-            "targetAreas" : [1,2,3,4,5,101]
+            "targetAreas" : [1,2,3,4,5,101],
+            "lonLat" : [-1.9860024, 53.731168]
         }
     ],
     "town" : [
         {
             "id" : 1,
-            "name" : "Mytholmroyd"
+            "name" : "Mytholmroyd",
+            "lonLat" : [-1.9837091, 53.730928]
         }
     ],
     "targetArea" : [
@@ -107,6 +111,19 @@
             "name" : "Hebden Bridge - Old Gate (Hebden Water)",
             "path" : "hebden-bridge-old-gate-hebden-water",  
             "levels" : [4,5,6,7],
+            "scenario" : [
+                { "id" : "a", "severity" : -1 },
+                { "id" : "b", "severity" : -1 },
+                { "id" : "c", "severity" : -1 },
+                { "id" : "d", "severity" : 2 }
+            ]
+        },
+        {
+            "id" : 6,
+            "type" : "warning",
+            "name" : "Todmorden to Eastwood (River Calder)",
+            "path" : "todmorden-to-eastwood-river-calder",  
+            "levels" : [5,6,7],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },

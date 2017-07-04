@@ -8,6 +8,7 @@ exports.getSummary = function(name, scenario) {
 		postcode, 
 		postcodes,  
 		location,
+		lonLat, // Of location
 
 		intersectingTargetAreas = [], 
 		intersectingTarget = {},
@@ -35,6 +36,8 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectAlertOrWarning = false,
 		hasIntersectTarget = false
 
+		targetStates = []
+
 	// Find in towns
 	town = data.town.find(
 		x => x.name.toLowerCase() === name.toLowerCase().split('-').join(' ')
@@ -43,6 +46,7 @@ exports.getSummary = function(name, scenario) {
 	// If town find all postcodes for location
 	if (town) {
 		postcodes = data.postcode.filter(x => x.townId === town.id)
+		lonLat = town.lonLat
 	}
 
 	// If postcode find in postcodes
@@ -60,7 +64,8 @@ exports.getSummary = function(name, scenario) {
 	location = town.name;
 	if (postcode) {
 		location = postcode.name + ', ' + town.name
-		hasPostcode = true;
+		lonLat = postcode.lonLat
+		hasPostcode = true
 	}
 
 	// Add intersections for postcode if applicable
@@ -68,26 +73,34 @@ exports.getSummary = function(name, scenario) {
 		var intersectingTargetWarning = data.targetArea.find(x => x.id == postcode.intersectingWarning)
 		var intersectingTargetAlert = data.targetArea.find(x => x.id == postcode.intersectingAlert)
 		if (intersectingTargetAlert) {
+			// Intersets with an target alert area
 			hasIntersectTarget = true
 			if (intersectingTargetAlert.scenario.find(x => x.id == scenario && x.severity == 3)) {
+				// Intersects with a current alert
 				intersectingTarget = intersectingTargetAlert
 				hasIntersectAlertOrWarning = true
 				hasIntersectAlert = true
 				hasAlertOrWarning = true
+				targetStates.push({ "id" : intersectingTarget.id, "state" : 3 })
 			}	
 		}
 		if (intersectingTargetWarning) {
+			// Intersets with an target warning area
 			hasIntersectTarget = true
 			if (intersectingTargetWarning.scenario.find(x => x.id == scenario && x.severity == 1)) {
+				// Intersects with a current severe warning
 				intersectingTarget = intersectingTargetWarning
 				hasIntersectAlertOrWarning = true
 				hasIntersectWarningSevere = true
 				hasAlertOrWarning = true
+				targetStates.push({ "id" : intersectingTarget.id, "state" : 1 })
 			} else if (intersectingTargetWarning.scenario.find(x => x.id == scenario && x.severity == 2)) {
+				// Intersects with a current warning
 				intersectingTarget = intersectingTargetWarning
 				hasIntersectAlertOrWarning = true
 				hasIntersectWarning = true
 				hasAlertOrWarning = true
+				targetStates.push({ "id" : intersectingTarget.id, "state" : 2 })
 			}
 		}
 	}
@@ -100,26 +113,29 @@ exports.getSummary = function(name, scenario) {
 				if (postcodes[key].targetAreas.indexOf(targetArea.id) > -1) {
 					// Add nearby severe warning, excluding intersecting severe warning
 					if (warningsSevere.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 1)) {
+						targetAreas.push(targetArea)
 						warningsSevere.push(targetArea)
+						targetStates.push({ "id" : targetArea.id, "state" : 1 })
 						hasWarningSevere = true
 						hasAlertOrWarning = true
-						targetAreas.push(targetArea)
 						hasTargetArea = true
 					}
 					// Add nearby warning, excluding intersecting warning
 					if (warnings.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 2)) {
 						warnings.push(targetArea)
+						targetAreas.push(targetArea)
+						targetStates.push({ "id" : targetArea.id, "state" : 2 })
 						hasWarning = true
 						hasAlertOrWarning = true
-						targetAreas.push(targetArea)
 						hasTargetArea = true
 					}
 					// Add nearby alert, excluding 1/4 scenario 
 					if (alerts.indexOf(targetArea) == -1 && targetArea.scenario.find(x => x.id == scenario && x.severity == 3) && !(!hasIntersectWarning && !hasIntersectWarningSevere && hasIntersectAlert)) {
 						alerts.push(targetArea)
+						targetAreas.push(targetArea)
+						targetStates.push({ "id" : targetArea.id, "state" : 3 })
 						hasAlert = true
 						hasAlertOrWarning = true
-						targetAreas.push(targetArea)
 						hasTargetArea = true
 					}
 				}
@@ -167,7 +183,6 @@ exports.getSummary = function(name, scenario) {
 		}
 	}
 
-
 	// Build model and return
 	return {
 
@@ -197,7 +212,10 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectAlertOrWarning,
 		hasIntersectTarget,
 		
-		hasImpacts
+		hasImpacts,
+
+		targetStates,
+		lonLat
 
 	}
 
