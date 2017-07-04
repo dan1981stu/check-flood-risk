@@ -22,6 +22,7 @@
 							<strong class="heading-medium">Are you at risk now?</strong>
 							<label for="location">Enter a location</label>
 							<input class="form-control" id="location" name="location" type="text" placeholder="eg. SW1A 2AA or Newcastle" value="{{ model.location }}" autocomplete="off" autocorrect="off" autocapitalize="off">
+							<input type="hidden" id="scenario" name="scenario" value="{{ model.scenario }}"/>
 							<button type="submit" class="button">Find</button>
 							<p><a rel="external" href="http://www.royalmail.com/find-a-postcode">Find a postcode on Royal Mail's postcode finder</a></p>
 						</div>

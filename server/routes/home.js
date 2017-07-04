@@ -45,8 +45,8 @@ module.exports = [
 					return reply.redirect('/' + path + '?s=' + scenario)
 				}
 				// Location doesn't exist in prototype
-				return reply.redirect('/start?s=' + scenario, {
-					'model' : { 'location' : location },
+				return reply.view('home/main', {
+					'model' : { 'location' : location, 'scenario' : scenario },
 					'pageTitle' : 'Check flood risk - GOV.UK'
 				})
 			}
