@@ -40,10 +40,12 @@
 			{{#unless model.hasRisk}}
 			<p class="lede" style="margin-top:0">
 				This location is at low risk from river and coastal flooding.
-				{{#if model.hasAlertOrWarning}}
-				{{#if model.hasWarningSevere }}Severe flooding{{else }}Flooding{{/if }} is forecast in the surrounding area.
-				{{/if }}
 			</p>
+			{{#if model.hasAlertOrWarning}}
+			<p class="lede">
+			{{#if model.hasWarningSevere }}Severe flooding{{else }}Flooding{{/if }} is forecast for the surrounding area.
+			</p>
+			{{/if }}
 			{{/unless }}
 
 			{{#if model.hasIntersectAlertOrWarning }}
@@ -172,12 +174,12 @@
 			<h2 class="heading-medium">Prepare for possible flooding</h2>
 			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for possible flooding</a>.</p>
 			{{else }}
-			<h2 class="heading-medium">Prepare for nearby flooding</h2>
-			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding nearby flooding</a>.</p>
+			<h2 class="heading-medium">Check local travel and weather conditions</h2>
+			<p><a href="">Check local travel news</a> and <a href="">local weather forecast</a></p>
 			{{/if }}
 			{{else }}
-			<h2 class="heading-medium">Prepare for nearby flooding</h2>
-			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding nearby flooding</a>.</p>
+			<h2 class="heading-medium">Check local travel and weather conditions</h2>
+			<p><a href="">Check local travel news</a> and <a href="">check local weather forecast</a></p>
 			{{/if }}
 
 			<!-- Get flood warnings -->

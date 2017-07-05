@@ -33,10 +33,10 @@
 			{{else }}
 			<p class="lede">
 				This location is at low risk from river and coastal flooding.
-				{{#unless model.hasAlertOrWarning}}
-				Flooding is not currently forecast nearby
-				{{/unless }}
 			</p>
+			{{#unless model.hasAlertOrWarning}}
+			<p class="lede">Flooding is not currently forecast nearby.</p>
+			{{/unless }}
 			{{/if }}
 			<details style="margin-top:2em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false">
@@ -63,7 +63,7 @@
 			<!-- Get flood warnings -->
 
 			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
-			<p>When flooding {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }} is forecast warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
+			<p>When flooding {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }} is forecast, warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
 			
 			<!-- Report a flood -->
 
