@@ -62,7 +62,7 @@
             "type" : "warning",
             "name" : "Central Mytholmroyd (River Calder)",
             "path" : "central-mytholmroyd-river-calder",  
-            "levels" : [1,3,4,5,6,7],
+            "levels" : [1,3,4,5,6,7,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -75,7 +75,7 @@
             "type" : "warning",
             "name" : "Mytholmroyd (River Calder and Cragg Brook)",
             "path" : "mytholmroyd-river-calder-and-cragg-brook",  
-            "levels" : [1,3,4,5,6,7],
+            "levels" : [1,3,4,5,6,7,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -88,7 +88,7 @@
             "type" : "warning",
             "name" : "Brearley and Luddenden Foot (River Calder)",
             "path" : "brearley-and-luddenden-foot-river-calder",  
-            "levels" : [1,2,3,4,5,6,7],
+            "levels" : [1,2,3,4,5,6,7,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -101,7 +101,7 @@
             "type" : "warning",
             "name" : "Hebden Bridge (River Calder and Hebden Water)",
             "path" : "hebden-bridge-river-calder-and-hebden-water)",  
-            "levels" : [4,5,6,7],
+            "levels" : [4,5,6,7,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -114,7 +114,7 @@
             "type" : "warning",
             "name" : "Hebden Bridge - Old Gate (Hebden Water)",
             "path" : "hebden-bridge-old-gate-hebden-water",  
-            "levels" : [4,5,6,7],
+            "levels" : [4,5,6,7,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -127,7 +127,7 @@
             "type" : "warning",
             "name" : "Todmorden to Eastwood (River Calder)",
             "path" : "todmorden-to-eastwood-river-calder",  
-            "levels" : [5,6,7],
+            "levels" : [6,8,9,10],
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : -1 },
@@ -140,7 +140,7 @@
             "type" : "alert",
             "name" : "River Calder Upper Catchment",
             "path" : "river-calder-upper-catchment", 
-            "levels" : [1,2,3,4,5,6,7], 
+            "levels" : [1,2,3,4,5,6,7,8,9,10], 
             "scenario" : [
                 { "id" : "a", "severity" : -1 },
                 { "id" : "b", "severity" : 3 },
@@ -154,7 +154,7 @@
             "id" : 1,
             "name" : "Mytholmroyd Dauber Bridge",
             "river" : "Cragg Brook",
-            "path" : "cragg-brook-mytholmroyd-dauber-bridge",  
+            "path" : "cragg-brook-at-mytholmroyd-dauber-bridge",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "above", "gain" : "normal" },
@@ -166,7 +166,7 @@
             "id" : 2,
             "name" : "Brearley",
             "river" : "River Calder",
-            "path" : "river-calder-brearley",  
+            "path" : "river-calder-at-brearley",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
@@ -178,7 +178,7 @@
             "id" : 3,
             "name" : "Mytholmroyd",
             "river" : "River Calder",
-            "path" : "river-calder-mytholmroyd",  
+            "path" : "river-calder-at-mytholmroyd",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
@@ -190,7 +190,7 @@
             "id" : 4,
             "name" : "Hebden Bridge",
             "river" : "River Calder",
-            "path" : "river-calder-hebden-bridge",  
+            "path" : "river-calder-at-hebden-bridge",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
@@ -202,7 +202,7 @@
             "id" : 5,
             "name" : "Todmorden Callis Bridge",
             "river" : "River Calder",
-            "path" : "river-calder-todmorden-callis-bridge",  
+            "path" : "river-calder-at-todmorden-callis-bridge",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
@@ -214,7 +214,7 @@
             "id" : 6,
             "name" : "Todmorden",
             "river" : "River Calder",
-            "path" : "river-calder-todmorden",  
+            "path" : "river-calder-at-todmorden",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
@@ -226,14 +226,50 @@
             "id" : 7,
             "name" : "Nutclough",
             "river" : "Hebden Water",
-            "path" : "hebdon-water-nutclough",  
+            "path" : "hebdon-water-at-nutclough",  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "normal" },
                 { "id" : "b", "state" : "normal", "gain" : "normal" },
                 { "id" : "c", "state" : "above", "gain" : "normal" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
-        }
+        },
+        {
+            "id" : 8,
+            "name" : "Portsmouth Lennox Road",
+            "river" : "River Calder",
+            "path" : "river-calder-at-portsmouth-lennox-road",  
+            "scenario" : [
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
+            ]
+        },
+        {
+            "id" : 9,
+            "name" : "Todmorden Salford",
+            "river" : "Walsden Water",
+            "path" : "walsden-water-at-todmorden-salford",  
+            "scenario" : [
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
+            ]
+        }, 
+        {
+            "id" : 10,
+            "name" : "Walsden",
+            "river" : "Walsden Water",
+            "path" : "walsden-water-at-walsden",  
+            "scenario" : [
+                { "id" : "a", "state" : "normal", "gain" : "normal" },
+                { "id" : "b", "state" : "normal", "gain" : "normal" },
+                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "d", "state" : "above", "gain" : "rising" }
+            ]
+        } 
     ],
     "impact" : [
         {

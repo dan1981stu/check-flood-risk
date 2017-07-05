@@ -116,6 +116,30 @@ var init = function(selectedId = '') {
         zoom: 13
     });
 
+    // Add river levels
+    var iconFeature = new ol.Feature({
+        geometry: new ol.geom.Point(
+            ol.proj.fromLonLat([-1.98221629139491,53.7296721399487])
+        )
+    });
+    var iconStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+            src: '/public/icon-locator-blue-2x.png',
+            size: [57, 71],
+            anchor: [0.5, 1],
+            scale: 0.5
+        })
+    });
+    iconFeature.setStyle(iconStyle);
+    var iconSource = new ol.source.Vector({
+        features: [iconFeature]
+    });
+    var iconLayer = new ol.layer.Vector({
+        source: iconSource,
+        defaultProjection :'EPSG:4326', 
+        projection: 'EPSG:3857'
+    });
+
     // Render map
     map = new ol.Map({
         target: 'map',
@@ -126,7 +150,7 @@ var init = function(selectedId = '') {
         //    another copy of the background clipped inside the selected feature
         // 4. Only target areas that intersect with the slected feature also
         //    clipped inside the selected feature
-        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting],
+        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting, iconLayer],
         view: view
     })
 

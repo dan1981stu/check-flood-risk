@@ -146,11 +146,11 @@
 			<div class="map-outer">
 				<div class="map-inner">
 					<div id="map" class="map map-small"></div>
-					<p style="margin-top:0.5em">Potential affected areas</p>
-					<!--<p><a href="/map?location=mytholmroyd">View map showing possible affected areas</a></p>-->
+					<p style="margin-top:0.5em">Map showing potential affected areas</p>
+					<p></p>
+					<p>[Weather forecast, warnings and rainfall levels for the current week]</p>
 				</div>
 			</div>
-			<p>Weather component<p>
 		</div>
 	
 	</div>
@@ -163,21 +163,21 @@
 
 			{{#if model.hasPostcode}}
 			{{#if model.hasIntersectWarningSevere }}
-			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who lives within or on the boundary of a severe flood warning currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a></p>
+			<h2 class="heading-medium">Prepare for severe flooding</h2>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for severe flooding</a>.</p>
 			{{else if model.hasIntersectWarning }}
 			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who lives within or on the boundary of a flood warning currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a></p>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
 			{{else if model.hasIntersectAlert}}
-			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who lives outside a warning area but within the boundary of a flood alert currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			<h2 class="heading-medium">Prepare for possible flooding</h2>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for possible flooding</a>.</p>
 			{{else }}
-			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who lives near but outside a flood alert or warning area in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			<h2 class="heading-medium">Prepare for nearby flooding</h2>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding nearby flooding</a>.</p>
 			{{/if }}
 			{{else }}
-			<h2 class="heading-medium">Prepare for flooding</h2>
-			<p>Actions for someone who is interested in a larger area and may live within one of its alert or warning areas currently in force. <a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
+			<h2 class="heading-medium">Prepare for nearby flooding</h2>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding nearby flooding</a>.</p>
 			{{/if }}
 
 			<!-- Get flood warnings -->
@@ -208,7 +208,7 @@
 			<!-- Impacts and river levels -->
 
 			{{#if model.hasImpacts}}
-			<h2 class="heading-medium">How current river levels might impact {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area?</h2>
+			<h2 class="heading-medium">How might current river levels impact {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area?</h2>
 			<p>River levels that impact this area are currently {{model.levelState}} range. Be aware of the following potential impacts.</p>
 			<ul class="list list-bullet">
 				{{#each model.impacts }}
