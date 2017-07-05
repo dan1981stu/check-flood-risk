@@ -171,9 +171,10 @@ exports.getSummary = function(name, scenario) {
 		for (var key in data.impact) {
 			var impact = data.impact[key]
 			var levelTrigger = levels.find(x => x.id == impact.levelId)
-			var impactImpactTargetArea = targetAreas.find(x => x.id == impact.targetAreaId)
+			var impactTargetArea = data.targetArea.find(x => x.id == impact.targetAreaId)
+
 			// Check for nearby level and target area
-			if (levelTrigger && impactImpactTargetArea) {
+			if (levelTrigger && impactTargetArea) {
 				// Check level trigger is above normal range
 				if(levelTrigger.scenario.find(x => x.id == scenario).state == 'above') {
 					impacts.push(impact)
@@ -220,7 +221,6 @@ exports.getSummary = function(name, scenario) {
 	}
 
 }
-
 
 // Get a location by its name and scenario
 exports.getLocation = function(name, scenario) {
