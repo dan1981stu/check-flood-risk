@@ -231,10 +231,10 @@
 
 <!-- This content to go at end of body -->
 <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
-{{#if model.hasAlert }}
+{{#if model.hasAlertOrWarning }}
 <script>
-var targetStates = {{{ json model.targetStates }}}
-var lonLat = {{{ json model.lonLat }}}
+	var targetStates = {{{ json model.targetStates }}}
+	var lonLat = {{{ json model.lonLat }}}
 </script>
 {{/if }}
 <script src="/public/javascripts/map.js"></script>
