@@ -150,7 +150,7 @@ var init = function(selectedId = '') {
         //    another copy of the background clipped inside the selected feature
         // 4. Only target areas that intersect with the slected feature also
         //    clipped inside the selected feature
-        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting],
+        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting, iconLayer],
         view: view
     })
 

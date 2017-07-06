@@ -102,7 +102,7 @@ exports.getSummary = function(name, scenario) {
 				// Intersects with a current warning
 				intersectingTarget = intersectingTargetWarning
 				targetAreaStates.push({ "id" : intersectingTarget.id, "state" : 2 })
-				targetAreaAll.push(intersectingTargeta)
+				targetAreaAll.push(intersectingTarget)
 				hasIntersectWarning = true
 			}
 		}
