@@ -1,19 +1,40 @@
 {
+    "riskType" : [
+        {
+            "id" : 1,
+            "name" : "river"
+        },
+        {
+            "id" : 2,
+            "name" : "coast"
+        },
+        {
+            "id" : 3,
+            "name" : "resovoir"
+        },
+        {
+            "id" : 4,
+            "name" : "surface water"
+        }
+    ],
     "firstLine" : [
         {
             "id" : 3,
             "name" : "12 Hullet Close",
-            "postcodeId" : 1
+            "postcodeId" : 1,
+            "riskTypes" : []
         },
         {
             "id" : 1,
             "name" : "28 Westfield Terrace",
-            "postcodeId" : 2
+            "postcodeId" : 2,
+            "riskTypes" : [4,1] 
         },
         {
             "id" : 2,
             "name" : "14 Caldene Avenue",
-            "postcodeId" : 3
+            "postcodeId" : 3,
+            "riskTypes" : [4,1] 
         }
     ],
     "postcode" : [
@@ -22,6 +43,7 @@
             "name" : "HX7 5QP",
             "path" : "hx7-5qp",
             "townId" : 1,
+            "riskTypes" : [4], 
             "intersectingWarning" : -1,
             "intersectingAlert" : -1,
             "targetAreas" : [1,2,3,4,5,101],
@@ -32,6 +54,7 @@
             "name" : "HX7 5DL",
             "path" : "hx7-5dl",
             "townId" : 1,
+            "riskTypes" : [4,1], 
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
             "targetAreas" : [1,2,3,4,5,101],
@@ -42,6 +65,7 @@
             "name" : "HX7 5AF",
             "path" : "hx7-5af",
             "townId" : 1,
+            "riskTypes" : [4,1], 
             "intersectingWarning" : 1,
             "intersectingAlert" : 101,
             "targetAreas" : [1,2,3,4,5,101],

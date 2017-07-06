@@ -37,15 +37,10 @@
 
 			<!-- Immediate location -->
 
-			{{#unless model.hasRisk}}
-			<p class="lede" style="margin-top:0">
-				This location is at low risk from river and coastal flooding.
-			</p>
-			{{#if model.hasAlertOrWarning}}
+			{{#unless model.hasRisk }}
 			<p class="lede">
-			{{#if model.hasWarningSevere }}Severe flooding{{else }}Flooding{{/if }} is forecast for the surrounding area.
+			{{#if model.hasWarningSevere }}Severe flooding{{else }}Flooding{{/if }} is forecast {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }}.
 			</p>
-			{{/if }}
 			{{/unless }}
 
 			{{#if model.hasIntersectAlertOrWarning }}
@@ -235,7 +230,7 @@
 <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
 {{#if model.hasAlertOrWarning }}
 <script>
-	var targetStates = {{{ json model.targetStates }}}
+	var targetAreaStates = {{{ json model.targetAreaStates }}}
 	var lonLat = {{{ json model.lonLat }}}
 </script>
 {{/if }}

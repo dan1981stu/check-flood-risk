@@ -15,7 +15,7 @@ var init = function(selectedId = '') {
     // Function used to style individual features
     var styleFunction = function(feature, resolution) {
 
-        var target = targetStates.find(x => x.id == feature.getId())
+        var target = targetAreaStates.find(x => x.id == feature.getId())
 
         if (target) {
 

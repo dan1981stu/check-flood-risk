@@ -28,17 +28,11 @@
 			
 			<!-- Imediate location -->
 
-			{{#if model.hasRisk}}
-			<p class="lede">Flooding is not currently forecast for this area</p>
-			{{else }}
 			<p class="lede">
-				This location is at low risk from river and coastal flooding.
+				Flooding is not currently forecast for this area.
 			</p>
-			{{#unless model.hasAlertOrWarning}}
-			<p class="lede">Flooding is not currently forecast nearby.</p>
-			{{/unless }}
-			{{/if }}
-			<details style="margin-top:2em" role="group">
+
+			<details style="margin-top:2em;margin-bottom:2.25em" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false">
 					<span class="summary">Were you expecting to see a flood warning or alert {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }}?</span>
 				</summary>
@@ -47,23 +41,29 @@
                 </div>
             </details>
 
+			<!-- Long term flood risk -->
 
-			{{#if model.hasRisk}}
-			<p class="notice notice-warnings" style="margin-top:2.25em">
+			{{#if model.hasRiskRiverCoastOrResovoir}}
+			<p class="notice notice-warnings">
 				<i class="icon icon-warning">
 					<span class="visually-hidden">Warning</span>
 				</i>
 				<strong class="bold-small notice-copy">Your property might be at risk from future flooding</strong>
 			</p>
-			<p>Some properties in this area might be at risk from future flooding. Find out what factors could cause or contribute to potential flooding and how likely it is to flood in the future. <a href="">Check your properties long term flood risk</a>.</p>
+			{{/if}}
+			<p>Parts of this area may experience {{ model.riskTypesString }} flooding in the future. Find out what factors could cause or contribute to potential flooding and how likely it is to affect you. <a href="">Check your properties long term flood risk</a>.</p>
+
+			<!-- Guidance -->
+
+			{{#if model.hasRiskRiverCoastOrResovoir }}
 			<h2 class="heading-medium">Prepare for future flooding</h2>
 			<p><a href="">Check your insurance</a> and <a href="https://www.gov.uk/prepare-for-flooding/future-flooding">protect your property</a> from future flooding.</p>
-			{{/if}}
+			{{/if }}
 
 			<!-- Get flood warnings -->
 
 			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
-			<p>When flooding {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }} is forecast, warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
+			<p>When flooding is forecast {{#if model.hasRiskRiverCoastOrResovoir }}for this area{{else }}nearby{{/if }}, warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
 			
 			<!-- Report a flood -->
 
@@ -91,7 +91,3 @@
 	</div>
 
 </main>
-
-<!-- This content to go at end of body -->
-<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
-<script src="/public/javascripts/map.js" type="text/javascript"></script>

@@ -18,10 +18,17 @@ exports.getSummary = function(name, scenario) {
 		targetAreas = [], // Nearby
 		levels = [], // Levels for impact area
 		impacts = [], // Current impacts in this area
-		levelState = 'within normal',
+		levelState = 'normal', // Level state summary
+		riskTypes = [], // List of risk types
+		riskTypesString, // Formatted string of risk types
 
 		hasPostcode = false,
-		hasRisk = true,
+		hasRisk = false,
+		hasRiskRiver = false,
+		hasRiskCoast = false,
+		hasRiskResovoir = false,
+		hasRiskSurface = false,
+		hasRiskRiverCoastOrResovoir = false,
 		hasImpacts = false,
 
 		hasWarningSevere = false, // Nearby
@@ -36,7 +43,7 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectAlertOrWarning = false,
 		hasIntersectTarget = false
 
-		targetStates = []
+		targetAreaStates = []
 
 	// Find in towns
 	town = data.town.find(
@@ -78,10 +85,8 @@ exports.getSummary = function(name, scenario) {
 			if (intersectingTargetAlert.scenario.find(x => x.id == scenario && x.severity == 3)) {
 				// Intersects with a current alert
 				intersectingTarget = intersectingTargetAlert
-				hasIntersectAlertOrWarning = true
+				targetAreaStates.push({ "id" : intersectingTarget.id, "state" : 3 })
 				hasIntersectAlert = true
-				hasAlertOrWarning = true
-				targetStates.push({ "id" : intersectingTarget.id, "state" : 3 })
 			}	
 		}
 		if (intersectingTargetWarning) {
@@ -90,17 +95,13 @@ exports.getSummary = function(name, scenario) {
 			if (intersectingTargetWarning.scenario.find(x => x.id == scenario && x.severity == 1)) {
 				// Intersects with a current severe warning
 				intersectingTarget = intersectingTargetWarning
-				hasIntersectAlertOrWarning = true
+				targetAreaStates.push({ "id" : intersectingTarget.id, "state" : 1 })
 				hasIntersectWarningSevere = true
-				hasAlertOrWarning = true
-				targetStates.push({ "id" : intersectingTarget.id, "state" : 1 })
 			} else if (intersectingTargetWarning.scenario.find(x => x.id == scenario && x.severity == 2)) {
 				// Intersects with a current warning
 				intersectingTarget = intersectingTargetWarning
-				hasIntersectAlertOrWarning = true
+				targetAreaStates.push({ "id" : intersectingTarget.id, "state" : 2 })
 				hasIntersectWarning = true
-				hasAlertOrWarning = true
-				targetStates.push({ "id" : intersectingTarget.id, "state" : 2 })
 			}
 		}
 	}
@@ -115,37 +116,26 @@ exports.getSummary = function(name, scenario) {
 					if (warningsSevere.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 1)) {
 						targetAreas.push(targetArea)
 						warningsSevere.push(targetArea)
-						targetStates.push({ "id" : targetArea.id, "state" : 1 })
+						targetAreaStates.push({ "id" : targetArea.id, "state" : 1 })
 						hasWarningSevere = true
-						hasAlertOrWarning = true
-						hasTargetArea = true
 					}
 					// Add nearby warning, excluding intersecting warning
 					if (warnings.indexOf(targetArea) == -1 && targetArea != intersectingTarget && targetArea.scenario.find(x => x.id == scenario && x.severity == 2)) {
 						warnings.push(targetArea)
 						targetAreas.push(targetArea)
-						targetStates.push({ "id" : targetArea.id, "state" : 2 })
+						targetAreaStates.push({ "id" : targetArea.id, "state" : 2 })
 						hasWarning = true
-						hasAlertOrWarning = true
-						hasTargetArea = true
 					}
 					// Add nearby alert, excluding 1/4 scenario 
 					if (alerts.indexOf(targetArea) == -1 && targetArea.scenario.find(x => x.id == scenario && x.severity == 3) && !(!hasIntersectWarning && !hasIntersectWarningSevere && hasIntersectAlert)) {
 						alerts.push(targetArea)
 						targetAreas.push(targetArea)
-						targetStates.push({ "id" : targetArea.id, "state" : 3 })
+						targetAreaStates.push({ "id" : targetArea.id, "state" : 3 })
 						hasAlert = true
-						hasAlertOrWarning = true
-						hasTargetArea = true
 					}
 				}
 			}
 		}
-	}
-
-	// Set risk boolean
-	if (postcode && !hasIntersectTarget) {
-		hasRisk = false
 	}
 
 	// Add river levels and set general level state (Normal, above or below)
@@ -158,9 +148,9 @@ exports.getSummary = function(name, scenario) {
 				levels.push(level)
 				var state = level.scenario.find(x => x.id == scenario).state
 				if (state == 'above') {
-					levelState = 'above normal'
+					levelState = 'above'
 				} else if (state == 'below') {
-					levelState = 'below normal'
+					levelState = 'below'
 				}
 			}
 		}
@@ -184,22 +174,81 @@ exports.getSummary = function(name, scenario) {
 		}
 	}
 
+	// Add risk types and set booleans
+	if (postcodes) {
+		var tmpRiskTypeIds = []
+		for (var key in postcodes) {
+			var riskTypeIds = postcodes[key].riskTypes
+			for (var key in riskTypeIds) {
+				var riskTypeId = data.riskType.find(x => x.id == riskTypeIds[key]).id
+				if (tmpRiskTypeIds.indexOf(riskTypeId) == -1) {
+					tmpRiskTypeIds.push(riskTypeId)
+				}
+				if (riskTypeId == 1) {
+					hasRiskRiver = true
+					hasRiskRiverCoastOrResovoir = true
+				}
+				if (riskTypeId == 2) {
+					hasRiskCoast = true
+					hasRiskRiverCoastOrResovoir = true
+				}
+				if (riskTypeId == 3) {
+					hasRiskResovoir = true
+					hasRiskRiverCoastOrResovoir = true
+				}
+				if (riskTypeId == 4 ) {
+					hasRiskSurface = true
+				}
+				hasRisk = true
+			}
+		}
+		// Order risktypes as per data source
+		for (var key in data.riskType) {
+			if (tmpRiskTypeIds.indexOf(data.riskType[key].id) > -1) {
+				riskTypes.push(data.riskType[key].name)
+			}
+		}
+	}
+
+	// Build risk types string
+	if (riskTypes.length) {
+		riskTypesString = riskTypes.join(', ').replace(/,(?!.*,)/gmi, ' or ')
+	}
+	
+	// Set intersect alert or warning boolean
+	if (hasIntersectAlert || hasIntersectWarning || hasIntersectWarningSevere) {
+		hasAlertOrWarning = true
+		hasIntersectAlertOrWarning = true
+	}
+
+	// Set has nearby target area and alert or wanring booleans
+	if (hasAlert || hasWarning || hasWarningSevere) {
+		hasAlertOrWarning = true
+		hasTargetArea = true
+	}
+
 	// Build model and return
 	return {
 
 		scenario,
 		location, // Full location name
+		lonLat, // Location centroid
 		warningsSevere, // List of nearby severe warnings
 		warnings, // List of nearby warnings
 		alerts, // List of nearby alerts
 		targetAreas, // List of nearby target areas
 		intersectingTarget, // The intersecting target area
 
-		levelState,
-		impacts,
+		levelState, // Above, normal or below
+		targetAreaStates, // List of states for each target area
+		impacts, // List of nearby impacts
 
 		hasRisk,
-		hasPostcode,
+		hasRiskRiverCoastOrResovoir,
+		riskTypesString,
+
+		hasPostcode, // Check if postcode or town
+		hasImpacts, // Nearby impacts
 		
 		hasWarningSevere,
 		hasWarning,
@@ -211,12 +260,7 @@ exports.getSummary = function(name, scenario) {
 		hasIntersectWarning,
 		hasIntersectAlert,
 		hasIntersectAlertOrWarning,
-		hasIntersectTarget,
-		
-		hasImpacts,
-
-		targetStates,
-		lonLat
+		hasIntersectTarget
 
 	}
 
@@ -241,6 +285,7 @@ exports.getLocation = function(name, scenario) {
 	if (location) {	
 		return location.path
 	}
+
 	return ''
 
 }
