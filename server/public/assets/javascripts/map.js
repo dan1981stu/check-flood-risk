@@ -2,7 +2,7 @@ var map
 
 // Custom controls
 
-var mapContainer = document.querySelector('.map')
+var mapContainer = document.querySelector('.map-container')
 
 var zoom = document.createElement('div')
 zoom.classList.add('map-controls','map-controls-zoom')
@@ -54,6 +54,7 @@ mapContainer.appendChild(main)
 // Toggle size event
 toggleSize.addEventListener('click', function(e) {
     e.preventDefault()
-    mapContainer.classList.toggle('map-full')
+    mapContainer.classList.toggle('map-container-full')
+    mapContainer.classList.toggle('map-container-small')
     map.updateSize()
 })

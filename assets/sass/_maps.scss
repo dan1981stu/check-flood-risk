@@ -1,32 +1,45 @@
 $path: "/public/";
 
-.map-outer {
-  margin-top:2em;
+/*
+.column-two-thirds-map {
+  position:relative;
+}
+
+.column-one-third-map {
   @include media(tablet) {
-    margin-top:0;
-    width:100%;
-    position:relative;
+    padding-top:24em;
+  }
+}
+
+.map-outer {
+  @include media(tablet) {
+    position:absolute;
+    width:50%;
+    top:0;
+    left:100%;
   }
 }
 
 .map-inner {
   @include media(tablet) {
-    position:absolute;
-    width:100%;
+    padding:0 15px;
   }
 }
+*/
 
-.map {
+.map-container {
   position:relative;
   height:450px;
   border:1px solid $border-colour;
 }
 
-.map-small {
+/*
+.map-container-small {
   height:275px;
 }
+*/
 
-.map.map-full {
+.map-container-full {
   background-color: #fff;
   height:100%;
   width:100%;

@@ -1,7 +1,7 @@
 var data = require('../data/data.json')
 
 // Get risk summary by location and scenario
-exports.getSummary = function(name, scenario) {
+exports.getSummary = function(path, scenario) {
 
 	var
 		town, 
@@ -46,7 +46,7 @@ exports.getSummary = function(name, scenario) {
 
 	// Find in towns
 	town = data.town.find(
-		x => x.name.toLowerCase() === name.toLowerCase().split('-').join(' ')
+		x => x.path === path
 	)
 
 	// If town find all postcodes for location
@@ -58,7 +58,7 @@ exports.getSummary = function(name, scenario) {
 	// If postcode find in postcodes
 	if (!town) {
 		postcode = data.postcode.find(
-			x => x.name.toLowerCase() === name.toLowerCase().split('-').join(' ')
+			x => x.path === path
 		)
 		postcodes = [postcode]
 		town = data.town.find(
@@ -250,6 +250,7 @@ exports.getSummary = function(name, scenario) {
 	return {
 
 		scenario,
+		path, // Url parameter
 		location, // Full location name
 		lonLat, // Location centroid
 		warningsSevere, // List of nearby severe warnings
@@ -285,11 +286,9 @@ exports.getSummary = function(name, scenario) {
 
 }
 
-// Get a location by its name and scenario
-exports.getLocation = function(name, scenario) {
-
+// Get a location by its name
+exports.getLocationPathFromName = function(name, scenario) {
 	var location
-
 	// Find in towns
 	location = data.town.find(
 		x => x.name.toLowerCase() === name.toLowerCase()
@@ -304,7 +303,5 @@ exports.getLocation = function(name, scenario) {
 	if (location) {	
 		return location.path
 	}
-
 	return ''
-
 }

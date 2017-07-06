@@ -9,6 +9,10 @@
 </div>
 -->
 
+{{#if trace }}
+<p class="font-xsmall">{{ json model }}<p>
+{{/if }}
+
 <main>
 
 	<div class="grid-row">
@@ -16,29 +20,34 @@
 		<div class="column-two-thirds">
 
 			<h1 class="heading-xlarge">
-				Map showing potential affected areas
-				{{#if location}}
-				<span class="heading-secondary">{{ location }}</span>
+				Potential extent of flooding
+				{{#if model.location}}
+				<span class="heading-secondary">{{ model.location }}</span>
 				{{/if}}
 			</h1>
 
-			<div id="map" class="map"></div>
+			<div id="map" class="map-container"></div>
 
 		</div>
 
 		<div class="column-third">
+
 			<div class="related">
 				<aside class="govuk-related-items">
-					<h2>Flooding and extreme weather</h2>
-					<nav role="navigation">
-						<ul>
-							<li>
-								<a href="">Item</a>
-							</li>
-						</ul>
-					</nav>
+					<h2 class="heading-small">Flooding and extreme weather</h2>
+					<ul class="list">
+						<li><a href="">Related content</a></li>
+						<li class="related-items-more">
+							<a href="https://gov.uk/browse/environment-countryside/flooding-extreme-weather">
+								More <span class="visuallyhidden">in Flooding and extreme weather</span>
+							</a>            
+						</li>
+					</ul>
 				</aside>      
-			</div>    
+			</div>  
+			<p></p>
+			<p class="font-xsmall">[Weather forecast, warnings and rainfall levels for the current week]</p>
+			  
 		</div>
 
 	</div>
@@ -46,6 +55,12 @@
 </main>
 
 <!-- This content to go at end of body -->
-<script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
-<script src="/public/javascripts/map.js" type="text/javascript"></script>
-<script src="/public/javascripts/features.js" type="text/javascript"></script>
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+{{#if model.hasAlertOrWarning }}
+<script>
+	var targetAreaStates = {{{ json model.targetAreaStates }}}
+	var lonLat = {{{ json model.lonLat }}}
+</script>
+{{/if }}
+<script src="/public/javascripts/map.js"></script>
+<script src="/public/javascripts/features.js"></script>

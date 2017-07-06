@@ -2564,36 +2564,44 @@ table.select-areas th {
   font-weight: bold;
 }
 
+/*
+.column-two-thirds-map {
+  position:relative;
+}
+
+.column-one-third-map {
+  @include media(tablet) {
+    padding-top:24em;
+  }
+}
+
 .map-outer {
-  margin-top: 2em;
-}
-
-@media (min-width: 641px) {
-  .map-outer {
-    margin-top: 0;
-    width: 100%;
-    position: relative;
+  @include media(tablet) {
+    position:absolute;
+    width:50%;
+    top:0;
+    left:100%;
   }
 }
 
-@media (min-width: 641px) {
-  .map-inner {
-    position: absolute;
-    width: 100%;
+.map-inner {
+  @include media(tablet) {
+    padding:0 15px;
   }
 }
-
-.map {
+*/
+.map-container {
   position: relative;
   height: 450px;
   border: 1px solid #bfc1c3;
 }
 
-.map-small {
-  height: 275px;
+/*
+.map-container-small {
+  height:275px;
 }
-
-.map.map-full {
+*/
+.map-container-full {
   background-color: #fff;
   height: 100%;
   width: 100%;

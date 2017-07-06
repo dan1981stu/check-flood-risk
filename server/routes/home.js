@@ -39,7 +39,7 @@ module.exports = [
 			handler: function (request, reply) {
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				const location = request.payload.location
-				var path = modelData.getLocation(location, scenario)
+				var path = modelData.getLocationPathFromName(location, scenario)
 				// Redirect to risk summary
 				if (path.length > 1) {
 					return reply.redirect('/' + path + '?s=' + scenario)
@@ -59,9 +59,9 @@ module.exports = [
 		path: '/{location}',
 		config: {
 			handler: function (request, reply) {
-				const location = request.params.location.toLowerCase()
+				const path = request.params.location.toLowerCase().split(' ').join('-')
 				const scenario = request.query.s ? request.query.s : 'a'
-				const model = modelData.getSummary(location, scenario)
+				const model = modelData.getSummary(path, scenario)
 				const pageTitle = model.location + ' - Current flood risk - GOV.UK'
 				const trace = request.query.t ? request.query.t : false
 				if (model.hasAlertOrWarning) {

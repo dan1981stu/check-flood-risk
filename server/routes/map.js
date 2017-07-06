@@ -1,25 +1,20 @@
+const modelData = require('../models/home')
+
 module.exports = [
 	{
 		method: 'GET',
 		path: '/map',
 		config: {
 			handler: function (request, reply) {
-
-				var location;
-				switch(request.query.location) {
-					case 'central-mytholmroyd-river-calder':
-						location = 'Central Mytholmroyd (River Calder)'
-						break
-					case 'mytholmroyd':
-						location = 'Mytholmroyd'
-						break
-					default:
-						location = false
-				}
-
+				const path = request.query.location ? request.query.location : ''
+				const scenario = request.query.s ? request.query.s : 'a'
+				const model = modelData.getSummary(path, scenario)
+				const pageTitle = model.location + ' - potential affected areas - GOV.UK'
+				const trace = request.query.t ? request.query.t : false
 				return reply.view('map/main', {
-					'location' : location,
-					'pageTitle' : 'Mytholomroyd - potential affected areas - GOV.UK'
+					'model': model,
+					'trace' : trace,
+					'pageTitle' : pageTitle
 				})
 			}
 		}
