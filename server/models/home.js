@@ -214,7 +214,24 @@ exports.getSummary = function(name, scenario) {
 
 	// Build risk types string
 	if (riskTypes.length) {
-		riskTypesString = riskTypes.join(', ').replace(/,(?!.*,)/gmi, ' or ')
+		var tmpRiskTypes = riskTypes
+		for (var key in tmpRiskTypes) {
+			switch (tmpRiskTypes[key]) {
+				case 'river' :
+					tmpRiskTypes[key] = 'rivers'
+					break
+				case 'river' :
+					tmpRiskTypes[key] = 'the sea'
+					break
+				case 'river' :
+					tmpRiskTypes[key] = 'resovoirs'
+					break
+				case 'river' :
+					tmpRiskTypes[key] = 'surface water'
+					break
+			}
+		}
+		riskTypesString = tmpRiskTypes.join(', ').replace(/,(?!.*,)/gmi, ' or ')
 	}
 	
 	// Set intersect alert or warning boolean
