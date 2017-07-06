@@ -206,7 +206,7 @@
 
 			{{#if model.hasImpacts}}
 			<h2 class="heading-medium">How might current river levels impact {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area?</h2>
-			<p>River levels that impact this area are currently {{model.levelState}} range. Be aware of the following potential impacts.</p>
+			<p>River levels that impact this area are currently {{model.levelState}} normal range. Be aware of the following potential impacts.</p>
 			<ul class="list list-bullet">
 				{{#each model.impacts }}
 				<li>{{this.description }}</li>
@@ -215,7 +215,7 @@
 			<p><a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
 			{{else }}
 			<h2 class="heading-medium">River levels in {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area</h2>
-			<p>River levels that impact this area are currently {{model.levelState}} range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
+			<p>River levels that impact this area are currently {{model.levelState}} normal range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
 			{{/if }}
 
 			<p style="margin-top:2em"><a href="">Change location</a></p>
