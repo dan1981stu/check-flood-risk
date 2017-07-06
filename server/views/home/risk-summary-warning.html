@@ -11,7 +11,6 @@
 
 {{#if trace }}
 <p class="font-xsmall">{{ json model }}<p>
-<p class="font-xsmall">{{ json level }}<p>
 {{/if }}
 
 <main>
@@ -167,7 +166,7 @@
 			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for flooding</a>.</p>
 			{{else if model.hasIntersectAlert}}
 			<h2 class="heading-medium">Prepare for possible flooding</h2>
-			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for possible flooding</a>.</p>
+			<p><a href="https://gov.uk/prepare-for-flooding">Prepare for possible flooding</a> and <a href="">check local travel news</a> and <a href="">local weather forecast</a>. </p>
 			{{else }}
 			<h2 class="heading-medium">Check local travel and weather conditions</h2>
 			<p><a href="">Check local travel news</a> and <a href="">local weather forecast</a></p>
@@ -215,7 +214,7 @@
 			<p><a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
 			{{else }}
 			<h2 class="heading-medium">River levels in {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area</h2>
-			<p>River levels that impact this area are currently {{model.levelState}} normal range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
+			<p>River levels that impact this area are currently {{#is model.levelState 'normal' }} within {{else }}{{model.levelState}}{{/is}} normal range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
 			{{/if }}
 
 			<p style="margin-top:2em"><a href="">Change location</a></p>
