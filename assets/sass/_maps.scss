@@ -1,31 +1,25 @@
 $path: "/public/";
 
-/*
 .column-two-thirds-map {
   position:relative;
 }
 
 .column-one-third-map {
   @include media(tablet) {
-    padding-top:24em;
+    padding-top:18em;
   }
 }
 
-.map-outer {
+.map {
   @include media(tablet) {
     position:absolute;
     width:50%;
     top:0;
     left:100%;
-  }
-}
-
-.map-inner {
-  @include media(tablet) {
     padding:0 15px;
+    box-sizing:border-box;
   }
 }
-*/
 
 .map-container {
   position:relative;
@@ -33,11 +27,9 @@ $path: "/public/";
   border:1px solid $border-colour;
 }
 
-/*
 .map-container-small {
   height:275px;
 }
-*/
 
 .map-container-full {
   background-color: #fff;
@@ -50,6 +42,11 @@ $path: "/public/";
   top: 0;
   z-index: 1;
   border: none
+}
+
+.map figcaption {
+  @include core-16;
+  margin-top:0.5em;
 }
 
 // Map controls zoom

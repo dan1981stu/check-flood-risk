@@ -26,7 +26,13 @@
 				</span>
 			</h1>
 
-			<!-- Immediate location -->
+		</div>
+
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds column-two-thirds-map">
 
 			{{#unless model.hasRisk }}
 			<p class="lede">
@@ -62,8 +68,6 @@
 					</p>
 			</div>
 			{{/if }}
-
-			<!-- Larger or nearby area -->
 
 			{{#if model.warningsSevere }}
 			<div class="panel panel-warning {{#if model.hasIntersectAlertOrWarning }}panel-border-warning-nearby{{ else }}panel-border-warning{{/if}}">
@@ -130,18 +134,14 @@
 			
 			<!-- Map view -->
 
-			<p><a href="/map?location={{ model.path }}&s={{ model.scenario }}">View potential extent of flooding</a></p>
-
 			<!--
-			<div class="map-outer">
-				<div class="map-inner">
-					<div id="map" class="map-container map-container-small"></div>
-					<p style="margin-top:0.5em">Potential affected areas</p>
-					<p></p>
-					<p>[Weather forecast, warnings and rainfall levels for the current week]</p>
-				</div>
-			</div>
+			<p><a href="/map?location={{ model.path }}&s={{ model.scenario }}">View potential extent of flooding</a></p>
 			-->
+
+			<figure class="map">
+				<div id="map" class="map-container map-container-small"></div>
+				<figcaption>Potential affected areas</figcaption>
+			</figure>
 
 			<!-- Guidance -->
 
@@ -204,8 +204,6 @@
 			<h2 class="heading-medium">River levels in {{#if model.hasPostcode }}the nearby{{else }}this{{/if }} area</h2>
 			<p>River levels that impact this area are currently {{#is model.levelState 'normal' }} within {{else }}{{model.levelState}}{{/is}} normal range. <a href="/river-and-sea-levels?location=mytholmroyd">Check river levels that impact this area</a>.</p>
 			{{/if }}
-
-			<p style="margin-top:2em"><a href="">Change location</a></p>
 
 		</div>
 

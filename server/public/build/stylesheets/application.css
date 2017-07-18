@@ -2564,43 +2564,37 @@ table.select-areas th {
   font-weight: bold;
 }
 
-/*
 .column-two-thirds-map {
-  position:relative;
+  position: relative;
 }
 
-.column-one-third-map {
-  @include media(tablet) {
-    padding-top:24em;
+@media (min-width: 641px) {
+  .column-one-third-map {
+    padding-top: 18em;
   }
 }
 
-.map-outer {
-  @include media(tablet) {
-    position:absolute;
-    width:50%;
-    top:0;
-    left:100%;
+@media (min-width: 641px) {
+  .map {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    left: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
   }
 }
 
-.map-inner {
-  @include media(tablet) {
-    padding:0 15px;
-  }
-}
-*/
 .map-container {
   position: relative;
   height: 450px;
   border: 1px solid #bfc1c3;
 }
 
-/*
 .map-container-small {
-  height:275px;
+  height: 275px;
 }
-*/
+
 .map-container-full {
   background-color: #fff;
   height: 100%;
@@ -2612,6 +2606,22 @@ table.select-areas th {
   top: 0;
   z-index: 1;
   border: none;
+}
+
+.map figcaption {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+  margin-top: 0.5em;
+}
+
+@media (min-width: 641px) {
+  .map figcaption {
+    font-size: 16px;
+    line-height: 1.25;
+  }
 }
 
 .map-controls-zoom {
