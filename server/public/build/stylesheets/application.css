@@ -2568,20 +2568,20 @@ table.select-areas th {
   position: relative;
 }
 
-@media (min-width: 641px) {
-  .column-one-third-map {
-    padding-top: 18em;
-  }
+.map {
+  padding-top: 15px;
 }
 
 @media (min-width: 641px) {
   .map {
-    position: absolute;
-    width: 50%;
-    top: 0;
-    left: 100%;
-    padding: 0 15px;
-    box-sizing: border-box;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-link {
+    display: none;
   }
 }
 
@@ -2694,4 +2694,8 @@ table.select-areas th {
   line-height: 30px;
   padding: 0 6px;
   margin-right: 10px;
+}
+
+.rainfall {
+  margin-top: 45px;
 }

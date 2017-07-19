@@ -1,17 +1,12 @@
 var init = function(selectedId = '') {
 
-    // Set selected feature Id
-    //var selectedId = ''; // No features selected
-    //selectedId = '123FWF315'; // Warning
-    //selectedId = '123WAF963'; // Alert
-    //selectedId = '123FWF308'; // Warning removed
-
     // layerOpacity setting for all image layers
     var layerOpacity = 1, selectedBdrWidth = 10, resolution;
 
     // Source of features
-    var geoJSON = '/public/data/features.json';
-    
+    var targetAreasJSON = '/public/data/target-areas.json';
+    var levelsJSON = '/public/data/levels.json';
+
     // Function used to style individual features
     var styleFunction = function(feature, resolution) {
 
@@ -66,9 +61,9 @@ var init = function(selectedId = '') {
     });
 
     // Source for features
-    var source = new ol.source.Vector({
+    var sourceTargetAreas = new ol.source.Vector({
         format: new ol.format.GeoJSON(),
-        url: geoJSON,
+        url: targetAreasJSON,
         defaultProjection :'EPSG:4326', 
         projection: 'EPSG:3857'
     });
@@ -82,7 +77,7 @@ var init = function(selectedId = '') {
     // Layer: All target areas
     var targetAreas = new ol.layer.Image({
         source: new ol.source.ImageVector({
-            source: source,
+            source: sourceTargetAreas,
             // Use custom style function to colour individual features accordingley
             style: styleFunction
         }),
@@ -107,7 +102,7 @@ var init = function(selectedId = '') {
     // Layer: A background map clipped to selected feature multi polygon
     var tileSelected = new ol.layer.Tile();
 
-    //  Selcted feature and selected feature extent objects
+    //  Selected feature and selected feature extent objects
     var featureSelected, featureSelectedExtent;
 
     // The map view object
@@ -117,12 +112,7 @@ var init = function(selectedId = '') {
     });
 
     // Add river levels
-    var iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point(
-            ol.proj.fromLonLat([-1.98221629139491,53.7296721399487])
-        )
-    });
-    var iconStyle = new ol.style.Style({
+    var levelStyle = new ol.style.Style({
         image: new ol.style.Icon({
             src: '/public/icon-locator-blue-2x.png',
             size: [57, 71],
@@ -130,19 +120,19 @@ var init = function(selectedId = '') {
             scale: 0.5
         })
     });
-    iconFeature.setStyle(iconStyle);
-    var iconSource = new ol.source.Vector({
-        features: [iconFeature]
-    });
-    var iconLayer = new ol.layer.Vector({
-        source: iconSource,
+    var sourceLevels = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: levelsJSON,
         defaultProjection :'EPSG:4326', 
         projection: 'EPSG:3857'
     });
-
+    var levels = new ol.layer.Vector({
+        source: sourceLevels,
+        style: levelStyle
+    });
     // Render map
     map = new ol.Map({
-        target: 'map',
+        target: 'map-container',
         // Layer order:
         // 1. Background map
         // 2. All target areas coloured accordingley
@@ -150,7 +140,7 @@ var init = function(selectedId = '') {
         //    another copy of the background clipped inside the selected feature
         // 4. Only target areas that intersect with the slected feature also
         //    clipped inside the selected feature
-        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting],
+        layers: [tile, targetAreas, tileSelected, targetAreasIntersecting, levels],
         view: view
     })
 
@@ -219,13 +209,13 @@ var init = function(selectedId = '') {
     // generate intersecting features source and
     // add OSM background map to tileSelected source
     // set extent to features
-    source.on('change', function(e){
+    sourceTargetAreas.on('change', function(e){
         if (selectedId) {
             if(e.target.getState() === 'ready'){
                 featureSelected = source.getFeatureById(selectedId);
                 featureSelectedExtent = featureSelected.getGeometry().getExtent();
                 tileSelected.setSource(new ol.source.OSM());
-                source.forEachFeatureIntersectingExtent(featureSelectedExtent, function(feature) {
+                sourceTargetAreas.forEachFeatureIntersectingExtent(featureSelectedExtent, function(feature) {
                     featureType = feature.getGeometry().getType();
                     if (featureType == 'MultiPolygon') {
                         sourceIntersect.addFeature(feature);
@@ -234,7 +224,7 @@ var init = function(selectedId = '') {
                 //map.getView().fit(featureSelectedExtent);
             }
         } else {
-            //map.getView().fit(source.getExtent());
+            //map.getView().fit(sourceTargetAreas.getExtent());
         }
     });
 

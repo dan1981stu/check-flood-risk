@@ -145,9 +145,16 @@ exports.getSummary = function(path, scenario) {
 		var level = data.level[key]
 		for (var key in targetAreaAll) {
 			var targetArea = targetAreaAll[key]
-			if (targetArea.levels.indexOf(level.id) > -1 && levels.indexOf(level) == -1) {
+			if (targetArea.levels.indexOf(level.id) > -1 && !levels.find(x => x.id == level.id)) {
 				// Add level
-				levels.push(level)
+				levels.push({ 
+					'id' : level.id,
+					'name' : level.name,
+					'river' : level.river,
+					'path' : level.path,
+					'gain' : level.scenario.find(x => x.id == scenario).gain,
+					'state' : level.scenario.find(x => x.id == scenario).state
+				})
 				var state = level.scenario.find(x => x.id == scenario).state
 				if (state == 'above') {
 					levelState = 'above'
@@ -168,7 +175,7 @@ exports.getSummary = function(path, scenario) {
 			// Check for nearby level and target area
 			if (levelTrigger && impactTargetArea) {
 				// Check level trigger is above normal range
-				if(levelTrigger.scenario.find(x => x.id == scenario).state == 'above') {
+				if(levelTrigger.state == 'above') {
 					impacts.push(impact)
 					hasImpacts = true
 				}
@@ -261,6 +268,7 @@ exports.getSummary = function(path, scenario) {
 
 		levelState, // Above, normal or below
 		targetAreaStates, // List of states for each target area
+		levels, // Levels that impact location
 		impacts, // List of nearby impacts
 
 		hasRisk,

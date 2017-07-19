@@ -31,6 +31,7 @@ module.exports = [
 			}
 		}
 	},
+
 	// Form post
 	{
 		method: 'POST',
@@ -80,4 +81,5 @@ module.exports = [
 			}
 		}
 	}
+
 ]

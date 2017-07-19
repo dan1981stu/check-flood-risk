@@ -1,0 +1,135 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "8321",
+            "properties": {
+                "name":"Mytholmroyd Dauber Bridge",
+                "river":"Cragg Brook",
+                "path" : "cragg-brook-at-mytholmroyd-dauber-bridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-1.98976354,53.7227915]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "9031",
+            "properties": {
+                "name":"Brearley",
+                "river":"River Calder",
+                "path" : "river-calder-at-brearley"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-1.96131201,53.72958074]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8048",
+            "properties": {
+                "name":"Mytholmroyd",
+                "river":"River Calder",
+                "path" : "river-calder-at-mytholmroyd"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-1.98328917,53.7312935]
+            }
+        },    
+        {
+            "type": "Feature",
+            "id": "8097",
+            "properties": {
+                "name":"Hebden Bridge",
+                "river":"River Calder",
+                "path" : "river-calder-at-hebden-bridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.02725307,53.74117832]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8343",
+            "properties": {
+                "name":"Todmorden Callis Bridge",
+                "river":"River Calder",
+                "path" : "river-calder-at-todmorden-callis-bridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.04521027,53.73290385]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8205",
+            "properties": {
+                "name":"Todmorden",
+                "river":"River Calder",
+                "path" : "river-calder-at-todmorden"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.09693896,53.7168743]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8152",
+            "properties": {
+                "name":"Nutclough",
+                "river":"Hebden Water",
+                "path" : "hebdon-water-at-nutclough"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.01057657,53.7447762]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8305",
+            "properties": {
+                "name":"Portsmouth Lennox Road",
+                "river":"River Calder",
+                "path" : "river-calder-at-portsmouth-lennox-road"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.15351354,53.73209478]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8310",
+            "properties": {
+                "name":"Todmorden Salford",
+                "river":"Walsden Water",
+                "path" : "walsden-water-at-todmorden-salford"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.10186338,53.71055157]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "8211",
+            "properties": {
+                "name":"Walsden",
+                "river":"Walsden Water",
+                "path" : "walsden-water-at-walsden"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates":[-2.10142186,53.69080508]
+            }
+        }        
+    ]
+}
