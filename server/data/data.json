@@ -180,9 +180,9 @@
             "river" : "Cragg Brook",
             "path" : "cragg-brook-at-mytholmroyd-dauber-bridge",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "above", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "above", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -192,9 +192,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-brearley",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -204,9 +204,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-mytholmroyd",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "normal", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "normal", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -216,9 +216,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-hebden-bridge",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -228,9 +228,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-todmorden-callis-bridge",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -240,9 +240,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-todmorden",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -252,9 +252,9 @@
             "river" : "Hebden Water",
             "path" : "hebdon-water-at-nutclough",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -264,9 +264,9 @@
             "river" : "River Calder",
             "path" : "river-calder-at-portsmouth-lennox-road",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         },
@@ -276,9 +276,9 @@
             "river" : "Walsden Water",
             "path" : "walsden-water-at-todmorden-salford",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         }, 
@@ -288,9 +288,9 @@
             "river" : "Walsden Water",
             "path" : "walsden-water-at-walsden",  
             "scenario" : [
-                { "id" : "a", "state" : "normal", "gain" : "normal" },
-                { "id" : "b", "state" : "normal", "gain" : "normal" },
-                { "id" : "c", "state" : "above", "gain" : "normal" },
+                { "id" : "a", "state" : "normal", "gain" : "stable" },
+                { "id" : "b", "state" : "normal", "gain" : "stable" },
+                { "id" : "c", "state" : "above", "gain" : "stable" },
                 { "id" : "d", "state" : "above", "gain" : "rising" }
             ]
         } 
