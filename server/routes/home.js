@@ -8,8 +8,23 @@ module.exports = [
 		path: '/',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('home/index', {
+				return reply.view('home/main', {
 					'pageTitle' : 'Prototype - Check flood risk'
+				})
+			}
+		}
+	},
+
+	// Service start page
+	{
+		method: 'GET',
+		path: '/check-flood-risk',
+		config: {
+			handler: function (request, reply) {
+				const scenario = request.query.s ? request.query.s : 'a'
+				return reply.view('home/check-flood-risk', {
+					'model' : { 'scenario' : scenario },
+					'pageTitle' : 'Check flood risk - GOV.UK'
 				})
 			}
 		}
@@ -18,15 +33,15 @@ module.exports = [
 	// Start page could be route in production
 	{
 		method: 'GET',
-		path: '/start',
+		path: '/find-location',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
 				const trace = request.query.t ? request.query.t : false
-				return reply.view('home/main', {
+				return reply.view('home/find-location', {
 					'model' : { 'location' : '', 'scenario' : scenario },
 					'trace' : trace,
-					'pageTitle' : 'Check flood risk - GOV.UK'
+					'pageTitle' : 'Find location - Check flood risk - GOV.UK'
 				})
 			}
 		}
@@ -35,7 +50,7 @@ module.exports = [
 	// Form post
 	{
 		method: 'POST',
-		path: '/start',
+		path: '/find-location',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'

@@ -9,6 +9,8 @@
 </div>
 -->
 
+<a href="/find-location" class="link-back">Back</a>
+
 {{#if trace }}
 <p class="font-xsmall">{{ json model }}<p>
 {{/if }}
@@ -37,21 +39,23 @@
 					<span class="summary">Were you expecting to see a flood warning or alert {{#if model.hasPostcode }}nearby{{else }}in this area{{/if }}?</span>
 				</summary>
                 <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
-					<p>Text</p>
+					<!-- Report a flood -->
+					<h2 class="heading-small">Report a flood or possible cause of flooding</h2>
+					<p>Who you need to contact depends on what’s flooding. <a href="">Report a flood or possible cause of flooding</a>.</p>
                 </div>
             </details>
 
 			<!-- Long term flood risk -->
 
 			{{#if model.hasRiskRiverCoastOrResovoir}}
-			<p class="notice notice-warnings">
-				<i class="icon icon-warning">
+			<p class="notice">
+				<i class="icon icon-important">
 					<span class="visually-hidden">Warning</span>
 				</i>
 				<strong class="bold-small notice-copy">Your property might be at risk from flooding in the future</strong>
 			</p>
 			{{/if}}
-			<p>Parts of this area may experience flooding from {{ model.riskTypesString }} in the future. Find out what factors could cause or contribute to potential flooding and how likely it is to affect you. <a href="">Check your property's long term flood risk</a>.</p>
+			<p style="margin-top:2em">Parts of this area may experience flooding from {{ model.riskTypesString }} in the future. Find out what factors could cause or contribute to potential flooding and how likely it is to affect you. <a href="">Check your property's long term flood risk</a>.</p>
 
 			<!-- Guidance -->
 
@@ -64,12 +68,7 @@
 
 			<h2 class="heading-medium">Get flood warnings by phone, text or email</h2>
 			<p>When flooding is forecast {{#if model.hasRiskRiverCoastOrResovoir }}for this area{{else }}nearby{{/if }}, warnings are sent by phone, text or email. <a href="/get-flood-warnings/select-warning-areas?location=mytholmroyd">Get warnings for nearby areas</a>.</p>
-			
-			<!-- Report a flood -->
-
-			<h2 class="heading-medium">Report a flood or possible cause of flooding</h2>
-			<p>Who you need to contact depends on what’s flooding. <a href="">Report a flood or possible cause of flooding</a>.</p>
-			
+						
 		</div>
 
 		<div class="column-third">

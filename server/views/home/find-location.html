@@ -1,0 +1,45 @@
+<main>
+
+	<!--
+	<div class="breadcrumbs">
+		<ol>
+			<li><a href="https://www.gov.uk/check-flood-risk">Back</a></li>
+		</ol>
+	</div>
+	-->
+
+	<a href="/check-flood-risk" class="link-back">Back</a> 
+		
+	<form action="/find-location" autocomplete="off" class="form" method="post" novalidate="novalidate">
+		<div class="grid-row no-bottom">
+			<div class="column-two-thirds no-bottom">
+				
+				<div class="error-summary" data-valmsg-summary="true" style="display:none;">
+					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
+					<p>Please amend the following details:</p>
+					<ul class="error-summary-list"></ul>
+				</div>
+
+				<h1 class="heading-large">Enter a location to check its current flood risk</h1>
+
+				<div class="form-group no-bottom">
+					<fieldset>
+						<legend class="visuallyhidden">Enter a postcode or town</legend>
+						<div class="form-group">
+							<label for="location">
+								<span class="form-label">Postcode or town</span>
+								<span class="form-hint">For example SW1A 2AA or Bakewell</span>
+							</label>
+							<input id="location" name="location" class="form-control" type="text" value="">
+							<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
+						</div>
+						<button class="button" type="submit">Check risk</button>
+					</fieldset>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+		
+</main>

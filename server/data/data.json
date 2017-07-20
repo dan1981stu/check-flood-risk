@@ -178,7 +178,8 @@
             "id" : 8321,
             "name" : "Mytholmroyd Dauber Bridge",
             "river" : "Cragg Brook",
-            "path" : "cragg-brook-at-mytholmroyd-dauber-bridge",  
+            "path" : "cragg-brook-at-mytholmroyd-dauber-bridge",
+            "coordinates": [-1.98976354,53.7227915],  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "above", "gain" : "stable" },
@@ -190,7 +191,8 @@
             "id" : 9031,
             "name" : "Brearley",
             "river" : "River Calder",
-            "path" : "river-calder-at-brearley",  
+            "path" : "river-calder-at-brearley",
+            "coordinates": [-1.96131201,53.72958074],  
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -203,6 +205,7 @@
             "name" : "Mytholmroyd",
             "river" : "River Calder",
             "path" : "river-calder-at-mytholmroyd",  
+            "coordinates": [-1.98328917,53.7312935],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -215,6 +218,7 @@
             "name" : "Hebden Bridge",
             "river" : "River Calder",
             "path" : "river-calder-at-hebden-bridge",  
+            "coordinates": [-2.02725307,53.74117832],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -227,6 +231,7 @@
             "name" : "Todmorden Callis Bridge",
             "river" : "River Calder",
             "path" : "river-calder-at-todmorden-callis-bridge",  
+            "coordinates": [-2.04521027,53.73290385],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -239,6 +244,7 @@
             "name" : "Todmorden",
             "river" : "River Calder",
             "path" : "river-calder-at-todmorden",  
+            "coordinates": [-2.09693896,53.7168743],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -251,6 +257,7 @@
             "name" : "Nutclough",
             "river" : "Hebden Water",
             "path" : "hebdon-water-at-nutclough",  
+            "coordinates": [-2.01057657,53.7447762],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -262,7 +269,8 @@
             "id" : 8305,
             "name" : "Portsmouth Lennox Road",
             "river" : "River Calder",
-            "path" : "river-calder-at-portsmouth-lennox-road",  
+            "path" : "river-calder-at-portsmouth-lennox-road", 
+            "coordinates": [-2.15351354,53.73209478], 
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -275,6 +283,7 @@
             "name" : "Todmorden Salford",
             "river" : "Walsden Water",
             "path" : "walsden-water-at-todmorden-salford",  
+            "coordinates": [-2.10186338,53.71055157],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },
@@ -287,6 +296,7 @@
             "name" : "Walsden",
             "river" : "Walsden Water",
             "path" : "walsden-water-at-walsden",  
+            "coordinates": [-2.10142186,53.69080508],
             "scenario" : [
                 { "id" : "a", "state" : "normal", "gain" : "stable" },
                 { "id" : "b", "state" : "normal", "gain" : "stable" },

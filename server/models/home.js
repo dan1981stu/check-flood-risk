@@ -152,6 +152,7 @@ exports.getSummary = function(path, scenario) {
 					'name' : level.name,
 					'river' : level.river,
 					'path' : level.path,
+					"coordinates" : level.coordinates,
 					'gain' : level.scenario.find(x => x.id == scenario).gain,
 					'state' : level.scenario.find(x => x.id == scenario).state
 				})
