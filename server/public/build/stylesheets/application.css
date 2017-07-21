@@ -2699,3 +2699,7 @@ table.select-areas th {
 .rainfall {
   margin-top: 45px;
 }
+
+.button {
+  width: auto;
+}
