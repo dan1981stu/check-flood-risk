@@ -11,7 +11,8 @@ module.exports = [
 				const scenario = request.query.s ? request.query.s : 'a'
 				return reply.view('gov-uk/check-flood-risk', {
 					'model' : { 'scenario' : scenario },
-					'pageTitle' : 'Check flood risk - GOV.UK'
+					'pageTitle' : '',
+					'serviceName' : ''
 				})
 			}
 		}

@@ -81,9 +81,9 @@ $path: "/public/";
   background-color:$focus-colour;
 }
 
-// Map controls main
+// Map controls view
 
-.map-controls-main {
+.map-controls-view {
   position:absolute;
   right:10px;
   top:10px;
@@ -113,4 +113,77 @@ $path: "/public/";
   line-height:30px;
   padding:0 6px;
   margin-right:10px;
+}
+
+// Map key
+
+.key-container {
+  width:100%;
+  @include media(tablet) {
+    padding:0 10px;
+    max-width:20em;
+  }
+}
+
+// Map controls key button
+
+.key {
+  position:absolute;
+  left:0;
+  bottom:0;
+  z-index:1;
+  width:100%;
+  @include media(tablet) {
+    bottom:10px;
+  }
+}
+a.map-control-toggleKey {
+  @include core-16;
+  cursor:pointer;
+  float:left;
+  height: 30px;
+  position: relative;
+  white-space: nowrap;
+  background-color:white;
+  line-height:30px !important;
+  padding:0 8px;
+  margin-left:10px;
+  @include media(tablet) {
+    margin-left:0;
+  }
+}
+a.map-control-toggleKey:after {
+  content:' ';
+  display:inline-block;
+  vertical-align:middle;
+  position:relative;
+  width:10px;
+  height:13px;
+  background-image:url('#{$path}map-legend-2x.png');
+  background-size:100%;
+  background-position:0 100%;
+  margin-top:-3px;
+  margin-left:5px;
+}
+a.map-control-toggleKey-open:after {
+  background-position:0 0;
+    margin-top:-1px;
+}
+a.map-control-toggleKey:hover {
+  background-color:white;
+}
+a.map-control-toggleKey:visited {
+  color: $link-colour;
+}
+
+// Map key copy
+
+.key-copy {
+  display:none;
+  clear:both;
+  background-color:white;
+  padding:15px;
+}
+.key-copy-open {
+  display:block;
 }

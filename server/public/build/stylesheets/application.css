@@ -2300,42 +2300,6 @@ a.banner {
   outline: none;
 }
 
-/*
- * Transactions and local transactions styles
- */
-.location-search {
-  background-color: #dee0e2;
-  min-height: 2em;
-  line-height: 2;
-  margin: 2em 0;
-  padding: 1em 0.75em 1em 1em;
-  position: relative;
-}
-
-.location-search label {
-  display: block;
-  margin-top: 0.5em;
-}
-
-@media (max-width: 640px) {
-  .location-search {
-    margin: 1.2em 0;
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-  .location-search .location {
-    margin-left: 0;
-  }
-}
-
-.location-search p {
-  line-height: 1.25;
-}
-
-.location-search button + p {
-  margin-top: 1em;
-}
-
 .govuk-related-items {
   border-top: 10px solid #005ea5;
   padding-top: 5px;
@@ -2662,7 +2626,7 @@ table.select-areas th {
   background-color: #ffbf47;
 }
 
-.map-controls-main {
+.map-controls-view {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -2694,6 +2658,99 @@ table.select-areas th {
   line-height: 30px;
   padding: 0 6px;
   margin-right: 10px;
+}
+
+.key-container {
+  width: 100%;
+}
+
+@media (min-width: 641px) {
+  .key-container {
+    padding: 0 10px;
+    max-width: 20em;
+  }
+}
+
+.key {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+@media (min-width: 641px) {
+  .key {
+    bottom: 10px;
+  }
+}
+
+a.map-control-toggleKey {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+  cursor: pointer;
+  float: left;
+  height: 30px;
+  position: relative;
+  white-space: nowrap;
+  background-color: white;
+  line-height: 30px !important;
+  padding: 0 8px;
+  margin-left: 10px;
+}
+
+@media (min-width: 641px) {
+  a.map-control-toggleKey {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 641px) {
+  a.map-control-toggleKey {
+    margin-left: 0;
+  }
+}
+
+a.map-control-toggleKey:after {
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 10px;
+  height: 13px;
+  background-image: url("/public/map-legend-2x.png");
+  background-size: 100%;
+  background-position: 0 100%;
+  margin-top: -3px;
+  margin-left: 5px;
+}
+
+a.map-control-toggleKey-open:after {
+  background-position: 0 0;
+  margin-top: -1px;
+}
+
+a.map-control-toggleKey:hover {
+  background-color: white;
+}
+
+a.map-control-toggleKey:visited {
+  color: #005ea5;
+}
+
+.key-copy {
+  display: none;
+  clear: both;
+  background-color: white;
+  padding: 15px;
+}
+
+.key-copy-open {
+  display: block;
 }
 
 .rainfall {
