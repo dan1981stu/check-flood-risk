@@ -1,11 +1,15 @@
-var init = function(selectedId = '') {
+var init = function() {
+
+    var selectedId = ''
+
+    // lon lat center
+    var centre = [-1.464854,52.561928]
 
     // layerOpacity setting for all image layers
     var layerOpacity = 1, selectedBdrWidth = 10, resolution;
 
     // Source of features
     var targetAreasJSON = '/public/data/target-areas.json';
-    var levelsJSON = '/public/data/levels.json';
 
     // Function used to style individual features
     var styleFunction = function(feature, resolution) {
@@ -64,13 +68,11 @@ var init = function(selectedId = '') {
     var sourceTargetAreas = new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: targetAreasJSON,
-        defaultProjection :'EPSG:4326', 
         projection: 'EPSG:3857'
     });
 
     // Source for features intersecting with selected feature
     var sourceIntersect = new ol.source.Vector({
-        defaultProjection :'EPSG:4326', 
         projection: 'EPSG:3857'
     });
 
@@ -107,11 +109,17 @@ var init = function(selectedId = '') {
 
     // The map view object
     var view = new ol.View({
-        center: ol.proj.fromLonLat(lonLat),
+        center: ol.proj.fromLonLat(centre),
+        enableRotation: false,
         zoom: 13
     });
 
-    // Add river levels
+    // Set extent or center
+    if (lonLat.length) {
+        view.setCenter(ol.proj.fromLonLat(lonLat));
+    }
+
+    // Add river levels layer
     var levelStyle = new ol.style.Style({
         image: new ol.style.Icon({
             src: '/public/icon-locator-blue-2x.png',
@@ -120,16 +128,27 @@ var init = function(selectedId = '') {
             scale: 0.5
         })
     });
-    var sourceLevels = new ol.source.Vector({
-        format: new ol.format.GeoJSON(),
-        url: levelsJSON,
-        defaultProjection :'EPSG:4326', 
-        projection: 'EPSG:3857'
-    });
+    var sourceLevels = new ol.source.Vector();
+    // Check if river levels are available
+    if (!isEmpty(levelsJSON)) {
+        sourceLevels.addFeatures(new ol.format.GeoJSON({
+            featureProjection:'EPSG:3857'
+        }).readFeatures(levelsJSON))
+    }
     var levels = new ol.layer.Vector({
         source: sourceLevels,
         style: levelStyle
     });
+
+    // Zoom reset button
+    var zoomResetElement = document.createElement('button')
+    zoomResetElement.appendChild(document.createTextNode('Zoom reset'))
+    zoomResetElement.className = 'ol-zoom-reset'
+    zoomResetElement.setAttribute('title','Reset location')
+    var zoomReset = new ol.control.Control({
+        element: zoomResetElement
+    })
+
     // Render map
     map = new ol.Map({
         target: 'map-container',
@@ -143,6 +162,12 @@ var init = function(selectedId = '') {
         layers: [tile, targetAreas, tileSelected, targetAreasIntersecting, levels],
         view: view
     })
+
+    // Set bounds if no lanLat
+    //map.getView().fit(sourceTargetAreas.getExtent());
+
+    // Add zoom reset control
+    map.addControl(zoomReset)
 
     // Draw the outer glow (border) then
     // add a background map that is clipped to the selected feature
@@ -209,7 +234,10 @@ var init = function(selectedId = '') {
     // generate intersecting features source and
     // add OSM background map to tileSelected source
     // set extent to features
+
+    /*
     sourceTargetAreas.on('change', function(e){
+        // Set selected target area
         if (selectedId) {
             if(e.target.getState() === 'ready'){
                 featureSelected = source.getFeatureById(selectedId);
@@ -227,7 +255,17 @@ var init = function(selectedId = '') {
             //map.getView().fit(sourceTargetAreas.getExtent());
         }
     });
+    */
 
+}
+
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 init()

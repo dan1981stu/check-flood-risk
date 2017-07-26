@@ -67,7 +67,7 @@
 					{{else}}
 					Flooding is possible - Be prepared
 					{{/if}}
-					</p>
+				</p>
 			</div>
 			{{/if }}
 
@@ -262,7 +262,7 @@
 {{#if model.hasAlertOrWarning }}
 <script>
 	var targetAreaStates = {{{ json model.targetAreaStates }}}
-	var levels = {{{ json model.levels }}}
+	var levelsJSON = {{{ json model.levelsJSON }}}
 	var lonLat = {{{ json model.lonLat }}}
 </script>
 {{/if }}

@@ -1,5 +1,4 @@
 module.exports = [].concat(
-  require('./home'),
   require('./gov-uk'),
   require('./current'),
   require('./map'),

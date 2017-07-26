@@ -46,38 +46,49 @@ $path: "/public/";
   margin-top:0.5em;
 }
 
-// Map controls zoom
+// Openlayers controls: zoom
 
-.map-controls-zoom {
+.ol-zoom,
+.ol-zoom-reset {
   position:absolute;
   left:10px;
-  top:10px;
+  top:40px;
   z-index:1;
 }
-.map-control-zoomReset,
-.map-control-zoomIn,
-.map-control-zoomOut {
+.ol-zoom-reset {
+  top:10px;
+}
+.ol-zoom-in,
+.ol-zoom-out,
+.ol-zoom-reset {
+  border:0;
   background-color: $link-colour;
   display: block;
   height: 30px;
-  position: relative;
   width: 30px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
   background-image:url('#{$path}map-controls-2x.png');
   background-size:100%;
+  cursor:pointer;
 }
-.map-control-zoomReset {
-  background-position:0% 0%;
-}
-.map-control-zoomIn {
+.ol-zoom-in {
+  position: relative;
   background-position:0% 25%;
 }
-.map-control-zoomOut {
+.ol-zoom-out {
+  position: relative;
   background-position:0% 50%;
 }
-.map-control:hover {
+.ol-zoom-reset {
+  position: absolute;
+  background-position:0% 0%;
+}
+.ol-zoom-in:hover,
+.ol-zoom-out:hover,
+.ol-zoom-reset:hover,
+.map-control-toggleSize:hover {
   background-color:$focus-colour;
 }
 
@@ -101,18 +112,6 @@ $path: "/public/";
   background-image:url('#{$path}map-controls-2x.png');
   background-size:100%;
   background-position:0% 75%;
-}
-.map-control-satelliteView {
-  background-color: $link-colour;
-  float:right;  
-  height: 30px;
-  position: relative;
-  color:white !important;
-  text-decoration:none;
-  font-size:16px;
-  line-height:30px;
-  padding:0 6px;
-  margin-right:10px;
 }
 
 // Map key
@@ -171,6 +170,7 @@ a.map-control-toggleKey-open:after {
 }
 a.map-control-toggleKey:hover {
   background-color:white;
+  color:$link-hover-colour;
 }
 a.map-control-toggleKey:visited {
   color: $link-colour;

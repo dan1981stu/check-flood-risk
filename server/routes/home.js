@@ -1,5 +1,3 @@
-const modelData = require('../models/home')
-
 module.exports = [
 
 	// Prototype index

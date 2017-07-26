@@ -1,4 +1,4 @@
-const modelData = require('../models/home')
+const modelData = require('../models/current')
 
 module.exports = [
 

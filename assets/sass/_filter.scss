@@ -1,0 +1,22 @@
+$path: "/public/";
+
+.filter {
+  padding:15px;
+  background-color:$panel-colour;
+  margin-bottom:2em;
+}
+.filter h2 {
+  margin-top:0;
+}
+.filter .form-group {
+  margin-bottom:0;
+}
+.filter .form-group,
+.filter .form-control,
+.filter .form-comtrol-reset,
+.filter .form-label {
+  @include core-16;
+}
+.filter .form-control-location {
+  max-width:20em;
+}

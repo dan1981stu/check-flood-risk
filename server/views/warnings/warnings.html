@@ -1,0 +1,131 @@
+<a href="/check-flood-risk" class="link-back">Back</a> 
+
+{{#if trace }}
+<p class="font-xsmall">{{ json model }}<p>
+{{/if }}
+
+<main>
+		
+	<div class="grid-row no-bottom">
+		<div class="column-two-thirds no-bottom">
+			
+			<h1 class="heading-xlarge">Flood warnings currently issued (England)</h1>
+
+		</div>
+	</div>
+
+	{{#if model.hasAlertOrWarning }}
+	<div class="grid-row no-bottom">
+		<div class="column-full">
+
+			<div class="filter">
+				<form action="/warnings" autocomplete="off" class="form" method="post" novalidate="novalidate">
+					<h2 class="heading-medium">Filter by location</h2>
+					<div class="form-group no-bottom">
+						<fieldset>
+							<legend class="visuallyhidden">Filter by postcode or town</legend>
+							<div class="form-group">
+								<label for="location">
+									<span class="form-label">Postcode or town</span>
+								</label>
+								<input id="location" name="location" class="form-control form-control-location" type="text" placeholder="eg SW1A 2AA or Bakewell" value="" />
+								<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
+								<button class="button" type="submit">Apply filter</button>
+								<a href="" class="form-control-reset">Reset filter</a>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	{{/if }}
+
+	<div class="grid-row no-bottom">
+		<div class="column-two-thirds">
+
+			<div class="notice notice-warning">
+				<i class="icon icon-flood-warning-severe-large">
+					<span class="visually-hidden">Severe flood warning</span>
+				</i>
+				<strong class="bold-xlarge">{{ model.warningsSevere.length }}</strong>
+			</div>
+			<p>
+				<span class="bold-medium">Sever flood warnings</span>
+				<br/>Severe flooding - danger to life
+			</p>
+			{{#if model.hasWarningSevere }}
+			<ul class="list list-warnings">
+				{{#each model.warningsSevere }}
+				<li>
+					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+				</li>
+				{{/each }}
+			</ul>
+			{{/if }}
+
+			<div class="notice notice-warning">
+				<i class="icon icon-flood-warning-large">
+					<span class="visually-hidden">Flood warning</span>
+				</i>
+				<strong class="bold-xlarge">{{ model.warnings.length }}</strong>
+			</div>
+			<p>
+				<span class="bold-medium">Flood warnings</span>
+				<br/>Flooding expected - immediate action required
+			</p>
+			{{#if model.hasWarning }}
+			<ul class="list list-warnings">
+				{{#each model.warnings }}
+				<li>
+					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+				</li>
+				{{/each }}
+			</ul>
+			{{/if }}
+
+			<div class="notice notice-warning">
+				<i class="icon icon-flood-alert-large">
+					<span class="visually-hidden">Flood alert</span>
+				</i>
+				<strong class="bold-xlarge">{{ model.alerts.length }}</strong>
+			</div>
+			<p>
+				<span class="bold-medium">Flood alert</span>
+				<br/>Flooding possible - be prepared
+			</p>
+			{{#if model.hasAlert }}
+			<ul class="list list-warnings">
+				{{#each model.alerts }}
+				<li>
+					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+				</li>
+				{{/each }}
+			</ul>
+			{{/if }}
+
+		</div>
+		<div class="column-one-third">
+		
+			<!-- Map view -->
+
+			<figure class="map" id="map">
+				<div id="map-container" class="map-container map-container-small"></div>
+				<figcaption>Potential affected areas</figcaption>
+			</figure>
+
+		</div>
+	</div>
+
+</main>
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+<script>
+	var targetAreaStates = {{{ json model.targetAreaStates }}}
+	var levelsJSON = {}
+	var lonLat = []
+</script>
+<script src="/public/javascripts/map.js"></script>
+<script src="/public/javascripts/features.js"></script>

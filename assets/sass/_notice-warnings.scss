@@ -46,73 +46,105 @@ $path: "/public/";
     }
 }
 
-.notice-alert, .notice-warning {
+.notice-alert,
+.notice-warning {
+    margin-bottom:0;
     strong {
+        line-height:50px;
         padding-top:0;
-        padding-left:70px;
+        padding-left:62px;
         @include media(tablet) {
+            line-height:56px;
             padding-left:76px;
         }
     }
 }
 
-.notice .icon-warning {
+.icon-warning {
     width:32px;
     height:32px;
     background-image:url('#{$path}icon-warning-small-2x.png');
     background-position:center center;
     background-size:80%;
-    margin-top:-16px;
+    margin-top:-16px !important;
     margin-left:-2px;
     @include media(tablet) {
         background-size:100%;
     }
 }
 
-.notice .icon-flood-warning,
-.notice .icon-flood-warning-severe {
+.icon-flood-warning-severe,
+.icon-flood-warning
+ {
     width:32px;
     height:32px;
     background-image:url('#{$path}icon-flood-warning-small-2x.png');
     background-position:center center;
     background-size:80%;
-    margin-top:-16px;
+    margin-top:-16px !important;
     margin-left:-2px;
     @include media(tablet) {
         background-size:100%;
     }
 }
 
-.notice .icon-flood-alert {
+.icon-flood-alert {
     width:32px;
     height:32px;
     background-image:url('#{$path}icon-flood-alert-small-2x.png');
     background-position:center center;
     background-size:80%;
-    margin-top:-16px;
+    margin-top:-16px !important;
     margin-left:-2px;
     @include media(tablet) {
         background-size:100%;
     }
 }
 
-.notice .icon-flood-warning-severe-large {
-    width:56px;
-    height:56px;
-    margin-top:-30px;
+.icon-flood-warning-severe-large {
+    width:50px;
+    height:50px;
+    margin-top:-26px !important;
     background-image:url('#{$path}icon-flood-warning-severe-2x.gif');
+    background-position:center center;
+    background-size:90%;
+    margin-left:-2px;
+    @include media(tablet) {
+        width:56px;
+        height:56px;
+        margin-top:-30px !important;
+        background-size:100%;
+    }
 }
 
-.notice .icon-flood-warning-large {
-    width:56px;
-    height:56px;
-    margin-top:-30px;
+.icon-flood-warning-large {
+    width:50px;
+    height:50px;
+    margin-top:-26px !important;
     background-image:url('#{$path}icon-flood-warning-2x.gif');
+    background-position:center center;
+    background-size:90%;
+    margin-left:-2px;
+    @include media(tablet) {
+        width:56px;
+        height:56px;
+        margin-top:-30px !important;
+        background-size:100%;
+    }
 }
 
-.notice .icon-flood-alert-large {
-    width:56px;
-    height:56px;
-    margin-top:-30px;
+.icon-flood-alert-large {
+    width:50px;
+    height:50px;
+    margin-top:-26px !important;
     background-image:url('#{$path}icon-flood-alert-2x.gif');
+    background-position:center center;
+    background-size:90%;
+    margin-left:-2px;
+    @include media(tablet) {
+        width:56px;
+        height:56px;
+        margin-top:-30px !important;
+        background-size:100%;
+    }
 }

@@ -8,7 +8,6 @@ exports.getSummary = function(path, scenario) {
 		postcode, 
 		postcodes,  
 		location,
-		lonLat, // Of location
 
 		intersectingTarget = {},
 		warningsSevere = [], // Nearby
@@ -40,9 +39,14 @@ exports.getSummary = function(path, scenario) {
 		hasIntersectWarning = false,
 		hasIntersectAlert = false,
 		hasIntersectAlertOrWarning = false,
-		hasIntersectTarget = false
+		hasIntersectTarget = false,
 
-		targetAreaStates = []
+		targetAreaStates = [],
+		levelsJSON,
+		lonLat = []
+
+	// Set levelsJSON empty structure
+	levelsJSON = { 'type': 'FeatureCollection', 'features': [] }
 
 	// Find in towns
 	town = data.town.find(
@@ -156,6 +160,19 @@ exports.getSummary = function(path, scenario) {
 					'gain' : level.scenario.find(x => x.id == scenario).gain,
 					'state' : level.scenario.find(x => x.id == scenario).state
 				})
+				levelsJSON.features.push({
+					'type': 'Feature',
+					'id': level.id,
+					'properties': {
+						'name': level.name,
+						'river': level.river,
+						'path' : level.path
+					},
+					'geometry': {
+						'type': 'Point',
+						'coordinates':level.coordinates
+					}
+				})
 				var state = level.scenario.find(x => x.id == scenario).state
 				if (state == 'above') {
 					levelState = 'above'
@@ -260,7 +277,6 @@ exports.getSummary = function(path, scenario) {
 		scenario,
 		path, // Url parameter
 		location, // Full location name
-		lonLat, // Location centroid
 		warningsSevere, // List of nearby severe warnings
 		warnings, // List of nearby warnings
 		alerts, // List of nearby alerts
@@ -268,9 +284,12 @@ exports.getSummary = function(path, scenario) {
 		intersectingTarget, // The intersecting target area
 
 		levelState, // Above, normal or below
-		targetAreaStates, // List of states for each target area
 		levels, // Levels that impact location
 		impacts, // List of nearby impacts
+
+		targetAreaStates, // Openlayers list of states for each target area
+		levelsJSON, // Openlayers feature collection
+		lonLat, // Openlayers location centroid
 
 		hasRisk,
 		hasRiskRiverCoastOrResovoir,
@@ -289,7 +308,9 @@ exports.getSummary = function(path, scenario) {
 		hasIntersectWarning,
 		hasIntersectAlert,
 		hasIntersectAlertOrWarning,
-		hasIntersectTarget
+		hasIntersectTarget,
+
+		levelsJSON
 
 	}
 

@@ -2260,6 +2260,64 @@ input[type=number] {
   }
 }
 
+.filter {
+  padding: 15px;
+  background-color: #dee0e2;
+  margin-bottom: 2em;
+}
+
+.filter h2 {
+  margin-top: 0;
+}
+
+.filter .form-group {
+  margin-bottom: 0;
+}
+
+.filter .form-group,
+.filter .form-control,
+.filter .form-comtrol-reset,
+.filter .form-label {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+}
+
+@media (min-width: 641px) {
+  .filter .form-group,
+  .filter .form-control,
+  .filter .form-comtrol-reset,
+  .filter .form-label {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.filter .form-control-location {
+  max-width: 20em;
+}
+
+.list-warnings-heading-copy {
+  display: inline-block;
+}
+
+.list-warnings-heading-copy span {
+  display: block;
+}
+
+.list-warnings li {
+  border-top: 1px solid #bfc1c3;
+  padding: 0.5em 0;
+  margin-bottom: 0;
+}
+
+.list-warnings {
+  margin-top: -0.6em;
+  border-bottom: 1px solid #bfc1c3;
+}
+
 .message {
   display: block;
   margin: 30px 0 0;
@@ -2416,86 +2474,131 @@ a.banner {
   }
 }
 
-.notice-alert strong, .notice-warning strong {
+.notice-alert,
+.notice-warning {
+  margin-bottom: 0;
+}
+
+.notice-alert strong,
+.notice-warning strong {
+  line-height: 50px;
   padding-top: 0;
-  padding-left: 70px;
+  padding-left: 62px;
 }
 
 @media (min-width: 641px) {
-  .notice-alert strong, .notice-warning strong {
+  .notice-alert strong,
+  .notice-warning strong {
+    line-height: 56px;
     padding-left: 76px;
   }
 }
 
-.notice .icon-warning {
+.icon-warning {
   width: 32px;
   height: 32px;
   background-image: url("/public/icon-warning-small-2x.png");
   background-position: center center;
   background-size: 80%;
-  margin-top: -16px;
+  margin-top: -16px !important;
   margin-left: -2px;
 }
 
 @media (min-width: 641px) {
-  .notice .icon-warning {
+  .icon-warning {
     background-size: 100%;
   }
 }
 
-.notice .icon-flood-warning,
-.notice .icon-flood-warning-severe {
+.icon-flood-warning-severe,
+.icon-flood-warning {
   width: 32px;
   height: 32px;
   background-image: url("/public/icon-flood-warning-small-2x.png");
   background-position: center center;
   background-size: 80%;
-  margin-top: -16px;
+  margin-top: -16px !important;
   margin-left: -2px;
 }
 
 @media (min-width: 641px) {
-  .notice .icon-flood-warning,
-  .notice .icon-flood-warning-severe {
+  .icon-flood-warning-severe,
+  .icon-flood-warning {
     background-size: 100%;
   }
 }
 
-.notice .icon-flood-alert {
+.icon-flood-alert {
   width: 32px;
   height: 32px;
   background-image: url("/public/icon-flood-alert-small-2x.png");
   background-position: center center;
   background-size: 80%;
-  margin-top: -16px;
+  margin-top: -16px !important;
   margin-left: -2px;
 }
 
 @media (min-width: 641px) {
-  .notice .icon-flood-alert {
+  .icon-flood-alert {
     background-size: 100%;
   }
 }
 
-.notice .icon-flood-warning-severe-large {
-  width: 56px;
-  height: 56px;
-  margin-top: -30px;
+.icon-flood-warning-severe-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
   background-image: url("/public/icon-flood-warning-severe-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
 }
 
-.notice .icon-flood-warning-large {
-  width: 56px;
-  height: 56px;
-  margin-top: -30px;
+@media (min-width: 641px) {
+  .icon-flood-warning-severe-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
+}
+
+.icon-flood-warning-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
   background-image: url("/public/icon-flood-warning-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
 }
 
-.notice .icon-flood-alert-large {
-  width: 56px;
-  height: 56px;
-  margin-top: -30px;
+@media (min-width: 641px) {
+  .icon-flood-warning-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
+}
+
+.icon-flood-alert-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
   background-image: url("/public/icon-flood-alert-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-alert-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
 }
 
 table th, table td {
@@ -2588,41 +2691,53 @@ table.select-areas th {
   }
 }
 
-.map-controls-zoom {
+.ol-zoom,
+.ol-zoom-reset {
   position: absolute;
   left: 10px;
-  top: 10px;
+  top: 40px;
   z-index: 1;
 }
 
-.map-control-zoomReset,
-.map-control-zoomIn,
-.map-control-zoomOut {
+.ol-zoom-reset {
+  top: 10px;
+}
+
+.ol-zoom-in,
+.ol-zoom-out,
+.ol-zoom-reset {
+  border: 0;
   background-color: #005ea5;
   display: block;
   height: 30px;
-  position: relative;
   width: 30px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
   background-image: url("/public/map-controls-2x.png");
   background-size: 100%;
+  cursor: pointer;
 }
 
-.map-control-zoomReset {
-  background-position: 0% 0%;
-}
-
-.map-control-zoomIn {
+.ol-zoom-in {
+  position: relative;
   background-position: 0% 25%;
 }
 
-.map-control-zoomOut {
+.ol-zoom-out {
+  position: relative;
   background-position: 0% 50%;
 }
 
-.map-control:hover {
+.ol-zoom-reset {
+  position: absolute;
+  background-position: 0% 0%;
+}
+
+.ol-zoom-in:hover,
+.ol-zoom-out:hover,
+.ol-zoom-reset:hover,
+.map-control-toggleSize:hover {
   background-color: #ffbf47;
 }
 
@@ -2645,19 +2760,6 @@ table.select-areas th {
   background-image: url("/public/map-controls-2x.png");
   background-size: 100%;
   background-position: 0% 75%;
-}
-
-.map-control-satelliteView {
-  background-color: #005ea5;
-  float: right;
-  height: 30px;
-  position: relative;
-  color: white !important;
-  text-decoration: none;
-  font-size: 16px;
-  line-height: 30px;
-  padding: 0 6px;
-  margin-right: 10px;
 }
 
 .key-container {
@@ -2736,6 +2838,7 @@ a.map-control-toggleKey-open:after {
 
 a.map-control-toggleKey:hover {
   background-color: white;
+  color: #2b8cc4;
 }
 
 a.map-control-toggleKey:visited {
