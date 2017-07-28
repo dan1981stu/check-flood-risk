@@ -2268,6 +2268,7 @@ input[type=number] {
 
 .filter h2 {
   margin-top: 0;
+  margin-bottom: 0.5em;
 }
 
 .filter .form-group {
@@ -2707,8 +2708,8 @@ table.select-areas th {
 .ol-zoom-out,
 .ol-zoom-reset {
   border: 0;
-  background-color: #005ea5;
   display: block;
+  background-color: #005ea5;
   height: 30px;
   width: 30px;
   overflow: hidden;
@@ -2717,6 +2718,7 @@ table.select-areas th {
   background-image: url("/public/map-controls-2x.png");
   background-size: 100%;
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .ol-zoom-in {
@@ -2741,25 +2743,23 @@ table.select-areas th {
   background-color: #ffbf47;
 }
 
-.map-controls-view {
+.map-control-toggleSize {
   position: absolute;
   right: 10px;
   top: 10px;
   z-index: 1;
-}
-
-.map-control-toggleSize {
+  border: 0;
   background-color: #005ea5;
-  float: right;
   height: 30px;
-  position: relative;
   width: 30px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
   background-image: url("/public/map-controls-2x.png");
   background-size: 100%;
-  background-position: 0% 75%;
+  background-position: 0 75%;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .key-container {
