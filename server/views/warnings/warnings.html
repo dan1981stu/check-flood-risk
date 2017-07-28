@@ -14,10 +14,10 @@
 		</div>
 	</div>
 
-	{{#if model.hasAlertOrWarning }}
 	<div class="grid-row no-bottom">
-		<div class="column-full">
+		<div class="column-two-thirds">
 
+			{{#if model.hasFilter }}
 			<div class="filter">
 				<form action="/warnings" autocomplete="off" class="form" method="post" novalidate="novalidate">
 					<h2 class="heading-medium">Filter by location</h2>
@@ -37,13 +37,7 @@
 					</div>
 				</form>
 			</div>
-
-		</div>
-	</div>
-	{{/if }}
-
-	<div class="grid-row no-bottom">
-		<div class="column-two-thirds">
+			{{/if }}
 
 			<div class="notice notice-warning">
 				<i class="icon icon-flood-warning-severe-large">
@@ -106,6 +100,8 @@
 			{{/if }}
 
 		</div>
+
+		{{#if model.hasMap }}
 		<div class="column-one-third">
 		
 			<!-- Map view -->
@@ -116,11 +112,14 @@
 			</figure>
 
 		</div>
+		{{/if }}
+
 	</div>
 
 </main>
 
 <!-- This content to go at end of body -->
+{{#if model.hasMap }}
 <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
 <script>
 	var targetAreaStates = {{{ json model.targetAreaStates }}}
@@ -128,3 +127,4 @@
 	var lonLat = []
 </script>
 <script src="/public/javascripts/map.js"></script>
+{{/if }}
