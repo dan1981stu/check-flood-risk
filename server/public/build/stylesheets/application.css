@@ -2475,12 +2475,10 @@ a.banner {
   }
 }
 
-.notice-alert,
 .notice-warning {
   margin-bottom: 0;
 }
 
-.notice-alert strong,
 .notice-warning strong {
   line-height: 50px;
   padding-top: 0;
@@ -2488,8 +2486,24 @@ a.banner {
 }
 
 @media (min-width: 641px) {
-  .notice-alert strong,
   .notice-warning strong {
+    line-height: 56px;
+    padding-left: 76px;
+  }
+}
+
+.notice-warning-heading {
+  margin-bottom: 0;
+}
+
+.notice-warning-heading .notice-primary {
+  line-height: 50px;
+  padding-top: 0;
+  padding-left: 62px;
+}
+
+@media (min-width: 641px) {
+  .notice-warning-heading .notice-primary {
     line-height: 56px;
     padding-left: 76px;
   }

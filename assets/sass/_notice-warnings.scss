@@ -46,10 +46,22 @@ $path: "/public/";
     }
 }
 
-.notice-alert,
 .notice-warning {
     margin-bottom:0;
     strong {
+        line-height:50px;
+        padding-top:0;
+        padding-left:62px;
+        @include media(tablet) {
+            line-height:56px;
+            padding-left:76px;
+        }
+    }
+}
+
+.notice-warning-heading {
+    margin-bottom:0;
+    .notice-primary {
         line-height:50px;
         padding-top:0;
         padding-left:62px;
