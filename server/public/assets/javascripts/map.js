@@ -1,3 +1,6 @@
+// Preset values
+var defaultBoundingBox = [[-5.72,49.96],[1.77,55.81]]
+
 // Custom controls
 
 var mapContainer = document.querySelector('.map-container')
@@ -31,43 +34,14 @@ mapContainer.appendChild(toggleSize)
 mapContainer.appendChild(key)
 
 // Reference require to redraw map
-var map
+var map, extent
 
 // Reference requried to redraw extent
 var sourceTargetAreas
 
-// Toggle size event
-toggleSize.addEventListener('click', function(e) {
-    e.preventDefault()
-    if (keyCopy.classList.contains('key-copy-open')) {
-        keyCopy.classList.remove('key-copy-open')
-        toggleKey.classList.toggle('map-control-toggleKey-open')
-    }
-    mapContainer.classList.toggle('map-container-full')
-    mapContainer.classList.toggle('map-container-small')
-    // Redraw map
-    map.updateSize()
-    // Rescale map to extent
-    if (!lonLat.length) {
-        map.getView().fit(sourceTargetAreas.getExtent());
-    }
-})
-
-// Toggle key event
-toggleKey.addEventListener('click', function(e) {
-    e.preventDefault()
-    if (mapContainer.classList.contains('map-container-small')) {
-        mapContainer.classList.remove('map-container-small')
-        mapContainer.classList.add('map-container-full')
-    }
-    toggleKey.classList.toggle('map-control-toggleKey-open')
-    keyCopy.classList.toggle('key-copy-open')
-    map.updateSize()
-    // Rescale map to extent
-    if (!lonLat.length) {
-        map.getView().fit(sourceTargetAreas.getExtent());
-    }
-})
+// Set default extent
+extent = ol.extent.boundingExtent(defaultBoundingBox)
+extent = ol.proj.transformExtent(extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'))
 
 var init = function() {
 
@@ -232,11 +206,12 @@ var init = function() {
         view: view
     })
 
-    // Set bounds if no lanLat
-    //map.getView().fit(sourceTargetAreas.getExtent());
-
     // Add zoom reset control
     map.addControl(zoomReset)
+
+    //
+    // Map events
+    //
 
     // Draw the outer glow (border) then
     // add a background map that is clipped to the selected feature
@@ -280,14 +255,17 @@ var init = function() {
 
     // Update layer opacity setting for different map resolutions
     map.on('moveend', function(){
+
+        resolution = map.getView().getResolution()
         /*
-        resolution = map.getView().getResolution();
         if (resolution > 19) { layerOpacity = 1 }
         else if (resolution > 9) { layerOpacity = 0.85 } 
         else if (resolution > 4) { layerOpacity = 0.7 }
         else { layerOpacity = 0.55 }	
         */
+        
         layerOpacity = 0.7
+        console.log(resolution)
         targetAreas.setOpacity(layerOpacity);
         targetAreasIntersecting.setOpacity(layerOpacity);
     });
@@ -303,15 +281,15 @@ var init = function() {
     // generate intersecting features source and
     // add OSM background map to tileSelected source
     // set extent to features
-
-
     sourceTargetAreas.on('change', function(e){
-        // Set extent or center
+
+        // Set center or extent
         if (lonLat.length) {
-            map.getView().setCenter(ol.proj.fromLonLat(lonLat));
+            map.getView().setCenter(ol.proj.fromLonLat(lonLat))
         } else {
-            map.getView().fit(sourceTargetAreas.getExtent());
+            map.getView().fit(extent, map.getSize());
         }
+
         /*
         // Set selected target area
         if (selectedId) {
@@ -332,6 +310,33 @@ var init = function() {
         }
         */
     });
+
+    // Toggle size event
+    toggleSize.addEventListener('click', function(e) {
+        e.preventDefault()
+        if (keyCopy.classList.contains('key-copy-open')) {
+            keyCopy.classList.remove('key-copy-open')
+            toggleKey.classList.toggle('map-control-toggleKey-open')
+        }
+        mapContainer.classList.toggle('map-container-full')
+        mapContainer.classList.toggle('map-container-small')
+        // Update extent and redraw map
+        if (!lonLat.length) {
+            map.getView().fit(extent, map.getSize())
+        }
+        map.updateSize()
+    })
+
+    // Toggle key event
+    toggleKey.addEventListener('click', function(e) {
+        e.preventDefault()
+        if (mapContainer.classList.contains('map-container-small')) {
+            mapContainer.classList.remove('map-container-small')
+            mapContainer.classList.add('map-container-full')
+        }
+        toggleKey.classList.toggle('map-control-toggleKey-open')
+        keyCopy.classList.toggle('key-copy-open')
+    })
 
 }
 
