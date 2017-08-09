@@ -336,6 +336,11 @@ var init = function() {
         }
         toggleKey.classList.toggle('map-control-toggleKey-open')
         keyCopy.classList.toggle('key-copy-open')
+        // Update extent and redraw map
+        if (!lonLat.length) {
+            map.getView().fit(extent, map.getSize())
+        }
+        map.updateSize()
     })
 
 }
