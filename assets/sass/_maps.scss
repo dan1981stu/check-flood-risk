@@ -136,44 +136,32 @@ $path: "/public/";
     bottom:10px;
   }
 }
-a.map-control-toggleKey {
+button.map-control-toggleKey {
   @include core-16;
-  cursor:pointer;
-  float:left;
-  height: 30px;
   position: relative;
-  white-space: nowrap;
-  background-color:white;
-  line-height:30px !important;
+  text-align:left;
+  border:0;
+  color:$link-colour;
+  height: 30px;
+  width: 55px;
   padding:0 8px;
+  background:white url('#{$path}map-legend-2x.png') no-repeat;
+  background-size:10px 60px;
+  background-position: 38px bottom;
+  cursor:pointer;
+  -webkit-appearance:none;
   margin-left:10px;
   @include media(tablet) {
     margin-left:0;
   }
 }
-a.map-control-toggleKey:after {
-  content:' ';
-  display:inline-block;
-  vertical-align:middle;
-  position:relative;
-  width:10px;
-  height:13px;
-  background-image:url('#{$path}map-legend-2x.png');
-  background-size:100%;
-  background-position:0 100%;
-  margin-top:-3px;
-  margin-left:5px;
+button.map-control-toggleKey-open {
+  background-position: 38px top;  
 }
-a.map-control-toggleKey-open:after {
-  background-position:0 0;
-    margin-top:-1px;
-}
-a.map-control-toggleKey:hover {
-  background-color:white;
-  color:$link-hover-colour;
-}
-a.map-control-toggleKey:visited {
-  color: $link-colour;
+.key-copyright {
+  @include core-16;
+  display:block;
+  margin-top:1em;
 }
 
 // Map key copy

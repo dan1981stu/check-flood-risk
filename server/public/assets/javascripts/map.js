@@ -11,23 +11,30 @@ key.classList.add('key')
 var keyContainer = document.createElement('div')
 keyContainer.classList.add('key-container')
 
-var keyCopy = document.createElement('div')
-keyCopy.classList.add('key-copy')
-
 var toggleSize = document.createElement('button')
 toggleSize.appendChild(document.createTextNode('Full screen'))
 toggleSize.setAttribute('title','Full screen')
 toggleSize.classList.add('map-control','map-control-toggleSize')
 mapContainer.appendChild(toggleSize)
 
-var toggleKey = document.createElement('a')
-toggleKey.setAttribute('href','')
+var toggleKey = document.createElement('button')
 toggleKey.appendChild(document.createTextNode('Key'))
 toggleKey.setAttribute('title','Show key')
 toggleKey.classList.add('map-control','map-control-toggleKey')
+
+var keyCopy = document.createElement('div')
+keyCopy.classList.add('key-copy')
+
+var copyright = document.createElement('span')
+copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+copyright.classList.add('key-copyright')
+
 keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
+keyCopy.appendChild(copyright)
+
 keyContainer.appendChild(toggleKey)
 keyContainer.appendChild(keyCopy)
+
 key.appendChild(keyContainer)
 
 mapContainer.appendChild(toggleSize)

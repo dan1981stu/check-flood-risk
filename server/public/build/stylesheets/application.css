@@ -2801,62 +2801,59 @@ table.select-areas th {
   }
 }
 
-a.map-control-toggleKey {
+button.map-control-toggleKey {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
   line-height: 1.14286;
-  cursor: pointer;
-  float: left;
-  height: 30px;
   position: relative;
-  white-space: nowrap;
-  background-color: white;
-  line-height: 30px !important;
+  text-align: left;
+  border: 0;
+  color: #005ea5;
+  height: 30px;
+  width: 55px;
   padding: 0 8px;
+  background: white url("/public/map-legend-2x.png") no-repeat;
+  background-size: 10px 60px;
+  background-position: 38px bottom;
+  cursor: pointer;
+  -webkit-appearance: none;
   margin-left: 10px;
 }
 
 @media (min-width: 641px) {
-  a.map-control-toggleKey {
+  button.map-control-toggleKey {
     font-size: 16px;
     line-height: 1.25;
   }
 }
 
 @media (min-width: 641px) {
-  a.map-control-toggleKey {
+  button.map-control-toggleKey {
     margin-left: 0;
   }
 }
 
-a.map-control-toggleKey:after {
-  content: ' ';
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  width: 10px;
-  height: 13px;
-  background-image: url("/public/map-legend-2x.png");
-  background-size: 100%;
-  background-position: 0 100%;
-  margin-top: -3px;
-  margin-left: 5px;
+button.map-control-toggleKey-open {
+  background-position: 38px top;
 }
 
-a.map-control-toggleKey-open:after {
-  background-position: 0 0;
-  margin-top: -1px;
+.key-copyright {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+  display: block;
+  margin-top: 1em;
 }
 
-a.map-control-toggleKey:hover {
-  background-color: white;
-  color: #2b8cc4;
-}
-
-a.map-control-toggleKey:visited {
-  color: #005ea5;
+@media (min-width: 641px) {
+  .key-copyright {
+    font-size: 16px;
+    line-height: 1.25;
+  }
 }
 
 .key-copy {
