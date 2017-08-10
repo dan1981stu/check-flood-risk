@@ -2493,12 +2493,12 @@ a.banner {
 }
 
 .notice-warning-heading {
-  margin-bottom: 0.9em;
+  margin-bottom: 0.9375em;
 }
 
 @media (min-width: 641px) {
   .notice-warning-heading {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.25em;
   }
 }
 

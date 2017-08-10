@@ -60,9 +60,9 @@ $path: "/public/";
 }
 
 .notice-warning-heading {
-    margin-bottom:0.9em;
+    margin-bottom:0.9375em;
     @include media(tablet) {
-        margin-bottom:1.2em;
+        margin-bottom:1.25em;
     }
     .notice-primary {
         padding-left:52px;
