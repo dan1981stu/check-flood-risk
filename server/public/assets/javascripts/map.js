@@ -1,5 +1,6 @@
 // Preset values
 var defaultBoundingBox = [[-5.72,49.96],[1.77,55.81]]
+var minIconResolution = 300
 
 // Custom controls
 
@@ -72,40 +73,81 @@ var init = function() {
 
         if (target) {
 
-            // No warning or alert colourse
-            var strokeColour = 'transparent';
-            var fillColour = 'transparent';
-            // Stroke width used to improve display when target areas are small
-            var strokeWidth = 2;
-            var zIndex = 1;
+            if (resolution <= minIconResolution) {
 
-            // Warning or severe warning colours
-            if (target.state == 1 || target.state == 2) {
-                strokeColour = '#e3000f';
-                fillColour = '#e3000f';
-                zIndex = 3;
+                // No warning or alert colourse
+                var strokeColour = 'transparent';
+                var fillColour = 'transparent';
+                // Stroke width used to improve display when target areas are small
+                var strokeWidth = 2;
+                var zIndex = 1;
+
+                // Warning or severe warning colours
+                if (target.state == 1 || target.state == 2) {
+                    strokeColour = '#e3000f';
+                    fillColour = '#e3000f';
+                    zIndex = 3;
+                    source = '/public/icon-flood-warning-small-2x.png';
+                }
+
+                // Alert area colours
+                else if (target.state == 3) {
+                    strokeColour = '#f18700';
+                    fillColour = '#f18700';
+                    zIndex = 2;
+                    source = '/public/icon-flood-alert-small-2x.png';
+                }
+
+                // Warning removed colours
+                else if (target.state == 4) {
+                    strokeColour = '#6f777b';
+                    fillColour = '#6f777b';
+                    zIndex = 3;
+                    source = '';
+                }
+
+                // Generate style
+                var style = new ol.style.Style({
+                    fill: new ol.style.Fill({ color: fillColour }),			
+                    stroke: new ol.style.Stroke({ color: strokeColour, width: strokeWidth, miterLimit: 2, lineJoin: 'round' }),
+                    zIndex: zIndex 
+                });
+
+            } else {
+
+                // Icon image source
+                var source = '';
+
+                // Warning or severe warning colours
+                if (target.state == 1 || target.state == 2) {
+                    zIndex = 3;
+                    source = '/public/icon-flood-warning-small-2x.png';
+                }
+
+                // Alert area colours
+                else if (target.state == 3) {
+                    zIndex = 2;
+                    source = '/public/icon-flood-alert-small-2x.png';
+                }
+
+                // Warning removed colours
+                else if (target.state == 4) {
+                    zIndex = 3;
+                    source = '';
+                }
+
+                // Generate style
+                var style = new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: source,
+                        size: [68, 68],
+                        anchor: [0.5, 1],
+                        scale: 0.5
+                    }),
+                    zIndex: zIndex 
+                });
+
             }
-
-            // Alert area colours
-            else if (target.state == 3) {
-                strokeColour = '#f18700';
-                fillColour = '#f18700';
-                zIndex = 2;
-            }
-
-            // Warning removed colours
-            else if (target.state == 4) {
-                strokeColour = '#6f777b';
-                fillColour = '#6f777b';
-                zIndex = 3;				
-            }
-
-            // Generate style
-            var style = new ol.style.Style({
-                fill: new ol.style.Fill({ color: fillColour }),			
-                stroke: new ol.style.Stroke({ color: strokeColour, width: strokeWidth, miterLimit: 2, lineJoin: 'round' }),
-                zIndex: zIndex 
-            });
 
         }
 
@@ -180,15 +222,17 @@ var init = function() {
     var levelStyle = new ol.style.Style({
         image: new ol.style.Icon({
             src: '/public/icon-locator-blue-2x.png',
-            size: [57, 71],
+            size: [53, 71],
             anchor: [0.5, 1],
             scale: 0.5
         })
-    });
-    var levels = new ol.layer.Vector({
-        source: sourceLevels,
-        style: levelStyle
-    });
+    })
+    var levels = new ol.layer.Image({
+        source: new ol.source.ImageVector({
+            source: sourceLevels,
+            style: levelStyle
+        })
+    })
 
     // Zoom reset button
     var zoomResetElement = document.createElement('button')
@@ -264,15 +308,15 @@ var init = function() {
     map.on('moveend', function(){
 
         resolution = map.getView().getResolution()
-        /*
-        if (resolution > 19) { layerOpacity = 1 }
-        else if (resolution > 9) { layerOpacity = 0.85 } 
-        else if (resolution > 4) { layerOpacity = 0.7 }
-        else { layerOpacity = 0.55 }	
-        */
-        
-        layerOpacity = 0.7
         console.log(resolution)
+
+        layerOpacity = 1
+        targetAreas.setZIndex(0)
+
+        if (resolution > minIconResolution) { targetAreas.setZIndex(99) }
+        else if (resolution > 19) { layerOpacity = 0.85 } 
+        else if (resolution > 9) { layerOpacity = 0.7 }
+        
         targetAreas.setOpacity(layerOpacity);
         targetAreasIntersecting.setOpacity(layerOpacity);
     });
