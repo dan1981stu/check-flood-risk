@@ -2493,19 +2493,33 @@ a.banner {
 }
 
 .notice-warning-heading {
-  margin-bottom: 0;
+  margin-bottom: 0.9em;
+}
+
+@media (min-width: 641px) {
+  .notice-warning-heading {
+    margin-bottom: 1.2em;
+  }
 }
 
 .notice-warning-heading .notice-primary {
-  line-height: 50px;
-  padding-top: 0;
-  padding-left: 62px;
+  padding-left: 52px;
 }
 
 @media (min-width: 641px) {
   .notice-warning-heading .notice-primary {
-    line-height: 56px;
-    padding-left: 76px;
+    padding-left: 60px;
+  }
+}
+
+.notice-warning-heading .icon {
+  top: 0 !important;
+  margin-top: -9px !important;
+}
+
+@media (min-width: 641px) {
+  .notice-warning-heading .icon {
+    margin-top: -6px !important;
   }
 }
 

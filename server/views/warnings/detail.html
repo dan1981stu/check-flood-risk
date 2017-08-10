@@ -76,3 +76,14 @@
 	</div>
 
 </main>
+
+<!-- This content to go at end of body -->
+{{#if model.hasMap }}
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+<script>
+	var targetAreaStates = {{{ json model.targetAreaStates }}}
+	var levelsJSON = {}
+	var lonLat = []
+</script>
+<script src="/public/javascripts/map.js"></script>
+{{/if }}

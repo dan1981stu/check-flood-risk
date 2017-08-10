@@ -60,14 +60,21 @@ $path: "/public/";
 }
 
 .notice-warning-heading {
-    margin-bottom:0;
+    margin-bottom:0.9em;
+    @include media(tablet) {
+        margin-bottom:1.2em;
+    }
     .notice-primary {
-        line-height:50px;
-        padding-top:0;
-        padding-left:62px;
+        padding-left:52px;
         @include media(tablet) {
-            line-height:56px;
-            padding-left:76px;
+            padding-left:60px;
+        }
+    }
+    .icon {
+        top: 0 !important;
+        margin-top:-9px !important;
+        @include media(tablet) {
+            margin-top:-6px !important;
         }
     }
 }
