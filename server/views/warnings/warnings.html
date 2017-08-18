@@ -15,22 +15,22 @@
 	</div>
 
 	<div class="grid-row no-bottom">
-		<div class="column-two-thirds">
+		<div class="column-one-third">
 
 			{{#if model.hasFilter }}
 			<div class="filter">
 				<form action="/warnings" autocomplete="off" class="form" method="post" novalidate="novalidate">
-					<h2 class="heading-medium">Filter by location</h2>
+					<h2 class="heading-medium">Show warnings near a town or postcode</h2>
 					<div class="form-group no-bottom">
 						<fieldset>
 							<legend class="visuallyhidden">Filter by postcode or town</legend>
 							<div class="form-group">
-								<label for="location">
+								<label for="location" class="visuallyhidden">
 									<span class="form-label">Postcode or town</span>
 								</label>
 								<input id="location" name="location" class="form-control form-control-location" type="text" placeholder="eg SW1A 2AA or Bakewell" value="" />
 								<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
-								<button class="button" type="submit">Apply filter</button>
+								<button class="button button-filter-search" type="submit">Apply filter</button>
 								<a href="" class="form-control-reset">Reset filter</a>
 							</div>
 						</fieldset>
@@ -46,17 +46,22 @@
 				<strong class="bold-xlarge">{{ model.warningsSevere.length }}</strong>
 			</div>
 			<p>
-				<span class="bold-medium">Severe flood warnings</span>
+				<span class="bold-medium">Severe flood warning{{#isPlural model.warningsSevere.length}}s{{/isPlural}}</span>
 				<br/>Severe flooding - danger to life
 			</p>
 			{{#if model.hasWarningSevere }}
-			<ul class="list list-warnings">
-				{{#each model.warningsSevere }}
-				<li>
-					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
-				</li>
-				{{/each }}
-			</ul>
+			<details style="margin-top:-0.5em;margin-bottom:1em">
+				<summary><span class="summary">List of severe flood warnings</span></summary>
+				<div class="panel panel-narrow">
+					<ul class="list list-warnings">
+						{{#each model.warningsSevere }}
+						<li class="font-xsmall">
+							<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+				</div>
+			</details>	
 			{{/if }}
 
 			<div class="notice notice-warning">
@@ -66,17 +71,20 @@
 				<strong class="bold-xlarge">{{ model.warnings.length }}</strong>
 			</div>
 			<p>
-				<span class="bold-medium">Flood warnings</span>
+				<span class="bold-medium">Flood warning{{#isPlural model.warnings.length}}s{{/isPlural}}</span>
 				<br/>Flooding expected - immediate action required
 			</p>
 			{{#if model.hasWarning }}
-			<ul class="list list-warnings">
-				{{#each model.warnings }}
-				<li>
-					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
-				</li>
-				{{/each }}
-			</ul>
+			<details>
+				<summary><span class="summary">List of flood warnings</span></summary>
+				<ul class="list list-warnings">
+					{{#each model.warnings }}
+					<li class="font-xsmall">
+						<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+					</li>
+					{{/each }}
+				</ul>
+			</details>
 			{{/if }}
 
 			<div class="notice notice-warning">
@@ -86,13 +94,13 @@
 				<strong class="bold-xlarge">{{ model.alerts.length }}</strong>
 			</div>
 			<p>
-				<span class="bold-medium">Flood alert</span>
+				<span class="bold-medium">Flood alert{{#isPlural model.alerts.length}}s{{/isPlural}}</span>
 				<br/>Flooding possible - be prepared
 			</p>
 			{{#if model.hasAlert }}
 			<ul class="list list-warnings">
 				{{#each model.alerts }}
-				<li>
+				<li class="font-xsmall">
 					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
 				</li>
 				{{/each }}
@@ -102,13 +110,13 @@
 		</div>
 
 		{{#if model.hasMap }}
-		<div class="column-one-third">
+		<div class="column-two-thirds">
 		
 			<!-- Map view -->
 
 			<figure class="map" id="map">
-				<div id="map-container" class="map-container map-container-small"></div>
-				<figcaption>Potential affected areas</figcaption>
+				<div id="map-container" class="map-container map-container-large"></div>
+				<figcaption>Map showing flood warnings and alerts</figcaption>
 			</figure>
 
 		</div>

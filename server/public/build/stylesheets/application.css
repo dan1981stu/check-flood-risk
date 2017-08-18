@@ -2260,46 +2260,6 @@ input[type=number] {
   }
 }
 
-.filter {
-  padding: 15px;
-  background-color: #dee0e2;
-  margin-bottom: 2em;
-}
-
-.filter h2 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-}
-
-.filter .form-group {
-  margin-bottom: 0;
-}
-
-.filter .form-group,
-.filter .form-control,
-.filter .form-comtrol-reset,
-.filter .form-label {
-  font-family: "nta", Arial, sans-serif;
-  font-weight: 400;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 1.14286;
-}
-
-@media (min-width: 641px) {
-  .filter .form-group,
-  .filter .form-control,
-  .filter .form-comtrol-reset,
-  .filter .form-label {
-    font-size: 16px;
-    line-height: 1.25;
-  }
-}
-
-.filter .form-control-location {
-  max-width: 20em;
-}
-
 .list-warnings-heading-copy {
   display: inline-block;
 }
@@ -2691,6 +2651,10 @@ table.select-areas th {
   height: 275px;
 }
 
+.map-container-large {
+  height: 600px;
+}
+
 .map-container-full {
   background-color: #fff;
   height: 100%;
@@ -2887,4 +2851,60 @@ button.map-control-toggleKey-open {
 
 .button {
   width: auto;
+}
+
+.filter {
+  padding: 15px;
+  background-color: #dee0e2;
+  margin-bottom: 2em;
+}
+
+.filter h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.filter .form-group {
+  margin-bottom: 0;
+}
+
+.filter .form-group,
+.filter .form-control,
+.filter .form-comtrol-reset,
+.filter .form-label {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+}
+
+@media (min-width: 641px) {
+  .filter .form-group,
+  .filter .form-control,
+  .filter .form-comtrol-reset,
+  .filter .form-label {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.filter .form-control-location {
+  width: 226px;
+}
+
+.button-filter-search {
+  text-indent: -5000px;
+  background: #00823b url("/public/icon-search-2x.png") center center no-repeat;
+  background-size: 50%;
+  width: 40px;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 7px 4px 5px;
+}
+
+.filter .form-control-reset {
+  margin-top: 0.5em;
+  display: inline-block;
+  white-space: nowrap;
 }

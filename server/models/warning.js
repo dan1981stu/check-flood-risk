@@ -3,7 +3,7 @@ var data = require('../data/data.json')
 // Get risk summary by location and scenario
 exports.getWarnings = function(search, scenario) {
 
-	var filterMin = 4
+	var filterMin = 1
 
 	var
 		town, 
@@ -23,7 +23,7 @@ exports.getWarnings = function(search, scenario) {
 		hasAlert = false, // Nearby
 		hasAlertOrWarning = false, // Nearby
 		hasFilter = false, // Filter required
-		hasMap = false, // Map required
+		hasMap = true, // Map required
 
 		targetAreaStates = []
 
@@ -121,12 +121,12 @@ exports.getWarnings = function(search, scenario) {
 		hasAlertOrWarning = true
 	}
 
-	// Set has filter bollean
+	// Set has filter boolean
 	if (targetAreaStates.length >= filterMin) {
 		hasFilter = true
 	}
 
-	// Set has map bollean
+	// Set has map boolean
 	if (targetAreaStates.length > 0) {
 		hasMap = true
 	}
