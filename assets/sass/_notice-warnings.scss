@@ -52,6 +52,7 @@ $path: "/public/";
         line-height:50px;
         padding-top:0;
         padding-left:62px;
+        margin-bottom:4px;
         @include media(tablet) {
             line-height:56px;
             padding-left:76px;

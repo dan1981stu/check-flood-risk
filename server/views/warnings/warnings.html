@@ -31,7 +31,7 @@
 								<input id="location" name="location" class="form-control form-control-location" type="text" placeholder="eg SW1A 2AA or Bakewell" value="" />
 								<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
 								<button class="button button-filter-search" type="submit">Apply filter</button>
-								<a href="" class="form-control-reset">Reset filter</a>
+								<a href="" class="form-control-reset">Show all warnings</a>
 							</div>
 						</fieldset>
 					</div>
@@ -39,20 +39,21 @@
 			</div>
 			{{/if }}
 
-			<div class="notice notice-warning">
-				<i class="icon icon-flood-warning-severe-large">
-					<span class="visually-hidden">Severe flood warning</span>
-				</i>
-				<strong class="bold-xlarge">{{ model.warningsSevere.length }}</strong>
-			</div>
-			<p>
-				<span class="bold-medium">Severe flood warning{{#isPlural model.warningsSevere.length}}s{{/isPlural}}</span>
-				<br/>Severe flooding - danger to life
-			</p>
-			{{#if model.hasWarningSevere }}
-			<details style="margin-top:-0.5em;margin-bottom:1em">
-				<summary><span class="summary">List of severe flood warnings</span></summary>
-				<div class="panel panel-narrow">
+			<div class="accordion">
+				
+				<div class="accordion-section">
+					<div class="accordion-header">
+						<div class="notice notice-warning">
+							<i class="icon icon-flood-warning-severe-large">
+								<span class="visually-hidden">Severe flood warning</span>
+							</i>
+							<strong class="bold-xlarge">{{ model.warningsSevere.length }}</strong>
+						</div>
+						<span class="bold-medium">Severe flood warning{{#isPlural model.warningsSevere.length}}s{{/isPlural}}</span><br/>
+						<span class="font-small">Severe flooding - danger to life</span>
+					</div>
+					<!--
+					{{#if model.hasWarningSevere }}
 					<ul class="list list-warnings">
 						{{#each model.warningsSevere }}
 						<li class="font-xsmall">
@@ -60,52 +61,58 @@
 						</li>
 						{{/each }}
 					</ul>
+					{{/if }}
+					-->
 				</div>
-			</details>	
-			{{/if }}
+				<div class="accordion-section">
+					<div class="accordion-header">
+						<div class="notice notice-warning">
+							<i class="icon icon-flood-warning-large">
+								<span class="visually-hidden">Flood warning</span>
+							</i>
+							<strong class="bold-xlarge">{{ model.warnings.length }}</strong>
+						</div>
+						<span class="bold-medium">Flood warning{{#isPlural model.warnings.length}}s{{/isPlural}}</span><br/>
+						<span class="font-small">Flooding expected - immediate action required</span>
+					</div>
+					<!--
+					{{#if model.hasWarning }}
+					<ul class="list list-warnings">
+						{{#each model.warnings }}
+						<li class="font-xsmall">
+							<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+					{{/if }}
+					-->
+				</div>
 
-			<div class="notice notice-warning">
-				<i class="icon icon-flood-warning-large">
-					<span class="visually-hidden">Flood warning</span>
-				</i>
-				<strong class="bold-xlarge">{{ model.warnings.length }}</strong>
-			</div>
-			<p>
-				<span class="bold-medium">Flood warning{{#isPlural model.warnings.length}}s{{/isPlural}}</span>
-				<br/>Flooding expected - immediate action required
-			</p>
-			{{#if model.hasWarning }}
-			<details>
-				<summary><span class="summary">List of flood warnings</span></summary>
-				<ul class="list list-warnings">
-					{{#each model.warnings }}
-					<li class="font-xsmall">
-						<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
-					</li>
-					{{/each }}
-				</ul>
-			</details>
-			{{/if }}
+				<div class="accordion-section">
+					<div class="accordion-header">
+						<div class="notice notice-warning">
+							<i class="icon icon-flood-alert-large">
+								<span class="visually-hidden">Flood alert</span>
+							</i>
+							<strong class="bold-xlarge">{{ model.alerts.length }}</strong>
+						</div>
+						<span class="bold-medium">Flood alert{{#isPlural model.alerts.length}}s{{/isPlural}}</span><br/>
+						<span class="font-small">Flooding possible - be prepared</span>
+					</div>
+					<!--
+					{{#if model.hasAlert }}
+					<ul class="list list-warnings">
+						{{#each model.alerts }}
+						<li class="font-xsmall">
+							<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+						</li>
+						{{/each }}
+					</ul>
+					{{/if }}
+					-->
+				</div>
 
-			<div class="notice notice-warning">
-				<i class="icon icon-flood-alert-large">
-					<span class="visually-hidden">Flood alert</span>
-				</i>
-				<strong class="bold-xlarge">{{ model.alerts.length }}</strong>
 			</div>
-			<p>
-				<span class="bold-medium">Flood alert{{#isPlural model.alerts.length}}s{{/isPlural}}</span>
-				<br/>Flooding possible - be prepared
-			</p>
-			{{#if model.hasAlert }}
-			<ul class="list list-warnings">
-				{{#each model.alerts }}
-				<li class="font-xsmall">
-					<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
-				</li>
-				{{/each }}
-			</ul>
-			{{/if }}
 
 		</div>
 

@@ -2260,23 +2260,12 @@ input[type=number] {
   }
 }
 
-.list-warnings-heading-copy {
-  display: inline-block;
-}
-
-.list-warnings-heading-copy span {
-  display: block;
+.list-warnings {
+  margin: 0;
 }
 
 .list-warnings li {
-  border-top: 1px solid #bfc1c3;
-  padding: 0.5em 0;
-  margin-bottom: 0;
-}
-
-.list-warnings {
-  margin-top: -0.6em;
-  border-bottom: 1px solid #bfc1c3;
+  margin-top: 0.6em;
 }
 
 .message {
@@ -2443,6 +2432,7 @@ a.banner {
   line-height: 50px;
   padding-top: 0;
   padding-left: 62px;
+  margin-bottom: 4px;
 }
 
 @media (min-width: 641px) {
@@ -2856,7 +2846,6 @@ button.map-control-toggleKey-open {
 .filter {
   padding: 15px;
   background-color: #dee0e2;
-  margin-bottom: 2em;
 }
 
 .filter h2 {
@@ -2907,4 +2896,17 @@ button.map-control-toggleKey-open {
   margin-top: 0.5em;
   display: inline-block;
   white-space: nowrap;
+}
+
+.accordion {
+  border-top: 1px solid #bfc1c3;
+}
+
+.accordion-section {
+  border-bottom: 1px solid #bfc1c3;
+}
+
+.accordion-section {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
 }

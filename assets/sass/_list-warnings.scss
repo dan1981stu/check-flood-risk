@@ -1,20 +1,8 @@
 $path: "/public/";
 
-.list-warnings-heading {
-
-}
-.list-warnings-heading-copy {
-    display: inline-block;
-}
-.list-warnings-heading-copy span {
-    display:block;
+.list-warnings {
+    margin:0;
 }
 .list-warnings li {
-    border-top:1px solid $border-colour;
-    padding:0.5em 0;
-    margin-bottom:0;
-}
-.list-warnings {
-    margin-top:-0.6em;
-    border-bottom:1px solid $border-colour;
+    margin-top:0.6em;
 }
