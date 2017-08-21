@@ -3,10 +3,46 @@ $path: "/public/";
 .accordion {
   border-top:1px solid $border-colour;
 }
-.accordion-section {
+.subsection {
   border-bottom:1px solid $border-colour;
 }
-.accordion-section {
-  padding-top:0.6em;
-  padding-bottom:0.6em;
+.subsection-header {
+  display:block;
+  position:relative;
+  padding-top:0.8em;
+  padding-bottom:0.8em;
+  text-decoration:none;
+}
+.subsection-header * {
+  color:$text-colour;
+}
+.subsection-header:focus {
+  background-color:white;  
+  z-index:1;
+}
+.subsection-content {
+  padding-bottom:0.5em;
+}
+.js-subsection-accordion .subsection-header:hover {
+  background-color:$highlight-colour;
+  cursor:pointer;
+}
+.icon-subsection {
+  position: absolute;
+  right: 15px;
+  top:50%;
+  height: 16px;
+  width: 16px;
+  margin-top:-8px;
+}
+.js-subsection-accordion .icon-subsection {
+  background: transparent url('#{$path}icons-plus-minus.png') bottom center no-repeat;
+  background-size:100%;
+}
+.list-warnings {
+  margin:0;
+}
+.list-warnings li {
+  margin-top:0;
+  margin-bottom:0.6em;
 }

@@ -20,16 +20,20 @@ $path: "/public/";
 
 .map-container {
   position:relative;
-  height:450px;
+  height:275px;
   border:1px solid $border-colour;
 }
 
-.map-container-small {
-  height:275px;
+.map-container-medium {
+  @include media(tablet) {
+    height:438px;
+  }
 }
 
 .map-container-large {
-  height:600px;
+  @include media(tablet) {
+    height:572px;
+  }
 }
 
 .map-container-full {

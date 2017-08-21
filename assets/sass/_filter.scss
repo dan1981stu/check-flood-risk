@@ -31,6 +31,7 @@ $path: "/public/";
 }
 .filter .form-control-reset {
   margin-top:0.5em;
-  display:inline-block;
+  display:block;
   white-space: nowrap;
+  width:8em;
 }

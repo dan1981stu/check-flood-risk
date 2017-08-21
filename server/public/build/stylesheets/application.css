@@ -2260,14 +2260,6 @@ input[type=number] {
   }
 }
 
-.list-warnings {
-  margin: 0;
-}
-
-.list-warnings li {
-  margin-top: 0.6em;
-}
-
 .message {
   display: block;
   margin: 30px 0 0;
@@ -2425,6 +2417,7 @@ a.banner {
 }
 
 .notice-warning {
+  display: block;
   margin-bottom: 0;
 }
 
@@ -2633,16 +2626,20 @@ table.select-areas th {
 
 .map-container {
   position: relative;
-  height: 450px;
+  height: 275px;
   border: 1px solid #bfc1c3;
 }
 
-.map-container-small {
-  height: 275px;
+@media (min-width: 641px) {
+  .map-container-medium {
+    height: 438px;
+  }
 }
 
-.map-container-large {
-  height: 600px;
+@media (min-width: 641px) {
+  .map-container-large {
+    height: 572px;
+  }
 }
 
 .map-container-full {
@@ -2894,19 +2891,64 @@ button.map-control-toggleKey-open {
 
 .filter .form-control-reset {
   margin-top: 0.5em;
-  display: inline-block;
+  display: block;
   white-space: nowrap;
+  width: 8em;
 }
 
 .accordion {
   border-top: 1px solid #bfc1c3;
 }
 
-.accordion-section {
+.subsection {
   border-bottom: 1px solid #bfc1c3;
 }
 
-.accordion-section {
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
+.subsection-header {
+  display: block;
+  position: relative;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  text-decoration: none;
+}
+
+.subsection-header * {
+  color: #0b0c0c;
+}
+
+.subsection-header:focus {
+  background-color: white;
+  z-index: 1;
+}
+
+.subsection-content {
+  padding-bottom: 0.5em;
+}
+
+.js-subsection-accordion .subsection-header:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.icon-subsection {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  height: 16px;
+  width: 16px;
+  margin-top: -8px;
+}
+
+.js-subsection-accordion .icon-subsection {
+  background: transparent url("/public/icons-plus-minus.png") bottom center no-repeat;
+  background-size: 100%;
+}
+
+.list-warnings {
+  margin: 0;
+}
+
+.list-warnings li {
+  margin-top: 0;
+  margin-bottom: 0.6em;
 }
