@@ -11,21 +11,30 @@ $path: "/public/";
   position:relative;
   padding-top:0.8em;
   padding-bottom:0.8em;
-  text-decoration:none;
-}
-.subsection-header * {
-  color:$text-colour;
-}
-.subsection-header:focus {
-  background-color:white;  
-  z-index:1;
 }
 .subsection-content {
   padding-bottom:0.5em;
 }
-.js-subsection-accordion .subsection-header:hover {
+
+// Div element replace with an a element using Javascript
+a.subsection-header {
+  display:block;
+  color:$text-colour;
+  text-decoration:none;
+}
+a.subsection-header:hover {
   background-color:$highlight-colour;
   cursor:pointer;
+}
+a.subsection-header:focus {
+  background-color:white;  
+  color:$text-colour;
+  border:0;
+  outline:0;
+  z-index:1;
+}
+a.subsection-header:focus .bold-medium {
+  background-color:$focus-colour;
 }
 .icon-subsection {
   position: absolute;
@@ -38,6 +47,9 @@ $path: "/public/";
 .js-subsection-accordion .icon-subsection {
   background: transparent url('#{$path}icons-plus-minus.png') bottom center no-repeat;
   background-size:100%;
+}
+.js-subsection-accordion.subsection-open .icon-subsection {
+  background-position:top center;
 }
 .list-warnings {
   margin:0;

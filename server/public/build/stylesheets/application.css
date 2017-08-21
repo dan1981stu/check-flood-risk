@@ -2909,25 +2909,33 @@ button.map-control-toggleKey-open {
   position: relative;
   padding-top: 0.8em;
   padding-bottom: 0.8em;
-  text-decoration: none;
-}
-
-.subsection-header * {
-  color: #0b0c0c;
-}
-
-.subsection-header:focus {
-  background-color: white;
-  z-index: 1;
 }
 
 .subsection-content {
   padding-bottom: 0.5em;
 }
 
-.js-subsection-accordion .subsection-header:hover {
+a.subsection-header {
+  display: block;
+  color: #0b0c0c;
+  text-decoration: none;
+}
+
+a.subsection-header:hover {
   background-color: #f8f8f8;
   cursor: pointer;
+}
+
+a.subsection-header:focus {
+  background-color: white;
+  color: #0b0c0c;
+  border: 0;
+  outline: 0;
+  z-index: 1;
+}
+
+a.subsection-header:focus .bold-medium {
+  background-color: #ffbf47;
 }
 
 .icon-subsection {
@@ -2942,6 +2950,10 @@ button.map-control-toggleKey-open {
 .js-subsection-accordion .icon-subsection {
   background: transparent url("/public/icons-plus-minus.png") bottom center no-repeat;
   background-size: 100%;
+}
+
+.js-subsection-accordion.subsection-open .icon-subsection {
+  background-position: top center;
 }
 
 .list-warnings {

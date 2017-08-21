@@ -308,7 +308,6 @@ var init = function() {
     map.on('moveend', function(){
 
         resolution = map.getView().getResolution()
-        console.log(resolution)
 
         layerOpacity = 1
         targetAreas.setZIndex(0)
