@@ -1,3 +1,5 @@
 var accordion = document.querySelector('.accordion')
-var subsection = accordion.querySelector('.subsection-accordion')
-subsection.classList.add('js-subsection-accordion')
+var subsections = accordion.querySelectorAll('.subsection-accordion')
+for (var i = 0; i < subsections.length; i++) {
+    subsections[i].classList.add('js-subsection-accordion')
+}
