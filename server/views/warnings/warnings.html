@@ -121,6 +121,35 @@
 					{{/if }}
 				</div>
 
+				<!--
+				<div class="subsection {{#if model.hasAlert }}subsection-accordion{{/ if}}">
+					<div data-href="#flood-warnings-removed" class="subsection-header">
+						{{#if model.hasAlert }}
+						<span class="icon icon-subsection"></span>
+						{{/ if}}
+						<span class="notice notice-warning">
+							<i class="icon icon-flood-warning-removed-large">
+								<span class="visually-hidden">Flood warning removed</span>
+							</i>
+							<strong class="bold-xlarge">{{ model.warningsRemoved.length }}</strong>
+						</span>
+						<span class="bold-medium">Flood warning{{#isPlural model.warningsRemoved.length}}s{{/isPlural}} removed</span><br/>
+						<span class="font-small">Flood warnings no longer inforce</span>
+					</div>
+					{{#if model.hasWarningRemoved }}
+					<div class="subsection-content js-hidden">
+						<ul class="list list-warnings">
+							{{#each model.warningsRemoved }}
+							<li class="font-xsmall">
+								<a href="/warnings/{{ this.path }}">{{ this.name }}</a>
+							</li>
+							{{/each }}
+						</ul>
+					</div>
+					{{/if }}
+				</div>
+			-->
+
 			</div>
 
 		</div>

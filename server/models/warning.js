@@ -15,6 +15,7 @@ exports.getWarnings = function(search, scenario) {
 		warningsSevere = [], // Nearby
 		warnings = [], // Nearby
 		alerts = [], // Nearby
+		warningsRemoved = [], // Nearby
 
 		hasPostcode = false,
 
@@ -22,6 +23,7 @@ exports.getWarnings = function(search, scenario) {
 		hasWarning = false, // Nearby
 		hasAlert = false, // Nearby
 		hasAlertOrWarning = false, // Nearby
+		hasWarningRemoved = true, //Nearby
 		hasFilter = false, // Filter required
 		hasMap = true, // Map required
 
@@ -140,11 +142,13 @@ exports.getWarnings = function(search, scenario) {
 		warningsSevere, // List of nearby severe warnings
 		warnings, // List of nearby warnings
 		alerts, // List of nearby alerts
+		warningsRemoved, // List of nearby warnings removed
 				
 		hasWarningSevere,
 		hasWarning,
 		hasAlert,
 		hasAlertOrWarning,
+		hasWarningRemoved,
 		hasFilter,
 		hasMap,
 
