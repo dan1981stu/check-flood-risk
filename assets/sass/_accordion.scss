@@ -33,7 +33,9 @@ a.subsection-header:focus {
   outline:0;
   z-index:1;
 }
-a.subsection-header:focus .bold-medium {
+a.subsection-header:focus .bold-xlarge,
+a.subsection-header:focus .bold-medium,
+a.subsection-header:focus .font-small {
   background-color:$focus-colour;
 }
 .icon-subsection {
@@ -45,7 +47,7 @@ a.subsection-header:focus .bold-medium {
   margin-top:-8px;
 }
 .js-subsection-accordion .icon-subsection {
-  background: transparent url('#{$path}icons-plus-minus.png') bottom center no-repeat;
+  background: transparent url('#{$path}icons-plus-minus-2x.png') bottom center no-repeat;
   background-size:100%;
 }
 .js-subsection-accordion.subsection-open .icon-subsection {
