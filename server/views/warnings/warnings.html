@@ -1,4 +1,4 @@
-<a href="/check-flood-risk" class="link-back">Back</a> 
+<a href="/check-flood-risk?s={{ model.scenario }}" class="link-back">Back</a> 
 
 {{#if trace }}
 <p class="font-xsmall">{{ json model }}<p>
@@ -44,7 +44,7 @@
 				<div class="subsection {{#if model.hasWarningSevere }}subsection-accordion{{/ if}}">
 					<div data-href="#severe-flood-warnings" class="subsection-header">
 						{{#if model.hasWarningSevere }}
-						<i class="icon icon-subsection"></i>
+						<span class="icon icon-subsection"></span>
 						{{/if }}
 						<span class="notice notice-warning">
 							<i class="icon icon-flood-warning-severe-large">

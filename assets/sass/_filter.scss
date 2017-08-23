@@ -18,16 +18,22 @@ $path: "/public/";
   @include core-16;
 }
 .filter .form-control-location {
-  width:226px;
+  width:216px;
+  line-height:1.25em;
 }
 .button-filter-search {
   text-indent:-5000px;
   background:$button-colour url('#{$path}icon-search-2x.png') center center no-repeat;
   background-size:50%;
   width:40px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.25;
-  padding: 7px 4px 5px;
+  padding: 8px 4px 5px;
+  @include media(tablet) {
+    font-size: 16px;
+    padding-top:6px;
+    padding-bottom:6px;    
+  }     
 }
 .filter .form-control-reset {
   margin-top:0.5em;

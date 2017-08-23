@@ -2422,16 +2422,18 @@ a.banner {
 }
 
 .notice-warning strong {
+  display: inline-block;
   line-height: 50px;
   padding-top: 0;
-  padding-left: 62px;
+  padding-left: 47px;
+  margin-left: 0;
   margin-bottom: 4px;
 }
 
 @media (min-width: 641px) {
   .notice-warning strong {
     line-height: 56px;
-    padding-left: 76px;
+    padding-left: 61px;
   }
 }
 
@@ -2876,7 +2878,8 @@ button.map-control-toggleKey-open {
 }
 
 .filter .form-control-location {
-  width: 226px;
+  width: 216px;
+  line-height: 1.25em;
 }
 
 .button-filter-search {
@@ -2884,9 +2887,17 @@ button.map-control-toggleKey-open {
   background: #00823b url("/public/icon-search-2x.png") center center no-repeat;
   background-size: 50%;
   width: 40px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.25;
-  padding: 7px 4px 5px;
+  padding: 8px 4px 5px;
+}
+
+@media (min-width: 641px) {
+  .button-filter-search {
+    font-size: 16px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 }
 
 .filter .form-control-reset {
@@ -2934,7 +2945,9 @@ a.subsection-header:focus {
   z-index: 1;
 }
 
-a.subsection-header:focus .bold-medium {
+a.subsection-header:focus .bold-xlarge,
+a.subsection-header:focus .bold-medium,
+a.subsection-header:focus .font-small {
   background-color: #ffbf47;
 }
 
@@ -2948,7 +2961,7 @@ a.subsection-header:focus .bold-medium {
 }
 
 .js-subsection-accordion .icon-subsection {
-  background: transparent url("/public/icons-plus-minus.png") bottom center no-repeat;
+  background: transparent url("/public/icons-plus-minus-2x.png") bottom center no-repeat;
   background-size: 100%;
 }
 

@@ -50,13 +50,15 @@ $path: "/public/";
     display:block;
     margin-bottom:0;
     strong {
+        display:inline-block;
         line-height:50px;
         padding-top:0;
-        padding-left:62px;
+        padding-left:47px;
+        margin-left:0;
         margin-bottom:4px;
         @include media(tablet) {
             line-height:56px;
-            padding-left:76px;
+            padding-left:61px;
         }
     }
 }
