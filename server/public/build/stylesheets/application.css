@@ -531,7 +531,7 @@ main {
   }
 }
 
-.heading-xlarge .heading-secondary {
+.heading-xlarge .heading-secondary, .heading-xlarge .heading-secondary-notice {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
@@ -545,14 +545,14 @@ main {
 }
 
 @media (min-width: 641px) {
-  .heading-xlarge .heading-secondary {
+  .heading-xlarge .heading-secondary, .heading-xlarge .heading-secondary-notice {
     font-size: 27px;
     line-height: 1.11111;
   }
 }
 
 @media (min-width: 641px) {
-  .heading-xlarge .heading-secondary {
+  .heading-xlarge .heading-secondary, .heading-xlarge .heading-secondary-notice {
     padding-top: 4px;
     padding-bottom: 6px;
   }
@@ -582,7 +582,7 @@ main {
   }
 }
 
-.heading-large .heading-secondary {
+.heading-large .heading-secondary, .heading-large .heading-secondary-notice {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
@@ -596,14 +596,14 @@ main {
 }
 
 @media (min-width: 641px) {
-  .heading-large .heading-secondary {
+  .heading-large .heading-secondary, .heading-large .heading-secondary-notice {
     font-size: 24px;
     line-height: 1.25;
   }
 }
 
 @media (min-width: 641px) {
-  .heading-large .heading-secondary {
+  .heading-large .heading-secondary, .heading-large .heading-secondary-notice {
     padding-top: 6px;
     padding-bottom: 4px;
   }
@@ -2166,6 +2166,10 @@ input[type=number] {
   }
 }
 
+.button {
+  width: auto;
+}
+
 .notifications-banner {
   margin-top: 40px;
   padding: 15px;
@@ -2364,215 +2368,6 @@ a.banner {
 
 .govuk-related-items ul li.related-items-more {
   font-weight: bold;
-}
-
-.column-map {
-  float: left;
-}
-
-.panel-border-warning {
-  border-left-width: 5px;
-  border-color: #e3000f;
-  margin-bottom: 1em;
-}
-
-.panel-border-warning-nearby {
-  border-left-width: 5px;
-  margin-bottom: 1em;
-}
-
-.panel-warning:last-child {
-  margin-bottom: 0.5em;
-}
-
-.panel-border-alert {
-  border-left-width: 5px;
-  border-color: #f18700;
-}
-
-.notice-warnings strong {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-
-.notice-warnings p {
-  margin-bottom: 0.5em;
-}
-
-.notice-warnings li {
-  margin-bottom: 10px;
-}
-
-.notice-warnings .notice-copy {
-  padding-left: 51px;
-  margin-left: -15px;
-  display: inline-block;
-}
-
-@media (min-width: 641px) {
-  .notice-warnings .notice-copy {
-    padding-left: 56px;
-  }
-}
-
-.notice-warning {
-  display: block;
-  margin-bottom: 0;
-}
-
-.notice-warning strong {
-  display: inline-block;
-  line-height: 50px;
-  padding-top: 0;
-  padding-left: 47px;
-  margin-left: 0;
-  margin-bottom: 4px;
-}
-
-@media (min-width: 641px) {
-  .notice-warning strong {
-    line-height: 56px;
-    padding-left: 61px;
-  }
-}
-
-.notice-warning-heading {
-  margin-bottom: 0.9375em;
-}
-
-@media (min-width: 641px) {
-  .notice-warning-heading {
-    margin-bottom: 1.25em;
-  }
-}
-
-.notice-warning-heading .notice-primary {
-  padding-left: 52px;
-}
-
-@media (min-width: 641px) {
-  .notice-warning-heading .notice-primary {
-    padding-left: 60px;
-  }
-}
-
-.notice-warning-heading .icon {
-  top: 0 !important;
-  margin-top: -9px !important;
-}
-
-@media (min-width: 641px) {
-  .notice-warning-heading .icon {
-    margin-top: -6px !important;
-  }
-}
-
-.icon-warning {
-  width: 32px;
-  height: 32px;
-  background-image: url("/public/icon-warning-small-2x.png");
-  background-position: center center;
-  background-size: 80%;
-  margin-top: -16px !important;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-warning {
-    background-size: 100%;
-  }
-}
-
-.icon-flood-warning-severe,
-.icon-flood-warning {
-  width: 32px;
-  height: 32px;
-  background-image: url("/public/icon-flood-warning-small-2x.png");
-  background-position: center center;
-  background-size: 80%;
-  margin-top: -16px !important;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-flood-warning-severe,
-  .icon-flood-warning {
-    background-size: 100%;
-  }
-}
-
-.icon-flood-alert {
-  width: 32px;
-  height: 32px;
-  background-image: url("/public/icon-flood-alert-small-2x.png");
-  background-position: center center;
-  background-size: 80%;
-  margin-top: -16px !important;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-flood-alert {
-    background-size: 100%;
-  }
-}
-
-.icon-flood-warning-severe-large {
-  width: 50px;
-  height: 50px;
-  margin-top: -26px !important;
-  background-image: url("/public/icon-flood-warning-severe-2x.gif");
-  background-position: center center;
-  background-size: 90%;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-flood-warning-severe-large {
-    width: 56px;
-    height: 56px;
-    margin-top: -30px !important;
-    background-size: 100%;
-  }
-}
-
-.icon-flood-warning-large {
-  width: 50px;
-  height: 50px;
-  margin-top: -26px !important;
-  background-image: url("/public/icon-flood-warning-2x.gif");
-  background-position: center center;
-  background-size: 90%;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-flood-warning-large {
-    width: 56px;
-    height: 56px;
-    margin-top: -30px !important;
-    background-size: 100%;
-  }
-}
-
-.icon-flood-alert-large {
-  width: 50px;
-  height: 50px;
-  margin-top: -26px !important;
-  background-image: url("/public/icon-flood-alert-2x.gif");
-  background-position: center center;
-  background-size: 90%;
-  margin-left: -2px;
-}
-
-@media (min-width: 641px) {
-  .icon-flood-alert-large {
-    width: 56px;
-    height: 56px;
-    margin-top: -30px !important;
-    background-size: 100%;
-  }
 }
 
 table th, table td {
@@ -2838,10 +2633,6 @@ button.map-control-toggleKey-open {
   margin-top: 45px;
 }
 
-.button {
-  width: auto;
-}
-
 .filter {
   padding: 15px;
   background-color: #dee0e2;
@@ -2976,4 +2767,233 @@ a.subsection-header:focus .font-small {
 .list-warnings li {
   margin-top: 0;
   margin-bottom: 0.6em;
+}
+
+.column-map {
+  float: left;
+}
+
+.panel-border-warning {
+  border-left-width: 5px;
+  border-color: #e3000f;
+  margin-bottom: 1em;
+}
+
+.panel-border-warning-nearby {
+  border-left-width: 5px;
+  margin-bottom: 1em;
+}
+
+.panel-warning:last-child {
+  margin-bottom: 0.5em;
+}
+
+.panel-border-alert {
+  border-left-width: 5px;
+  border-color: #f18700;
+}
+
+.notice-warnings strong {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.notice-warnings p {
+  margin-bottom: 0.5em;
+}
+
+.notice-warnings li {
+  margin-bottom: 10px;
+}
+
+.notice-warnings .notice-copy {
+  padding-left: 51px;
+  margin-left: -15px;
+  display: inline-block;
+}
+
+@media (min-width: 641px) {
+  .notice-warnings .notice-copy {
+    padding-left: 56px;
+  }
+}
+
+.notice-warning {
+  display: block;
+  margin-bottom: 0;
+}
+
+.notice-warning strong {
+  display: inline-block;
+  line-height: 50px;
+  padding-top: 0;
+  padding-left: 47px;
+  margin-left: 0;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 641px) {
+  .notice-warning strong {
+    line-height: 56px;
+    padding-left: 61px;
+  }
+}
+
+.heading-secondary-notice {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 0.75em;
+}
+
+@media (min-width: 641px) {
+  .heading-secondary-notice {
+    margin-bottom: 1.25em;
+    padding-left: 56px;
+  }
+}
+
+.heading-secondary-notice .icon {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+}
+
+/*
+.heading-primary-notice {
+    @include media(tablet) {
+        display:block;
+        max-width:66.66%;
+        padding-right:30px;
+        box-sizing:border-box;
+    }
+}
+
+.heading-secondary-notice {
+    @extend .heading-secondary;
+    position:relative;
+    padding-left:66px;
+    margin-bottom:1.25em;
+    @include media(tablet) {
+        margin-bottom:1.5em;
+        padding-left:76px;
+    }
+    .icon {
+        position:absolute;
+        left:15px;
+        top:50%;
+    }
+
+    background-color:#e3000f;
+    margin-top:-1.11em;
+    color:white !important;
+    padding-top:25px !important;
+    padding-bottom:25px !important;
+}
+*/
+.icon-warning {
+  width: 32px;
+  height: 32px;
+  background-image: url("/public/icon-warning-small-2x.png");
+  background-position: center center;
+  background-size: 80%;
+  margin-top: -16px !important;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-warning {
+    background-size: 100%;
+  }
+}
+
+.icon-flood-warning-severe,
+.icon-flood-warning {
+  width: 32px;
+  height: 32px;
+  background-image: url("/public/icon-flood-warning-small-2x.png");
+  background-position: center center;
+  background-size: 80%;
+  margin-top: -16px !important;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-warning-severe,
+  .icon-flood-warning {
+    background-size: 100%;
+  }
+}
+
+.icon-flood-alert {
+  width: 32px;
+  height: 32px;
+  background-image: url("/public/icon-flood-alert-small-2x.png");
+  background-position: center center;
+  background-size: 80%;
+  margin-top: -16px !important;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-alert {
+    background-size: 100%;
+  }
+}
+
+.icon-flood-warning-severe-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
+  background-image: url("/public/icon-flood-warning-severe-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-warning-severe-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
+}
+
+.icon-flood-warning-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
+  background-image: url("/public/icon-flood-warning-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-warning-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
+}
+
+.icon-flood-alert-large {
+  width: 50px;
+  height: 50px;
+  margin-top: -26px !important;
+  background-image: url("/public/icon-flood-alert-2x.gif");
+  background-position: center center;
+  background-size: 90%;
+  margin-left: -2px;
+}
+
+@media (min-width: 641px) {
+  .icon-flood-alert-large {
+    width: 56px;
+    height: 56px;
+    margin-top: -30px !important;
+    background-size: 100%;
+  }
 }
