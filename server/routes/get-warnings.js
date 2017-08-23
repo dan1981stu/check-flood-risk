@@ -1,19 +1,6 @@
 module.exports = [
 	{
 		method: 'GET',
-		path: '/get-flood-warnings',
-		config: {
-			handler: function (request, reply) {
-				return reply.view('get-warnings/main', {
-					'serviceName' : 'Get flood warnings',
-					'servicePath' : '/get-flood-warnings',
-					'pageTitle' : 'Get flood warnings - GOV.UK'
-				})
-			}
-		}
-	},
-	{
-		method: 'GET',
 		path: '/get-flood-warnings/select-warning-areas',
 		config: {
 			handler: function (request, reply) {
