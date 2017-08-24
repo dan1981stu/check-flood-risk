@@ -25,7 +25,6 @@ exports.getWarnings = function(search, scenario) {
 		hasAlertOrWarning = false, // Nearby
 		hasWarningRemoved = true, //Nearby
 		hasFilter = false, // Filter required
-		hasMap = true, // Map required
 
 		targetAreaStates = []
 
@@ -128,11 +127,6 @@ exports.getWarnings = function(search, scenario) {
 		hasFilter = true
 	}
 
-	// Set has map boolean
-	if (targetAreaStates.length > 0) {
-		hasMap = true
-	}
-
 	// Build model and return
 	return {
 
@@ -150,7 +144,6 @@ exports.getWarnings = function(search, scenario) {
 		hasAlertOrWarning,
 		hasWarningRemoved,
 		hasFilter,
-		hasMap,
 
 		targetAreaStates
 

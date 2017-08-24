@@ -1,5 +1,4 @@
-var accordion = document.querySelector('.accordion')
-var subsections = accordion.querySelectorAll('.subsection-accordion')
+var subsections = document.querySelectorAll('.subsection-accordion')
 for (var i = 0; i < subsections.length; i++) {
 
     var subsection = subsections[i]

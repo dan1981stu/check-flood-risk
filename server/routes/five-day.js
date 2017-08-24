@@ -5,7 +5,7 @@ module.exports = [
 	// Find location
 	{
 		method: 'GET',
-		path: '/5-day-forecast',
+		path: '/five-day-forecast',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
@@ -13,7 +13,7 @@ module.exports = [
 				return reply.view('five-day/main', {
 					'model' : { 'location' : '', 'scenario' : scenario },
 					'trace' : trace,
-					'pageTitle' : '5 day forecast - Check flood risk - GOV.UK'
+					'pageTitle' : 'Five day forecast - Check flood risk - GOV.UK'
 				})
 			}
 		}
