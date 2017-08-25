@@ -1,6 +1,8 @@
 const modelData = require('../models/warning')
 
 module.exports = [
+
+	// Warnings list page
 	{
 		method: 'GET',
 		path: '/warnings',
@@ -17,30 +19,19 @@ module.exports = [
 			}
 		}
 	},
-	/*
-	{
-		method: 'POST',
-		path: '/warnings',
-		config: {
-			handler: function (request, reply) {
-				const scenario = request.query.s ? request.query.s : 'a'
-				const trace = request.query.t ? request.query.t : false
-				const location = request.payload.location
-				return reply.view('warnings/results', {
-					'model' : { 'location' : location, 'scenario' : scenario },
-					'trace' : trace,
-					'pageTitle' : 'Flood alerts and warnings - Check flood risk - GOV.UK'
-				})
-			}
-		}
-	},
-	*/
+
+	// Warning detail page
 	{
 		method: 'GET',
 		path: '/warnings/central-mytholmroyd-river-calder',
 		config: {
 			handler: function (request, reply) {
+				const scenario = request.query.s ? request.query.s : 'a'
+				const trace = request.query.t ? request.query.t : false
+				const model = modelData.getWarnings('', scenario)
 				return reply.view('warnings/detail', {
+					'model' : model,
+					'trace' : trace,
 					'pageTitle' : 'Central Mytholmroyd (River Calder) - Flood warning - GOV.UK'
 				})
 			}

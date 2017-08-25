@@ -2459,6 +2459,7 @@ table.select-areas th {
   font-size: 14px;
   line-height: 1.14286;
   margin-top: 0.5em;
+  margin-bottom: 2em;
 }
 
 @media (min-width: 641px) {
@@ -2471,13 +2472,13 @@ table.select-areas th {
 .ol-zoom,
 .ol-zoom-reset {
   position: absolute;
-  left: 10px;
-  top: 40px;
+  right: 10px;
+  bottom: 10px;
   z-index: 1;
 }
 
 .ol-zoom-reset {
-  top: 10px;
+  bottom: 70px;
 }
 
 .ol-zoom-in,
@@ -2991,5 +2992,11 @@ a.subsection-header:focus .font-small {
     height: 56px;
     margin-top: -30px !important;
     background-size: 100%;
+  }
+}
+
+@media (min-width: 641px) {
+  .panel-warning-message {
+    margin-bottom: 1.5em;
   }
 }

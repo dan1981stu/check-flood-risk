@@ -1,3 +1,4 @@
+
 // Preset values
 var defaultBoundingBox = [[-5.72,49.96],[1.77,55.81]]
 var minIconResolution = 300
@@ -364,16 +365,22 @@ var init = function() {
     // Toggle size event
     toggleSize.addEventListener('click', function(e) {
         e.preventDefault()
+
+        var requestFullScreen = mapContainer.requestFullscreen || mapContainer.msRequestFullscreen || mapContainer.mozRequestFullScreen || mapContainer.webkitRequestFullscreen
+
         if (keyCopy.classList.contains('key-copy-open')) {
             keyCopy.classList.remove('key-copy-open')
             toggleKey.classList.toggle('map-control-toggleKey-open')
         }
         mapContainer.classList.toggle('map-container-full')
-        mapContainer.classList.toggle('map-container-small')
+        if (requestFullScreen) {
+            requestFullScreen.call(mapContainer)
+        }
         // Update extent and redraw map
         if (!lonLat.length) {
             map.getView().fit(extent, map.getSize())
         }
+
         map.updateSize()
     })
 

@@ -52,6 +52,7 @@ $path: "/public/";
 .map figcaption {
   @include core-16;
   margin-top:0.5em;
+  margin-bottom:2em;
 }
 
 // Openlayers controls: zoom
@@ -59,12 +60,12 @@ $path: "/public/";
 .ol-zoom,
 .ol-zoom-reset {
   position:absolute;
-  left:10px;
-  top:40px;
+  right:10px;
+  bottom:10px;
   z-index:1;
 }
 .ol-zoom-reset {
-  top:10px;
+  bottom:70px;
 }
 .ol-zoom-in,
 .ol-zoom-out,
