@@ -79,39 +79,6 @@ $path: "/public/";
     }
 }
 
-/*
-.heading-primary-notice {
-    @include media(tablet) {
-        display:block;
-        max-width:66.66%;
-        padding-right:30px;
-        box-sizing:border-box;
-    }
-}
-
-.heading-secondary-notice {
-    @extend .heading-secondary;
-    position:relative;
-    padding-left:66px;
-    margin-bottom:1.25em;
-    @include media(tablet) {
-        margin-bottom:1.5em;
-        padding-left:76px;
-    }
-    .icon {
-        position:absolute;
-        left:15px;
-        top:50%;
-    }
-
-    background-color:#e3000f;
-    margin-top:-1.11em;
-    color:white !important;
-    padding-top:25px !important;
-    padding-bottom:25px !important;
-}
-*/
-
 .icon-warning {
     width:32px;
     height:32px;

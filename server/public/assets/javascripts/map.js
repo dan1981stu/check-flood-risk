@@ -10,9 +10,6 @@ var mapContainer = document.querySelector('.map-container')
 var key = document.createElement('div')
 key.classList.add('key')
 
-var keyContainer = document.createElement('div')
-keyContainer.classList.add('key-container')
-
 var toggleSize = document.createElement('button')
 toggleSize.appendChild(document.createTextNode('Full screen'))
 toggleSize.setAttribute('title','Full screen')
@@ -34,10 +31,8 @@ copyright.classList.add('key-copyright')
 keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
 keyCopy.appendChild(copyright)
 
-keyContainer.appendChild(toggleKey)
-keyContainer.appendChild(keyCopy)
-
-key.appendChild(keyContainer)
+key.appendChild(toggleKey)
+key.appendChild(keyCopy)
 
 mapContainer.appendChild(toggleSize)
 mapContainer.appendChild(key)
@@ -368,9 +363,8 @@ var init = function() {
 
         var requestFullScreen = mapContainer.requestFullscreen || mapContainer.msRequestFullscreen || mapContainer.mozRequestFullScreen || mapContainer.webkitRequestFullscreen
 
-        if (keyCopy.classList.contains('key-copy-open')) {
-            keyCopy.classList.remove('key-copy-open')
-            toggleKey.classList.toggle('map-control-toggleKey-open')
+        if (key.classList.contains('key-open')) {
+            key.classList.remove('key-open')
         }
         mapContainer.classList.toggle('map-container-full')
         if (requestFullScreen) {
@@ -387,12 +381,7 @@ var init = function() {
     // Toggle key event
     toggleKey.addEventListener('click', function(e) {
         e.preventDefault()
-        if (mapContainer.classList.contains('map-container-small')) {
-            mapContainer.classList.remove('map-container-small')
-            mapContainer.classList.add('map-container-full')
-        }
-        toggleKey.classList.toggle('map-control-toggleKey-open')
-        keyCopy.classList.toggle('key-copy-open')
+        key.classList.toggle('key-open')
         // Update extent and redraw map
         if (!lonLat.length) {
             map.getView().fit(extent, map.getSize())

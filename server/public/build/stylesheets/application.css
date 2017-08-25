@@ -2405,12 +2405,12 @@ table.select-areas th {
 }
 
 .map {
-  padding-top: 15px;
+  margin-top: -1px;
 }
 
 @media (min-width: 641px) {
   .map {
-    padding-top: 0;
+    margin-top: 0;
     padding-bottom: 15px;
   }
 }
@@ -2539,38 +2539,16 @@ table.select-areas th {
   -webkit-appearance: none;
 }
 
-.key-container {
-  width: 100%;
-}
-
-@media (min-width: 641px) {
-  .key-container {
-    padding: 0 10px;
-    max-width: 20em;
-  }
-}
-
-.key {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  width: 100%;
-}
-
-@media (min-width: 641px) {
-  .key {
-    bottom: 10px;
-  }
-}
-
 button.map-control-toggleKey {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
   line-height: 1.14286;
-  position: relative;
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  top: 10px;
   text-align: left;
   border: 0;
   color: #005ea5;
@@ -2582,7 +2560,6 @@ button.map-control-toggleKey {
   background-position: 38px bottom;
   cursor: pointer;
   -webkit-appearance: none;
-  margin-left: 10px;
 }
 
 @media (min-width: 641px) {
@@ -2590,16 +2567,6 @@ button.map-control-toggleKey {
     font-size: 16px;
     line-height: 1.25;
   }
-}
-
-@media (min-width: 641px) {
-  button.map-control-toggleKey {
-    margin-left: 0;
-  }
-}
-
-button.map-control-toggleKey-open {
-  background-position: 38px top;
 }
 
 .key-copyright {
@@ -2621,13 +2588,29 @@ button.map-control-toggleKey-open {
 
 .key-copy {
   display: none;
-  clear: both;
-  background-color: white;
   padding: 15px;
+  overflow: hidden;
 }
 
-.key-copy-open {
+.key-open {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0px;
+  bottom: 0px;
+  width: 70%;
+  max-width: 20em;
+  background-color: white;
+}
+
+.key-open .key-copy {
   display: block;
+}
+
+.key-open button.map-control-toggleKey {
+  left: auto;
+  right: 10px;
+  background-position: 38px top;
 }
 
 .rainfall {
@@ -2856,38 +2839,6 @@ a.subsection-header:focus .font-small {
   top: 50%;
 }
 
-/*
-.heading-primary-notice {
-    @include media(tablet) {
-        display:block;
-        max-width:66.66%;
-        padding-right:30px;
-        box-sizing:border-box;
-    }
-}
-
-.heading-secondary-notice {
-    @extend .heading-secondary;
-    position:relative;
-    padding-left:66px;
-    margin-bottom:1.25em;
-    @include media(tablet) {
-        margin-bottom:1.5em;
-        padding-left:76px;
-    }
-    .icon {
-        position:absolute;
-        left:15px;
-        top:50%;
-    }
-
-    background-color:#e3000f;
-    margin-top:-1.11em;
-    color:white !important;
-    padding-top:25px !important;
-    padding-bottom:25px !important;
-}
-*/
 .icon-warning {
   width: 32px;
   height: 32px;

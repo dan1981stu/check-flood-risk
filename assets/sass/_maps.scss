@@ -5,9 +5,9 @@ $path: "/public/";
 }
 
 .map {
-  padding-top:15px;
+  margin-top:-1px;
   @include media(tablet) {
-    padding-top:0;
+    margin-top:0;
     padding-bottom:15px;
   }
 }
@@ -125,29 +125,12 @@ $path: "/public/";
 
 // Map key
 
-.key-container {
-  width:100%;
-  @include media(tablet) {
-    padding:0 10px;
-    max-width:20em;
-  }
-}
-
-// Map controls key button
-
-.key {
-  position:absolute;
-  left:0;
-  bottom:0;
-  z-index:1;
-  width:100%;
-  @include media(tablet) {
-    bottom:10px;
-  }
-}
 button.map-control-toggleKey {
   @include core-16;
-  position: relative;
+  position: absolute;
+  z-index:2;
+  left:10px;
+  top:10px;
   text-align:left;
   border:0;
   color:$link-colour;
@@ -159,13 +142,6 @@ button.map-control-toggleKey {
   background-position: 38px bottom;
   cursor:pointer;
   -webkit-appearance:none;
-  margin-left:10px;
-  @include media(tablet) {
-    margin-left:0;
-  }
-}
-button.map-control-toggleKey-open {
-  background-position: 38px top;  
 }
 .key-copyright {
   @include core-16;
@@ -177,10 +153,24 @@ button.map-control-toggleKey-open {
 
 .key-copy {
   display:none;
-  clear:both;
-  background-color:white;
   padding:15px;
+  overflow:hidden;
 }
-.key-copy-open {
+.key-open {
+  position:absolute;
+  z-index:1;
+  left:0;
+  top:0px;
+  bottom:0px;
+  width:70%;
+  max-width:20em;
+  background-color:white;
+}
+.key-open .key-copy {
   display:block;
+}
+.key-open button.map-control-toggleKey {
+  left:auto;
+  right:10px;
+  background-position: 38px top;  
 }
