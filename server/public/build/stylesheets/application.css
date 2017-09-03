@@ -2539,34 +2539,53 @@ table.select-areas th {
   -webkit-appearance: none;
 }
 
-button.map-control-toggleKey {
+.map-control-toggleKey {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
   line-height: 1.14286;
   position: absolute;
+  background: white;
   z-index: 2;
   left: 10px;
   top: 10px;
   text-align: left;
   border: 0;
   color: #005ea5;
-  height: 30px;
-  width: 55px;
-  padding: 0 8px;
-  background: white url("/public/map-legend-2x.png") no-repeat;
-  background-size: 10px 60px;
-  background-position: 38px bottom;
   cursor: pointer;
   -webkit-appearance: none;
+  padding-right: 23px;
 }
 
 @media (min-width: 641px) {
-  button.map-control-toggleKey {
+  .map-control-toggleKey {
     font-size: 16px;
     line-height: 1.25;
   }
+}
+
+.map-control-toggleKey:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  margin-top: -5px;
+  right: 5px;
+  width: 13px;
+  height: 10px;
+  background: white url("/public/map-legend-2x.png") no-repeat;
+  background-size: 100%;
+  background-position: top center;
+}
+
+.key-open button.map-control-toggleKey {
+  right: 10px;
+  left: auto;
+  text-indent: -5000px;
+}
+
+.key-open button.map-control-toggleKey:after {
+  background-position: bottom center;
 }
 
 .key-copyright {
@@ -2605,12 +2624,6 @@ button.map-control-toggleKey {
 
 .key-open .key-copy {
   display: block;
-}
-
-.key-open button.map-control-toggleKey {
-  left: auto;
-  right: 10px;
-  background-position: 38px top;
 }
 
 .rainfall {

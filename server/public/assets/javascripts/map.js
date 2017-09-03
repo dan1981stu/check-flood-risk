@@ -361,15 +361,10 @@ var init = function() {
     toggleSize.addEventListener('click', function(e) {
         e.preventDefault()
 
-        var requestFullScreen = mapContainer.requestFullscreen || mapContainer.msRequestFullscreen || mapContainer.mozRequestFullScreen || mapContainer.webkitRequestFullscreen
-
         if (key.classList.contains('key-open')) {
             key.classList.remove('key-open')
         }
         mapContainer.classList.toggle('map-container-full')
-        if (requestFullScreen) {
-            requestFullScreen.call(mapContainer)
-        }
         // Update extent and redraw map
         if (!lonLat.length) {
             map.getView().fit(extent, map.getSize())
