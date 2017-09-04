@@ -36,17 +36,11 @@ $path: "/public/";
   }
 }
 
-.map-container-full {
-  background-color: #fff;
-  height:100%;
-  width:100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  z-index: 1;
-  border: none
+.map-container:-moz-full-screen,
+.map-container:-webkit-full-screen,
+.map-container:-ms-fullscreen,
+.map-container:fullscreen {
+  height:100% !important;
 }
 
 .map figcaption {
@@ -57,24 +51,17 @@ $path: "/public/";
 
 // Openlayers controls: zoom
 
-.ol-zoom,
-.ol-zoom-reset {
+.ol-zoom {
   position:absolute;
   right:10px;
   bottom:10px;
   z-index:1;
 }
-.ol-zoom-reset {
-  bottom:70px;
-}
 .ol-zoom-in,
 .ol-zoom-out,
 .ol-zoom-reset {
   border:0;
-  display:block;
   background-color: $link-colour;
-  height: 30px;
-  width: 30px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
@@ -82,37 +69,56 @@ $path: "/public/";
   background-size:100%;
   cursor:pointer;
   -webkit-appearance:none;
+  height: 40px;
+  width: 40px;
+}
+.ol-zoom-in,
+.ol-zoom-out {
+  position: relative;
+  display: none;
+  @include media(tablet) {
+    display:block;
+    height: 30px;
+    width: 30px;
+  }
 }
 .ol-zoom-in {
-  position: relative;
   background-position:0% 25%;
 }
 .ol-zoom-out {
-  position: relative;
   background-position:0% 50%;
 }
 .ol-zoom-reset {
   position: absolute;
+  right:10px;
+  bottom:10px;
   background-position:0% 0%;
+  @include media(tablet) {
+    height: 30px;
+    width: 30px;
+    bottom:70px;
+  }
 }
 .ol-zoom-in:hover,
 .ol-zoom-out:hover,
 .ol-zoom-reset:hover,
-.map-control-toggleSize:hover {
+.ol-full-screen-false:hover,
+.ol-full-screen-true:hover {
   background-color:$focus-colour;
 }
 
-// Map control toggleSize
+// Map control fullscreen
 
-.map-control-toggleSize {
+.ol-full-screen-false,
+.ol-full-screen-true {
   position:absolute;
   right:10px;
   top:10px;
   z-index:1;
   border:0;
   background-color: $link-colour;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
@@ -121,6 +127,10 @@ $path: "/public/";
   background-position:0 75%;
   cursor:pointer;
   -webkit-appearance:none;
+  @include media(tablet) {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 // Map key
@@ -137,7 +147,11 @@ $path: "/public/";
   color:$link-colour;
   cursor:pointer;
   -webkit-appearance:none;
-  padding-right:23px;
+  padding: 0px 22px 0px 6px;
+  height:40px;
+  @include media(tablet) {
+    height:30px;
+  }
 }
 .map-control-toggleKey:after {
   content: '';
@@ -151,13 +165,25 @@ $path: "/public/";
   background-size:100%;
   background-position:top center;  
 }
-.key-open button.map-control-toggleKey {
-  right: 10px;
+.key-open .map-control-toggleKey {
+  right: 0;
   left: auto;
   text-indent:-5000px;
+  padding: 0;
+  width:40px;
+  height:40px;
+  @include media(tablet) {
+    right: 6px;
+    height:30px;
+    width:30px;
+  }
 }
 .key-open button.map-control-toggleKey:after {
+  right:14px;
   background-position:bottom center; 
+  @include media(tablet) {
+    right:9px;
+  }
 } 
 
 // Map copyright statement
