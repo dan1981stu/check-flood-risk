@@ -1,18 +1,6 @@
 module.exports = [
 	{
 		method: 'GET',
-		path: '/long-term',
-		config: {
-			handler: function (request, reply) {
-				return reply.view('long-term/main', {
-					'location': request.query.location,
-					'pageTitle' : 'Long term flood risk - GOV.UK'
-				})
-			}
-		}
-	},
-	{
-		method: 'GET',
 		path: '/long-term/3-hewitt-street-hx7-5nr',
 		config: {
 			handler: function (request, reply) {

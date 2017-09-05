@@ -2439,17 +2439,11 @@ table.select-areas th {
   }
 }
 
-.map-container-full {
-  background-color: #fff;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  z-index: 1;
-  border: none;
+.map-container:-moz-full-screen,
+.map-container:-webkit-full-screen,
+.map-container:-ms-fullscreen,
+.map-container:fullscreen {
+  height: 100% !important;
 }
 
 .map figcaption {
@@ -2469,26 +2463,18 @@ table.select-areas th {
   }
 }
 
-.ol-zoom,
-.ol-zoom-reset {
+.ol-zoom {
   position: absolute;
   right: 10px;
   bottom: 10px;
   z-index: 1;
 }
 
-.ol-zoom-reset {
-  bottom: 70px;
-}
-
 .ol-zoom-in,
 .ol-zoom-out,
 .ol-zoom-reset {
   border: 0;
-  display: block;
   background-color: #005ea5;
-  height: 30px;
-  width: 30px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
@@ -2496,39 +2482,74 @@ table.select-areas th {
   background-size: 100%;
   cursor: pointer;
   -webkit-appearance: none;
+  height: 40px;
+  width: 40px;
+}
+
+.ol-zoom-in,
+.ol-zoom-out {
+  position: relative;
+  display: none;
+}
+
+@media (min-width: 641px) {
+  .ol-zoom-in,
+  .ol-zoom-out {
+    display: block;
+    height: 30px;
+    width: 30px;
+  }
 }
 
 .ol-zoom-in {
-  position: relative;
   background-position: 0% 25%;
 }
 
 .ol-zoom-out {
-  position: relative;
   background-position: 0% 50%;
 }
 
 .ol-zoom-reset {
   position: absolute;
+  right: 10px;
+  bottom: 10px;
   background-position: 0% 0%;
+}
+
+@media (min-width: 641px) {
+  .ol-zoom-reset {
+    height: 30px;
+    width: 30px;
+    bottom: 70px;
+  }
 }
 
 .ol-zoom-in:hover,
 .ol-zoom-out:hover,
 .ol-zoom-reset:hover,
-.map-control-toggleSize:hover {
+.ol-full-screen-false:hover,
+.ol-full-screen-true:hover {
   background-color: #ffbf47;
 }
 
-.map-control-toggleSize {
+.ol-zoom-in:focus,
+.ol-zoom-out:focus,
+.ol-zoom-reset:focus,
+.ol-full-screen-false:focus,
+.ol-full-screen-true:focus {
+  z-index: 2;
+}
+
+.ol-full-screen-false,
+.ol-full-screen-true {
   position: absolute;
   right: 10px;
   top: 10px;
   z-index: 1;
   border: 0;
   background-color: #005ea5;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
@@ -2537,6 +2558,14 @@ table.select-areas th {
   background-position: 0 75%;
   cursor: pointer;
   -webkit-appearance: none;
+}
+
+@media (min-width: 641px) {
+  .ol-full-screen-false,
+  .ol-full-screen-true {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 .map-control-toggleKey {
@@ -2555,13 +2584,20 @@ table.select-areas th {
   color: #005ea5;
   cursor: pointer;
   -webkit-appearance: none;
-  padding-right: 23px;
+  padding: 0px 22px 0px 6px;
+  height: 40px;
 }
 
 @media (min-width: 641px) {
   .map-control-toggleKey {
     font-size: 16px;
     line-height: 1.25;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-control-toggleKey {
+    height: 30px;
   }
 }
 
@@ -2578,14 +2614,32 @@ table.select-areas th {
   background-position: top center;
 }
 
-.key-open button.map-control-toggleKey {
-  right: 10px;
+.key-open .map-control-toggleKey {
+  right: 0;
   left: auto;
   text-indent: -5000px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 641px) {
+  .key-open .map-control-toggleKey {
+    right: 6px;
+    height: 30px;
+    width: 30px;
+  }
 }
 
 .key-open button.map-control-toggleKey:after {
+  right: 14px;
   background-position: bottom center;
+}
+
+@media (min-width: 641px) {
+  .key-open button.map-control-toggleKey:after {
+    right: 9px;
+  }
 }
 
 .key-copyright {

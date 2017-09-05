@@ -19,14 +19,14 @@ module.exports = [
 	// Check a propeties long term flood risk - Service start page (GOV.UK)
 	{
 		method: 'GET',
-		path: '/check-a-properties-flood-risk',
+		path: '/check-a-propertys-flood-risk',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
-				return reply.view('gov-uk/check-a-properties-flood-risk', {
+				return reply.view('gov-uk/check-a-propertys-flood-risk', {
 					'model' : { 'scenario' : scenario },
-					'pageTitle' : 'Check a properties long term flood risk - GOV.UK',
-					'serviceName' : 'Check a properties long term flood risk'
+					'pageTitle' : 'Check a property&apos;s long term flood risk - GOV.UK',
+					'serviceName' : 'Check a property&apos;s long term flood risk'
 				})
 			}
 		}

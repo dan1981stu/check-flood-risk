@@ -10,12 +10,6 @@ var mapContainer = document.querySelector('.map-container')
 var key = document.createElement('div')
 key.classList.add('key')
 
-var toggleSize = document.createElement('button')
-toggleSize.appendChild(document.createTextNode('Full screen'))
-toggleSize.setAttribute('title','Full screen')
-toggleSize.classList.add('map-control','map-control-toggleSize')
-mapContainer.appendChild(toggleSize)
-
 var toggleKey = document.createElement('button')
 toggleKey.appendChild(document.createTextNode('Key'))
 toggleKey.setAttribute('title','Show key')
@@ -34,7 +28,6 @@ keyCopy.appendChild(copyright)
 key.appendChild(toggleKey)
 key.appendChild(keyCopy)
 
-mapContainer.appendChild(toggleSize)
 mapContainer.appendChild(key)
 
 // Reference require to redraw map
@@ -230,7 +223,25 @@ var init = function() {
         })
     })
 
+    // Zoom buttons
+
+    var zoomElement = document.createElement('button')
+    zoomElement.appendChild(document.createTextNode('Zoom'))
+    zoomElement.className = 'ol-zoom'
+    var zoom = new ol.control.Zoom({
+        element: zoomElement
+    })
+
+    // Fullscreen button
+
+    var fullScreenElement = document.createElement('button')
+    fullScreenElement.appendChild(document.createTextNode('Full screen'))
+    var fullScreen = new ol.control.FullScreen({
+        element: fullScreenElement
+    })
+
     // Zoom reset button
+
     var zoomResetElement = document.createElement('button')
     zoomResetElement.appendChild(document.createTextNode('Zoom reset'))
     zoomResetElement.className = 'ol-zoom-reset'
@@ -239,9 +250,30 @@ var init = function() {
         element: zoomResetElement
     })
 
+    // Interactions
+
+    var interactions = ol.interaction.defaults({
+        altShiftDragRotate:false, 
+        pinchRotate:false
+    })
+
+    // Add and remove controls
+
+    var controls = ol.control.defaults({
+        zoom: false,
+        rotate: false,
+        attribution: false
+    }).extend([
+        fullScreen,
+        zoomReset,
+        zoom
+    ])
+
     // Render map
     map = new ol.Map({
         target: 'map-container',
+        interactions: interactions,
+        controls: controls,
         // Layer order:
         // 1. Background map
         // 2. All target areas coloured accordingley
@@ -252,9 +284,6 @@ var init = function() {
         layers: [tile, targetAreas, tileSelected, targetAreasIntersecting, levels],
         view: view
     })
-
-    // Add zoom reset control
-    map.addControl(zoomReset)
 
     //
     // Map events
@@ -356,22 +385,6 @@ var init = function() {
         }
         */
     });
-
-    // Toggle size event
-    toggleSize.addEventListener('click', function(e) {
-        e.preventDefault()
-
-        if (key.classList.contains('key-open')) {
-            key.classList.remove('key-open')
-        }
-        mapContainer.classList.toggle('map-container-full')
-        // Update extent and redraw map
-        if (!lonLat.length) {
-            map.getView().fit(extent, map.getSize())
-        }
-
-        map.updateSize()
-    })
 
     // Toggle key event
     toggleKey.addEventListener('click', function(e) {
