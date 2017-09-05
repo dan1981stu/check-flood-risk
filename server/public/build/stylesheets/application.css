@@ -2427,10 +2427,8 @@ table.select-areas th {
   border: 1px solid #bfc1c3;
 }
 
-@media (min-width: 641px) {
-  .map-container-medium {
-    height: 438px;
-  }
+.map-container-large {
+  height: 275px;
 }
 
 @media (min-width: 641px) {
@@ -2439,11 +2437,11 @@ table.select-areas th {
   }
 }
 
-.map-container:-moz-full-screen,
-.map-container:-webkit-full-screen,
-.map-container:-ms-fullscreen,
-.map-container:fullscreen {
-  height: 100% !important;
+.map-container-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .map figcaption {
@@ -2467,6 +2465,7 @@ table.select-areas th {
   position: absolute;
   right: 10px;
   bottom: 10px;
+  height: 60px;
   z-index: 1;
 }
 
@@ -2474,14 +2473,12 @@ table.select-areas th {
 .ol-zoom-out,
 .ol-zoom-reset {
   border: 0;
-  background-color: #005ea5;
-  overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
-  background-image: url("/public/map-controls-2x.png");
+  -webkit-appearance: none;
+  background: #005ea5 url("/public/map-controls-2x.png") no-repeat;
   background-size: 100%;
   cursor: pointer;
-  -webkit-appearance: none;
   height: 40px;
   width: 40px;
 }
@@ -2547,17 +2544,12 @@ table.select-areas th {
   top: 10px;
   z-index: 1;
   border: 0;
-  background-color: #005ea5;
   height: 40px;
   width: 40px;
-  overflow: hidden;
   text-indent: -5000px;
-  white-space: nowrap;
-  background-image: url("/public/map-controls-2x.png");
+  background: #005ea5 url("/public/map-controls-2x.png") no-repeat 0 75%;
   background-size: 100%;
-  background-position: 0 75%;
   cursor: pointer;
-  -webkit-appearance: none;
 }
 
 @media (min-width: 641px) {
@@ -2568,7 +2560,7 @@ table.select-areas th {
   }
 }
 
-.map-control-toggleKey {
+.map-control-key {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
@@ -2589,19 +2581,19 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .map-control-toggleKey {
+  .map-control-key {
     font-size: 16px;
     line-height: 1.25;
   }
 }
 
 @media (min-width: 641px) {
-  .map-control-toggleKey {
+  .map-control-key {
     height: 30px;
   }
 }
 
-.map-control-toggleKey:after {
+.map-control-key:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -2614,7 +2606,7 @@ table.select-areas th {
   background-position: top center;
 }
 
-.key-open .map-control-toggleKey {
+.map-key-open .map-control-key {
   right: 0;
   left: auto;
   text-indent: -5000px;
@@ -2624,50 +2616,52 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .key-open .map-control-toggleKey {
+  .map-key-open .map-control-key {
     right: 6px;
     height: 30px;
     width: 30px;
   }
 }
 
-.key-open button.map-control-toggleKey:after {
+.map-key-open .map-control-key:after {
   right: 14px;
   background-position: bottom center;
 }
 
 @media (min-width: 641px) {
-  .key-open button.map-control-toggleKey:after {
+  .map-key-open .map-control-key:after {
     right: 9px;
   }
 }
 
-.key-copyright {
+.map-key-copyright {
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 14px;
   line-height: 1.14286;
-  display: block;
-  margin-top: 1em;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 100%;
 }
 
 @media (min-width: 641px) {
-  .key-copyright {
+  .map-key-copyright {
     font-size: 16px;
     line-height: 1.25;
   }
 }
 
-.key-copy {
+.map-key-copy {
   display: none;
   padding: 15px;
   overflow: hidden;
 }
 
-.key-open {
+.map-key-open {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0px;
   bottom: 0px;
@@ -2676,7 +2670,7 @@ table.select-areas th {
   background-color: white;
 }
 
-.key-open .key-copy {
+.map-key-open .map-key-copy {
   display: block;
 }
 

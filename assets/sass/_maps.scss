@@ -24,23 +24,18 @@ $path: "/public/";
   border:1px solid $border-colour;
 }
 
-.map-container-medium {
-  @include media(tablet) {
-    height:438px;
-  }
-}
-
 .map-container-large {
+  height:275px;
   @include media(tablet) {
     height:576px;
   }
 }
 
-.map-container:-moz-full-screen,
-.map-container:-webkit-full-screen,
-.map-container:-ms-fullscreen,
-.map-container:fullscreen {
-  height:100% !important;
+.map-container-inner {
+  position: relative;
+  z-index:1;
+  width:100%;
+  height:100%;
 }
 
 .map figcaption {
@@ -55,20 +50,19 @@ $path: "/public/";
   position:absolute;
   right:10px;
   bottom:10px;
+  height:60px;
   z-index:1;
 }
 .ol-zoom-in,
 .ol-zoom-out,
 .ol-zoom-reset {
   border:0;
-  background-color: $link-colour;
-  overflow: hidden;
   text-indent: -5000px;
   white-space: nowrap;
-  background-image:url('#{$path}map-controls-2x.png');
+  -webkit-appearance:none;
+  background:$link-colour url('#{$path}map-controls-2x.png') no-repeat;
   background-size:100%;
   cursor:pointer;
-  -webkit-appearance:none;
   height: 40px;
   width: 40px;
 }
@@ -123,17 +117,12 @@ $path: "/public/";
   top:10px;
   z-index:1;
   border:0;
-  background-color: $link-colour;
   height: 40px;
   width: 40px;
-  overflow: hidden;
   text-indent: -5000px;
-  white-space: nowrap;
-  background-image:url('#{$path}map-controls-2x.png');
+  background:$link-colour url('#{$path}map-controls-2x.png') no-repeat 0 75%;
   background-size:100%;
-  background-position:0 75%;
   cursor:pointer;
-  -webkit-appearance:none;
   @include media(tablet) {
     height: 30px;
     width: 30px;
@@ -142,7 +131,7 @@ $path: "/public/";
 
 // Map key
 
-.map-control-toggleKey {
+.map-control-key {
   @include core-16;
   position: absolute;
   background:white;
@@ -160,7 +149,7 @@ $path: "/public/";
     height:30px;
   }
 }
-.map-control-toggleKey:after {
+.map-control-key:after {
   content: '';
   position: absolute;
   top:50%;
@@ -172,7 +161,7 @@ $path: "/public/";
   background-size:100%;
   background-position:top center;  
 }
-.key-open .map-control-toggleKey {
+.map-key-open .map-control-key {
   right: 0;
   left: auto;
   text-indent:-5000px;
@@ -185,7 +174,7 @@ $path: "/public/";
     width:30px;
   }
 }
-.key-open button.map-control-toggleKey:after {
+.map-key-open .map-control-key:after {
   right:14px;
   background-position:bottom center; 
   @include media(tablet) {
@@ -195,22 +184,24 @@ $path: "/public/";
 
 // Map copyright statement
 
-.key-copyright {
+.map-key-copyright {
   @include core-16;
-  display:block;
-  margin-top:1em;
+  position: absolute;
+  bottom:10px;
+  left: 10px;
+  width:100%;
 }
 
 // Map key copy
 
-.key-copy {
+.map-key-copy {
   display:none;
   padding:15px;
   overflow:hidden;
 }
-.key-open {
+.map-key-open {
   position:absolute;
-  z-index:1;
+  z-index:2;
   left:0;
   top:0px;
   bottom:0px;
@@ -218,6 +209,6 @@ $path: "/public/";
   max-width:20em;
   background-color:white;
 }
-.key-open .key-copy {
+.map-key-open .map-key-copy {
   display:block;
 }

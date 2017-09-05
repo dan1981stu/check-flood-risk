@@ -1,34 +1,39 @@
 
 // Preset values
+
 var defaultBoundingBox = [[-5.72,49.96],[1.77,55.81]]
 var minIconResolution = 300
 
-// Custom controls
+// Setup fullscreen container and key elements
 
 var mapContainer = document.querySelector('.map-container')
+var mapContainerInner = document.createElement('div')
+mapContainerInner.classList.add('map-container-inner')
+mapContainerInner.id = 'map-container-inner'
 
 var key = document.createElement('div')
-key.classList.add('key')
+key.classList.add('map-key')
 
-var toggleKey = document.createElement('button')
-toggleKey.appendChild(document.createTextNode('Key'))
-toggleKey.setAttribute('title','Show key')
-toggleKey.classList.add('map-control','map-control-toggleKey')
+var keyToggle = document.createElement('button')
+keyToggle.appendChild(document.createTextNode('Key'))
+keyToggle.setAttribute('title','Show key')
+keyToggle.classList.add('map-control','map-control-key')
 
 var keyCopy = document.createElement('div')
-keyCopy.classList.add('key-copy')
+keyCopy.classList.add('map-key-copy')
 
 var copyright = document.createElement('span')
 copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-copyright.classList.add('key-copyright')
+copyright.classList.add('map-key-copyright')
 
 keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
 keyCopy.appendChild(copyright)
 
-key.appendChild(toggleKey)
+key.appendChild(keyToggle)
 key.appendChild(keyCopy)
 
-mapContainer.appendChild(key)
+mapContainerInner.appendChild(key)
+mapContainer.appendChild(mapContainerInner)
 
 // Reference require to redraw map
 var map, extent
@@ -271,7 +276,7 @@ var init = function() {
 
     // Render map
     map = new ol.Map({
-        target: 'map-container',
+        target: 'map-container-inner',
         interactions: interactions,
         controls: controls,
         // Layer order:
@@ -387,15 +392,26 @@ var init = function() {
     });
 
     // Toggle key event
-    toggleKey.addEventListener('click', function(e) {
+
+    keyToggle.addEventListener('click', function(e) {
         e.preventDefault()
-        key.classList.toggle('key-open')
+        key.classList.toggle('map-key-open')
+    })
+
+    // Full screen event
+
+    var fullScreenHandler = function () {
         // Update extent and redraw map
         if (!lonLat.length) {
             map.getView().fit(extent, map.getSize())
         }
         map.updateSize()
-    })
+    }
+
+    document.addEventListener('fullscreenchange', fullScreenHandler)
+    document.addEventListener('webkitfullscreenchange', fullScreenHandler)
+    document.addEventListener('mozfullscreenchange', fullScreenHandler)
+    document.addEventListener('MSFullscreenChange', fullScreenHandler)
 
 }
 
