@@ -1,6 +1,22 @@
 module.exports = [
 
-	// Check flood risk - Service start page (GOV.UK)
+	// Flooding and extreme weather - Service start page (GOV.UK)
+	{
+		method: 'GET',
+		path: '/flooding-extreme-weather',
+		config: {
+			handler: function (request, reply) {
+				const scenario = request.query.s ? request.query.s : 'a'
+				return reply.view('gov-uk/flooding-extreme-weather', {
+					'model' : { 'scenario' : scenario },
+					'pageTitle' : 'Flooding and extreme weather - GOV.UK',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Check flood risk - Task start page (GOV.UK)
 	{
 		method: 'GET',
 		path: '/check-flood-risk',
@@ -16,7 +32,7 @@ module.exports = [
 		}
 	},
 
-	// Check a propeties long term flood risk - Service start page (GOV.UK)
+	// Check a propeties long term flood risk - Task start page (GOV.UK)
 	{
 		method: 'GET',
 		path: '/check-a-propertys-flood-risk',
@@ -32,7 +48,7 @@ module.exports = [
 		}
 	},
 
-	// Find flood risk for planning - Service start page (GOV.UK)
+	// Find flood risk for planning - Task start page (GOV.UK)
 	{
 		method: 'GET',
 		path: '/find-flood-risk-for-planning',
@@ -48,7 +64,7 @@ module.exports = [
 		}
 	},
 
-	// Get flood warnings - Service start page (GOV.UK)
+	// Get flood warnings - Task start page (GOV.UK)
 	{
 		method: 'GET',
 		path: '/get-flood-warnings',
@@ -64,7 +80,7 @@ module.exports = [
 		}
 	},
 
-	// Report a flood - Service start page (GOV.UK)
+	// Report a flood - Task start page (GOV.UK)
 	{
 		method: 'GET',
 		path: '/report-a-flood',
@@ -75,6 +91,48 @@ module.exports = [
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Report a flood - GOV.UK',
 					'serviceName' : 'Report a flood'
+				})
+			}
+		}
+	},
+
+	// Check if you need permission to do flood work
+	{
+		method: 'GET',
+		path: '/permission',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/check-permission-to-do-flood-work', {
+					'pageTitle' : 'Check permission to do flood work - GOV.UK',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Find sandbags
+	{
+		method: 'GET',
+		path: '/sandbags',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/find-sandbags', {
+					'pageTitle' : 'Find out where to get sandbags - GOV.UK',
+					'serviceName' : 'Find sandbags'
+				})
+			}
+		}
+	},
+
+	// Check flood history
+	{
+		method: 'GET',
+		path: '/check-flood-history',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/flood-history', {
+					'pageTitle' : 'Check a property&apos;s flood history - GOV.UK',
+					'serviceName' : 'Check a property&apos;s flood history'
 				})
 			}
 		}
