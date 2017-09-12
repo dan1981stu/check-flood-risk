@@ -99,7 +99,7 @@ module.exports = [
 	// Check if you need permission to do flood work
 	{
 		method: 'GET',
-		path: '/permission',
+		path: '/check-permission-to-do-flood-work',
 		config: {
 			handler: function (request, reply) {
 				return reply.view('gov-uk/check-permission-to-do-flood-work', {
