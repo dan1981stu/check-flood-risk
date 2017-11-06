@@ -26,7 +26,7 @@ module.exports = [
 				return reply.view('gov-uk/check-flood-risk', {
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Check flood risk - GOV.UK',
-					'serviceName' : 'Check flood risk'
+					'serviceName' : ''
 				})
 			}
 		}
@@ -41,8 +41,8 @@ module.exports = [
 				const scenario = request.query.s ? request.query.s : 'a'
 				return reply.view('gov-uk/check-a-propertys-flood-risk', {
 					'model' : { 'scenario' : scenario },
-					'pageTitle' : 'Check a property&apos;s long term flood risk - GOV.UK',
-					'serviceName' : 'Check a property&apos;s long term flood risk'
+					'pageTitle' : 'Check a property&#39;s long term flood risk - GOV.UK',
+					'serviceName' : ''
 				})
 			}
 		}
@@ -51,14 +51,14 @@ module.exports = [
 	// Find flood risk for planning - Task start page (GOV.UK)
 	{
 		method: 'GET',
-		path: '/find-flood-risk-for-planning',
+		path: '/check-flood-zone',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
-				return reply.view('gov-uk/find-flood-risk-for-planning', {
+				return reply.view('gov-uk/check-flood-zone', {
 					'model' : { 'scenario' : scenario },
-					'pageTitle' : 'Find flood risk for planning - GOV.UK',
-					'serviceName' : 'Find flood risk for planning'
+					'pageTitle' : 'Flood risk assessment for planning applications - GOV.UK',
+					'serviceName' : ''
 				})
 			}
 		}
@@ -74,7 +74,7 @@ module.exports = [
 				return reply.view('gov-uk/get-flood-warnings', {
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Get flood warnings - GOV.UK',
-					'serviceName' : 'Get flood warnings'
+					'serviceName' : ''
 				})
 			}
 		}
@@ -90,7 +90,7 @@ module.exports = [
 				return reply.view('gov-uk/report-a-flood', {
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Report a flood - GOV.UK',
-					'serviceName' : 'Report a flood'
+					'serviceName' : ''
 				})
 			}
 		}

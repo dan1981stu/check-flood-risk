@@ -31,6 +31,9 @@
     <meta property="og:image" content="{{{ assetPath }}}images/opengraph-image.png?0.22.2">
 
     {{> head }}
+
+    {{{_sections.head}}}
+
   </head>
 
   <body class="{{ bodyClasses }}">
@@ -50,27 +53,19 @@
       
     </div>
 
-    
     <header role="banner" id="global-header" class="{{{ headerClass }}}">
-      <div class="header-wrapper">
-        <div class="header-global">
-          <div class="header-logo">
-            <a href="{{{ homepageUrl }}}" title="{{ logoLinkTitle }}" id="logo" class="content">
-              <img src="{{{ assetPath }}}images/gov.uk_logotype_crown_invert_trans.png?0.22.2" width="36" height="32" alt=""> {{{ globalHeaderText }}}
-            </a>
-          </div>
-          {{> insideHeader }}
-        </div>
-        {{> propositionHeader }}
-      </div>
+      {{{_sections.header}}}
     </header>
-    
 
     {{> afterHeader }}
 
     <div id="global-header-bar"></div>
 
-    <div id="content" class="wrapper">			{{> beforeContent }}				{{{content}}}			{{> afterContent }}		</div>
+    <div id="content" class="wrapper">
+			{{> beforeContent }}
+				{{{content}}}
+			{{> afterContent }}
+		</div>
 
     <footer class="group js-footer" id="footer" role="contentinfo">
 
