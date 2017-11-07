@@ -6,33 +6,59 @@
     <meta charset="utf-8" />
     <title>{{ pageTitle }}</title>
 
+    {{#if isGuidance}}
+    
+    <!--[if gt IE 8]><!--><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/govuk-template-2775f99eaec64ff8121bfbfb3eb67b0c2b4b7c3fc78d25da30e12db2a09d30d6.css" crossorigin="anonymous" integrity="sha256-J3X5nq7GT/gSG/v7PrZ7DCtLfD/HjSXaMOEtsqCdMNY=">
+    <!--<![endif]-->
+    <!--[if IE 6]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/govuk-template-ie6-5bb08c355a12ac38b0ac9d2446da122ec0f81c78e02dcd2a98766f53c23793c8.css" /><![endif]-->
+    <!--[if IE 7]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/govuk-template-ie7-be1ea757827710f20eae59ae3ebfd172b7dbeabb171a79945ba610947eebb3cc.css" /><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/govuk-template-ie8-5ab4d0c7b42f2bf10f8c7aadf331a11f7399be832b0ee2c68c94071195a1e36e.css" /><![endif]-->
+    <link rel="stylesheet" media="print" href="https://assets.publishing.service.gov.uk/static/govuk-template-print-1076519521c2fffbbf75ab3b0d3b32ee2d96ac7e9778f1cdfac1771eefd1a1c0.css" crossorigin="anonymous" integrity="sha256-EHZRlSHC//u/das7DTsy7i2WrH6XePHN+sF3Hu/RocA=">
+    <!--[if IE 8]><link rel="stylesheet" media="all" href="https://assets.publishing.service.gov.uk/static/fonts-ie8-f5e3c18a96ecb0f37246556a27330202d6e18feffa05a3b67825024609629ac8.css" /><![endif]-->
+    <!--[if gte IE 9]><!--><link rel="stylesheet" media="all" href="https://assets.publishing.service.gov.uk/static/fonts-5ff8c53913434afd0072a480d7cfca67cace4c8d03f6ef96b78a4455728ce745.css" crossorigin="anonymous" integrity="sha256-X/jFORNDSv0AcqSA18/KZ8rOTI0D9u+Wt4pEVXKM50U=">
+    <!--<![endif]-->
+    <!--[if lt IE 9]><script src="https://assets.publishing.service.gov.uk/static/ie-75db9d4df4993de5335d6e49013362743a78107245bcf6543337a0ecc0a95b41.js" crossorigin="anonymous" integrity="sha256-ddudTfSZPeUzXW5JATNidDp4EHJFvPZUMzeg7MCpW0E="></script><![endif]-->
+    <link rel="shortcut icon" href="https://assets.publishing.service.gov.uk/static/favicon-8d811b8c3badbc0b0e2f6e25d3660a96cc0cca7993e6f32e98785f205fc40907.ico" type="image/x-icon">
+    <link rel="mask-icon" href="https://assets.publishing.service.gov.uk/static/gov.uk_logotype_crown-de738c3fcce8ce2a91b67e89787090dc24a5cda0275ab6b75f6226c5b9619d3d.svg" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.publishing.service.gov.uk/static/apple-touch-icon-180x180-ea1cbb1cbbeddfff275dfa6e8e46b84cd530892df79dc4882a8f99b802b49a90.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://assets.publishing.service.gov.uk/static/apple-touch-icon-167x167-181e404a50c572923285fb83f0fbd78da6b4e38e3ce52f8e6b8e29da8586450a.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://assets.publishing.service.gov.uk/static/apple-touch-icon-152x152-02457fcdcee8d309276305af2233d41bfb8fd055e855727d355e61bce7ffa9bb.png">
+    <link rel="apple-touch-icon" href="https://assets.publishing.service.gov.uk/static/apple-touch-icon-a318f305290c523aed80082456175b46c95350c0eeac93f42e78a71c7a55544e.png">
+    <meta name="theme-color" content="#0b0c0c">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="https://assets.publishing.service.gov.uk/static/opengraph-image-a1f7d89ffd0782738b1aeb0da37842d8bd0addbd724b8e58c3edbc7287cc11de.png">
+    <!--[if gt IE 8]><!--><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/core-layout-b2cb5fc5ee4ae94eff36f5a5b19ed7e23926523e1e4737c8baedfcd2eea6da5d.css" crossorigin="anonymous" integrity="sha256-sstfxe5K6U7/NvWlsZ7X4jkmUj4eRzfIuu380u6m2l0=">
+    <!--<![endif]-->
+    <!--[if IE 6]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/core-layout-ie6-db31c75ae02f1f5a23ddee6ec2373edc5fa9e95a71571413d5b86630a9df10ce.css" /><script>var ieVersion = 6;</script><![endif]-->
+    <!--[if IE 7]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/core-layout-ie7-0a0203fe3c0e8f4c6f5c2761800e41402e75c38a3d1e5bbfcad848c1d278daa0.css" /><script>var ieVersion = 7;</script><![endif]-->
+    <!--[if IE 8]><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/core-layout-ie8-a1d25d8255ccdd88da5db42791b803f608cc43b2d7c96e635256450d1f9596ed.css" /><script>var ieVersion = 8;</script><![endif]-->
+    <link rel="stylesheet" media="print" href="https://assets.publishing.service.gov.uk/static/core-layout-print-17ae04fa41ad116c2d3a329800a3160d98adf170d561703b3836dad57f2b994d.css" crossorigin="anonymous" integrity="sha256-F64E+kGtEWwtOjKYAKMWDZit8XDVYXA7ODba1X8rmU0=">
+    <!--[if gt IE 8]><!--><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/government-frontend/application-cbbf4be004a24f385f981f900892d1a0cb33971c46022640b4f0f4dc8ca96290.css" crossorigin="anonymous" integrity="sha256-y79L4ASiTzhfmB+QCJLRoMszlxxGAiZAtPD03IypYpA=">
+    <!--<![endif]--><link rel="stylesheet" media="print" href="https://assets.publishing.service.gov.uk/government-frontend/print-9e52619a28f6d0ef9fb0a8b9d8fe0c4f2ff35d8dbb2d28db2d600b8bffcc4e9a.css" crossorigin="anonymous" integrity="sha256-nlJhmij20O+fsKi52P4MTy/zXY27LSjbLWALi//MTpo=">
+
+    {{else }}
+
     <!--[if gt IE 8]><!--><link href="{{{ assetPath }}}stylesheets/govuk-template.css?0.22.2" media="screen" rel="stylesheet" /><!--<![endif]-->
     <!--[if IE 6]><link href="{{{ assetPath }}}stylesheets/govuk-template-ie6.css?0.22.2" media="screen" rel="stylesheet" /><![endif]-->
     <!--[if IE 7]><link href="{{{ assetPath }}}stylesheets/govuk-template-ie7.css?0.22.2" media="screen" rel="stylesheet" /><![endif]-->
     <!--[if IE 8]><link href="{{{ assetPath }}}stylesheets/govuk-template-ie8.css?0.22.2" media="screen" rel="stylesheet" /><![endif]-->
     <link href="{{{ assetPath }}}stylesheets/govuk-template-print.css?0.22.2" media="print" rel="stylesheet" />
-
     <!--[if IE 8]><link href="{{{ assetPath }}}stylesheets/fonts-ie8.css?0.22.2" media="all" rel="stylesheet" /><![endif]-->
     <!--[if gte IE 9]><!--><link href="{{{ assetPath }}}stylesheets/fonts.css?0.22.2" media="all" rel="stylesheet" /><!--<![endif]-->
     <!--[if lt IE 9]><script src="{{{ assetPath }}}javascripts/ie.js?0.22.2"></script><![endif]-->
-
     <link rel="shortcut icon" href="{{{ assetPath }}}images/favicon.ico?0.22.2" type="image/x-icon" />
-    
     <link rel="mask-icon" href="{{{ assetPath }}}images/gov.uk_logotype_crown.svg?0.22.2" color="#0b0c0c">
     <link rel="apple-touch-icon" sizes="180x180" href="{{{ assetPath }}}images/apple-touch-icon-180x180.png?0.22.2">
     <link rel="apple-touch-icon" sizes="167x167" href="{{{ assetPath }}}images/apple-touch-icon-167x167.png?0.22.2">
     <link rel="apple-touch-icon" sizes="152x152" href="{{{ assetPath }}}images/apple-touch-icon-152x152.png?0.22.2">
     <link rel="apple-touch-icon" href="{{{ assetPath }}}images/apple-touch-icon.png?0.22.2">
-
-    
     <meta name="theme-color" content="#0b0c0c" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="{{{ assetPath }}}images/opengraph-image.png?0.22.2">
 
     {{> head }}
 
-    {{{_sections.head}}}
+    {{/if }}
 
   </head>
 
@@ -48,24 +74,101 @@
     </div>
 
     <div id="global-cookie-message">
-      
         {{> cookieMessage }}
-      
     </div>
 
-    <header role="banner" id="global-header" class="{{{ headerClass }}}">
-      {{{_sections.header}}}
+    {{#if isGuidance}}
+    <header role="banner" id="global-header">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="https://assets.publishing.service.gov.uk/static/gov.uk_logotype_crown_invert_trans-203e1db49d3eff430d7dc450ce723c1002542fe1d2bce661b6d8571f14c1043c.png" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+          <a href="#search" class="search-toggle js-header-toggle">Search</a>
+          <form id="search" class="site-search" action="/search" method="get" role="search">
+            <div class="content">
+              <label for="site-search-text">Search</label>
+              <input type="search" name="q" id="site-search-text" title="Search" class="js-search-focus">
+              <input class="submit" type="submit" value="Search">
+            </div>
+          </form>
+        </div>
+      </div>
     </header>
+    <!--
+    <header role="banner" id="global-header" class="{{{ headerClass }}}">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="https://assets.publishing.service.gov.uk/static/gov.uk_logotype_crown_invert_trans-203e1db49d3eff430d7dc450ce723c1002542fe1d2bce661b6d8571f14c1043c.png" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+          <a href="#search" class="search-toggle js-header-toggle">Search</a>
+          <form id="search" class="site-search" action="/search" method="get" role="search">
+            <div class="content">
+              <label for="site-search-text">Search</label>
+              <input type="search" name="q" id="site-search-text" title="Search" class="js-search-focus">
+              <input class="submit" type="submit" value="Search">
+            </div>
+          </form>
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu" class="no-proposition-name">
+              <ul id="proposition-links">
+                <li><a href="">Departments</a></li>
+                <li><a href="">Worldwide</a></li>
+                <li><a href="">How government works</a></li>
+                <li><a href="">Get involved</a></li>
+                <li class="clear-child"><a href="">Policies</a></li>
+                <li><a href="">Publications</a></li>
+                <li><a href="">Consultations</a></li>
+                <li><a href="">Statistics</a></li>
+                <li><a href="">Announcements</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    -->
+    {{else }}
+    <header role="banner" id="global-header" class="{{{ headerClass }}}">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="{{{ homepageUrl }}}" title="{{ logoLinkTitle }}" id="logo" class="content">
+              <img src="{{{ assetPath }}}images/gov.uk_logotype_crown_invert_trans.png?0.22.2" width="36" height="32" alt=""> {{{ globalHeaderText }}}
+            </a>
+          </div>
+        {{> insideHeader }}
+        </div>
+        {{> propositionHeader }}
+      </div>
+    </header>
+    {{/if }}
 
     {{> afterHeader }}
 
     <div id="global-header-bar"></div>
 
+    {{#if isGuidance}}
+    <div id="wrapper" class="direction-ltr">
+      {{> beforeContent }}
+        {{{content}}}
+      {{> afterContent }}
+    </div>
+    {{else }}
     <div id="content" class="wrapper">
 			{{> beforeContent }}
 				{{{content}}}
 			{{> afterContent }}
-		</div>
+    </div>
+    {{/if }}
 
     <footer class="group js-footer" id="footer" role="contentinfo">
 

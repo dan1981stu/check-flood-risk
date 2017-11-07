@@ -58,7 +58,8 @@ module.exports = [
 				return reply.view('gov-uk/check-flood-zone', {
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Flood risk assessment for planning applications - GOV.UK',
-					'serviceName' : ''
+					'serviceName' : '',
+					'isGuidance' : true
 				})
 			}
 		}

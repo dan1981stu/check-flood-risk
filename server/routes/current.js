@@ -10,7 +10,7 @@ module.exports = [
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
 				const trace = request.query.t ? request.query.t : false
-				return reply.view('current/find-location', {
+				return reply.view('current/location', {
 					'model' : { 'location' : '', 'scenario' : scenario },
 					'trace' : trace,
 					'pageTitle' : 'Find location - Check flood risk - GOV.UK'
@@ -33,7 +33,7 @@ module.exports = [
 					return reply.redirect('/' + path + '?s=' + scenario)
 				}
 				// Location doesn't exist in prototype
-				return reply.view('current/find-location', {
+				return reply.view('current/location', {
 					'model' : { 'location' : location, 'scenario' : scenario },
 					'pageTitle' : 'Check flood risk - GOV.UK'
 				})

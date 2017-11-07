@@ -1,28 +1,12 @@
-{{#section 'head'}}
-<link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/core-layout-b2cb5fc5ee4ae94eff36f5a5b19ed7e23926523e1e4737c8baedfcd2eea6da5d.css" />
-{{/section}}
-
-{{#section 'header'}}
-<div class="header-wrapper">
-	<div class="header-global">
-	<div class="header-logo">
-		<a href="{{{ homepageUrl }}}" title="{{ logoLinkTitle }}" id="logo" class="content">
-		<img src="{{{ assetPath }}}images/gov.uk_logotype_crown_invert_trans.png?0.22.2" width="36" height="32" alt=""> {{{ globalHeaderText }}}
-		</a>
-	</div>
-	{{> insideHeader }}
-	</div>
-	{{> propositionHeader }}
+<div class="govuk-breadcrumbs " data-module="track-click">
+	<ol>
+		<li>
+			<a href="">Home</a>
+		</li>
+	</ol>
 </div>
-{{/section}}
 
 <main>
-
-	<div class="breadcrumbs">
-		<ol>
-			<li><a href="/">Home</a></li>
-		</ol>
-	</div>
 
 	<div class="grid-row">
 		<div class="column-two-thirds">
@@ -53,5 +37,48 @@
 	</div>
 
 	<p class="pub-c-lead-paragraph">Find out when you need to do a flood risk assessment as part of your planning application, how to complete one and how it's&nbsp;processed.</p>
+
+	<div class="grid-row sidebar-with-body" data-module="sticky-element-container" id="contents">
+		<div class="column-third">
+			<nav role="navigation" class="app-c-contents-list">
+				<h2>Contents</h2>
+				<ol class="app-c-contents-list__list">
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#when-you-need-an-assessment">When you need an assessment</a></li>
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#when-you-dont-need-an-assessment">When you don’t need an assessment</a></li>
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#when-to-follow-standing-advice">When to follow standing advice</a></li>
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#how-to-do-an-assessment">How to do an assessment</a></li>
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#get-information-to-complete-an-assessment">Get information to complete an assessment</a></li>
+					<li class="app-c-contents-list__list-item app-c-contents-list__list-item--dashed"><a class="app-c-contents-list__link" href="#contact">Contact the Environment Agency</a></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="column-two-thirds ">
+			<div class="govuk-govspeak direction-ltr">
+				<div class="govspeak">
+					<p>As a planning applicant, you may need to carry out a flood risk assessment for your proposed development site.</p>
+					<!--
+					<div class="call-to-action">
+						<p>Guidance for local planning authorities can be found in the guide on <a href="https://www.gov.uk/guidance/flood-risk-assessment-local-planning-authorities">reviewing flood risk assessments</a>.</p>
+					</div>
+					-->
+					<p>You’ll usually need to pay a flood risk specialist to carry out the flood risk assessment for you, but you may be able to do it yourself if it’s for a simple, low risk development, for example a house extension. If you’re unsure, <a href="#contact">contact the Environment Agency</a> for advice.</p>
+					<p>Your planning application may be refused by your <a rel="external" href="">local planning authority</a> if you don’t include a flood risk assessment or if it isn’t satisfactory.</p>
+					<h2 id="when-you-need-an-assessment">When you need an assessment</h2>
+					<p>You need to do a flood risk assessment for most developments within one of the <a rel="external" href="">flood zones</a>.</p>
+					<p>This includes developments:</p>
+					<ul>
+						<li>in flood zone 2 or 3 including <a rel="external" href="">minor development</a> and <a rel="external" href="">change of use</a></li>
+						<li>more than 1 hectare (ha) in flood zone 1</li>
+						<li>less than 1 ha in flood zone 1, including a change of use in development type to a more vulnerable class (for example from commercial to residential), where they could be affected by sources of flooding other than rivers and the sea (for example surface water drains, reservoirs)</li>
+						<li>in an area within flood zone 1 which has critical drainage problems as notified by the Environment Agency</li>
+					</ul>
+					<div class="call-to-action">
+						<p><a rel="external" href="/flood-zone/find-location">Find out what flood zone you’re in</a></p>
+					</div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+
 
 </main>
