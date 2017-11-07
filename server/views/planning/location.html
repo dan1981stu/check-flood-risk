@@ -20,44 +20,62 @@
 					<ul class="error-summary-list"></ul>
 				</div>
 
-				<div class="form-group">
-					<fieldset>
-						<legend>
-							<h1 class="heading-large">Find your development site location</h1>
-						</legend>
-						<div class="multiple-choice">
-							<input id="radio-home-address" type="radio" name="radio-indent-group" value="Yes">
-							<label for="radio-home-address">Home address</label>
-						</div>
-						<div class="multiple-choice" data-target="example-other-address">
-							<input id="radio-other-address" type="radio" name="radio-indent-group" value="No" aria-controls="example-other-address" aria-expanded="true">
-							<label for="radio-other-address">Other address</label>
-						</div>
-						<div class="panel panel-border-narrow" id="example-other-address" aria-hidden="false">
-					<fieldset>
-					<legend>
-						<h2 class="heading-medium">Your other address</h2>
-					</legend>
-					<div class="form-group form-group-compound">
-						<label class="form-label" for="address-line-1">Street</label>
-						<input type="text" class="form-control" id="address-line-1">
-					</div>
+				<form>
 					<div class="form-group">
-					<label class="form-label visually-hidden" for="address-line-2">Street</label>
-					<input type="text" class="form-control" id="address-line-2">
+						<fieldset>
+							<legend>
+								<h1 class="heading-large">Where is your development site?</h1>
+								<p>Find your site by:</p>
+							</legend>
+
+							<div class="multiple-choice">
+								<input id="find-site-by-location" type="radio" name="radio-find-site-group" value="Yes" checked="checked">
+								<label for="find-site-by-location">Location</label>
+							</div>
+							<div class="panel panel-border-narrow" style="padding-bottom:1em">
+								<label class="form-label" for="site-postcode">
+									Postcode or town
+									<span class="form-hint">For example SW1A 2AA or Bakewell</span>
+								</label>
+								<input class="form-control" name="site-postcode" id="site-postcode" type="text">
+							</div>
+
+							<div class="multiple-choice">
+								<input id="find-site-by-ngr" type="radio" name="radio-find-site-group" value="No">
+								<label for="find-site-by-ngr">National Grid Reference (NGR)</label>
+							</div>
+							<div class="panel panel-border-narrow" style="padding-bottom:1em">
+								<label class="form-label" for="site-ngr">
+									NGR
+									<span class="form-hint">For example SW1A 2AA or Bakewell</span>
+								</label>
+								<input class="form-control" name="site-ngr" type="text" id="find-site-by-ngr">
+							</div>
+
+							<div class="multiple-choice">
+								<input id="find-site-by-easting-northing" type="radio" name="radio-find-site-group" value="No">
+								<label for="find-site-by-easting-northing">Easting and northing</label>
+							</div>
+							<div class="panel panel-border-narrow" style="padding-bottom:1em">
+								<div class="form-easting-northing" style="overflow:auto">
+									<div class="form-group form-group-easting" style="float:left;width:50%;margin-bottom:0">
+										<label class="form-label" for="site-easting">Easting</label>
+										<input class="form-control" id="site-easting" name="site-easting" type="number">
+									</div>
+									<div class="form-group form-group-northing" style="float:left;width:50%;margin-bottom:0">
+										<label class="form-label" for="site-northing">Northing</label>
+										<input class="form-control" id="site-northing" name="site-northing" type="number">
+									</div>
+								</div>
+							</div>
+
+						</fieldset>
+					
 					</div>
-					<div class="form-group">
-					<label class="form-label" for="address-town">Town or City</label>
-					<input type="text" class="form-control form-control-1-4" id="address-town">
-					</div>
-					<div class="form-group">
-					<label class="form-label" for="address-postcode">Postcode</label>
-					<input type="text" class="form-control form-control-1-8" id="address-postcode">
-					</div>
-					</fieldset>
-					</div>
-					</fieldset>
-				</div>
+
+					<input class="button" type="submit" value="Continue">
+					
+				</form>
 
 				<!--
 				<div class="form-group no-bottom">
