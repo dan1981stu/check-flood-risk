@@ -1,7 +1,7 @@
 module.exports = [
 	{
 		method: 'GET',
-		path: '/flood-zone/find-location',
+		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
 				return reply.view('planning/location', {

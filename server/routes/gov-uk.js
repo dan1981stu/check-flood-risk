@@ -51,11 +51,11 @@ module.exports = [
 	// Find flood risk for planning - Task start page (GOV.UK)
 	{
 		method: 'GET',
-		path: '/check-flood-zone',
+		path: '/guidance/flood-risk-assessment-for-planning-applications',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
-				return reply.view('gov-uk/check-flood-zone', {
+				return reply.view('gov-uk/flood-risk-assessment-for-planning', {
 					'model' : { 'scenario' : scenario },
 					'pageTitle' : 'Flood risk assessment for planning applications - GOV.UK',
 					'serviceName' : '',

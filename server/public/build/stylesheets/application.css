@@ -3007,6 +3007,37 @@ a.subsection-header:focus .font-small {
   }
 }
 
+.form-location-planning .panel {
+  padding-bottom: 1em;
+}
+
+.form-location-planning .form-control {
+  width: 100%;
+  max-width: 20em;
+}
+
+.form-group-easting {
+  width: 50%;
+  max-width: 10em;
+  float: left;
+  margin-bottom: 0;
+}
+
+.form-group-easting .form-group-container {
+  padding-right: 0.3947em;
+}
+
+.form-group-northing {
+  width: 50%;
+  max-width: 10em;
+  float: left;
+  margin-bottom: 0;
+}
+
+.form-group-northing .form-group-container {
+  padding-left: 0.3947em;
+}
+
 @media (min-width: 641px) {
   .panel-warning-message {
     margin-bottom: 1.5em;

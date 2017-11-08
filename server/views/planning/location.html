@@ -8,63 +8,77 @@
 	</div>
 	-->
 
-	<a href="/check-flood-zone" class="link-back">Back</a> 
+	<a href="/guidance/flood-risk-assessment-for-planning-applications" class="link-back">Back</a> 
 		
 	<form action="/find-location" autocomplete="off" class="form" method="post" novalidate="novalidate">
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				<div class="error-summary" data-valmsg-summary="true" style="display:none;">
+				<!-- inserted with javascript or invalid post -->
+				<div class="error-summary">
 					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
 					<p>Please amend the following details:</p>
-					<ul class="error-summary-list"></ul>
+					<ul class="error-summary-list">
+						<li><a href="#postcode">Check your postcode or town</a></li>
+					</ul>
 				</div>
+				<!-- end insert -->
 
 				<form>
-					<div class="form-group">
+					<div class="form-group form-location-planning">
 						<fieldset>
 							<legend>
-								<h1 class="heading-large">Where is your development site?</h1>
-								<p>Find your site by:</p>
+								<h1 class="heading-large">Find your development location</h1>
 							</legend>
 
 							<div class="multiple-choice">
-								<input id="find-site-by-location" type="radio" name="radio-find-site-group" value="Yes" checked="checked">
-								<label for="find-site-by-location">Location</label>
+								<input id="find-location" type="radio" name="radio-find-location-group" value="Yes" checked="checked">
+								<label for="find-by-postcode-town">By postcode or town</label>
 							</div>
-							<div class="panel panel-border-narrow" style="padding-bottom:1em">
+							<div class="panel panel-border-narrow form-group-error" id="postcode">
 								<label class="form-label" for="site-postcode">
-									Postcode or town
+									<span class="bold-small">Postcode or town</span>
 									<span class="form-hint">For example SW1A 2AA or Bakewell</span>
+									<!-- inserted with javascript or invalid post -->
+									<span class="error-message">Postcode is right out</span>
+									<!-- end insert -->
 								</label>
-								<input class="form-control" name="site-postcode" id="site-postcode" type="text">
+								<input class="form-control form-control-error" name="site-postcode" id="site-postcode" type="text">
 							</div>
 
 							<div class="multiple-choice">
-								<input id="find-site-by-ngr" type="radio" name="radio-find-site-group" value="No">
-								<label for="find-site-by-ngr">National Grid Reference (NGR)</label>
+								<input id="find-site-by-ngr" type="radio" name="radio-find-location-group" value="No">
+								<label for="find-site-by-ngr">By National Grid Reference (NGR)</label>
 							</div>
-							<div class="panel panel-border-narrow" style="padding-bottom:1em">
+							<div class="panel panel-border-narrow" id="ngr"><!-- add class js-hidden and hidden attribute with javascript -->
 								<label class="form-label" for="site-ngr">
-									NGR
-									<span class="form-hint">For example SW1A 2AA or Bakewell</span>
+									<span class="bold-small">NGR</span>
+									<span class="form-hint">For example NY395557 (6, 8 or 12 digits)</span>
 								</label>
 								<input class="form-control" name="site-ngr" type="text" id="find-site-by-ngr">
 							</div>
 
 							<div class="multiple-choice">
-								<input id="find-site-by-easting-northing" type="radio" name="radio-find-site-group" value="No">
-								<label for="find-site-by-easting-northing">Easting and northing</label>
+								<input id="find-site-by-easting-northing" type="radio" name="radio-find-location-group" value="No">
+								<label for="find-site-by-easting-northing">By easting and northing</label>
 							</div>
-							<div class="panel panel-border-narrow" style="padding-bottom:1em">
-								<div class="form-easting-northing" style="overflow:auto">
-									<div class="form-group form-group-easting" style="float:left;width:50%;margin-bottom:0">
-										<label class="form-label" for="site-easting">Easting</label>
-										<input class="form-control" id="site-easting" name="site-easting" type="number">
+							<div class="panel panel-border-narrow" id="easting-northing"><!-- add class js-hidden and hidden attribute with javascript -->
+								<div class="form-group-en">
+									<div class="form-group form-group-easting">
+										<div class="form-group-container">
+											<label class="form-label" for="location-easting">
+												<span class="bold-small">Easting</span>
+											</label>
+											<input class="form-control" id="location-easting" name="location-easting" type="number">
+										</div>
 									</div>
-									<div class="form-group form-group-northing" style="float:left;width:50%;margin-bottom:0">
-										<label class="form-label" for="site-northing">Northing</label>
-										<input class="form-control" id="site-northing" name="site-northing" type="number">
+									<div class="form-group form-group-northing">
+										<div class="form-group-container">
+											<label class="form-label" for="location-northing">
+												<span class="bold-small">Northing</span>
+											</label>
+											<input class="form-control" id="location-northing" name="location-northing" type="number">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -100,3 +114,12 @@
 	</form>
 		
 </main>
+
+{{#section 'bodyScripts'}}
+
+<script>
+
+
+</script>
+
+{{/section}}
