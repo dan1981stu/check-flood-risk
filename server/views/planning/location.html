@@ -14,14 +14,13 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				<div class="error-summary visuallyhidden"><!-- Error: remove class="visuallyhidden" and tabindex="-1" -->
+				<div class="error-summary" style="display:none" hidden><!-- Error: remove style="display:none" and hidden attribute -->
 					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
-					<p>Please amend the following details:</p>
 					<ul class="error-summary-list">
-						<li><a href="#postcode-town" tabindex="-1">Check your postcode or town</a></li><!-- Error: remove aria-hidden="true" -->
-						<li><a href="#ngr" aria-hidden="true" tabindex="-1">Check your NGR</a></li>
-						<li><a href="#easting" aria-hidden="true" tabindex="-1">Check your easting</a></li>
-						<li><a href="#northing" aria-hidden="true" tabindex="-1">Check your northing</a></li>
+						<li><a href="#postcode-town" style="display:none" hidden>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
+						<li><a href="#ngr" style="display:none" hidden>Check your NGR</a></li>
+						<li><a href="#easting" style="display:none" hidden>Check your easting</a></li>
+						<li><a href="#northing" style="display:none" hidden>Check your northing</a></li>
 					</ul>
 				</div>
 
@@ -33,55 +32,61 @@
 							</legend>
 
 							<div class="multiple-choice" data-target="postcode-town">
-								<input id="find-by-postcode-town" type="radio" name="radio-find-location-group" value="Yes" checked="checked">
-								<label for="find-by-postcode-town">By postcode or town</label>
+								<input id="location-by-postcode-town" type="radio" name="radio-location-group" value="Yes" checked="checked">
+								<label for="location-by-postcode-town">By postcode or town</label>
 							</div>
-							<div class="panel panel-border-narrow form-group-error" id="postcode-town"><!-- Error: add class 'form-group-error' with javascript or postback -->
-								<label class="form-label" for="site-postcode">
+							<div class="panel panel-border-narrow" id="postcode-town"><!-- Error: add class 'form-group-error' with javascript or postback -->
+								<label class="form-label" for="location-postcode">
 									<span class="bold-small">Postcode or town</span>
-									<span class="form-hint">For example SW1A 2AA or Bakewell</span>
-									<span class="error-message">Postcode is right out</span><!-- Error: inline style="display:none" and hidden attribute removed with javascript or postback -->
+									<span class="form-hint">For example, SW1A 2AA or Bakewell</span>
+									<span class="error-message" style="display:none" hidden>Postcode is right out</span><!-- Error: remove inline style="display:none" and hidden attribute -->
 								</label>
-								<input class="form-control form-control-error" name="site-postcode" id="site-postcode" type="text" value="SD345T"><!-- Error: add class 'form-control-error' with javascript or postback -->
+								<input class="form-control" name="location-postcode" id="location-postcode" type="text"><!-- Error: add class 'form-control-error' with javascript or postback -->
 							</div>
 
 							<div class="multiple-choice" data-target="ngr">
-								<input id="find-site-by-ngr" type="radio" name="radio-find-location-group" value="No">
-								<label for="find-site-by-ngr">By National Grid Reference (NGR)</label>
+								<input id="location-by-ngr" type="radio" name="radio-location-group" value="No">
+								<label for="location-by-ngr">By National Grid Reference (NGR)</label>
 							</div>
 							<div class="panel panel-border-narrow" id="ngr"><!-- Default: add class js-hidden and hidden attribute with javascript or postback -->
-								<label class="form-label" for="site-ngr">
+								<label class="form-label" for="location-ngr">
 									<span class="bold-small">NGR</span>
-									<span class="form-hint">For example NY395557 (6, 8 or 12 digits)</span>
+									<span class="form-hint">For example, NY395557 (6, 8 or 12 digits)</span>
 									<span class="error-message" style="display:none" hidden>NGR is right out</span>
 								</label>
-								<input class="form-control" name="site-ngr" type="text" id="find-site-by-ngr">
+								<input class="form-control" name="location-ngr" type="text" id="location-ngr">
 							</div>
 
 							<div class="multiple-choice" data-target="easting-northing">
-								<input id="find-site-by-easting-northing" type="radio" name="radio-find-location-group" value="No">
-								<label for="find-site-by-easting-northing">By easting and northing</label>
+								<input id="location-by-easting-northing" type="radio" name="radio-location-group" value="No">
+								<label for="location-by-easting-northing">By easting and northing</label>
 							</div>
 							<div class="panel panel-border-narrow" id="easting-northing">
-								<div class="form-group-en">
-									<div class="form-group form-group-easting">
-										<div class="form-group-container">
-											<label class="form-label" for="location-easting">
-												<span class="bold-small">Easting</span>
-												<span class="error-message" style="display:none" hidden>Easting is right out</span>
-											</label>
-											<input class="form-control" id="location-easting" name="location-easting" type="number">
+								<div class="form-group-easting-northing">
+									<fieldset>
+										<legend>
+											<span class="form-label-bold">Easting and northing</span>
+											<span class="form-hint">For example, 123456 123456</span>
+											<span class="error-message" style="display:none" hidden>Easting is right out</span>
+											<span class="error-message" style="display:none" hidden>Northing is right out</span>
+										</legend>
+										<div class="form-group form-group-easting">
+											<div class="form-group-container">
+												<label class="form-label" for="location-easting">
+													<span class="font-small">Easting</span>
+												</label>
+												<input class="form-control" id="location-easting" name="location-easting" type="number">
+											</div>
 										</div>
-									</div>
-									<div class="form-group form-group-northing">
-										<div class="form-group-container">
-											<label class="form-label" for="location-northing">
-												<span class="bold-small">Northing</span>
-												<span class="error-message" style="display:none" hidden>Northing is right out</span>
-											</label>
-											<input class="form-control" id="location-northing" name="location-northing" type="number">
+										<div class="form-group form-group-northing">
+											<div class="form-group-container">
+												<label class="form-label" for="location-northing">
+													<span class="font-small">Northing</span>
+												</label>
+												<input class="form-control" id="location-northing" name="location-northing" type="number">
+											</div>
 										</div>
-									</div>
+									</fieldset>
 								</div>
 							</div>
 
