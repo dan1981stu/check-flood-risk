@@ -1,4 +1,6 @@
-<main>
+<main {{#if errors}}class="js-error"{{/if }}>
+
+	<p>{{ json errors }}</p>
 
 	<!--
 	<div class="breadcrumbs">
@@ -14,13 +16,12 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				<div class="error-summary" {{#unless errors}}style="display:none" hidden{{/unless }}><!-- Error: remove style="display:none" and hidden attribute -->
-					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
+				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" {{#unless errors}}style="display:none" hidden tabindex="-1"{{/unless }}><!-- Error: remove style="display:none" and hidden attribute -->
+					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
-						<li><a href="#postcodeTown" {{#unless errors.postcodeTown}}style="display:none" hidden{{/unless }}>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
-						<li><a href="#ngr" {{#unless errors.ngr}}style="display:none" hidden{{/unless }}>Check your National Grid Reference</a></li>
-						<li><a href="#easting" {{#unless errors.easting}}style="display:none" hidden{{/unless }}>Check your easting</a></li>
-						<li><a href="#northing" {{#unless errors.northing}}style="display:none" hidden{{/unless }}>Check your northing</a></li>
+						<li><a href="#postcode-town" {{#unless errors.postcodeTown}}style="display:none" hidden{{/unless }}>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
+						<li><a href="#national-grid-reference" {{#unless errors.ngr}}style="display:none" hidden{{/unless }}>Check your National Grid Reference</a></li>
+						<li><a href="#easting-northing" {{#notIsOr errors.easting errors.northing}}style="display:none" hidden{{/notIsOr }}>Check your easting and northing</a></li>
 					</ul>
 				</div>
 
@@ -108,12 +109,30 @@
 <script src="/public/javascripts/show-hide-content.js"></script>
 <script>
 $(document).ready(function () {
+
 	// Turn off jQuery animation
 	jQuery.fx.off = true
 	// Where .multiple-choice uses the data-target attribute
 	// to toggle hidden content
 	var showHideContent = new GOVUK.ShowHideContent()
 	showHideContent.init()
+
+	// If there is an error, set focus to the summary
+	if ($('.js-error').length) {
+		if ($('.error-summary:visible').length) {
+			console.log('visible')
+			$('.error-summary').focus()
+			$('.error-summary a').click(function (e) {
+				e.preventDefault()
+				var href = $(this).attr('href')
+				$(href).focus()
+			})
+		} else {
+			// Otherwise, set focus to the field with the error
+			$('.error input:first').focus()
+		}
+	}
+
 })
 </script>
 <!-- end before closing body tag -->

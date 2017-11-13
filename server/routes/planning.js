@@ -60,10 +60,10 @@ module.exports = [
 					}
 					return reply.view('planning/location', {
 						'serviceName' : 'Check flood zone',
-						'pageTitle' : 'Find location - Check flood zone - GOV.UK',
+						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
 						'errors'  : errors, // error object used in html template
 						'values' : values  // (escaped) values displayed in form inputs
-					}).code(error ? 400 : 200); // HTTP status code depending on error
+					})//.code(error ? 400 : 200) HTTP status code depending on error
 				}
 			}
 		}
@@ -93,16 +93,7 @@ function ExtractValidationErrors(error){
 		}
 	})
 	return err
-
-	/*
-	var key = error.data.details[0].path
-	err = {}
-	err[key] = {
-		type : error.data.details[0].type,
-		message : error.data.details[0].message
-	}
-	return err
-	*/
+	
 }
 
 function ReturnFormInputValues(error) {
