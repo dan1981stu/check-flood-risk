@@ -1,7 +1,5 @@
 <main {{#if errors}}class="js-error"{{/if }}>
 
-	<p>{{ json errors }}</p>
-
 	<!--
 	<div class="breadcrumbs">
 		<ol>
@@ -120,7 +118,6 @@ $(document).ready(function () {
 	// If there is an error, set focus to the summary
 	if ($('.js-error').length) {
 		if ($('.error-summary:visible').length) {
-			console.log('visible')
 			$('.error-summary').focus()
 			$('.error-summary a').click(function (e) {
 				e.preventDefault()
