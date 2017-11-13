@@ -17,9 +17,10 @@
 				<div class="error-summary" {{#unless errors}}style="display:none" hidden{{/unless }}><!-- Error: remove style="display:none" and hidden attribute -->
 					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
-						<li><a href="#postcode-town" {{#isnt values.type 'postcodeTown'}}style="display:none" hidden{{/isnt }}>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
-						<li><a href="#national-grid-reference" {{#isnt values.type 'ngr'}}style="display:none" hidden{{/isnt }}>Check your National Grid Reference</a></li>
-						<li><a href="#easting-northing" {{#isnt values.type 'en'}}style="display:none" hidden{{/isnt }}>Check your easting and/or northing</a></li>
+						<li><a href="#postcodeTown" {{#unless errors.postcodeTown}}style="display:none" hidden{{/unless }}>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
+						<li><a href="#ngr" {{#unless errors.ngr}}style="display:none" hidden{{/unless }}>Check your National Grid Reference</a></li>
+						<li><a href="#easting" {{#unless errors.easting}}style="display:none" hidden{{/unless }}>Check your easting</a></li>
+						<li><a href="#northing" {{#unless errors.northing}}style="display:none" hidden{{/unless }}>Check your northing</a></li>
 					</ul>
 				</div>
 
