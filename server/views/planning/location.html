@@ -1,8 +1,5 @@
 <main>
 
-	<p>*{{ json errors }}*</p>
-	<p>*{{ json values }}*</p>
-
 	<!--
 	<div class="breadcrumbs">
 		<ol>
@@ -17,13 +14,12 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				<div class="error-summary" style="display:none" hidden><!-- Error: remove style="display:none" and hidden attribute -->
+				<div class="error-summary" {{#unless errors}}style="display:none" hidden{{/unless }}><!-- Error: remove style="display:none" and hidden attribute -->
 					<h1 class="heading-medium error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
-						<li><a href="#postcode-town" style="display:none" hidden>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
-						<li><a href="#ngr" style="display:none" hidden>Check your National Grid Reference</a></li>
-						<li><a href="#easting" style="display:none" hidden>Check your easting</a></li>
-						<li><a href="#northing" style="display:none" hidden>Check your northing</a></li>
+						<li><a href="#postcode-town" {{#isnt values.type 'postcodeTown'}}style="display:none" hidden{{/isnt }}>Check your postcode or town</a></li><!-- Error: remove style="display:none" and hidden attribute -->
+						<li><a href="#national-grid-reference" {{#isnt values.type 'ngr'}}style="display:none" hidden{{/isnt }}>Check your National Grid Reference</a></li>
+						<li><a href="#easting-northing" {{#isnt values.type 'en'}}style="display:none" hidden{{/isnt }}>Check your easting and/or northing</a></li>
 					</ul>
 				</div>
 

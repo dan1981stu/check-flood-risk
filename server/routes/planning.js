@@ -55,7 +55,7 @@ module.exports = [
 				failAction: function (request, reply, source, error) {
 					var errors, values
 					if(error && error.data) {
-						errors = ExtractValidationError(error) // the error field + message
+						errors = ExtractValidationErrors(error) // the error field + message
 						values = ReturnFormInputValues(error) // avoid wiping form data
 					}
 					return reply.view('planning/location', {
@@ -82,7 +82,19 @@ module.exports = [
 	}
 ]
 
-function ExtractValidationError(error){
+function ExtractValidationErrors(error){
+
+	err = {}
+	error.data.details.forEach (function(detail) {
+		var key = detail.path
+		err[key] = {
+			type : error.data.details[0].type,
+			message : error.data.details[0].message
+		}
+	})
+	return err
+
+	/*
 	var key = error.data.details[0].path
 	err = {}
 	err[key] = {
@@ -90,6 +102,7 @@ function ExtractValidationError(error){
 		message : error.data.details[0].message
 	}
 	return err
+	*/
 }
 
 function ReturnFormInputValues(error) {
