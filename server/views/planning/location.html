@@ -49,7 +49,7 @@
 								<span class="error-message" id="postcodeTownAnyEmpty">Please provide a postcode</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if errors.postcodeTown}} form-control-error{{/if }}" name="postcodeTown" id="postcodeTown" type="text" value="{{ values.postcodeTown }}">
+							<input class="form-control{{#if errors.postcodeTown}} form-control-error{{/if }}" {{#if errors.postcodeTown}} aria-invalid="true"{{/if }} name="postcodeTown" id="postcodeTown" type="text" value="{{ values.postcodeTown }}">
 						</div>
 
 						<div class="multiple-choice" data-target="national-grid-reference">
@@ -64,7 +64,7 @@
 								<span class="error-message">Please provide a National Grid Reference</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if errors.ngr}} form-control-error{{/if }}" name="ngr" type="text" id="ngr" value="{{ values.ngr }}">
+							<input class="form-control{{#if errors.ngr}} form-control-error{{/if }}" {{#if errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ values.ngr }}">
 						</div>
 
 						<div class="multiple-choice" data-target="easting-northing">
@@ -75,7 +75,7 @@
 							<div class="form-group-easting-northing">
 								<fieldset>
 									<legend>
-										<span class="form-label-bold">Easting and northing</span>
+										<span class="visuallyhidden">Easting and northing</span>
 										<span class="form-hint">For example, 123456 123456</span>
 										{{#isOr errors.easting errors.northing}}
 										<span class="error-message">Please provide an easting and northing</span>
@@ -84,17 +84,17 @@
 									<div class="form-group form-group-easting">
 										<div class="form-group-container">
 											<label class="form-label" for="easting">
-												<span class="font-small">Easting</span>
+												<span class="bold-small">Easting</span>
 											</label>
-											<input class="form-control{{#if errors.easting}} form-control-error{{/if }}" id="easting" name="easting" type="number" value="{{ values.easting }}">
+											<input class="form-control{{#if errors.easting}} form-control-error{{/if }}" {{#if errors.easting}}aria-invalid="true"{{/if }} id="easting" name="easting" type="number" value="{{ values.easting }}">
 										</div>
 									</div>
 									<div class="form-group form-group-northing">
 										<div class="form-group-container">
 											<label class="form-label" for="northing">
-												<span class="font-small">Northing</span>
+												<span class="bold-small">Northing</span>
 											</label>
-											<input class="form-control{{#if errors.northing}} form-control-error{{/if }}" id="northing" name="northing" type="number" value="{{ values.northing }}">
+											<input class="form-control{{#if errors.northing}} form-control-error{{/if }}" {{#if errors.northing}} aria-invalid="true"{{/if }} id="northing" name="northing" type="number" value="{{ values.northing }}">
 										</div>
 									</div>
 								</fieldset>
@@ -129,20 +129,7 @@ $(document).ready(function () {
 	showHideContent.init()
 
 	// If there is an error, set focus to the summary
-	if ($('.js-error').length) {
-		if ($('.error-summary:visible').length) {
-			console.log('has summary')
-			$('.error-summary').focus()
-			$('.error-summary a').click(function (e) {
-				e.preventDefault()
-				var href = $(this).attr('href')
-				$(href).focus()
-			})
-		} else {
-			// Otherwise, set focus to the field with the error
-			$('.error input:first').focus()
-		}
-	}
+	$('.js-error .error-summary:visible').first().focus()
 
 })
 </script>
