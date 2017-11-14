@@ -1,6 +1,17 @@
 module.exports = [
 	{
 		method: 'GET',
+		path: '/long-term/find-address',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('long-term/find-address', {
+					'pageTitle' : 'Find address - Long term flood risk - GOV.UK'
+				})
+			}
+		}
+	},
+	{
+		method: 'GET',
 		path: '/long-term/3-hewitt-street-hx7-5nr',
 		config: {
 			handler: function (request, reply) {

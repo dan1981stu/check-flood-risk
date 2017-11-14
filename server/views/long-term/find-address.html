@@ -1,0 +1,54 @@
+<main {{#if errors}}class="js-error"{{/if }}>
+
+	<!--
+	<div class="breadcrumbs">
+		<ol>
+			<li><a href="https://www.gov.uk/check-flood-risk">Back</a></li>
+		</ol>
+	</div>
+	-->
+
+	<a href="/check-a-propertys-flood-risk" class="link-back">Back</a> 
+		
+	<form action="/flood-risk-assessment/find-location" autocomplete="off" class="form" method="post">
+		<div class="grid-row no-bottom">
+			<div class="column-two-thirds no-bottom">
+				
+				{{#if errors}}
+				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+					<ul class="error-summary-list">
+						<li><a href="#">Error message</a></li>
+					</ul>
+				</div>
+				{{/if }}
+
+				<h1 class="heading-large">Find your property</h1>
+
+				<fieldset>
+					<legend>
+						<span class="visuallyhidden">Address details</span>
+					</legend>
+					<div class="form-group">
+						<label for="premises">
+							<span class="font-small">House number or name</span>
+							<span class="form-hint">For example, Flat 20A</span>
+						</label>
+						<input class="form-control" id="premises" type="text" name="premises" value="">
+					</div>
+					<div class="form-group">
+						<label for="postcode">
+							<span class="font-small">Postcode</span>
+							<span class="form-hint">For example, WA4 1AB</span>
+						</label>
+						<input class="form-control" id="postcode" type="text" name="postcode" value="">
+					</div>
+				</fieldset>
+
+				<input class="button" type="submit" value="Continue">
+
+			</div>
+		</div>
+	</form>
+		
+</main>
