@@ -6,7 +6,7 @@ module.exports = [].concat(
   require('./get-warnings'),
   require('./warnings'),
   require('./levels'),
-  require('./long-term'),
+  require('./property'),
   require('./planning'),
   require('./five-day'),
   require('./public')

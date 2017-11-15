@@ -1,0 +1,41 @@
+<main {{#if errors}}class="js-error"{{/if }}>
+
+	<!--
+	<div class="breadcrumbs">
+		<ol>
+			<li><a href="https://www.gov.uk/check-flood-risk">Back</a></li>
+		</ol>
+	</div>
+	-->
+
+	<a href="/find-address" class="link-back">Back</a> 
+		
+	<form action="/flood-risk-assessment/find-address" autocomplete="off" class="form" method="post">
+		<div class="grid-row no-bottom">
+			<div class="column-two-thirds no-bottom">
+				
+				{{#if errors}}
+				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+					<ul class="error-summary-list">
+						<li><a href="#">Error message</a></li>
+					</ul>
+				</div>
+				{{/if }}
+
+				<h1 class="heading-large">Select your property</h1>
+
+				<fieldset>
+					<legend>
+						<span class="visuallyhidden">List of propertys</span>
+					</legend>
+					
+				</fieldset>
+
+				<input class="button" type="submit" value="Continue">
+
+			</div>
+		</div>
+	</form>
+		
+</main>
