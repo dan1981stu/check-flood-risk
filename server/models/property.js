@@ -1,15 +1,23 @@
 var data = require('../data/data.json')
 
 // Get a location by its name
-exports.getLocationsFromValue = function(postcodeTown) {
-	var towns = []
-	// Find in towns
-	towns = data.town.filter(
-		x => x.name.toLowerCase().includes(postcodeTown.toLowerCase())
+exports.getAddress = function(premises, postcode) {
+
+	var address = []
+	
+	// Filter firstline
+	firstLine = data.firstLine.filter(
+		x => x.premises.toLowerCase().includes(premises.toLowerCase())
+		&& x.postcodeId == (data.postcode.find( y => y.path === postcode).id)
 	)
-	// If location exists build model and return
-	if (towns) {	
-		return towns
+
+	// If firstLine(s) found build address list
+	firstLine.forEach(function (item) {
+		address.push({ 'firstLine' : item.premises + ' ' + item.street })
+	})
+
+	if (address.length) {	
+		return address
 	}
 	return ''
 }

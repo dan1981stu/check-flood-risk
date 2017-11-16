@@ -1,3 +1,4 @@
+const utilities = require('../utilities/utilities.js')
 var Joi = require('joi')
 
 module.exports = [
@@ -51,8 +52,8 @@ module.exports = [
 				failAction: function (request, reply, source, error) {
 					var errors, values
 					if(error && error.data) {
-						errors = ExtractValidationErrors(error) // the error field + message
-						values = ReturnFormInputValues(error) // avoid wiping form data
+						errors = utilities.extractValidationErrors(error) // the error field + message
+						values = utilities.getFormInputValues(error) // avoid wiping form data
 					}
 					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
@@ -76,26 +77,3 @@ module.exports = [
 		}
 	}
 ]
-
-function ExtractValidationErrors(error){
-
-	err = {}
-	error.data.details.forEach (function(detail) {
-		var key = detail.path
-		err[key] = {
-			type : error.data.details[0].type,
-			message : error.data.details[0].message
-		}
-	})
-	return err
-	
-}
-
-function ReturnFormInputValues(error) {
-	var values = {}
-	var keys = Object.keys(error.data._object)
-	keys.forEach(function(k){
-		values[k] = error.data._object[k]
-	});
-	return values
-}

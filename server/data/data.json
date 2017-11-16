@@ -19,21 +19,35 @@
     ],
     "firstLine" : [
         {
-            "id" : 3,
-            "name" : "12 Hullet Close",
+            "id" : 1,
+            "premises" : "12",
+            "street" : "Hullet Close",
             "postcodeId" : 1,
+            "country" : "e",
             "riskTypes" : []
         },
         {
-            "id" : 1,
-            "name" : "28 Westfield Terrace",
+            "id" : 2,
+            "premises" : "28",
+            "street" : "Westfield Terrace",
             "postcodeId" : 2,
+            "country" : "e",
             "riskTypes" : [4,1] 
         },
         {
-            "id" : 2,
-            "name" : "14 Caldene Avenue",
+            "id" : 3,
+            "premises" : "14",
+            "street" : "Caldene Avenue",
             "postcodeId" : 3,
+            "country" : "e",
+            "riskTypes" : [4,1] 
+        },
+        {
+            "id" : 4,
+            "premises" : "15",
+            "street" : "Caldene Avenue",
+            "postcodeId" : 3,
+            "country" : "e",
             "riskTypes" : [4,1] 
         }
     ],

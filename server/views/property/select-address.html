@@ -1,5 +1,7 @@
 <main {{#if errors}}class="js-error"{{/if }}>
 
+	<p>{{ json model }}</p>
+
 	<a href="/find-address" class="link-back">Back</a> 
 		
 	<form action="" autocomplete="off" class="form" method="post">
@@ -15,15 +17,24 @@
 				</div>
 				{{/if }}
 
-				<h1 class="heading-large">Select your address</h1>
+				<div class="form-group">
+					<fieldset>
+						<legend>
+							<h1 class="heading-large">Select your address</h1>
+						</legend>
+						<div class="multiple-choice">
+							<input id="radio-1" type="radio" name="radio-group" value="Richmond, North Yorkshire">
+							<label for="radio-1">Address 1</label>
+						</div>
+						<p class="form-block">or</p>
+						<div class="multiple-choice">
+							<input id="radio-2" type="radio" name="radio-group" value="Richmond, London">
+							<label for="radio-2">Address 2</label>
+						</div>
+					</fieldset>
+				</div>
 
-				<fieldset>
-					<legend>
-						<span class="visuallyhidden">List of propertys</span>
-					</legend>
-					
-				</fieldset>
-
+				<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
 				<input class="button" type="submit" value="Continue">
 
 			</div>
