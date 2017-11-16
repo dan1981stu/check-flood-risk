@@ -9,10 +9,8 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
-				const trace = request.query.t ? request.query.t : false
 				return reply.view('current/location', {
 					'model' : { 'location' : '', 'scenario' : scenario },
-					'trace' : trace,
 					'pageTitle' : 'Find location - Check flood risk - GOV.UK'
 				})
 			}
@@ -27,7 +25,7 @@ module.exports = [
 			handler: function (request, reply) {
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				const location = request.payload.location
-				var path = modelData.getLocationPathFromName(location, scenario)
+				var path = modelData.getLocationPathFromValue(location, scenario)
 				// Redirect to risk summary
 				if (path.length > 1) {
 					return reply.redirect('/' + path + '?s=' + scenario)
@@ -51,17 +49,14 @@ module.exports = [
 				const scenario = request.query.s ? request.query.s : 'a'
 				const model = modelData.getSummary(path, scenario)
 				const pageTitle = model.location + ' - Current flood risk - GOV.UK'
-				const trace = request.query.t ? request.query.t : false
 				if (model.hasAlertOrWarning) {
 					return reply.view('current/summary-warning', {
 						'model': model,
-						'trace' : trace,
 						'pageTitle' : pageTitle
 					})
 				} else {
 					return reply.view('current/summary-normal', {
 						'model': model,
-						'trace' : trace,
 						'pageTitle' : pageTitle
 					})
 				}

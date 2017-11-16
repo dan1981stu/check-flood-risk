@@ -1,0 +1,75 @@
+<main {{#if errors}}class="js-error"{{/if }}>
+
+	<!--
+	<div class="breadcrumbs">
+		<ol>
+			<li><a href="https://www.gov.uk/check-flood-risk">Back</a></li>
+		</ol>
+	</div>
+	-->
+
+	<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
+		
+	<form action="/flood-risk-assessment/identify-site" autocomplete="off" class="form" method="post">
+		<div class="grid-row no-bottom">
+			<div class="column-two-thirds no-bottom">
+				
+				{{#if errors}}
+				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+					<ul class="error-summary-list">
+						{{#if errors }}
+						<li><a href="#town">Please select a town</a></li>
+						{{/if }}
+					</ul>
+				</div>
+				{{/if }}
+
+				<div class="form-group">
+					<fieldset>
+						<legend>
+							<h1 class="heading-large">Select your town</h1>
+						</legend>
+						<div class="multiple-choice">
+							<input id="radio-1" type="radio" name="radio-group" value="Richmond, North Yorkshire">
+							<label for="radio-1">Richmond, North Yorkshire</label>
+						</div>
+						<p class="form-block">or</p>
+						<div class="multiple-choice">
+							<input id="radio-2" type="radio" name="radio-group" value="Richmond, London">
+							<label for="radio-2">Richmond, London</label>
+						</div>
+					</fieldset>
+				</div>
+
+				<input class="button" type="submit" value="Continue">
+
+			</div>
+		</div>
+	</form>
+		
+</main>
+
+{{#section 'bodyScripts'}}
+
+<!-- Add before closing body tag -->
+<!-- below uses GDS style guide javascript adapted to use html5 hidden instead of aria-hidden -->
+<script src="/public/javascripts/show-hide-content.js"></script>
+<script>
+$(document).ready(function () {
+
+	// Turn off jQuery animation
+	jQuery.fx.off = true
+	// Where .multiple-choice uses the data-target attribute
+	// to toggle hidden content
+	var showHideContent = new GOVUK.ShowHideContent()
+	showHideContent.init()
+
+	// If there is an error, set focus to the summary
+	$('.js-error .error-summary:visible').first().focus()
+
+})
+</script>
+<!-- end before closing body tag -->
+
+{{/section}}

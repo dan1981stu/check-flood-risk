@@ -317,7 +317,7 @@ exports.getSummary = function(path, scenario) {
 }
 
 // Get a location by its name
-exports.getLocationPathFromName = function(name, scenario) {
+exports.getLocationPathFromValue = function(name, scenario) {
 	var location
 	// Find in towns
 	location = data.town.find(

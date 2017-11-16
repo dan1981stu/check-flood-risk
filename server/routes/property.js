@@ -1,3 +1,6 @@
+const modelData = require('../models/property')
+var Joi = require('joi')
+
 module.exports = [
 	{
 		method: 'GET',
@@ -17,6 +20,17 @@ module.exports = [
 			handler: function (request, reply) {
 				return reply.view('property/select-address', {
 					'pageTitle' : 'Select property - Long term flood risk - GOV.UK'
+				})
+			}
+		}
+	},
+	{
+		method: 'GET',
+		path: '/select-town',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('property/select-town', {
+					'pageTitle' : 'Select town - Check flood zone - GOV.UK'
 				})
 			}
 		}

@@ -1,4 +1,4 @@
-<main {{#if errors}}class="js-error"{{/if }}>
+<main {{#if model.errors}}class="js-error"{{/if }}>
 
 	<!--
 	<div class="breadcrumbs">
@@ -14,17 +14,17 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				{{#if errors}}
+				{{#if model.errors}}
 				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
-						{{#is errors.postcodeTown.type 'any.empty'}}
-						<li><a href="#postcode-town">Please provide a postcode</a></li>
+						{{#is model.errors.place.type 'any.empty'}}
+						<li><a href="#place">Please provide a place or a postcode</a></li>
 						{{/is }}
-						{{#is errors.ngr.type 'any.empty'}}
+						{{#is model.errors.ngr.type 'any.empty'}}
 						<li><a href="#national-grid-reference">Please provide a National Grid Reference</a></li>
 						{{/is }}
-						{{#isOr errors.easting errors.northing}}
+						{{#isOr model.errors.easting model.errors.northing}}
 						<li><a href="#easting-northing">Please provide an easting and northing</a></li>
 						{{/isOr }}
 					</ul>
@@ -37,64 +37,64 @@
 							<h1 class="heading-large">Find your development location</h1>
 						</legend>
 
-						<div class="multiple-choice" data-target="postcode-town">
-							<input id="typePostcodeTown" type="radio" name="type" value="postcodeTown" {{#is values.type 'postcodeTown'}}checked="checked"{{/is}}>
-							<label for="typePostcodeTown">By postcode or town</label>
+						<div class="multiple-choice" data-target="place-postcode">
+							<input id="typePlace" type="radio" name="type" value="place" {{#is model.values.type 'place'}}checked="checked"{{/is}}>
+							<label for="typePlace">By place or postcode</label>
 						</div>
-						<div class="panel panel-border-narrow{{#if errors.postcodeTown}} form-group-error{{/if }}" id="postcode-town">
-							<label class="form-label" for="postcodeTown">
-								<span class="bold-small">Postcode or town</span>
-								<span class="form-hint">For example, SW1A 2AA or Bakewell</span>
-								{{#is errors.postcodeTown.type 'any.empty'}}
-								<span class="error-message" id="postcodeTownAnyEmpty">Please provide a postcode</span>
+						<div class="panel panel-border-narrow{{#if model.errors.place}} form-group-error{{/if }}" id="place-postcode">
+							<label class="form-label" for="place">
+								<span class="visuallyhidden">Place or postcode</span>
+								<span class="form-hint">For example, Bakewell or WA4 1AB</span>
+								{{#is model.errors.place.type 'any.empty'}}
+								<span class="error-message" id="placeAnyEmpty">Please provide a place or postcode</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if errors.postcodeTown}} form-control-error{{/if }}" {{#if errors.postcodeTown}} aria-invalid="true"{{/if }} name="postcodeTown" id="postcodeTown" type="text" value="{{ values.postcodeTown }}">
+							<input class="form-control{{#if model.errors.place}} form-control-error{{/if }}" {{#if model.errors.place}} aria-invalid="true"{{/if }} name="place" id="place" type="text" value="{{ model.values.place }}">
 						</div>
 
 						<div class="multiple-choice" data-target="national-grid-reference">
-							<input id="typeNgr" type="radio" name="type" value="ngr" {{#is values.type 'ngr'}}checked="checked"{{/is}}>
+							<input id="typeNgr" type="radio" name="type" value="ngr" {{#is model.values.type 'ngr'}}checked="checked"{{/is}}>
 							<label for="typeNgr">By National Grid Reference</label>
 						</div>
-						<div class="panel panel-border-narrow{{#if errors.ngr}} form-group-error{{/if }}" id="national-grid-reference">
+						<div class="panel panel-border-narrow{{#if model.errors.ngr}} form-group-error{{/if }}" id="national-grid-reference">
 							<label class="form-label" for="ngr">
-								<span class="bold-small">National Grid Reference</span>
+								<span class="visuallyhidden">National Grid Reference</span>
 								<span class="form-hint">For example, NY395557 (6, 8 or 12 digits)</span>
-								{{#is errors.ngr.type 'any.empty'}}
+								{{#is model.errors.ngr.type 'any.empty'}}
 								<span class="error-message">Please provide a National Grid Reference</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if errors.ngr}} form-control-error{{/if }}" {{#if errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ values.ngr }}">
+							<input class="form-control{{#if model.errors.ngr}} form-control-error{{/if }}" {{#if model.errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ model.values.ngr }}">
 						</div>
 
 						<div class="multiple-choice" data-target="easting-northing">
-							<input id="typeEn" type="radio" name="type" value="en" {{#is values.type 'en'}}checked="checked"{{/is}}>
+							<input id="typeEn" type="radio" name="type" value="en" {{#is model.values.type 'en'}}checked="checked"{{/is}}>
 							<label for="typeEn">By easting and northing</label>
 						</div>
-						<div class="panel panel-border-narrow{{#isOr errors.easting errors.northing}} form-group-error{{/isOr }}" id="easting-northing">
+						<div class="panel panel-border-narrow{{#isOr model.errors.easting model.errors.northing}} form-group-error{{/isOr }}" id="easting-northing">
 							<div class="form-group-easting-northing">
 								<fieldset>
 									<legend>
 										<span class="visuallyhidden">Easting and northing</span>
 										<span class="form-hint">For example, 123456 123456</span>
-										{{#isOr errors.easting errors.northing}}
+										{{#isOr model.errors.easting errors.northing}}
 										<span class="error-message">Please provide an easting and northing</span>
 										{{/isOr }}
 									</legend>
 									<div class="form-group form-group-easting">
 										<div class="form-group-container">
 											<label class="form-label" for="easting">
-												<span class="bold-small">Easting</span>
+												<span class="font-small">Easting</span>
 											</label>
-											<input class="form-control{{#if errors.easting}} form-control-error{{/if }}" {{#if errors.easting}}aria-invalid="true"{{/if }} id="easting" name="easting" type="number" value="{{ values.easting }}">
+											<input class="form-control{{#if model.errors.easting}} form-control-error{{/if }}" {{#if model.errors.easting}}aria-invalid="true"{{/if }} id="easting" name="easting" type="number" value="{{ model.values.easting }}">
 										</div>
 									</div>
 									<div class="form-group form-group-northing">
 										<div class="form-group-container">
 											<label class="form-label" for="northing">
-												<span class="bold-small">Northing</span>
+												<span class="font-small">Northing</span>
 											</label>
-											<input class="form-control{{#if errors.northing}} form-control-error{{/if }}" {{#if errors.northing}} aria-invalid="true"{{/if }} id="northing" name="northing" type="number" value="{{ values.northing }}">
+											<input class="form-control{{#if model.errors.northing}} form-control-error{{/if }}" {{#if model.errors.northing}} aria-invalid="true"{{/if }} id="northing" name="northing" type="number" value="{{ model.values.northing }}">
 										</div>
 									</div>
 								</fieldset>

@@ -1,5 +1,4 @@
-const modelData = require('../models/planning')
-var Joi = require('joi');
+var Joi = require('joi')
 
 module.exports = [
 	{
@@ -7,10 +6,10 @@ module.exports = [
 		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('planning/location', {
+				return reply.view('planning/find-location', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Find location - Check flood zone - GOV.UK',
-					'values' : { 'type' : 'postcodeTown' }
+					'model' : { 'values' : { 'type' : 'place' }}
 				})
 			}
 		}
@@ -20,18 +19,15 @@ module.exports = [
 		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('planning/site', {
-					'serviceName' : 'Check flood zone',
-					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK'
-				})
+				return reply.redirect('/flood-risk-assessment/identify-site')
 			},
 			validate: {
 				options: {
 					allowUnknown: true
 				},
 				payload: {
-					postcodeTown: Joi.any().when('type', {
-						is: 'postcodeTown',
+					place: Joi.any().when('type', {
+						is: 'place',
 						then: Joi.string().required(),
 						otherwise: Joi.optional()
 					}),
@@ -58,22 +54,21 @@ module.exports = [
 						errors = ExtractValidationErrors(error) // the error field + message
 						values = ReturnFormInputValues(error) // avoid wiping form data
 					}
-					return reply.view('planning/location', {
+					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
 						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-						'errors'  : errors, // error object used in html template
-						'values' : values  // (escaped) values displayed in form inputs
-					})//.code(error ? 400 : 200) HTTP status code depending on error
+						'model' : { 'errors'  : errors, 'values' : values}
+					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
 			}
 		}
 	},
 	{
 		method: 'GET',
-		path: '/flood-risk-assessment/identify-boundary',
+		path: '/flood-risk-assessment/identify-site',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('planning/site', {
+				return reply.view('planning/identify-site', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK'
 				})
