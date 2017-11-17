@@ -1,4 +1,6 @@
-<main {{#if errors}}class="js-error"{{/if }}>
+<main {{#if model.errors}}class="js-error"{{/if }}>
+
+	<p>{{ json model }}</p>
 
 	<a href="/check-a-propertys-flood-risk" class="link-back">Back</a> 
 		
@@ -16,6 +18,9 @@
 						{{#is model.errors.postcode.type 'any.empty'}}
 						<li><a href="#postcode">Please provide a postcode</a></li>
 						{{/is }}
+						{{#if model.errors.address}}
+						<li><a href="#address">We can not find this address</a></li>
+						{{/if }}
 					</ul>
 				</div>
 				{{/if }}
@@ -26,25 +31,30 @@
 					<legend>
 						<span class="visuallyhidden">Address details</span>
 					</legend>
-					<div class="form-group{{#if model.errors.premises}} form-group-error{{/if }}">
-						<label for="premises">
-							<span class="font-small">House number or name</span>
-							<span class="form-hint">For example, Flat 20A</span>
-							{{#is model.errors.premises.type 'any.empty'}}
-							<span class="error-message" id="premisesAnyEmpty">Please provide a house number or name</span>
-							{{/is }}
-						</label>
-						<input class="form-control{{#if model.errors.premises}} form-control-error{{/if }}" id="premises" type="text" name="premises" value="{{ model.values.premises }}">
-					</div>
-					<div class="form-group{{#if model.errors.postcode}} form-group-error{{/if }}">
-						<label for="postcode">
-							<span class="font-small">Postcode</span>
-							<span class="form-hint">For example, WA4 1AB</span>
-							{{#is model.errors.postcode.type 'any.empty'}}
-							<span class="error-message" id="postcodeAnyEmpty">Please provide a postcode</span>
-							{{/is }}
-						</label>
-						<input class="form-control{{#if model.errors.postcode}} form-control-error{{/if }}" id="postcode" type="text" name="postcode" value="{{ model.values.place }}">
+					<div{{#if model.errors.address}} class="form-group form-group-error"{{/if }} id="address">
+						{{#if model.errors.address}}
+						<span class="error-message" id="addressAnyEmpty">We can not find this address</span>
+						{{/if }}
+						<div class="form-group{{#if model.errors.premises}} form-group-error{{/if }}">
+							<label for="premises">
+								<span class="font-small">House number or name</span>
+								<span class="form-hint">For example, Flat 20A</span>
+								{{#is model.errors.premises.type 'any.empty'}}
+								<span class="error-message" id="premisesAnyEmpty">Please provide a house number or name</span>
+								{{/is }}
+							</label>
+							<input class="form-control{{#if model.errors.premises}} form-control-error{{/if }}" id="premises" type="text" name="premises" value="{{ model.values.premises }}">
+						</div>
+						<div class="form-group{{#if model.errors.postcode}} form-group-error{{/if }}">
+							<label for="postcode">
+								<span class="font-small">Postcode</span>
+								<span class="form-hint">For example, WA4 1AB</span>
+								{{#is model.errors.postcode.type 'any.empty'}}
+								<span class="error-message" id="postcodeAnyEmpty">Please provide a postcode</span>
+								{{/is }}
+							</label>
+							<input class="form-control{{#if model.errors.postcode}} form-control-error{{/if }}" id="postcode" type="text" name="postcode" value="{{ model.values.postcode }}">
+						</div>
 					</div>
 				</fieldset>
 
@@ -67,3 +77,27 @@
 	</form>
 		
 </main>
+
+{{#section 'bodyScripts'}}
+
+<!-- Add before closing body tag -->
+<!-- below uses GDS style guide javascript adapted to use html5 hidden instead of aria-hidden -->
+<script src="/public/javascripts/show-hide-content.js"></script>
+<script>
+$(document).ready(function () {
+
+	// Turn off jQuery animation
+	jQuery.fx.off = true
+	// Where .multiple-choice uses the data-target attribute
+	// to toggle hidden content
+	var showHideContent = new GOVUK.ShowHideContent()
+	showHideContent.init()
+
+	// If there is an error, set focus to the summary
+	$('.js-error .error-summary:visible').first().focus()
+
+})
+</script>
+<!-- end before closing body tag -->
+
+{{/section}}

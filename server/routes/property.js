@@ -33,14 +33,17 @@ module.exports = [
 				} 
 				// We don't have a valid address
 				else {
-
+					return reply.view('property/find-address', {
+						'pageTitle' : 'Error: Find address - Property flood risk - GOV.UK',
+						'model' : { 'errors': { 'address' : { 'type' : 'any.empty', 'message' : '' }}, 'values' : { 'premises' : request.payload.premises, 'postcode' : request.payload.postcode, 'scenario' : scenario }, 'scenario' : scenario }
+					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
 			},
 			validate: {
 				options: {
 					allowUnknown: true
 				},
-				payload: {
+				payload: { 
 					premises: Joi.string().required(),
 					postcode: Joi.string().required()
 				},
