@@ -27,7 +27,13 @@ module.exports = [
 				var address = modelData.getAddress(premises, postcode)
 				// If we have a valid address
 				if (address.length) {
+					// One or more addresses are in England
 					return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
+					// All the addresses are in Scotland, Wales or Northern Ireland
+				} 
+				// We don't have a valid address
+				else {
+
 				}
 			},
 			validate: {

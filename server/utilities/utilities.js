@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = class Utilities {
     static extractValidationErrors(error){
         var err = {}
