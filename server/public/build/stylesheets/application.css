@@ -3061,6 +3061,16 @@ a.subsection-header:focus .font-small {
   width: 100%;
 }
 
+.error-message-group {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 641px) {
+  .error-message-group .form-group {
+    margin-bottom: 30px;
+  }
+}
+
 @media (min-width: 641px) {
   .panel-warning-message {
     margin-bottom: 1.5em;

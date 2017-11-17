@@ -39,3 +39,11 @@ $path: "/public/";
     width:100%;
   }
 }
+.error-message-group {
+  margin-bottom: 15px;
+  @include media(tablet) {
+    .form-group {
+      margin-bottom: 30px;
+    }
+  }
+}

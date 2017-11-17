@@ -1,7 +1,5 @@
 <main {{#if model.errors}}class="js-error"{{/if }}>
 
-	<p>{{ json model }}</p>
-
 	<a href="/check-a-propertys-flood-risk" class="link-back">Back</a> 
 		
 	<form action="/find-address" autocomplete="off" class="form" method="post">
@@ -33,7 +31,7 @@
 					</legend>
 					<div{{#if model.errors.address}} class="form-group form-group-error"{{/if }} id="address">
 						{{#if model.errors.address}}
-						<span class="error-message" id="addressAnyEmpty">We can not find this address</span>
+						<span class="error-message error-message-group" id="addressAnyEmpty">We can not find this address</span>
 						{{/if }}
 						<div class="form-group{{#if model.errors.premises}} form-group-error{{/if }}">
 							<label for="premises">
