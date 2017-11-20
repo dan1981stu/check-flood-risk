@@ -1,4 +1,5 @@
 const utilities = require('../utilities/utilities.js')
+const modelData = require('../models/planning')
 var Joi = require('joi')
 
 module.exports = [
@@ -20,7 +21,15 @@ module.exports = [
 		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
-				return reply.redirect('/flood-risk-assessment/identify-site')
+				var location = modelData.getLocation(request.payload.place)
+				// Place is in England
+				//return reply.redirect('/flood-risk-assessment/identify-site')
+				// Place is in Scotland, Wales or Northern Ireland
+				return reply.view('planning/alternate-service', {
+					'serviceName' : 'Check flood zone',
+					'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
+					'model' : { 'errors' : { 'country' : location } }
+				}) // .code(error ? 400 : 200) // HTTP status code depending on error
 			},
 			validate: {
 				options: {

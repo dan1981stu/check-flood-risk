@@ -108,6 +108,7 @@
         {
             "id" : 1,
             "name" : "Mytholmroyd",
+            "country" : "e",
             "county" : 1,
             "path" : "mytholmroyd",
             "lonLat" : [-1.9837091, 53.730928]
@@ -115,6 +116,7 @@
         {
             "id" : 2,
             "name" : "Richmond",
+            "country" : "e",
             "county" : 2,
             "path" : "richmond",
             "lonLat" : [-1.9837091, 53.730928]
@@ -122,6 +124,7 @@
         {
             "id" : 3,
             "name" : "Richmond",
+            "country" : "e",
             "county" : 3,
             "path" : "richmond",
             "lonLat" : [-1.9837091, 53.730928]
@@ -129,6 +132,7 @@
         {
             "id" : 4,
             "name" : "Kirkudbright",
+            "country" : "s",
             "county" : 4,
             "path" : "kirkudbright",
             "lonLat" : []
@@ -137,19 +141,23 @@
     "county" : [
         {
             "id" : 1,
-            "name" : "West Yorkshire"
+            "name" : "West Yorkshire",
+            "country" : "e"
         },
         {
             "id" : 2,
-            "name" : "North Yorkshire"
+            "name" : "North Yorkshire",
+            "country" : "e"
         },
         {
             "id" : 3,
-            "name" : "Surrey"
+            "name" : "Surrey",
+            "country" : "e"
         },
         {
             "id" : 4,
-            "name" : "Dumfries and Galloway"
+            "name" : "Dumfries and Galloway",
+            "country" : "s"
         }
     ],
     "targetArea" : [

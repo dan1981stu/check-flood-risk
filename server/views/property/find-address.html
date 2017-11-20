@@ -17,7 +17,7 @@
 						<li><a href="#postcode">Please provide a postcode</a></li>
 						{{/is }}
 						{{#if model.errors.address}}
-						<li><a href="#address">We can not find this address</a></li>
+						<li><a href="#address">We can't find this address</a></li>
 						{{/if }}
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 					</legend>
 					<div{{#if model.errors.address}} class="form-group form-group-error"{{/if }} id="address">
 						{{#if model.errors.address}}
-						<span class="error-message error-message-group" id="addressAnyEmpty">We can not find this address</span>
+						<span class="error-message error-message-group" id="addressAnyEmpty">We can't find this address</span>
 						{{/if }}
 						<div class="form-group{{#if model.errors.premises}} form-group-error{{/if }}">
 							<label for="premises">

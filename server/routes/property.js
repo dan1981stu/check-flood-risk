@@ -27,10 +27,19 @@ module.exports = [
 				var property = modelData.getProperty(premises, postcode)
 				// If we have a valid address
 				if (property.length) {
-					// One or more addresses are in England
-					return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
-					// All the addresses are in Scotland, Wales or Northern Ireland
-				} 
+					var country = property[0].country
+					// Addresses are in England
+					if (country == 'e') {
+						return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
+					}
+					// Addresses are outside England
+					else {
+						return reply.view('property/alternate-service', {
+							'pageTitle' : 'Error: Find address - Property flood risk - GOV.UK',
+							'model' : { 'errors' : { 'country' : country } }
+						})
+					}
+				}
 				// We don't have a valid address
 				else {
 					return reply.view('property/find-address', {

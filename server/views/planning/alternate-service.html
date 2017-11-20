@@ -1,0 +1,27 @@
+<main>
+
+	<p>{{ json model }}</p>
+
+	<a href="/flood-risk-assessment/find-address" class="link-back">Back</a> 
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+
+			<h1 class="heading-xlarge">
+				We provide property flood risk information for England only
+			</h1>
+
+			{{#is model.errors.country 's'}}
+			<p>It looks like this place is in Scotland.</p>
+			<p>Flood probability information for Scotland is available from the <a href="">Scottish Environment Protection Agency</a></p>
+			{{/is }}
+			{{#is model.errors.country 'w'}}
+			<p>It looks like this place is in Wales.</p>
+			<p>Flood probability information for Wales is available from <a href="">Natural Resources Wales</a></p>
+			{{/is }}
+		</div>
+
+	</div>
+
+</main>
