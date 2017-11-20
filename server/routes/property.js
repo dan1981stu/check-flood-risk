@@ -24,9 +24,9 @@ module.exports = [
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				var premises = request.payload.premises.toLowerCase()
 				var postcode = request.payload.postcode.replace(/ /g,'-').toLowerCase()
-				var address = modelData.getAddress(premises, postcode)
+				var property = modelData.getProperty(premises, postcode)
 				// If we have a valid address
-				if (address.length) {
+				if (property.length) {
 					// One or more addresses are in England
 					return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
 					// All the addresses are in Scotland, Wales or Northern Ireland
@@ -75,11 +75,11 @@ module.exports = [
 					return reply.view('404').code(404)
 				}
 				
-				var address = modelData.getAddress(premises, postcode)
+				var property = modelData.getProperty(premises, postcode)
 
 				return reply.view('property/select-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
-					'model' : { 'address' : address, 'scenario' : scenario }
+					'model' : { 'property' : property, 'scenario' : scenario }
 				})
 			}
 		}

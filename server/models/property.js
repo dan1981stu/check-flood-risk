@@ -1,9 +1,9 @@
 var data = require('../data/data.json')
 
 // Get a location by its name
-exports.getAddress = function(premises, postcode) {
+exports.getProperty = function(premises, postcode) {
 
-	var address = [], postcodes = []
+	var property = [], postcodes = [], country
 
 	// Find postcode
 	p = data.postcode.find( y => y.path == postcode)
@@ -17,9 +17,16 @@ exports.getAddress = function(premises, postcode) {
 	
 	// If firstLine(s) found build address list
 	firstLine.forEach(function (item) {
-		address.push({ 'firstLine' : item.premises + ' ' + item.street })
+		// Add comma to non number premises
+		premises = isNaN(item.premises) ? item.premises + ', ' : item.premises
+		// Get postcode for address
+		postcode = data.postcode.find( x => x.id == item.postcodeId)
+		// Get town for postcode
+		town = data.town.find( x => x.id == postcode.townId)
+		// Add item to list
+		property.push({ 'address' : premises + ' ' + item.street + ', ' + town.name + ', ' + postcode.name, 'country' : postcode.country })
 	})
 
-	return address
+	return property
 
 }

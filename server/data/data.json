@@ -23,7 +23,6 @@
             "premises" : "12",
             "street" : "Hullet Close",
             "postcodeId" : 1,
-            "country" : "e",
             "riskTypes" : []
         },
         {
@@ -31,7 +30,6 @@
             "premises" : "28",
             "street" : "Westfield Terrace",
             "postcodeId" : 2,
-            "country" : "e",
             "riskTypes" : [4,1] 
         },
         {
@@ -39,7 +37,6 @@
             "premises" : "14",
             "street" : "Caldene Avenue",
             "postcodeId" : 3,
-            "country" : "e",
             "riskTypes" : [4,1] 
         },
         {
@@ -47,7 +44,6 @@
             "premises" : "15",
             "street" : "Caldene Avenue",
             "postcodeId" : 3,
-            "country" : "e",
             "riskTypes" : [4,1] 
         },
         {
@@ -55,7 +51,6 @@
             "premises" : "Kirkcudbright Courthouse",
             "street" : "High Street",
             "postcodeId" : 4,
-            "country" : "s",
             "riskTypes" : [] 
         }
     ],
@@ -65,6 +60,7 @@
             "name" : "HX7 5QP",
             "path" : "hx7-5qp",
             "townId" : 1,
+            "country" : "e",
             "riskTypes" : [4], 
             "intersectingWarning" : -1,
             "intersectingAlert" : -1,
@@ -76,6 +72,7 @@
             "name" : "HX7 5DL",
             "path" : "hx7-5dl",
             "townId" : 1,
+            "country" : "e",
             "riskTypes" : [4,1], 
             "intersectingWarning" : -1,
             "intersectingAlert" : 101,
@@ -87,6 +84,7 @@
             "name" : "HX7 5AF",
             "path" : "hx7-5af",
             "townId" : 1,
+            "country" : "e",
             "riskTypes" : [4,1], 
             "intersectingWarning" : 1,
             "intersectingAlert" : 101,
@@ -98,6 +96,7 @@
             "name" : "DG6 4JW",
             "path" : "dg6-4jw",
             "townId" : 4,
+            "country" : "s",
             "riskTypes" : [], 
             "intersectingWarning" : -1,
             "intersectingAlert" : -1,
