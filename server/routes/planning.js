@@ -21,15 +21,24 @@ module.exports = [
 		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
-				var location = modelData.getLocation(request.payload.place)
+
+				// Prototyp only uses place to check location country
+				var country = modelData.getCountry(request.payload.place)
+
 				// Place is in England
-				//return reply.redirect('/flood-risk-assessment/identify-site')
+				if (country.code == 'e') {
+					return reply.redirect('/flood-risk-assessment/identify-site')
+				}
+
 				// Place is in Scotland, Wales or Northern Ireland
-				return reply.view('planning/alternate-service', {
-					'serviceName' : 'Check flood zone',
-					'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-					'model' : { 'errors' : { 'country' : location } }
-				}) // .code(error ? 400 : 200) // HTTP status code depending on error
+				else {
+					return reply.view('planning/alternate-service', {
+						'serviceName' : 'Check flood zone',
+						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
+						'model' : { 'errors' : { 'country' : country } }
+					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+				}
+				
 			},
 			validate: {
 				options: {
