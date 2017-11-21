@@ -109,7 +109,7 @@ module.exports = [
 				
 				return reply.view('property/select-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
-					'model' : { 'property' : property, 'isSingle' : isSingle, 'scenario' : scenario }
+					'model' : { 'property' : property, 'isSingle' : isSingle, 'premises' : premises, 'postcode' : property[0].address.postcode, 'scenario' : scenario }
 				})
 			}
 		}

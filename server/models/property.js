@@ -24,7 +24,7 @@ exports.getProperty = function(premises, postcode) {
 		// Get town for postcode
 		town = data.town.find( x => x.id == postcode.townId)
 		// Add item to list
-		property.push({ 'address' : premises + ' ' + item.street + ', ' + town.name + ', ' + postcode.name, 'country' : postcode.country })
+		property.push({ 'address' : premises + ' ' + item.street + ', ' + town.name + ', ' + postcode.name, 'postcode' : postcode.name, 'country' : postcode.country })
 	})
 
 	return property
