@@ -22,19 +22,14 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				// Prototyp only uses place to check location country
-				var country = modelData.getCountry(request.payload.place)
+				// We have a place search
+				if (request.payload.type == 'place') {
 
-				// We have an existing place
-				if (country != null) {
+					// Prototype only uses place to check if in England
+					var country = modelData.getCountry(request.payload.place)
 
-					// Place is in England
-					if (country.code == 'e') {
-						return reply.redirect('/flood-risk-assessment/identify-site')
-					}
-
-					// Place is in Scotland, Wales or Northern Ireland
-					else {
+					// We have an existing place that is in Scotalnd, Wales or Northern Ireland
+					if (country != null && country.code != 'e') {
 						return reply.view('planning/alternate-service', {
 							'serviceName' : 'Check flood zone',
 							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
@@ -42,19 +37,20 @@ module.exports = [
 						}) // .code(error ? 400 : 200) // HTTP status code depending on error
 					}
 
-				}
-
-				// Can't find the place
-				else {
-
-					return reply.view('planning/find-location', {
-						'serviceName' : 'Check flood zone',
-						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-						'model' : { 'errors'  : { 'place' : { 'type' : 'any.notFound', 'message' : '' } }, 'values' : { 'type' : 'place', 'place' : request.payload.place } }
-					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+					// Can't find the place
+					if (country != null) {
+						return reply.view('planning/find-location', {
+							'serviceName' : 'Check flood zone',
+							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
+							'model' : { 'errors'  : { 'place' : { 'type' : 'any.notFound', 'message' : '' } }, 'values' : { 'type' : 'place', 'place' : request.payload.place } }
+						}) // .code(error ? 400 : 200) // HTTP status code depending on error
+					}
 
 				}
-				
+
+				// Valid place and other search types
+				return reply.redirect('/flood-risk-assessment/identify-site')
+
 			},
 			validate: {
 				options: {
