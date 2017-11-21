@@ -1,13 +1,5 @@
 <main {{#if model.errors}}class="js-error"{{/if }}>
 
-	<!--
-	<div class="breadcrumbs">
-		<ol>
-			<li><a href="https://www.gov.uk/check-flood-risk">Back</a></li>
-		</ol>
-	</div>
-	-->
-
 	<a href="/guidance/flood-risk-assessment-for-planning-applications" class="link-back">Back</a> 
 		
 	<form action="/flood-risk-assessment/find-location" autocomplete="off" class="form" method="post">
@@ -20,6 +12,9 @@
 					<ul class="error-summary-list">
 						{{#is model.errors.place.type 'any.empty'}}
 						<li><a href="#place">Please provide a place or a postcode</a></li>
+						{{/is }}
+						{{#is model.errors.place.type 'any.notFound'}}
+						<li><a href="#place">We can't find this place or postcode</a></li>
 						{{/is }}
 						{{#is model.errors.ngr.type 'any.empty'}}
 						<li><a href="#national-grid-reference">Please provide a National Grid Reference</a></li>
@@ -47,6 +42,9 @@
 								<span class="form-hint">For example, Bakewell or WA4 1AB</span>
 								{{#is model.errors.place.type 'any.empty'}}
 								<span class="error-message" id="placeAnyEmpty">Please provide a place or postcode</span>
+								{{/is }}
+								{{#is model.errors.place.type 'any.notFound'}}
+								<span class="error-message" id="placeAnyEmpty">We can't find this place or postcode</span>
 								{{/is }}
 							</label>
 							<input class="form-control{{#if model.errors.place}} form-control-error{{/if }}" {{#if model.errors.place}} aria-invalid="true"{{/if }} name="place" id="place" type="text" value="{{ model.values.place }}">

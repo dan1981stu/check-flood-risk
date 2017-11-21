@@ -34,20 +34,27 @@
         },
         {
             "id" : 3,
+            "premises" : "10",
+            "street" : "Caldene Avenue",
+            "postcodeId" : 3,
+            "riskTypes" : [4,1] 
+        },
+        {
+            "id" : 4,
             "premises" : "14",
             "street" : "Caldene Avenue",
             "postcodeId" : 3,
             "riskTypes" : [4,1] 
         },
         {
-            "id" : 4,
+            "id" : 5,
             "premises" : "15",
             "street" : "Caldene Avenue",
             "postcodeId" : 3,
             "riskTypes" : [4,1] 
         },
         {
-            "id" : 4,
+            "id" : 6,
             "premises" : "Kirkcudbright Courthouse",
             "street" : "High Street",
             "postcodeId" : 4,

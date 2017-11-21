@@ -25,18 +25,34 @@ module.exports = [
 				// Prototyp only uses place to check location country
 				var country = modelData.getCountry(request.payload.place)
 
-				// Place is in England
-				if (country.code == 'e') {
-					return reply.redirect('/flood-risk-assessment/identify-site')
+				// We have an existing place
+				if (country != null) {
+
+					// Place is in England
+					if (country.code == 'e') {
+						return reply.redirect('/flood-risk-assessment/identify-site')
+					}
+
+					// Place is in Scotland, Wales or Northern Ireland
+					else {
+						return reply.view('planning/alternate-service', {
+							'serviceName' : 'Check flood zone',
+							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
+							'model' : { 'errors' : { 'country' : country } }
+						}) // .code(error ? 400 : 200) // HTTP status code depending on error
+					}
+
 				}
 
-				// Place is in Scotland, Wales or Northern Ireland
+				// Can't find the place
 				else {
-					return reply.view('planning/alternate-service', {
+
+					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
 						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-						'model' : { 'errors' : { 'country' : country } }
+						'model' : { 'errors'  : { 'place' : { 'type' : 'any.notFound', 'message' : '' } }, 'values' : { 'type' : 'place', 'place' : request.payload.place } }
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+
 				}
 				
 			},

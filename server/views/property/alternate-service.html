@@ -10,14 +10,11 @@
 				We provide property flood risk information for England only
 			</h1>
 
-			{{#is model.errors.country 's'}}
-			<p>It looks like this postcode is in Scotland.</p>
-			<p>Flood probability information for Scotland is available from the <a href="">Scottish Environment Protection Agency</a></p>
-			{{/is }}
-			{{#is model.errors.country 'w'}}
-			<p>It looks like this postcode is in Wales.</p>
-			<p>Flood probability information for Wales is available from <a href="">Natural Resources Wales</a></p>
-			{{/is }}
+			{{#if model.errors.country.code}}
+			<p>This postcode is in {{ model.errors.country.name }}.</p>
+			<p>Flood probability information for {{ model.errors.country.name }} is available from the <a href="">Scottish Environment Protection Agency</a></p>
+			{{/if }}
+
 		</div>
 
 	</div>

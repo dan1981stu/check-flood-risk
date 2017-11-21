@@ -1,7 +1,5 @@
 <main {{#if errors}}class="js-error"{{/if }}>
 
-	<p>{{ json model }}</p>
-
 	<a href="/find-address" class="link-back">Back</a> 
 		
 	<form action="" autocomplete="off" class="form" method="post">
@@ -19,23 +17,29 @@
 
 				<div class="form-group">
 					<fieldset>
+						
+						{{#if model.isSingle }}
+						<legend>
+							<h1 class="heading-large">Confirm your address</h1>
+						</legend>
+						<div class="multiple-choice">
+							<input id="property" name="property" type="checkbox" value="No">
+							<label for="property">{{ model.property.[0].address }}</label>
+						</div>
+						{{else }}
 						<legend>
 							<h1 class="heading-large">Select your address</h1>
-						</legend>						
-						{{#is model.property.length 1 }}
-						<p>one</p>
-						{{/is }}
-						{{#notIs model.property.length 1 }}
-						<p>Not one</p>
-						{{/notIs }}
-						
+						</legend>
 						{{#each model.property as |item|}}
+						{{#if @last}}
+						<p class="form-block">or</p>
+						{{/if }}
 						<div class="multiple-choice">
-							<input id="radio-1" type="radio" name="radio-group" value="Richmond, North Yorkshire">
-							<label for="radio-1">Address 1</label>
+							<input id="property-1" type="radio" name="property" value="No">
+							<label for="property-1">{{ item.address }}</label>
 						</div>
 						{{/each }}
-						<p class="form-block">or</p>
+						{{/if }}
 					</fieldset>
 				</div>
 
@@ -43,6 +47,15 @@
 					<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
 					<input class="button" type="submit" value="Continue">
 				</div>
+
+				<details>
+					<summary>
+						<span class="summary">My address is not listed</span>
+					</summary>
+					<div class="panel panel-border-narrow">
+						<p>Where do we direct them?</p>
+					</div>
+				</details>
 
 			</div>
 		</div>

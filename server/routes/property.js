@@ -21,17 +21,35 @@ module.exports = [
 		path: '/find-address',
 		config: {
 			handler: function (request, reply) {
+
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				var premises = request.payload.premises.toLowerCase()
 				var postcode = request.payload.postcode.replace(/ /g,'-').toLowerCase()
 				var property = modelData.getProperty(premises, postcode)
+				
 				// If we have a valid address
 				if (property.length) {
-					var country = property[0].country
+
+					var country = { 'code' : property[0].country, 'name' : '' }
+					switch(country.code) {
+						case 's':
+							country.name = 'Scotland'
+							break
+						case 'w':
+							country.name = 'Wales'
+							break
+						case 'w':
+							country.name = 'Northern Ireland'
+							break
+						default:
+							country.name = 'England'
+					}
+
 					// Addresses are in England
-					if (country == 'e') {
+					if (country.code == 'e') {
 						return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
 					}
+
 					// Addresses are outside England
 					else {
 						return reply.view('property/alternate-service', {
@@ -39,6 +57,7 @@ module.exports = [
 							'model' : { 'errors' : { 'country' : country } }
 						})
 					}
+
 				}
 				// We don't have a valid address
 				else {
@@ -47,6 +66,7 @@ module.exports = [
 						'model' : { 'errors': { 'address' : { 'type' : 'any.empty', 'message' : '' }}, 'values' : { 'premises' : request.payload.premises, 'postcode' : request.payload.postcode, 'scenario' : scenario }, 'scenario' : scenario }
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
+
 			},
 			validate: {
 				options: {
@@ -85,10 +105,11 @@ module.exports = [
 				}
 				
 				var property = modelData.getProperty(premises, postcode)
-
+				var isSingle = property.length > 1 ? false : true
+				
 				return reply.view('property/select-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
-					'model' : { 'property' : property, 'scenario' : scenario }
+					'model' : { 'property' : property, 'isSingle' : isSingle, 'scenario' : scenario }
 				})
 			}
 		}
