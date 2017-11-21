@@ -38,7 +38,7 @@ module.exports = [
 					}
 
 					// Can't find the place
-					if (country != null) {
+					if (country == null) {
 						return reply.view('planning/find-location', {
 							'serviceName' : 'Check flood zone',
 							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',

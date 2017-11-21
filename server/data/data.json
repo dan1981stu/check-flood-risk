@@ -55,7 +55,7 @@
         },
         {
             "id" : 6,
-            "premises" : "Kirkcudbright Courthouse",
+            "premises" : "83",
             "street" : "High Street",
             "postcodeId" : 4,
             "riskTypes" : [] 
