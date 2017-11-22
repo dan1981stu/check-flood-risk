@@ -27,7 +27,7 @@ module.exports = [
 				var postcode = request.payload.postcode.replace(/ /g,'-').toLowerCase()
 				var property = modelData.getProperty(premises, postcode)
 				
-				// If we have a valid address
+				// If we have a valid address(s)
 				if (property.length) {
 
 					var country = { 'code' : property[0].country, 'name' : '' }
@@ -45,12 +45,12 @@ module.exports = [
 							country.name = 'England'
 					}
 
-					// Addresses are in England
+					// Address(s) are in England
 					if (country.code == 'e') {
 						return reply.redirect('/select-address?premises=' + premises + '&postcode=' + postcode + '&s='+ scenario)
 					}
 
-					// Addresses are outside England
+					// Address(s) are outside England
 					else {
 						return reply.view('property/alternate-service', {
 							'pageTitle' : 'Error: Find address - Property flood risk - GOV.UK',

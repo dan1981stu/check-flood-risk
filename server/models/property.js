@@ -10,10 +10,17 @@ exports.getProperty = function(premises, postcode) {
 	pId = p != null ? p.id : -1
 
 	// Filter firstline
-	firstLine = data.firstLine.filter(
-		x => x.premises.toLowerCase().includes(premises.toLowerCase())
-		&& x.postcodeId == pId
-	)
+	firstLine = data.firstLine.filter(function(x){
+		// If premises containes a name, flat or apartment
+		if (isNaN(x.premises)) {
+			var premisesStreet = x.premises.concat(', ' + x.street).toLowerCase()
+			return premisesStreet.includes(premises.toLowerCase()) ? true : false
+		} 
+		// If premises is a number
+		else {
+			return x.premises.toLowerCase() == premises.toLowerCase() ? true : false
+		}
+	})
 	
 	// If firstLine(s) found build address list
 	firstLine.forEach(function (item) {
