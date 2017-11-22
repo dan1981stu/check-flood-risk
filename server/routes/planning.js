@@ -88,7 +88,7 @@ module.exports = [
 					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
 						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-						'model' : { 'errors'  : errors, 'values' : values}
+						'model' : { 'errors'  : errors, 'values' : values }
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
 			}
