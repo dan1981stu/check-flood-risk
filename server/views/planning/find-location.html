@@ -1,5 +1,7 @@
 <main {{#if model.errors}}class="js-error"{{/if }}>
 
+	<p>{{ json model }}</p>
+
 	<a href="/guidance/flood-risk-assessment-for-planning-applications" class="link-back">Back</a> 
 		
 	<form action="/flood-risk-assessment/find-location" autocomplete="off" class="form" method="post">
@@ -19,9 +21,13 @@
 						{{#is model.errors.ngr.type 'any.empty'}}
 						<li><a href="#national-grid-reference">Please provide a National Grid Reference</a></li>
 						{{/is }}
-						{{#isOr model.errors.easting model.errors.northing}}
+						{{#isAnd model.errors.easting model.errors.northing}}
 						<li><a href="#easting-northing">Please provide an easting and northing</a></li>
-						{{/isOr }}
+						{{else is model.errors.easting.type 'any.empty'  }}
+						<li><a href="#easting-northing">Please provide an easting</a></li>
+						{{else is model.errors.northing.type 'any.empty' }}
+						<li><a href="#easting-northing">Please provide a northing</a></li>
+						{{/isAnd }}
 					</ul>
 				</div>
 				{{/if }}
@@ -75,9 +81,13 @@
 									<legend>
 										<span class="visuallyhidden">Easting and northing</span>
 										<span class="form-hint">For example, 123456 123456</span>
-										{{#isOr model.errors.easting errors.northing}}
+										{{#isAnd model.errors.easting model.errors.northing}}
 										<span class="error-message">Please provide an easting and northing</span>
-										{{/isOr }}
+										{{else is model.errors.easting.type 'any.empty'  }}
+										<span class="error-message">Please provide an easting</span>
+										{{else is model.errors.northing.type 'any.empty' }}
+										<span class="error-message">Please provide a northing</span>
+										{{/isAnd }}
 									</legend>
 									<div class="form-group form-group-easting">
 										<div class="form-group-container">
