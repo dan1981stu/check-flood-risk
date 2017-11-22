@@ -29,7 +29,7 @@
 						{{else }}
 						<legend>
 							<h1 class="heading-large">Select your address</h1>
-							<p class="font-small">{{ model.property.length }} addresses found for <strong class="bold-small">{{ model.premises }}</strong> and <strong class="bold-small">{{ model.property.[0].postcode }}</strong></p>
+							<p class="bold-small">{{ model.property.length }} addresses found for '{{ model.premises }}' and '{{ model.property.[0].postcode }}'</p>
 						</legend>
 						{{#each model.property as |item|}}
 						<div class="multiple-choice">
