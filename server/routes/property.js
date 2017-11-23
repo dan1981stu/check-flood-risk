@@ -120,16 +120,24 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
-				return reply.redirect('/<address>?scenario='+ scenario)
+				const property = request.payload.property ? request.payload.property : ''
+				return reply.redirect('/' + property + '?s='+ scenario)
 			},
 			validate: {
 				options: {
 					allowUnknown: true
 				},
 				payload: {
-					address: Joi.string().required()
+					property: Joi.string().required()
 				},
 				failAction: function (request, reply, source, error) {
+					const scenario = request.payload.scenario ? request.payload.scenario : 'a'
+					const premises = request.payload.premises ? request.payload.premises : 'error'
+					const postcode = request.payload.postcode ? request.payload.postcode : 'error'
+
+					var property = modelData.getProperty(premises, postcode)
+					var isSingle = property.length > 1 ? false : true
+
 					var errors, values
 					if(error && error.data) {
 						errors = utilities.extractValidationErrors(error) // the error field + message
@@ -137,7 +145,7 @@ module.exports = [
 					}
 					return reply.view('property/select-address', {
 						'pageTitle' : 'Error: Select address - Property flood risk - GOV.UK',
-						'model' : { 'errors'  : errors, 'values' : values, 'scenario' : scenario }
+						'model' : { 'property' : property, 'errors'  : errors, 'values' : values, 'isSingle' : isSingle, 'premises' : premises, 'scenario' : scenario }
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
 			}

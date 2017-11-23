@@ -30,8 +30,12 @@ exports.getProperty = function(premises, postcode) {
 		postcode = data.postcode.find( x => x.id == item.postcodeId)
 		// Get town for postcode
 		town = data.town.find( x => x.id == postcode.townId)
+		// Concatenate the address
+		address = premises + ' ' + item.street + ', ' + town.name + ', ' + postcode.name
+		// Create the path
+		path = address.replace(/,\s+/g,'/').replace(/\s+/g, '-').toLowerCase()
 		// Add item to list
-		property.push({ 'address' : premises + ' ' + item.street + ', ' + town.name + ', ' + postcode.name, 'postcode' : postcode.name, 'country' : postcode.country })
+		property.push({ 'address' : address, 'path' : path, 'postcode' : postcode.name, 'country' : postcode.country })
 	})
 
 	return property
