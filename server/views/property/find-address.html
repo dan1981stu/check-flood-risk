@@ -1,6 +1,8 @@
 <main {{#if model.errors}}class="js-error"{{/if }}>
 
-	<a href="/check-a-propertys-flood-risk" class="link-back">Back</a> 
+	<nav class="nav-back" style="display:none" hidden>
+		<a href="#" class="link-back">Back</a> 
+	</nav>
 		
 	<form action="/find-address" autocomplete="off" class="form" method="post">
 		<div class="grid-row no-bottom">
@@ -17,7 +19,7 @@
 						<li><a href="#postcode">Please give a full postcode, eg WA4 1AB</a></li>
 						{{/is }}
 						{{#if model.errors.address}}
-						<li><a href="#address">We can't find this address</a></li>
+						<li><a href="#address">This address is not listed</a></li>
 						{{/if }}
 					</ul>
 				</div>
@@ -31,7 +33,7 @@
 					</legend>
 					<div{{#if model.errors.address}} class="form-group form-group-error"{{/if }} id="address">
 						{{#if model.errors.address}}
-						<span class="error-message error-message-group" id="addressAnyEmpty">We can't find this address</span>
+						<span class="error-message error-message-group" id="addressAnyEmpty">This address is not listed</span>
 						{{/if }}
 						<div class="form-group{{#if model.errors.premises}} form-group-error{{/if }}">
 							<label for="premises">
@@ -66,7 +68,7 @@
 						<span class="summary">Don't know the address details?</span>
 					</summary>
 					<div class="panel panel-border-narrow">
-						<p>You can <a href="">look up the postcode at Royal Mail</a>. Or you can see a map showing <a href="">areas at risk of flooding</a>.</p>
+						<p>You can <a href="">look up the postcode at Royal Mail</a>.</p><p>Or you can <a href="">see a map showing areas at risk of flooding</a>.</p>
 					</div>
 				</details>
 

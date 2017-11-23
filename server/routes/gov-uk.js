@@ -35,13 +35,13 @@ module.exports = [
 	// Check a propeties long term flood risk - Task start page (GOV.UK)
 	{
 		method: 'GET',
-		path: '/check-a-propertys-flood-risk',
+		path: '/get-property-flood-risk-assessment',
 		config: {
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
-				return reply.view('gov-uk/check-a-propertys-flood-risk', {
+				return reply.view('gov-uk/get-property-flood-risk-assessment', {
 					'model' : { 'scenario' : scenario },
-					'pageTitle' : 'Check a property&#39;s long term flood risk - GOV.UK',
+					'pageTitle' : 'Get a property&#39;s flood risk assessment - GOV.UK',
 					'serviceName' : ''
 				})
 			}
