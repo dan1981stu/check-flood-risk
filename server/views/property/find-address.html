@@ -11,7 +11,7 @@
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
 						{{#is model.errors.premises.type 'any.empty'}}
-						<li><a href="#premises">Please provide a house number or name</a></li>
+						<li><a href="#premises">Please give a house number or name</a></li>
 						{{/is }}
 						{{#is model.errors.postcode.type 'any.empty'}}
 						<li><a href="#postcode">Please give a full postcode, eg WA4 1AB</a></li>
@@ -23,7 +23,7 @@
 				</div>
 				{{/if }}
 
-				<h1 class="heading-large">Find your address</h1>
+				<h1 class="heading-large">Find the address</h1>
 
 				<fieldset>
 					<legend>
@@ -38,7 +38,7 @@
 								<span class="font-small">House number or name</span>
 								<span class="form-hint">For example, Flat 20A</span>
 								{{#is model.errors.premises.type 'any.empty'}}
-								<span class="error-message" id="premisesAnyEmpty">Please provide a house number or name</span>
+								<span class="error-message" id="premisesAnyEmpty">Please give a house number or name</span>
 								{{/is }}
 							</label>
 							<input class="form-control{{#if model.errors.premises}} form-control-error{{/if }}" id="premises" type="text" name="premises" value="{{ model.values.premises }}">
@@ -63,10 +63,10 @@
 
 				<details>
 					<summary>
-						<span class="summary">I don't know the house number, name or postcode?</span>
+						<span class="summary">Don't know address details?</span>
 					</summary>
 					<div class="panel panel-border-narrow">
-						<p>Where do we direct them?</p>
+						<p>You can <a href="">look up the postcode at Royal Mail</a>. Or you can see a map showing <a href="">areas at risk of flooding</a>.</p>
 					</div>
 				</details>
 
