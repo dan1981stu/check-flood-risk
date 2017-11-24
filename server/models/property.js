@@ -6,7 +6,7 @@ exports.getProperty = function(premises, postcode, scenario, error) {
 
 	error = error || false
 	premises = premises || ''
-	postcode = postcode || ''
+	postcode = postcode.replace(/-/g, ' ') || ''
 	scenario = scenario || 'a'
 
 	var model = {}, property = []
@@ -53,8 +53,10 @@ exports.getProperty = function(premises, postcode, scenario, error) {
 			model['isEngland'] = false
 		}
 
-		// Filter firstline if premises and postcode given
+		// FInd only firstlines that match the postcode
 		if (premises != '') {
+
+			// Filter first lines that match the premises
 			firstLine = data.firstLine.filter(function(x){
 				// If premises containes a name, flat or apartment
 				if (isNaN(x.premises)) {
@@ -66,6 +68,10 @@ exports.getProperty = function(premises, postcode, scenario, error) {
 					return x.premises.toLowerCase() == premises.toLowerCase() ? true : false
 				}
 			})
+
+			// Filter first lines premises matches that match the postcode
+			firstLine = firstLine.filter(x => x.postcodeId == postcode.id)
+
 			// If firstLine(s) found build property/address list
 			if (firstLine.length) {
 				firstLine.forEach(function (item) {
@@ -86,6 +92,7 @@ exports.getProperty = function(premises, postcode, scenario, error) {
 				})
 				model['property'] = property
 			}
+
 		}
 	}
 

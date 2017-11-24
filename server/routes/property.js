@@ -34,7 +34,9 @@ module.exports = [
 
 					// If postcode is England
 					if (model.isEngland) {
-						return reply.redirect('/select-address?premises=' + model.premises + '&postcode=' + model.postcode + '&s='+ scenario)
+						return reply.redirect(
+							'/confirm-address?premises=' + model.premises + '&postcode=' + model.postcode.replace(/ /g,'-') + '&s='+ scenario
+						)
 					}
 
 					// Postcode is in Scotland, Wales or Northern Ireland
@@ -82,7 +84,7 @@ module.exports = [
 	},
 	{
 		method: 'GET',
-		path: '/select-address',
+		path: '/confirm-address',
 		config: {
 			handler: function (request, reply) {
 
@@ -96,7 +98,7 @@ module.exports = [
 				
 				var model = modelData.getProperty(premises, postcode, scenario)
 				
-				return reply.view('property/select-address', {
+				return reply.view('property/confirm-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
 					'model' : model
 				})
@@ -106,7 +108,7 @@ module.exports = [
 	},
 	{
 		method: 'POST',
-		path: '/select-address',
+		path: '/confirm-address',
 		config: {
 			handler: function (request, reply) {
 
@@ -130,7 +132,7 @@ module.exports = [
 					var postcode = request.payload.postcode
 					var model = modelData.getProperty(premises, postcode, scenario, error)
 
-					return reply.view('property/select-address', {
+					return reply.view('property/confirm-address', {
 						'pageTitle' : 'Error: Select address - Property flood risk - GOV.UK',
 						'model' : model
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
