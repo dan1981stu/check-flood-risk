@@ -1,5 +1,7 @@
 <main>
 
+	<p>{{ json model }}</p>
+
 	<nav class="nav-back" style="display:none" hidden>
 		<a href="#" class="link-back">Back</a> 
 	</nav>
@@ -12,10 +14,8 @@
 				This service is for postcodes in England only
 			</h1>
 
-			{{#if model.errors.country.code}}
-			<p>The postcode you entered is in {{ model.errors.country.name }}.</p>
-			<p>Find <a href="">flood information for {{ model.errors.country.name }}</a>.</p>
-			{{/if }}
+			<p>The postcode you entered is in {{ model.countryName }}.</p>
+			<p>Find <a href="">flood information for {{ model.countryName }}</a>.</p>
 
 		</div>
 

@@ -1,4 +1,4 @@
-<main {{#if model.errors}}class="js-error"{{/if }}>
+<main {{#if model.isError}}class="js-error"{{/if }}>
 
 	<nav class="nav-back" style="display:none" hidden>
 		<a href="#" class="link-back">Back</a> 
@@ -8,7 +8,7 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				{{#if model.errors}}
+				{{#if model.isError}}
 				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
@@ -43,7 +43,7 @@
 								<span class="error-message" id="premisesAnyEmpty">Please give a house number or name</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if model.errors.premises}} form-control-error{{/if }}" id="premises" type="text" name="premises" value="{{ model.values.premises }}">
+							<input class="form-control{{#if model.errors.premises}} form-control-error{{/if }}" id="premises" type="text" name="premises" value="{{ model.premises }}">
 						</div>
 						<div class="form-group{{#if model.errors.postcode}} form-group-error{{/if }}">
 							<label for="postcode">
@@ -53,7 +53,7 @@
 								<span class="error-message" id="postcodeAnyEmpty">Please give a full postcode, eg WA4 1AB</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if model.errors.postcode}} form-control-error{{/if }}" id="postcode" type="text" name="postcode" value="{{ model.values.postcode }}">
+							<input class="form-control{{#if model.errors.postcode}} form-control-error{{/if }}" id="postcode" type="text" name="postcode" value="{{ model.postcode }}">
 						</div>
 					</div>
 				</fieldset>

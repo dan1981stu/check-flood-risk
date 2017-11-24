@@ -8,7 +8,7 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				{{#if model.errors}}
+				{{#if model.isError}}
 				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
@@ -40,7 +40,7 @@
 					{{else }}
 					<legend>
 						<h1 class="heading-large">Select your address</h1>
-						<p class="bold-small">{{ model.property.length }} addresses found for '{{ model.premises }}' and '{{ model.property.[0].postcode }}'. <a href="/find-address" title="Change address details">Change</a></p>
+						<p class="bold-small">{{ model.property.length }} addresses found for '{{ model.premises }}' and '{{ model.postcode }}'. <a href="/find-address" title="Change address details">Change</a></p>
 					</legend>
 					<div class="form-group{{#is model.errors.property.type 'any.required' }} form-group-error{{/is }}" id="address">
 						{{#is model.errors.property.type 'any.required' }}
