@@ -113,7 +113,7 @@ module.exports = [
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				const property = request.payload.property
 
-				return reply.redirect('/' + property + '?s='+ scenario)
+				return reply.redirect('/property/' + property + '?s='+ scenario)
 
 			},
 			validate: {
