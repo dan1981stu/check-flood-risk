@@ -1,7 +1,7 @@
 var data = require('../data/data.json')
 
 // Get a location by its name
-exports.getProperty = function(premises, postcode) {
+exports.getProperty = function(premises, postcode, scenario) {
 
 	var property = [], postcodes = [], country
 
@@ -35,7 +35,7 @@ exports.getProperty = function(premises, postcode) {
 		// Create the path
 		path = address.replace(/,\s+/g,'/').replace(/\s+/g, '-').toLowerCase()
 		// Add item to list
-		property.push({ 'address' : address, 'path' : path, 'postcode' : postcode.name, 'country' : postcode.country })
+		property.push({ 'address' : address, 'path' : path, 'country' : postcode.country })
 	})
 
 	return property

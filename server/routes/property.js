@@ -25,7 +25,7 @@ module.exports = [
 				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 				var premises = request.payload.premises.toLowerCase()
 				var postcode = request.payload.postcode.replace(/ /g,'-').toLowerCase()
-				var property = modelData.getProperty(premises, postcode)
+				var property = modelData.getProperty(premises, postcode, scenario)
 				
 				// If we have a valid address(s)
 				if (property.length) {
@@ -98,18 +98,18 @@ module.exports = [
 			handler: function (request, reply) {
 				const scenario = request.query.s ? request.query.s : 'a'
 				const premises = request.query.premises ? request.query.premises : 'error'
-				const postcode = request.query.postcode ? request.query.postcode : 'error'
+				const postcode = request.query.postcode ? request.query.postcode.replace(/\-/g,' ').toUpperCase() : 'error'
 
 				if (premises === 'error' || postcode === 'error') {
 					return reply.view('404').code(404)
 				}
 				
-				var property = modelData.getProperty(premises, postcode)
+				var property = modelData.getProperty(premises, postcode, scenario)
 				var isSingle = property.length > 1 ? false : true
 				
 				return reply.view('property/select-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
-					'model' : { 'property' : property, 'isSingle' : isSingle, 'premises' : premises, 'postcode' : property[0].address.postcode, 'scenario' : scenario }
+					'model' : { 'property' : property, 'isSingle' : isSingle, 'premises' : premises, 'postcode' : postcode, 'scenario' : scenario }
 				})
 			}
 		}
@@ -133,7 +133,7 @@ module.exports = [
 				failAction: function (request, reply, source, error) {
 					const scenario = request.payload.scenario ? request.payload.scenario : 'a'
 					const premises = request.payload.premises ? request.payload.premises : 'error'
-					const postcode = request.payload.postcode ? request.payload.postcode : 'error'
+					const postcode = request.payload.postcode ? request.payload.postcode.replace(/\-/g,' ').toUpperCase() : 'error'
 
 					var property = modelData.getProperty(premises, postcode)
 					var isSingle = property.length > 1 ? false : true
@@ -145,7 +145,7 @@ module.exports = [
 					}
 					return reply.view('property/select-address', {
 						'pageTitle' : 'Error: Select address - Property flood risk - GOV.UK',
-						'model' : { 'property' : property, 'errors'  : errors, 'values' : values, 'isSingle' : isSingle, 'premises' : premises, 'scenario' : scenario }
+						'model' : { 'property' : property, 'errors'  : errors, 'values' : values, 'isSingle' : isSingle, 'premises' : premises, 'postcode' : postcode, 'scenario' : scenario }
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
 			}
