@@ -11,20 +11,20 @@
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
 						{{#is model.errors.place.type 'any.empty'}}
-						<li><a href="#place">Please provide a place or a postcode</a></li>
+						<li><a href="#place">Please give a place or a postcode</a></li>
 						{{/is }}
 						{{#is model.errors.place.type 'any.notFound'}}
 						<li><a href="#place">We can't find this place or postcode</a></li>
 						{{/is }}
 						{{#is model.errors.ngr.type 'any.empty'}}
-						<li><a href="#national-grid-reference">Please provide a National Grid Reference</a></li>
+						<li><a href="#national-grid-reference">Please give a National Grid Reference (NGR)</a></li>
 						{{/is }}
 						{{#isAnd model.errors.easting model.errors.northing}}
-						<li><a href="#easting-northing">Please provide an easting and northing</a></li>
+						<li><a href="#easting-northing">Please give an easting and northing</a></li>
 						{{else is model.errors.easting.type 'any.empty'  }}
-						<li><a href="#easting-northing">Please provide an easting</a></li>
+						<li><a href="#easting-northing">Please give a valid easting</a></li>
 						{{else is model.errors.northing.type 'any.empty' }}
-						<li><a href="#easting-northing">Please provide a valid northing</a></li>
+						<li><a href="#easting-northing">Please give a valid northing</a></li>
 						{{/isAnd }}
 					</ul>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="form-group form-location-planning">
 					<fieldset>
 						<legend>
-							<h1 class="heading-large">Find your development location</h1>
+							<h1 class="heading-large">Find the location</h1>
 						</legend>
 
 						<div class="multiple-choice" data-target="place-postcode">
@@ -45,7 +45,7 @@
 								<span class="visuallyhidden">Place or postcode</span>
 								<span class="form-hint">For example, Bakewell or WA4 1AB</span>
 								{{#is model.errors.place.type 'any.empty'}}
-								<span class="error-message" id="placeAnyEmpty">Please provide a place or postcode</span>
+								<span class="error-message" id="placeAnyEmpty">Please give a place or postcode</span>
 								{{/is }}
 								{{#is model.errors.place.type 'any.notFound'}}
 								<span class="error-message" id="placeAnyEmpty">We can't find this place or postcode</span>
@@ -56,14 +56,14 @@
 
 						<div class="multiple-choice" data-target="national-grid-reference">
 							<input id="typeNgr" type="radio" name="type" value="ngr" {{#is model.type 'ngr'}}checked="checked"{{/is}}>
-							<label for="typeNgr">By National Grid Reference</label>
+							<label for="typeNgr">By National Grid Reference (NGR)</label>
 						</div>
 						<div class="panel panel-border-narrow{{#if model.errors.ngr}} form-group-error{{/if }}" id="national-grid-reference">
 							<label class="form-label" for="ngr">
 								<span class="visuallyhidden">National Grid Reference</span>
 								<span class="form-hint">For example, NY395557 (6, 8 or 12 digits)</span>
 								{{#is model.errors.ngr.type 'any.empty'}}
-								<span class="error-message">Please provide a National Grid Reference</span>
+								<span class="error-message">Please give a National Grid Reference (NGR)</span>
 								{{/is }}
 							</label>
 							<input class="form-control{{#if model.errors.ngr}} form-control-error{{/if }}" {{#if model.errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ model.ngr }}">
@@ -80,11 +80,11 @@
 										<span class="visuallyhidden">Easting and northing</span>
 										<span class="form-hint">For example, 123456 123456</span>
 										{{#isAnd model.errors.easting model.errors.northing}}
-										<span class="error-message">Please provide an easting and northing</span>
+										<span class="error-message">Please give an easting and northing</span>
 										{{else is model.errors.easting.type 'any.empty'  }}
-										<span class="error-message">Please provide an easting</span>
+										<span class="error-message">Please give a valid easting</span>
 										{{else is model.errors.northing.type 'any.empty' }}
-										<span class="error-message">Please provide a northing</span>
+										<span class="error-message">Please give a valid northing</span>
 										{{/isAnd }}
 									</legend>
 									<div class="form-group form-group-easting">
