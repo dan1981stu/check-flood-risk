@@ -7,13 +7,11 @@
 		<div class="column-two-thirds">
 
 			<h1 class="heading-xlarge">
-				We provide property flood risk information for England only
+				This service is for locations in England only
 			</h1>
 
-			{{#if model.errors.country.code}}
-			<p>It looks like this place is in {{ model.errors.country.name }}.</p>
-			<p>Flood probability information for Scotland is available from the <a href="">Scottish Environment Protection Agency</a></p>
-			{{/if }}
+			<p>This location is in {{ model.countryName }}.</p>
+			<p>Find <a href="">flood information for {{ model.countryName }}</a>.</p>
 
 		</div>
 

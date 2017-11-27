@@ -8,11 +8,11 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				const scenario = request.query.s ? request.query.s : 'a'
+				var model = { 'scenario' : request.query.s ? request.query.s : 'a' }
 
 				return reply.view('property/find-address', {
 					'pageTitle' : 'Find address - Property flood risk - GOV.UK',
-					'model' : { 'scenario' : scenario }
+					'model' : model
 				})
 
 			}
@@ -24,18 +24,19 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				const scenario = request.payload.scenario ? request.payload.scenario : 'a'
-				var premises = request.payload.premises
-				var postcode = request.payload.postcode
-				var model = modelData.getProperty(premises, postcode, scenario)
+				var model = modelData.getProperty(
+					request.payload.premises, 
+					request.payload.postcode, 
+					request.payload.scenario
+				)	
 				
 				// If we have an one or more existing addresses
 				if (model.hasExistingAddress) {
 
-					// If postcode is England
+					// Postcode is England
 					if (model.isEngland) {
 						return reply.redirect(
-							'/confirm-address?premises=' + model.premises + '&postcode=' + model.postcode.replace(/ /g,'-') + '&s='+ scenario
+							'/confirm-address?premises=' + model.premises + '&postcode=' + model.postcode.replace(/ /g,'-') + '&s='+ model.scenario
 						)
 					}
 
@@ -68,10 +69,14 @@ module.exports = [
 				},
 				failAction: function (request, reply, source, error) {
 
-					const scenario = request.payload.scenario ? request.payload.scenario : 'a'
-					var premises = request.payload.premises
-					var postcode = request.payload.postcode
-					var model = modelData.getProperty(premises, postcode, scenario, error)
+					// Pattern match validation fails
+
+					var model = modelData.getProperty(
+						request.payload.premises, 
+						request.payload.postcode, 
+						request.payload.scenario, 
+						error
+					)			
 					
 					return reply.view('property/find-address', {
 						'pageTitle' : 'Error: Find address - Property flood risk - GOV.UK',
@@ -88,16 +93,12 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				const scenario = request.query.s ? request.query.s : 'a'
-				const premises = request.query.premises ? request.query.premises : 'error'
-				const postcode = request.query.postcode ? request.query.postcode : 'error'
+				var model = modelData.getProperty(
+					request.query.premises ? request.query.premises : 'error', 
+					request.query.postcode ? request.query.postcode : 'error', 
+					request.query.s ? request.query.s : 'a'
+				)
 
-				if (premises === 'error' || postcode === 'error') {
-					return reply.view('404').code(404)
-				}
-				
-				var model = modelData.getProperty(premises, postcode, scenario)
-				
 				return reply.view('property/confirm-address', {
 					'pageTitle' : 'Select address - Property flood risk - GOV.UK',
 					'model' : model
@@ -126,11 +127,13 @@ module.exports = [
 					property: Joi.string().required()
 				},
 				failAction: function (request, reply, source, error) {
-
-					const scenario = request.payload.scenario ? request.payload.scenario : 'a'
-					var premises = request.payload.premises
-					var postcode = request.payload.postcode
-					var model = modelData.getProperty(premises, postcode, scenario, error)
+					
+					var model = modelData.getProperty(
+						request.payload.premises, 
+						request.payload.postcode, 
+						request.payload.scenario, 
+						error
+					)
 
 					return reply.view('property/confirm-address', {
 						'pageTitle' : 'Error: Select address - Property flood risk - GOV.UK',

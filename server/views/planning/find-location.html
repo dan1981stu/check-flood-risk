@@ -1,4 +1,4 @@
-<main {{#if model.errors}}class="js-error"{{/if }}>
+<main {{#if model.isError}}class="js-error"{{/if }}>
 
 	<a href="/guidance/flood-risk-assessment-for-planning-applications" class="link-back">Back</a> 
 		
@@ -6,7 +6,7 @@
 		<div class="grid-row no-bottom">
 			<div class="column-two-thirds no-bottom">
 				
-				{{#if model.errors}}
+				{{#if model.isError}}
 				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
 					<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
 					<ul class="error-summary-list">
@@ -37,7 +37,7 @@
 						</legend>
 
 						<div class="multiple-choice" data-target="place-postcode">
-							<input id="typePlace" type="radio" name="type" value="place" {{#is model.values.type 'place'}}checked="checked"{{/is}}>
+							<input id="typePlace" type="radio" name="type" value="place" {{#is model.type 'place'}}checked="checked"{{/is}}>
 							<label for="typePlace">By place or postcode</label>
 						</div>
 						<div class="panel panel-border-narrow{{#if model.errors.place}} form-group-error{{/if }}" id="place-postcode">
@@ -51,11 +51,11 @@
 								<span class="error-message" id="placeAnyEmpty">We can't find this place or postcode</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if model.errors.place}} form-control-error{{/if }}" {{#if model.errors.place}} aria-invalid="true"{{/if }} name="place" id="place" type="text" value="{{ model.values.place }}">
+							<input class="form-control{{#if model.errors.place}} form-control-error{{/if }}" {{#if model.errors.place}} aria-invalid="true"{{/if }} name="place" id="place" type="text" value="{{ model.place }}">
 						</div>
 
 						<div class="multiple-choice" data-target="national-grid-reference">
-							<input id="typeNgr" type="radio" name="type" value="ngr" {{#is model.values.type 'ngr'}}checked="checked"{{/is}}>
+							<input id="typeNgr" type="radio" name="type" value="ngr" {{#is model.type 'ngr'}}checked="checked"{{/is}}>
 							<label for="typeNgr">By National Grid Reference</label>
 						</div>
 						<div class="panel panel-border-narrow{{#if model.errors.ngr}} form-group-error{{/if }}" id="national-grid-reference">
@@ -66,11 +66,11 @@
 								<span class="error-message">Please provide a National Grid Reference</span>
 								{{/is }}
 							</label>
-							<input class="form-control{{#if model.errors.ngr}} form-control-error{{/if }}" {{#if model.errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ model.values.ngr }}">
+							<input class="form-control{{#if model.errors.ngr}} form-control-error{{/if }}" {{#if model.errors.ngr}} aria-invalid="true"{{/if }} name="ngr" type="text" id="ngr" value="{{ model.ngr }}">
 						</div>
 
 						<div class="multiple-choice" data-target="easting-northing">
-							<input id="typeEn" type="radio" name="type" value="en" {{#is model.values.type 'en'}}checked="checked"{{/is}}>
+							<input id="typeEn" type="radio" name="type" value="en" {{#is model.type 'en'}}checked="checked"{{/is}}>
 							<label for="typeEn">By easting and northing</label>
 						</div>
 						<div class="panel panel-border-narrow{{#isOr model.errors.easting model.errors.northing}} form-group-error{{/isOr }}" id="easting-northing">
@@ -92,7 +92,7 @@
 											<label class="form-label" for="easting">
 												<span class="font-small">Easting</span>
 											</label>
-											<input class="form-control{{#if model.errors.easting}} form-control-error{{/if }}" {{#if model.errors.easting}}aria-invalid="true"{{/if }} id="easting" name="easting" type="number" value="{{ model.values.easting }}">
+											<input class="form-control{{#if model.errors.easting}} form-control-error{{/if }}" {{#if model.errors.easting}}aria-invalid="true"{{/if }} id="easting" name="easting" type="number" value="{{ model.easting }}">
 										</div>
 									</div>
 									<div class="form-group form-group-northing">
@@ -100,7 +100,7 @@
 											<label class="form-label" for="northing">
 												<span class="font-small">Northing</span>
 											</label>
-											<input class="form-control{{#if model.errors.northing}} form-control-error{{/if }}" {{#if model.errors.northing}} aria-invalid="true"{{/if }} id="northing" name="northing" type="number" value="{{ model.values.northing }}">
+											<input class="form-control{{#if model.errors.northing}} form-control-error{{/if }}" {{#if model.errors.northing}} aria-invalid="true"{{/if }} id="northing" name="northing" type="number" value="{{ model.northing }}">
 										</div>
 									</div>
 								</fieldset>
@@ -111,6 +111,7 @@
 				
 				</div>
 
+				<input id="scenario" name="scenario" type="hidden" value="{{ model.scenario }}"/>
 				<input class="button" type="submit" value="Continue">
 
 			</div>

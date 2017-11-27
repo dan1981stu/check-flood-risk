@@ -4,10 +4,10 @@ var data = require('../data/data.json')
 // Get a location by its name
 exports.getProperty = function(premises, postcode, scenario, error) {
 
-	error = error || false
 	premises = premises || ''
 	postcode = postcode.replace(/-/g, ' ') || ''
 	scenario = scenario || 'a'
+	error = error || false
 
 	var model = {}, property = []
 

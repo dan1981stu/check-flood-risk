@@ -8,11 +8,15 @@ module.exports = [
 		path: '/flood-risk-assessment/find-location',
 		config: {
 			handler: function (request, reply) {
+				
+				var model = { 'type' : 'place' }
+
 				return reply.view('planning/find-location', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Find location - Check flood zone - GOV.UK',
-					'model' : { 'values' : { 'type' : 'place' }}
+					'model' : model
 				})
+
 			}
 		}
 	},
@@ -22,34 +26,42 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				// We have a place search
-				if (request.payload.type == 'place') {
+				var model = modelData.getLocation(
+					request.payload.type, 
+					request.payload.place,
+					request.payload.ngr,
+					request.payload.easting,
+					request.payload.northing,
+					request.payload.scenario
+				)
 
-					// Prototype only uses place to check if in England
-					var country = modelData.getCountry(request.payload.place)
+				// Search type is place
+				if (model.hasLocation) {
 
-					// We have an existing place that is in Scotalnd, Wales or Northern Ireland
-					if (country != null && country.code != 'e') {
+					// Location is in England
+					if (model.isEngland) {
+						return reply.redirect('/flood-risk-assessment/identify-site')
+					}
+					
+					// Location is in Scotland, Wales or Northern Ireland
+					else {
 						return reply.view('planning/alternate-service', {
 							'serviceName' : 'Check flood zone',
 							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-							'model' : { 'errors' : { 'country' : country } }
-						}) // .code(error ? 400 : 200) // HTTP status code depending on error
-					}
-
-					// Can't find the place
-					if (country == null) {
-						return reply.view('planning/find-location', {
-							'serviceName' : 'Check flood zone',
-							'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-							'model' : { 'errors'  : { 'place' : { 'type' : 'any.notFound', 'message' : '' } }, 'values' : { 'type' : 'place', 'place' : request.payload.place } }
+							'model' : model
 						}) // .code(error ? 400 : 200) // HTTP status code depending on error
 					}
 
 				}
 
-				// Valid place and other search types
-				return reply.redirect('/flood-risk-assessment/identify-site')
+				// Can't find the location
+				else {
+					return reply.view('planning/find-location', {
+						'serviceName' : 'Check flood zone',
+						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
+						'model' : model
+					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+				}
 
 			},
 			validate: {
@@ -80,16 +92,23 @@ module.exports = [
 					type: Joi.string()
 				},
 				failAction: function (request, reply, source, error) {
-					var errors, values
-					if(error && error.data) {
-						errors = utilities.extractValidationErrors(error) // the error field + message
-						values = utilities.getFormInputValues(error) // avoid wiping form data
-					}
+
+					var model = modelData.getLocation(
+						request.payload.type, 
+						request.payload.place,
+						request.payload.ngr,
+						request.payload.easting,
+						request.payload.northing,
+						request.payload.scenario,
+						error
+					)
+
 					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
 						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
-						'model' : { 'errors'  : errors, 'values' : values }
+						'model' : model
 					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+
 				}
 			}
 		}
