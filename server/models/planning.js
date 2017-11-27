@@ -80,6 +80,12 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 	
 	}
 
+	// Add lat long for location.
+	// Mytholmroyd hardcoded in prototype
+	if (model.hasLocation) {
+		model['lonLat'] = '-1.9837,53.7309'
+	}
+
 	// If patern match error add error details
 	if (error) {
 		var errors
@@ -103,7 +109,6 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 			}
 		}
 	}
-
 
 	// Build and return model
 	model['type'] = type

@@ -1,9 +1,30 @@
 <main>
 
-	<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
-		
-	<h1 class="heading-large">Identify your site boundary</h1>
+	<div class="grid-row">
+		<div class="column-full">
+			<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
+				
+			<h1 class="heading-large">Identify the site boundary</h1>
 
-	<p>Needs service standard compliant screen with polygon feature instead of marker placement</p>
-		
+			<p class="bold-small">Map centered on &apos;Mytholmroyd&apos;. <a href="/flood-risk-assessment/find-location">Change</a></p>
+				
+			<figure class="map map-planning" id="map">
+				<div class="map-container-large"></div>
+				<figcaption class="visuallyhidden">Site boundary</figcaption>
+			</figure>
+
+		</div>
+	</div>
+
 </main>
+
+{{#section 'bodyScripts' }}
+
+<!-- This content to go at end of body -->
+<script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+<script>
+	var centre = {{{ json model.lonLat }}}
+</script>
+<script src="/public/javascripts/map-planning.js"></script>
+
+{{/section }}

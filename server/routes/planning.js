@@ -40,7 +40,7 @@ module.exports = [
 
 					// Location is in England
 					if (model.isEngland) {
-						return reply.redirect('/flood-risk-assessment/identify-site')
+						return reply.redirect('/flood-risk-assessment/identify-site?lonLat=' + model.lonLat)
 					}
 					
 					// Location is in Scotland, Wales or Northern Ireland
@@ -118,10 +118,24 @@ module.exports = [
 		path: '/flood-risk-assessment/identify-site',
 		config: {
 			handler: function (request, reply) {
+
+				var model = {
+					'lonLat' : JSON.parse('[' + request.query.lonLat + ']')
+				}
+
+				// Logic if lonLat is in error or outside England
+
+				// lonLat is in England
 				return reply.view('planning/identify-site', {
 					'serviceName' : 'Check flood zone',
-					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK'
+					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK',
+					'model' : model
 				})
+
+			},
+			cors: {
+				origin: ['*'],
+				additionalHeaders: ['cache-control', 'x-requested-with']
 			}
 		}
 	}
