@@ -1,4 +1,4 @@
-// Prototype wide javascript
+// Prototype javascript
 
 var application = {};
 (function(){

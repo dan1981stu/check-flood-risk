@@ -28,6 +28,7 @@ $path: "/public/";
   height:275px;
   @include media(tablet) {
     height:576px;
+    border:1px solid $border-colour;
   }
 }
 
@@ -108,6 +109,35 @@ $path: "/public/";
   z-index:2;
 }
 
+// Map control start / reset drawing
+
+.ol-draw-reset,
+.ol-draw-start {
+  position:absolute;
+  @include core-16;
+  color:$link-colour;
+  background:white;
+  line-height:1em;
+  left:75px;
+  top:10px;
+  z-index:1;
+  border:0;
+  height: 30px;
+  padding:0 5px;
+  cursor:pointer;
+}
+
+.ol-draw-reset:hover,
+.ol-draw-start:hover {
+  background:$focus-colour;
+}
+
+.ol-draw-reset[disabled="disabled"],
+.ol-draw-start[disabled="disabled"] {
+  display:none;
+}
+
+
 // Map control fullscreen
 
 .ol-full-screen-false,
@@ -181,6 +211,9 @@ $path: "/public/";
     right:9px;
   }
 } 
+.map-control-key:hover {
+  background:$focus-colour;
+}
 
 // Map copyright statement
 

@@ -13,6 +13,20 @@
 				<figcaption class="visuallyhidden">Site boundary</figcaption>
 			</figure>
 
+			<div class="form-group">
+				<input id="scenario" name="scenario" type="hidden" value=""/>
+				<input class="button" type="submit" value="Get report">
+			</div>
+
+			<details>
+				<summary><span class="summary">Bookmark and share this site boundary</span></summary>
+				<div class="panel panel-border-narrow">
+					<div class="form-group">
+						<textarea style="width:100%" readonly>https://flood-risk-planning.service.gov.uk/site=?lonLat=-1.9837,53.7309&amp;zoom=X&amp;boundary=[1,1,1,2,3,4]</textarea>
+					</div>
+				</div>
+			</details>
+
 		</div>
 	</div>
 
@@ -21,7 +35,7 @@
 {{#section 'bodyScripts' }}
 
 <!-- This content to go at end of body -->
-<script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+<script src="https://openlayers.org/en/v4.5.0/build/ol.js"></script>
 <script>
 	var centre = {{{ json model.lonLat }}}
 </script>

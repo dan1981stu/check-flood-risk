@@ -2434,6 +2434,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .map-container-large {
     height: 576px;
+    border: 1px solid #bfc1c3;
   }
 }
 
@@ -2537,6 +2538,44 @@ table.select-areas th {
   z-index: 2;
 }
 
+.ol-draw-reset,
+.ol-draw-start {
+  position: absolute;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+  color: #005ea5;
+  background: white;
+  line-height: 1em;
+  left: 75px;
+  top: 10px;
+  z-index: 1;
+  border: 0;
+  height: 30px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+@media (min-width: 641px) {
+  .ol-draw-reset,
+  .ol-draw-start {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.ol-draw-reset:hover,
+.ol-draw-start:hover {
+  background: #ffbf47;
+}
+
+.ol-draw-reset[disabled="disabled"],
+.ol-draw-start[disabled="disabled"] {
+  display: none;
+}
+
 .ol-full-screen-false,
 .ol-full-screen-true {
   position: absolute;
@@ -2632,6 +2671,10 @@ table.select-areas th {
   .map-key-open .map-control-key:after {
     right: 9px;
   }
+}
+
+.map-control-key:hover {
+  background: #ffbf47;
 }
 
 .map-key-copyright {

@@ -15,6 +15,31 @@ var copyright = document.createElement('span')
 copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 copyright.classList.add('map-key-copyright')
 
+// Add key
+var key = document.createElement('div')
+key.classList.add('map-key')
+
+var keyToggle = document.createElement('button')
+keyToggle.appendChild(document.createTextNode('Key'))
+keyToggle.setAttribute('title','Show key')
+keyToggle.classList.add('map-control','map-control-key')
+
+var keyCopy = document.createElement('div')
+keyCopy.classList.add('map-key-copy')
+
+var copyright = document.createElement('span')
+copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+copyright.classList.add('map-key-copyright')
+
+keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
+keyCopy.appendChild(copyright)
+
+key.appendChild(keyToggle)
+key.appendChild(keyCopy)
+
+mapContainerInner.appendChild(key)
+
+// Add inner comtainer
 mapContainer.appendChild(mapContainerInner)
 
 // Reference require to redraw map
@@ -24,20 +49,73 @@ var init = function() {
 
     // Function used to style individual features
     var styleFunction = function(feature, resolution) {
-
         return style;
-    };
+    }
+
+    // Drawing styles
+    var styleDraw = new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.5)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#005EA5',
+            width: 3
+        }),
+        image: new ol.style.Icon({
+            opacity: 1,
+            size: [32,32],
+            scale: 0.5,
+            src: '/public/map-draw-cursor-2x.png'
+        })
+    })
+    var styleDrawComplate = new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.5)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#B10E1E',
+            width: 3
+        }),
+        image: new ol.style.Icon({
+            opacity: 1,
+            size : [32,32],
+            scale: 0.5,
+            src: '/public/map-draw-cursor-2x.png'
+        })
+    })
+    var styleDrawModify = new ol.style.Style({
+        fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.5)'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#FFBF47',
+            width: 3
+        }),
+        image: new ol.style.Icon({
+            opacity: 1,
+            size : [32,32],
+            scale: 0.5,
+            src: '/public/map-draw-cursor-2x.png'
+        })
+    })
 
     // Layer: Background map
     var tile = new ol.layer.Tile({
         source: new ol.source.OSM()
-    });
+    })
+
+    // Layer: Polygon vector
+    var source = new ol.source.Vector()
+    var vector = new ol.layer.Vector({
+        source: source,
+        style: styleDrawComplate
+    })
 
     // The map view object
     var view = new ol.View({
         center: ol.proj.fromLonLat(centre),
         enableRotation: false,
-        zoom: 17
+        zoom: 15
     });
 
     // Zoom buttons
@@ -57,41 +135,65 @@ var init = function() {
         element: fullScreenElement
     })
 
-    // Zoom reset button
+    // Draw reset button
 
-    var zoomResetElement = document.createElement('button')
-    zoomResetElement.appendChild(document.createTextNode('Zoom reset'))
-    zoomResetElement.className = 'ol-zoom-reset'
-    zoomResetElement.setAttribute('title','Reset location')
-    var zoomReset = new ol.control.Control({
-        element: zoomResetElement
+    var drawResetElement = document.createElement('button')
+    drawResetElement.appendChild(document.createTextNode('Clear drawing'))
+    drawResetElement.className = 'ol-draw-reset'
+    drawResetElement.setAttribute('title','Clear this drawing')
+    drawResetElement.setAttribute('disabled','disabled')
+    var drawReset = new ol.control.Control({
+        element: drawResetElement
+    })
+
+    // Draw start button
+
+    var drawStartElement = document.createElement('button')
+    drawStartElement.appendChild(document.createTextNode('Continue'))
+    drawStartElement.className = 'ol-draw-start'
+    drawStartElement.setAttribute('title','Continue drawing')
+    drawStartElement.setAttribute('disabled','disabled')
+    var drawStart = new ol.control.Control({
+        element: drawStartElement
     })
 
     // Interactions
-
     var interactions = ol.interaction.defaults({
         altShiftDragRotate:false, 
-        pinchRotate:false
+        pinchRotate:false,
+        doubleClickZoom :false
+    })
+    var modify = new ol.interaction.Modify({
+        source: source,
+        style: styleDrawModify
+    })
+    var draw = new ol.interaction.Draw({
+        source: source,
+        type: 'Polygon',
+        style: styleDraw
+    })
+    var snap = new ol.interaction.Snap({
+        source: source
     })
 
     // Add and remove controls
-
     var controls = ol.control.defaults({
         zoom: false,
         rotate: false,
         attribution: false
     }).extend([
         fullScreen,
-        zoomReset,
+        drawReset,
+        drawStart,
         zoom
     ])
 
     // Render map
     map = new ol.Map({
         target: 'map-container-inner',
-        interactions: interactions,
+        interactions: interactions.extend([draw, snap, modify]),
         controls: controls,
-        layers: [tile],
+        layers: [tile, vector],
         view: view
     })
 
@@ -110,9 +212,33 @@ var init = function() {
     document.addEventListener('mozfullscreenchange', fullScreenHandler)
     document.addEventListener('MSFullscreenChange', fullScreenHandler)
 
-    // Apple greyscale filter.
-    tile.on('postcompose', function(e) {
-        greyscale(e.context)
+    // Deactivate draw event after first polygon
+    draw.on('drawend', function (e) {
+        map.removeInteraction(draw)
+        var reset = document.getElementsByClassName('ol-draw-reset')[0]
+        reset.setAttribute('disabled','')      
+    })
+
+    // Finish drawing on escape
+    draw.on('drawstart', function(e) {
+        console.log('Features: ' + vector.getSource().getFeatures().length)
+        document.addEventListener('keyup', function() {
+            if (event.keyCode === 27) {
+                draw.finishDrawing()
+                // console.log('Features: ' + vector.getSource().getFeatures().length)
+            }
+        })
+    })
+
+    // Toggle key event
+    keyToggle.addEventListener('click', function(e) {
+        e.preventDefault()
+        key.classList.toggle('map-key-open')
+    })
+
+    // Apply greyscale filter.
+    tile.on('postcompose', function(event) {
+        //greyscale(event.context);
     })
 
 }
@@ -125,25 +251,26 @@ function getParameterByName(name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
-// Function applies greyscale to every pixel in canvas
-// Ref: http://jsfiddle.net/geraldo/vyde6f83/3/
+// function applies greyscale to every pixel in canvas
 function greyscale(context) {
-    var width = context.canvas.width
-    var height = context.canvas.height
-    var inputData = context.getImageData(0, 0, width, height).data
-    var canvas = document.getElementsByClassName('ol-unselectable')[0]
-    var ctx = canvas.getContext('2d')
-    ctx.fillStyle = 'rgba(0, 0, 0, 0)'
-    var myImageData = ctx.createImageData(width, height)
-    var d = myImageData.data
-    for (i = 0; i < inputData.length; i += 4) {
-        var r = inputData[i]
-        var g = inputData[i + 1]
-        var b = inputData[i + 2]
+    var canvas = context.canvas
+    var width = canvas.width
+    var height = canvas.height
+    var imageData = context.getImageData(0, 0, width, height)
+    var data = imageData.data
+    for (i=0; i<data.length; i += 4) {
+        var r = data[i]
+        var g = data[i + 1]
+        var b = data[i + 2]
+        // CIE luminance for the RGB
         var v = 0.2126 * r + 0.7152 * g + 0.0722 * b
-        d[i + 0] = v
-        d[i + 1] = v
-        d[i + 2] = v
-        d[i + 3] = 255
+        // Show white color instead of black color while loading new tiles:
+        if(v === 0.0)
+        v = 255.0
+        data[i+0] = v// Red
+        data[i+1] = v // Green
+        data[i+2] = v // Blue
+        data[i+3] = 255 // Alpha
     }
+    context.putImageData(imageData,0,0)
 }
