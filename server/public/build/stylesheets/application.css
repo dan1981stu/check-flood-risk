@@ -2415,26 +2415,38 @@ table.select-areas th {
   }
 }
 
-@media (min-width: 641px) {
-  .map-link {
-    display: none;
-  }
-}
-
 .map-container {
   position: relative;
   height: 275px;
   border: 1px solid #bfc1c3;
 }
 
-.map-container-large {
-  height: 275px;
+.map-container-planning {
+  border: 1px solid #bfc1c3;
 }
 
 @media (min-width: 641px) {
-  .map-container-large {
+  .map-container-planning {
     height: 576px;
-    border: 1px solid #bfc1c3;
+  }
+}
+
+.map-container.map-container-fullscreen,
+.map-container-planning.map-container-fullscreen {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+@media (min-width: 641px) {
+  .map-link {
+    display: none;
   }
 }
 
@@ -2525,16 +2537,14 @@ table.select-areas th {
 .ol-zoom-in:hover,
 .ol-zoom-out:hover,
 .ol-zoom-reset:hover,
-.ol-full-screen-false:hover,
-.ol-full-screen-true:hover {
+.ol-full-screen:hover {
   background-color: #ffbf47;
 }
 
 .ol-zoom-in:focus,
 .ol-zoom-out:focus,
 .ol-zoom-reset:focus,
-.ol-full-screen-false:focus,
-.ol-full-screen-true:focus {
+.ol-full-screen:focus {
   z-index: 2;
 }
 
@@ -2576,8 +2586,7 @@ table.select-areas th {
   display: none;
 }
 
-.ol-full-screen-false,
-.ol-full-screen-true {
+.ol-full-screen {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -2592,8 +2601,7 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .ol-full-screen-false,
-  .ol-full-screen-true {
+  .ol-full-screen {
     height: 30px;
     width: 30px;
   }
@@ -2640,7 +2648,7 @@ table.select-areas th {
   right: 5px;
   width: 13px;
   height: 10px;
-  background: white url("/public/map-legend-2x.png") no-repeat;
+  background: transparent url("/public/map-legend-2x.png") no-repeat;
   background-size: 100%;
   background-position: top center;
 }
@@ -3112,6 +3120,12 @@ a.subsection-header:focus .font-small {
   .error-message-group .form-group {
     margin-bottom: 30px;
   }
+}
+
+.form-control-readonly {
+  width: 100%;
+  border-color: #bfc1c3;
+  color: #6f777b;
 }
 
 @media (min-width: 641px) {

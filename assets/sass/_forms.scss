@@ -47,3 +47,8 @@ $path: "/public/";
     }
   }
 }
+.form-control-readonly {
+  width:100%;
+  border-color:$border-colour;
+  color:$secondary-text-colour;
+}

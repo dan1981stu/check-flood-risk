@@ -11,6 +11,9 @@ var mapContainerInner = document.createElement('div')
 mapContainerInner.classList.add('map-container-inner')
 mapContainerInner.id = 'map-container-inner'
 
+
+// Add key
+
 var key = document.createElement('div')
 key.classList.add('map-key')
 
@@ -18,6 +21,10 @@ var keyToggle = document.createElement('button')
 keyToggle.appendChild(document.createTextNode('Key'))
 keyToggle.setAttribute('title','Show key')
 keyToggle.classList.add('map-control','map-control-key')
+keyToggle.addEventListener('click', function(e) {
+    e.preventDefault()
+    key.classList.toggle('map-key-open')
+})
 
 var keyCopy = document.createElement('div')
 keyCopy.classList.add('map-key-copy')
@@ -241,7 +248,14 @@ var init = function() {
 
     var fullScreenElement = document.createElement('button')
     fullScreenElement.appendChild(document.createTextNode('Full screen'))
-    var fullScreen = new ol.control.FullScreen({
+    fullScreenElement.className = 'ol-full-screen'
+    fullScreenElement.addEventListener('click', function(e) {
+        e.preventDefault()
+        mapContainer.classList.toggle('map-container-fullscreen')
+        this.classList.toggle('ol-full-screen-open')
+        map.updateSize()
+    })
+    var fullScreen = new ol.control.Control({ // Use fullscreen for HTML Fullscreen API
         element: fullScreenElement
     })
 
@@ -299,40 +313,40 @@ var init = function() {
     tileSelected.on('precompose', function(e){
         if (featureSelected) {
             // Save initial clipping state of canvas
-            e.context.save();
+            e.context.save()
             // Draw the selected border
-            e.vectorContext.drawFeature(featureSelected, styleSelected);
+            e.vectorContext.drawFeature(featureSelected, styleSelected)
             if (resolution > 19) {
-                e.vectorContext.drawFeature(featureSelected, styleFunction(featureSelected,resolution));
+                e.vectorContext.drawFeature(featureSelected, styleFunction(featureSelected,resolution))
             }
             // Set this polygon as a clipping mask for this layers background map
-            e.context.clip();
+            e.context.clip()
         }	
     });
 
     // Restore the canvas so no subsequent content is clipped/masked
     tileSelected.on('postcompose', function(e) {
-        e.context.restore();
-    });	
+        e.context.restore()
+    })
 
     // Clip intersect features to the shape of the selected feature
     targetAreasIntersecting.on('precompose', function(e){
         if (featureSelected) {
             // Save initial clipping state of canvas
-            e.context.save();
+            e.context.save()
             // Draw the selected feature with no/transparent border
             e.vectorContext.drawFeature(featureSelected, new ol.style.Style({
                 stroke: new ol.style.Stroke({ color: 'transparent', width: 0, miterLimit: 2, lineJoin: 'round' })
-            }));
+            }))
             // Set this polygon as a clipping mask for this layers features
-            e.context.clip();	
+            e.context.clip()
         }
-    });
+    })
     
     // Restore the canvas so no subsequent content is clipped/masked
     targetAreasIntersecting.on('postcompose', function(e){
-        e.context.restore();
-    });
+        e.context.restore()
+    })
 
     // Update layer opacity setting for different map resolutions
     map.on('moveend', function(){
@@ -346,15 +360,15 @@ var init = function() {
         else if (resolution > 19) { layerOpacity = 0.85 } 
         else if (resolution > 9) { layerOpacity = 0.7 }
         
-        targetAreas.setOpacity(layerOpacity);
-        targetAreasIntersecting.setOpacity(layerOpacity);
+        targetAreas.setOpacity(layerOpacity)
+        targetAreasIntersecting.setOpacity(layerOpacity)
     });
 
     // Change pointer type and highlight style
     map.on('pointermove', function (e) {
-        var pixel = map.getEventPixel(e.originalEvent);
-        var hit = map.hasFeatureAtPixel(pixel);
-        map.getViewport().style.cursor = hit ? 'pointer' : '';
+        var pixel = map.getEventPixel(e.originalEvent)
+        var hit = map.hasFeatureAtPixel(pixel)
+        map.getViewport().style.cursor = hit ? 'pointer' : ''
     });
 
     // When main source has loaded if there is a selected feature
@@ -367,7 +381,7 @@ var init = function() {
         if (lonLat.length) {
             map.getView().setCenter(ol.proj.fromLonLat(lonLat))
         } else {
-            map.getView().fit(extent, map.getSize());
+            map.getView().fit(extent, map.getSize())
         }
 
         /*
@@ -389,29 +403,7 @@ var init = function() {
             //map.getView().fit(sourceTargetAreas.getExtent());
         }
         */
-    });
-
-    // Toggle key event
-
-    keyToggle.addEventListener('click', function(e) {
-        e.preventDefault()
-        key.classList.toggle('map-key-open')
     })
-
-    // Full screen event
-
-    var fullScreenHandler = function () {
-        // Update extent and redraw map
-        if (!lonLat.length) {
-            map.getView().fit(extent, map.getSize())
-        }
-        map.updateSize()
-    }
-
-    document.addEventListener('fullscreenchange', fullScreenHandler)
-    document.addEventListener('webkitfullscreenchange', fullScreenHandler)
-    document.addEventListener('mozfullscreenchange', fullScreenHandler)
-    document.addEventListener('MSFullscreenChange', fullScreenHandler)
 
 }
 

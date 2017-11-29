@@ -16,6 +16,7 @@ copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">O
 copyright.classList.add('map-key-copyright')
 
 // Add key
+
 var key = document.createElement('div')
 key.classList.add('map-key')
 
@@ -23,6 +24,10 @@ var keyToggle = document.createElement('button')
 keyToggle.appendChild(document.createTextNode('Key'))
 keyToggle.setAttribute('title','Show key')
 keyToggle.classList.add('map-control','map-control-key')
+keyToggle.addEventListener('click', function(e) {
+    e.preventDefault()
+    key.classList.toggle('map-key-open')
+})
 
 var keyCopy = document.createElement('div')
 keyCopy.classList.add('map-key-copy')
@@ -83,6 +88,19 @@ var init = function() {
             src: '/public/map-draw-cursor-2x.png'
         })
     })
+    var styleDrawComplateGeometry = new ol.style.Style({
+        image: new ol.style.Icon({
+            opacity: 1,
+            size : [32,32],
+            scale: 0.5,
+            src: '/public/map-draw-cursor-2x.png'
+        }),
+        geometry: function(feature) {
+          // return the coordinates of the first ring of the polygon
+          var coordinates = feature.getGeometry().getCoordinates()[0];
+          return new ol.geom.MultiPoint(coordinates);
+        }
+    })
     var styleDrawModify = new ol.style.Style({
         fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.5)'
@@ -108,7 +126,7 @@ var init = function() {
     var source = new ol.source.Vector()
     var vector = new ol.layer.Vector({
         source: source,
-        style: styleDrawComplate
+        style: [styleDrawComplate, styleDrawComplateGeometry]
     })
 
     // The map view object
@@ -131,7 +149,14 @@ var init = function() {
 
     var fullScreenElement = document.createElement('button')
     fullScreenElement.appendChild(document.createTextNode('Full screen'))
-    var fullScreen = new ol.control.FullScreen({
+    fullScreenElement.className = 'ol-full-screen'
+    fullScreenElement.addEventListener('click', function(e) {
+        e.preventDefault()
+        mapContainer.classList.toggle('map-container-fullscreen')
+        this.classList.toggle('ol-full-screen-open')
+        map.updateSize()
+    })
+    var fullScreen = new ol.control.Control({ // Use fullscreen for HTML Fullscreen API
         element: fullScreenElement
     })
 
@@ -201,39 +226,36 @@ var init = function() {
     // Map events
     //
 
-    // Full screen event
-
-    var fullScreenHandler = function () {
-        map.updateSize()
-    }
-
-    document.addEventListener('fullscreenchange', fullScreenHandler)
-    document.addEventListener('webkitfullscreenchange', fullScreenHandler)
-    document.addEventListener('mozfullscreenchange', fullScreenHandler)
-    document.addEventListener('MSFullscreenChange', fullScreenHandler)
-
-    // Deactivate draw event after first polygon
+    // Deactivate draw interaction after first polygon
     draw.on('drawend', function (e) {
         map.removeInteraction(draw)
-        var reset = document.getElementsByClassName('ol-draw-reset')[0]
-        reset.setAttribute('disabled','')      
     })
 
     // Finish drawing on escape
     draw.on('drawstart', function(e) {
-        console.log('Features: ' + vector.getSource().getFeatures().length)
         document.addEventListener('keyup', function() {
             if (event.keyCode === 27) {
                 draw.finishDrawing()
-                // console.log('Features: ' + vector.getSource().getFeatures().length)
             }
         })
     })
 
-    // Toggle key event
-    keyToggle.addEventListener('click', function(e) {
-        e.preventDefault()
-        key.classList.toggle('map-key-open')
+    // Feature added
+    source.on('addfeature', function (e) {
+        var feature = e.feature
+        var coordinates = feature.getGeometry().getCoordinates()[0]
+
+        // Feature too small
+        if (coordinates.length < 4) {
+            source.removeFeature(feature)
+            map.addInteraction(draw)
+        } 
+        
+        // Feature ok
+        else {
+            var reset = document.getElementsByClassName('ol-draw-reset')[0]
+            reset.setAttribute('disabled','') 
+        }
     })
 
     // Apply greyscale filter.

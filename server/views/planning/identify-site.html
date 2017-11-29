@@ -1,31 +1,53 @@
 <main>
 
-	<div class="grid-row">
-		<div class="column-full">
+	<div class="grid-row no-bottom">
+		<div class="column-two-thirds no-bottom">
+
 			<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
-				
-			<h1 class="heading-large">Identify the site boundary</h1>
 
-			<p class="bold-small">Map centered on &apos;Mytholmroyd&apos;. <a href="/flood-risk-assessment/find-location">Change</a></p>
-				
-			<figure class="map map-planning" id="map">
-				<div class="map-container-large"></div>
-				<figcaption class="visuallyhidden">Site boundary</figcaption>
-			</figure>
-
-			<div class="form-group">
-				<input id="scenario" name="scenario" type="hidden" value=""/>
-				<input class="button" type="submit" value="Get report">
+			<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+				<h1 class="heading-medium error-summary-heading" id="error-summary-heading">There was a problem</h1>
+				<ul class="error-summary-list">
+					<li><a href="#place">Site boundary has not been drawn</a></li>
+				</ul>
 			</div>
 
-			<details>
-				<summary><span class="summary">Bookmark and share this site boundary</span></summary>
-				<div class="panel panel-border-narrow">
+		</div>
+	</div>
+
+	<div class="grid-row">
+		<div class="column-full">
+				
+			<form action="/flood-risk-assessment/find-location" autocomplete="off" class="form" method="post">
+
+				<fieldset>
+
+					<legend>
+						<h1 class="heading-large">Identify the site boundary</h1>
+					</legend>
+				
+					<p class="bold-small">Map centered on &apos;Mytholmroyd&apos;. <a href="/flood-risk-assessment/find-location">Change</a></p>
+						
+					<figure class="map" id="map">
+						<div class="map-container map-container-planning"></div>
+						<figcaption class="visuallyhidden">Site boundary</figcaption>
+					</figure>
+
 					<div class="form-group">
-						<textarea style="width:100%" readonly>https://flood-risk-planning.service.gov.uk/site=?lonLat=-1.9837,53.7309&amp;zoom=X&amp;boundary=[1,1,1,2,3,4]</textarea>
+						<label class="form-label" for="link">
+							Bookmark or share the boundary
+						</label>
+						<input class="form-control form-control-readonly" name="link" id="link" value="https://flood-risk-planning.service.gov.uk/site=?lonLat=-1.9837,53.7309&amp;zoom=X&amp;boundary=[1,1,1,2,3,4]" readonly></input>
 					</div>
-				</div>
-			</details>
+
+					<div class="form-group">
+						<input id="scenario" name="scenario" type="hidden" value=""/>
+						<input class="button" type="submit" value="Get report">
+					</div>
+
+				</fieldset>
+
+			</form>
 
 		</div>
 	</div>
