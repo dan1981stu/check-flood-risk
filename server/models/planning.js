@@ -123,7 +123,7 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 }
 
 // Get a location by its name
-exports.getBoundary = function(lonLat) {
+exports.getBoundary = function(hasBoundary, lonLat) {
 
 	var model = { }
 

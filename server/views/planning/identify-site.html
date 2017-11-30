@@ -1,5 +1,7 @@
 <main>
 
+	<p>{{ json model }}</p>
+
 	<div class="grid-row no-bottom">
 		<div class="column-two-thirds no-bottom">
 
@@ -56,6 +58,7 @@
 
 					<div class="form-group">
 						<input id="scenario" name="scenario" type="hidden" value=""/>
+						<input id="hasBoundary" name="hasBoundary" type="hidden" value="{{ model.hasBoundary }}"/>
 						<input class="button" type="submit" value="Get report">
 					</div>
 

@@ -37,7 +37,7 @@ copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">O
 copyright.classList.add('map-key-copyright')
 
 //keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
-keyCopy.innerHTML = '<h2 class="bold-medium">Map key</h2>'
+keyCopy.innerHTML = '<h2 class="bold-medium">Key</h2>'
 keyCopy.appendChild(copyright)
 
 key.appendChild(keyToggle)

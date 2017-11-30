@@ -119,7 +119,10 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				var model = modelData.getBoundary(request.query.lonLat)
+				var model = modelData.getBoundary(
+					false,
+					request.query.lonLat
+				)
 
 				// Logic if lonLat is in error or outside England
 
@@ -134,6 +137,29 @@ module.exports = [
 			cors: {
 				origin: ['*'],
 				additionalHeaders: ['cache-control', 'x-requested-with']
+			}
+		}
+	},
+	{
+		method: 'POST',
+		path: '/flood-risk-assessment/identify-site',
+		config: {
+			handler: function (request, reply) {
+				
+				var model = modelData.getBoundary(
+					request.payload.hasBoundary,
+					request.query.lonLat
+				)
+
+				// Check boundary has been drawn
+				if (!model.hasBoundary) {
+					return reply.view('planning/identify-site', {
+						'serviceName' : 'Check flood zone',
+						'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK',
+						'model' : model
+					})
+				}
+
 			}
 		}
 	}
