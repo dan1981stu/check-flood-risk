@@ -121,3 +121,17 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 	return model
 
 }
+
+// Get a location by its name
+exports.getBoundary = function(lonLat) {
+
+	var model = { }
+
+	model['isError'] = false
+	model['hasBoundary'] = false
+	model['lonLat'] = JSON.parse('[' + lonLat + ']')
+
+	return model
+
+}
+	

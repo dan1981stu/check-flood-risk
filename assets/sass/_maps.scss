@@ -8,7 +8,7 @@ $path: "/public/";
   margin-top:-1px;
   @include media(tablet) {
     margin-top:0;
-    padding-bottom:15px;
+    padding-bottom:5px;
   }
 }
 .map-container {
@@ -124,8 +124,8 @@ $path: "/public/";
 .ol-draw-start {
   position:absolute;
   @include core-16;
-  color:$link-colour;
-  background:white;
+  color:white;
+  background:$link-colour;
   line-height:1em;
   left:75px;
   top:10px;
@@ -172,13 +172,13 @@ $path: "/public/";
 .map-control-key {
   @include core-16;
   position: absolute;
-  background:white;
+  background:$link-colour;
   z-index:2;
   left:10px;
   top:10px;
   text-align:left;
   border:0;
-  color:$link-colour;
+  color:white;
   cursor:pointer;
   -webkit-appearance:none;
   padding: 0px 22px 0px 6px;

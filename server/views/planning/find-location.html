@@ -45,10 +45,10 @@
 								<span class="visuallyhidden">Place or postcode</span>
 								<span class="form-hint">For example, Bakewell or WA4 1AB</span>
 								{{#is model.errors.place.type 'any.empty'}}
-								<span class="error-message" id="placeAnyEmpty">Please give a place or postcode</span>
+								<span class="error-message">Please give a place or postcode</span>
 								{{/is }}
 								{{#is model.errors.place.type 'any.notFound'}}
-								<span class="error-message" id="placeAnyEmpty">This place or postcode isn't listed</span>
+								<span class="error-message">This place or postcode isn't listed</span>
 								{{/is }}
 							</label>
 							<input class="form-control{{#if model.errors.place}} form-control-error{{/if }}" {{#if model.errors.place}} aria-invalid="true"{{/if }} name="place" id="place" type="text" value="{{ model.place }}">

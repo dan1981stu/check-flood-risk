@@ -52,3 +52,7 @@ $path: "/public/";
   border-color:$border-colour;
   color:$secondary-text-colour;
 }
+.form-group-map-error {
+  @extend .form-group-error;
+  margin-right:0;
+}

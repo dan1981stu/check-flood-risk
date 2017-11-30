@@ -1872,14 +1872,14 @@ input[type=number] {
   width: 70px;
 }
 
-.form-group-error {
+.form-group-error, .form-group-map-error {
   margin-right: 15px;
   border-left: 4px solid #b10e1e;
   padding-left: 10px;
 }
 
 @media (min-width: 641px) {
-  .form-group-error {
+  .form-group-error, .form-group-map-error {
     border-left: 5px solid #b10e1e;
     padding-left: 15px;
   }
@@ -2411,7 +2411,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .map {
     margin-top: 0;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
   }
 }
 
@@ -2556,8 +2556,8 @@ table.select-areas th {
   text-transform: none;
   font-size: 14px;
   line-height: 1.14286;
-  color: #005ea5;
-  background: white;
+  color: white;
+  background: #005ea5;
   line-height: 1em;
   left: 75px;
   top: 10px;
@@ -2614,13 +2614,13 @@ table.select-areas th {
   font-size: 14px;
   line-height: 1.14286;
   position: absolute;
-  background: white;
+  background: #005ea5;
   z-index: 2;
   left: 10px;
   top: 10px;
   text-align: left;
   border: 0;
-  color: #005ea5;
+  color: white;
   cursor: pointer;
   -webkit-appearance: none;
   padding: 0px 22px 0px 6px;
@@ -3126,6 +3126,10 @@ a.subsection-header:focus .font-small {
   width: 100%;
   border-color: #bfc1c3;
   color: #6f777b;
+}
+
+.form-group-map-error {
+  margin-right: 0;
 }
 
 @media (min-width: 641px) {

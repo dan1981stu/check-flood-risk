@@ -119,9 +119,7 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 
-				var model = {
-					'lonLat' : JSON.parse('[' + request.query.lonLat + ']')
-				}
+				var model = modelData.getBoundary(request.query.lonLat)
 
 				// Logic if lonLat is in error or outside England
 

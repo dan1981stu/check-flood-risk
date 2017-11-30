@@ -171,17 +171,6 @@ var init = function() {
         element: drawResetElement
     })
 
-    // Draw start button
-
-    var drawStartElement = document.createElement('button')
-    drawStartElement.appendChild(document.createTextNode('Continue'))
-    drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Continue drawing')
-    drawStartElement.setAttribute('disabled','disabled')
-    var drawStart = new ol.control.Control({
-        element: drawStartElement
-    })
-
     // Interactions
     var interactions = ol.interaction.defaults({
         altShiftDragRotate:false, 
@@ -201,6 +190,23 @@ var init = function() {
         source: source
     })
 
+    // Draw start button
+
+    var drawStartElement = document.createElement('button')
+    drawStartElement.appendChild(document.createTextNode('Start drawing'))
+    drawStartElement.className = 'ol-draw-start'
+    drawStartElement.setAttribute('title','Start drawing')
+    drawStartElement.addEventListener('click', function(e) {
+        e.preventDefault()
+        map.addInteraction(draw)
+        map.addInteraction(snap)
+        map.addInteraction(modify)
+        this.setAttribute('disabled','disabled')
+    })
+    var drawStart = new ol.control.Control({
+        element: drawStartElement
+    })
+
     // Add and remove controls
     var controls = ol.control.defaults({
         zoom: false,
@@ -216,7 +222,7 @@ var init = function() {
     // Render map
     map = new ol.Map({
         target: 'map-container-inner',
-        interactions: interactions.extend([draw, snap, modify]),
+        interactions: interactions,
         controls: controls,
         layers: [tile, vector],
         view: view
@@ -229,6 +235,7 @@ var init = function() {
     // Deactivate draw interaction after first polygon
     draw.on('drawend', function (e) {
         map.removeInteraction(draw)
+        console.log('drawend')
     })
 
     // Finish drawing on escape
