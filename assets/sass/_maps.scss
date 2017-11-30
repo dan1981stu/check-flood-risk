@@ -123,17 +123,35 @@ $path: "/public/";
 .ol-draw-reset,
 .ol-draw-start {
   position:absolute;
-  @include core-16;
+  font-size: 16px;
   color:white;
   background:$link-colour;
   line-height:1em;
-  left:75px;
+  left:55px;
   top:10px;
   z-index:1;
   border:0;
-  height: 30px;
-  padding:0 5px;
+  height: 40px;
+  width:54px;
+  padding:0;
   cursor:pointer;
+  span {
+    display:none;
+  }
+  @include media(tablet) {
+    left:111px;
+    height: 30px;
+    width:106px;
+    span {
+      display:inline;
+    }
+  }
+}
+.ol-draw-reset {
+  left:114px;
+  @include media(tablet) {
+    left:222px;
+  }
 }
 
 .ol-draw-reset:hover,
@@ -141,9 +159,10 @@ $path: "/public/";
   background:$focus-colour;
 }
 
-.ol-draw-reset[disabled="disabled"],
-.ol-draw-start[disabled="disabled"] {
-  display:none;
+.ol-draw-reset:disabled,
+.ol-draw-start:disabled {
+  background-color:$border-colour;
+  cursor:default;
 }
 
 
@@ -181,31 +200,48 @@ $path: "/public/";
   color:white;
   cursor:pointer;
   -webkit-appearance:none;
-  padding: 0px 22px 0px 6px;
+  padding: 0px;
   height:40px;
+  width:40px;
+  span {
+    display:none;
+  }
   @include media(tablet) {
     height:30px;
+    width:96px;
+    padding: 0px 22px 0px 7px;
+    span {
+      display:inline;
+    }
   }
 }
 .map-control-key:after {
   content: '';
   position: absolute;
   top:50%;
-  margin-top:-5px;
-  right:5px;
-  width:13px;
-  height: 10px;
+  margin-top:-6.5px;
+  right:10px;
+  width:17px;
+  height: 13px;
   background:transparent url('#{$path}map-legend-2x.png') no-repeat;
   background-size:100%;
   background-position:top center;  
+  @include media(tablet) {
+    margin-top:-5px;
+    right:5px;
+    width:13px;
+    height: 10px;
+  }
 }
 .map-key-open .map-control-key {
-  right: 0;
+  right: 10px;
   left: auto;
   text-indent:-5000px;
   padding: 0;
   width:40px;
   height:40px;
+  background:white;
+  color:$link-colour;
   @include media(tablet) {
     right: 6px;
     height:30px;
@@ -213,7 +249,6 @@ $path: "/public/";
   }
 }
 .map-key-open .map-control-key:after {
-  right:14px;
   background-position:bottom center; 
   @include media(tablet) {
     right:9px;
@@ -246,7 +281,7 @@ $path: "/public/";
   left:0;
   top:0px;
   bottom:0px;
-  width:70%;
+  width:100%;
   max-width:20em;
   background-color:white;
 }

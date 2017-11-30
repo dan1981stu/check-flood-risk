@@ -21,8 +21,8 @@ var key = document.createElement('div')
 key.classList.add('map-key')
 
 var keyToggle = document.createElement('button')
-keyToggle.appendChild(document.createTextNode('Key'))
-keyToggle.setAttribute('title','Show key')
+keyToggle.innerHTML = '<span>Show key</span>'
+keyToggle.setAttribute('title','Find out what the features are')
 keyToggle.classList.add('map-control','map-control-key')
 keyToggle.addEventListener('click', function(e) {
     e.preventDefault()
@@ -36,7 +36,8 @@ var copyright = document.createElement('span')
 copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 copyright.classList.add('map-key-copyright')
 
-keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
+//keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
+keyCopy.innerHTML = '<h2 class="bold-medium">Map key</h2>'
 keyCopy.appendChild(copyright)
 
 key.appendChild(keyToggle)
@@ -163,10 +164,17 @@ var init = function() {
     // Draw reset button
 
     var drawResetElement = document.createElement('button')
-    drawResetElement.appendChild(document.createTextNode('Clear drawing'))
+    drawResetElement.innerHTML = 'Clear<span> drawing</span>'
     drawResetElement.className = 'ol-draw-reset'
     drawResetElement.setAttribute('title','Clear this drawing')
-    drawResetElement.setAttribute('disabled','disabled')
+    drawResetElement.disabled = true
+    drawResetElement.addEventListener('click', function(e) {
+        e.preventDefault()
+        this.disabled = true
+        drawStartElement.disabled = false
+        // Remove previously drawn features
+        vector.getSource().clear()
+    })
     var drawReset = new ol.control.Control({
         element: drawResetElement
     })
@@ -193,7 +201,7 @@ var init = function() {
     // Draw start button
 
     var drawStartElement = document.createElement('button')
-    drawStartElement.appendChild(document.createTextNode('Start drawing'))
+    drawStartElement.innerHTML = 'Start<span> drawing</span>'
     drawStartElement.className = 'ol-draw-start'
     drawStartElement.setAttribute('title','Start drawing')
     drawStartElement.addEventListener('click', function(e) {
@@ -201,7 +209,7 @@ var init = function() {
         map.addInteraction(draw)
         map.addInteraction(snap)
         map.addInteraction(modify)
-        this.setAttribute('disabled','disabled')
+        this.disabled = true
     })
     var drawStart = new ol.control.Control({
         element: drawStartElement
@@ -213,9 +221,9 @@ var init = function() {
         rotate: false,
         attribution: false
     }).extend([
-        fullScreen,
         drawReset,
         drawStart,
+        fullScreen,
         zoom
     ])
 
@@ -232,10 +240,25 @@ var init = function() {
     // Map events
     //
 
+    // Close key if map is clicked
+    map.on('click', function(e) {
+        console.log('Map clicked')
+        var keyOpen = document.getElementsByClassName('map-key-open')
+        if (keyOpen.length) {
+            keyOpen[0].classList.remove('map-key-open')   
+        }
+        // Get layer if needed
+        /*
+        map.forEachLayerAtPixel(e.pixel, function(layer){ 
+            if( layer === tile ) {
+            } 
+        })
+        */
+    })
+
     // Deactivate draw interaction after first polygon
     draw.on('drawend', function (e) {
         map.removeInteraction(draw)
-        console.log('drawend')
     })
 
     // Finish drawing on escape
@@ -251,17 +274,20 @@ var init = function() {
     source.on('addfeature', function (e) {
         var feature = e.feature
         var coordinates = feature.getGeometry().getCoordinates()[0]
-
         // Feature too small
         if (coordinates.length < 4) {
             source.removeFeature(feature)
             map.addInteraction(draw)
         } 
-        
         // Feature ok
         else {
-            var reset = document.getElementsByClassName('ol-draw-reset')[0]
-            reset.setAttribute('disabled','') 
+            drawResetElement.disabled = false
+            // Define the string
+            var string = JSON.stringify(coordinates)
+            // Encode the String
+            var encodedString = btoa(string)
+            console.log(string)
+            console.log(encodedString)
         }
     })
 

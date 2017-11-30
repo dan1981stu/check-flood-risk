@@ -2551,28 +2551,45 @@ table.select-areas th {
 .ol-draw-reset,
 .ol-draw-start {
   position: absolute;
-  font-family: "nta", Arial, sans-serif;
-  font-weight: 400;
-  text-transform: none;
-  font-size: 14px;
-  line-height: 1.14286;
+  font-size: 16px;
   color: white;
   background: #005ea5;
   line-height: 1em;
-  left: 75px;
+  left: 55px;
   top: 10px;
   z-index: 1;
   border: 0;
-  height: 30px;
-  padding: 0 5px;
+  height: 40px;
+  width: 54px;
+  padding: 0;
   cursor: pointer;
+}
+
+.ol-draw-reset span,
+.ol-draw-start span {
+  display: none;
 }
 
 @media (min-width: 641px) {
   .ol-draw-reset,
   .ol-draw-start {
-    font-size: 16px;
-    line-height: 1.25;
+    left: 111px;
+    height: 30px;
+    width: 106px;
+  }
+  .ol-draw-reset span,
+  .ol-draw-start span {
+    display: inline;
+  }
+}
+
+.ol-draw-reset {
+  left: 114px;
+}
+
+@media (min-width: 641px) {
+  .ol-draw-reset {
+    left: 222px;
   }
 }
 
@@ -2581,9 +2598,10 @@ table.select-areas th {
   background: #ffbf47;
 }
 
-.ol-draw-reset[disabled="disabled"],
-.ol-draw-start[disabled="disabled"] {
-  display: none;
+.ol-draw-reset:disabled,
+.ol-draw-start:disabled {
+  background-color: #bfc1c3;
+  cursor: default;
 }
 
 .ol-full-screen {
@@ -2623,8 +2641,9 @@ table.select-areas th {
   color: white;
   cursor: pointer;
   -webkit-appearance: none;
-  padding: 0px 22px 0px 6px;
+  padding: 0px;
   height: 40px;
+  width: 40px;
 }
 
 @media (min-width: 641px) {
@@ -2634,9 +2653,18 @@ table.select-areas th {
   }
 }
 
+.map-control-key span {
+  display: none;
+}
+
 @media (min-width: 641px) {
   .map-control-key {
     height: 30px;
+    width: 96px;
+    padding: 0px 22px 0px 7px;
+  }
+  .map-control-key span {
+    display: inline;
   }
 }
 
@@ -2644,22 +2672,33 @@ table.select-areas th {
   content: '';
   position: absolute;
   top: 50%;
-  margin-top: -5px;
-  right: 5px;
-  width: 13px;
-  height: 10px;
+  margin-top: -6.5px;
+  right: 10px;
+  width: 17px;
+  height: 13px;
   background: transparent url("/public/map-legend-2x.png") no-repeat;
   background-size: 100%;
   background-position: top center;
 }
 
+@media (min-width: 641px) {
+  .map-control-key:after {
+    margin-top: -5px;
+    right: 5px;
+    width: 13px;
+    height: 10px;
+  }
+}
+
 .map-key-open .map-control-key {
-  right: 0;
+  right: 10px;
   left: auto;
   text-indent: -5000px;
   padding: 0;
   width: 40px;
   height: 40px;
+  background: white;
+  color: #005ea5;
 }
 
 @media (min-width: 641px) {
@@ -2671,7 +2710,6 @@ table.select-areas th {
 }
 
 .map-key-open .map-control-key:after {
-  right: 14px;
   background-position: bottom center;
 }
 
@@ -2716,7 +2754,7 @@ table.select-areas th {
   left: 0;
   top: 0px;
   bottom: 0px;
-  width: 70%;
+  width: 100%;
   max-width: 20em;
   background-color: white;
 }
