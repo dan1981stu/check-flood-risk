@@ -77,13 +77,12 @@ exports.getLocation = function(path, type, place, ngr, easting, northing, scenar
 		} else {
 			model['isEngland'] = false
 		}
-	
+
 	}
 
-	// Add lat long for location.
-	// Mytholmroyd hardcoded in prototype
-	if (model.hasLocation) {
-		model['lonLat'] = '-1.9837,53.7309'
+	// Set lonLat
+	if (location.lonLat) {
+		model['lonLat'] = location.lonLat
 	}
 
 	// If patern match error add error details
@@ -124,24 +123,24 @@ exports.getLocation = function(path, type, place, ngr, easting, northing, scenar
 }
 
 // Get a location by its name
-exports.getBoundary = function(path, lonLat, coordinates, method) {
+exports.getBoundary = function(path, lonLat, site, geoJson, method) {
 
 	// Defaults
 	var model = { }
 	lonLat = '[' + lonLat + ']' || '[]'
-	coordinates = coordinates || '[]'
+	geoJson = geoJson || ''
 	method = method || 'GET'
 
 	// Convert strings to JSON
 	lonLat = JSON.parse(lonLat),
-	coordinates = JSON.parse(coordinates)
+	geoJson = JSON.parse(geoJson)
 
-	// Set error if no coordinates
-	if (!coordinates.length && method == 'POST') {
+	// Set error if no geoJson
+	if (!geoJson && method == 'POST') {
 		model['isError'] = true
 	}
 
-	model['coordinates'] = coordinates
+	model['geoJson'] = geoJson
 	model['lonLat'] = lonLat
 	model['path'] = path
 

@@ -124,7 +124,9 @@ module.exports = [
 				var model = modelData.getBoundary(
 					request.url.path,
 					request.query.lonLat || '[]',
-					request.query.coordinates || '[]'
+					request.query.site || '',
+					'',
+					''
 				)
 
 				return reply.view('planning/identify-site', {
@@ -159,7 +161,8 @@ module.exports = [
 					var model = modelData.getBoundary(
 						request.url.path,
 						request.payload.lonLat,
-						request.payload.coordinates,
+						'',
+						request.payload.geoJson,
 						'POST'
 					)
 

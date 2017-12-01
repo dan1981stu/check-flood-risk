@@ -36,7 +36,6 @@ var copyright = document.createElement('span')
 copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 copyright.classList.add('map-key-copyright')
 
-//keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
 keyCopy.innerHTML = '<h2 class="bold-medium">Key</h2>'
 keyCopy.appendChild(copyright)
 
@@ -242,7 +241,6 @@ var init = function() {
 
     // Close key if map is clicked
     map.on('click', function(e) {
-        console.log('Map clicked')
         var keyOpen = document.getElementsByClassName('map-key-open')
         if (keyOpen.length) {
             keyOpen[0].classList.remove('map-key-open')   
@@ -282,12 +280,23 @@ var init = function() {
         // Feature ok
         else {
             drawResetElement.disabled = false
-            // Define the string
-            var string = JSON.stringify(coordinates)
-            // Encode the String
-            var encodedString = btoa(string)
-            console.log(string)
-            console.log(encodedString)
+            // Write feature as GeoJson
+            var writer = new ol.format.GeoJSON()
+            var geoJson = writer.writeFeature(feature,{
+                featureProjection : 'EPSG:4326',
+                decimals : 6 // This should reduce size of data and still gives +- 4inch precision
+            })
+
+            // Normal
+            console.log(geoJson)
+
+            // Compress the String
+            var codec = JsonUrl('lzma')
+            codec.compress(geoJson).then(result => 
+                console.log(result)
+            )
+
+
         }
     })
 
