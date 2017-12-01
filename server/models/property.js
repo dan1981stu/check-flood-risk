@@ -2,7 +2,7 @@ const utilities = require('../utilities/utilities.js')
 var data = require('../data/data.json')
 
 // Get a location by its name
-exports.getProperty = function(premises, postcode, scenario, error) {
+exports.getProperty = function(path, premises, postcode, scenario, error) {
 
 	premises = premises || ''
 	postcode = postcode.replace(/-/g, ' ') || ''
@@ -15,6 +15,7 @@ exports.getProperty = function(premises, postcode, scenario, error) {
 	model['premises'] = premises
 	model['postcode'] = postcode
 	model['scenario'] = scenario
+	model['path'] = path
 
 	// Try to set postcode to object
 	postcode = data.postcode.find( x => x.path == postcode.replace(/ /g,'-').toLowerCase() )

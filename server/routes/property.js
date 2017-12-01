@@ -25,6 +25,7 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getProperty(
+					request.url.path,
 					request.payload.premises, 
 					request.payload.postcode, 
 					request.payload.scenario
@@ -72,6 +73,7 @@ module.exports = [
 					// Pattern match validation fails
 
 					var model = modelData.getProperty(
+						request.url.path,
 						request.payload.premises, 
 						request.payload.postcode, 
 						request.payload.scenario, 
@@ -94,6 +96,7 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getProperty(
+					request.url.path,
 					request.query.premises ? request.query.premises : 'error', 
 					request.query.postcode ? request.query.postcode : 'error', 
 					request.query.s ? request.query.s : 'a'
@@ -129,6 +132,7 @@ module.exports = [
 				failAction: function (request, reply, source, error) {
 					
 					var model = modelData.getProperty(
+						request.url.path,
 						request.payload.premises, 
 						request.payload.postcode, 
 						request.payload.scenario, 

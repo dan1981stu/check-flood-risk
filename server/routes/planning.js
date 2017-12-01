@@ -27,6 +27,7 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getLocation(
+					request.url.path,
 					request.payload.type, 
 					request.payload.place,
 					request.payload.ngr,
@@ -94,6 +95,7 @@ module.exports = [
 				failAction: function (request, reply, source, error) {
 
 					var model = modelData.getLocation(
+						request.url.path,
 						request.payload.type, 
 						request.payload.place,
 						request.payload.ngr,
@@ -102,7 +104,7 @@ module.exports = [
 						request.payload.scenario,
 						error
 					)
-
+					
 					return reply.view('planning/find-location', {
 						'serviceName' : 'Check flood zone',
 						'pageTitle' : 'Error: Find location - Check flood zone - GOV.UK',
@@ -120,24 +122,17 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getBoundary(
-					'[]',
-					request.query.lonLat,
-					'GET'
+					request.url.path,
+					request.query.lonLat || '[]',
+					request.query.coordinates || '[]'
 				)
 
-				// Logic if lonLat is in error or outside England
-
-				// lonLat is in England
 				return reply.view('planning/identify-site', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK',
 					'model' : model
 				})
 
-			},
-			cors: {
-				origin: ['*'],
-				additionalHeaders: ['cache-control', 'x-requested-with']
 			}
 		}
 	},
@@ -147,21 +142,33 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				
-				var model = modelData.getBoundary(
-					request.payload.coordinates,
-					request.query.lonLat,
-					'POST'
-				)
+				const coordinates = request.payload.coordinates
 
-				// Check boundary has been drawn
-				if (!model.hasBoundary) {
+				return reply.redirect('/flood-risk-assessment/site-reference')
+
+			},
+			validate: {
+				options: {
+					allowUnknown: true
+				},
+				payload: {
+					coordinates: Joi.string().required()
+				},
+				failAction: function (request, reply, source, error) {
+					
+					var model = modelData.getBoundary(
+						request.url.path,
+						request.payload.lonLat,
+						request.payload.coordinates,
+						'POST'
+					)
+
 					return reply.view('planning/identify-site', {
 						'serviceName' : 'Check flood zone',
-						'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK',
+						'pageTitle' : 'Error: Identify boundary - Check flood zone - GOV.UK',
 						'model' : model
-					})
+					}) // .code(error ? 400 : 200) // HTTP status code depending on error
 				}
-
 			}
 		}
 	}

@@ -2,7 +2,7 @@ const utilities = require('../utilities/utilities.js')
 var data = require('../data/data.json')
 
 // Get a location by its name
-exports.getLocation = function(type, place, ngr, easting, northing, scenario, error) {
+exports.getLocation = function(path, type, place, ngr, easting, northing, scenario, error) {
 
 	// Set method defaults
 	type = type || 'place'
@@ -117,29 +117,33 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 	model['easting'] = easting
 	model['northing'] = northing
 	model['scenario'] = scenario
+	model['path'] = path
 
 	return model
 
 }
 
 // Get a location by its name
-exports.getBoundary = function(coordinates, lonLat, method) {
+exports.getBoundary = function(path, lonLat, coordinates, method) {
 
 	// Defaults
 	var model = { }
-	//method = method || 'GET'
-	coordinates = JSON.parse(coordinates) || []
+	lonLat = '[' + lonLat + ']' || '[]'
+	coordinates = coordinates || '[]'
+	method = method || 'GET'
 
-	model['length'] = coordinates.length
-	model['method'] = '*' + method
+	// Convert strings to JSON
+	lonLat = JSON.parse(lonLat),
+	coordinates = JSON.parse(coordinates)
 
 	// Set error if no coordinates
 	if (!coordinates.length && method == 'POST') {
-		model['isError'] = false
+		model['isError'] = true
 	}
 
-	//model['coordinates'] = coordinates
-	model['lonLat'] = JSON.parse('[' + lonLat + ']')
+	model['coordinates'] = coordinates
+	model['lonLat'] = lonLat
+	model['path'] = path
 
 	return model
 
