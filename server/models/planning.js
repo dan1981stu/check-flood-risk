@@ -123,12 +123,22 @@ exports.getLocation = function(type, place, ngr, easting, northing, scenario, er
 }
 
 // Get a location by its name
-exports.getBoundary = function(hasBoundary, lonLat) {
+exports.getBoundary = function(coordinates, lonLat, method) {
 
+	// Defaults
 	var model = { }
+	//method = method || 'GET'
+	coordinates = JSON.parse(coordinates) || []
 
-	model['isError'] = false
-	model['hasBoundary'] = false
+	model['length'] = coordinates.length
+	model['method'] = '*' + method
+
+	// Set error if no coordinates
+	if (!coordinates.length && method == 'POST') {
+		model['isError'] = false
+	}
+
+	//model['coordinates'] = coordinates
 	model['lonLat'] = JSON.parse('[' + lonLat + ']')
 
 	return model

@@ -120,8 +120,9 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getBoundary(
-					false,
-					request.query.lonLat
+					'[]',
+					request.query.lonLat,
+					'GET'
 				)
 
 				// Logic if lonLat is in error or outside England
@@ -147,8 +148,9 @@ module.exports = [
 			handler: function (request, reply) {
 				
 				var model = modelData.getBoundary(
-					request.payload.hasBoundary,
-					request.query.lonLat
+					request.payload.coordinates,
+					request.query.lonLat,
+					'POST'
 				)
 
 				// Check boundary has been drawn
