@@ -1,9 +1,3 @@
-
-// Preset values
-
-var defaultBoundingBox = [[-5.72,49.96],[1.77,55.81]]
-var minIconResolution = 300
-
 // Setup fullscreen container and key elements
 
 var mapContainer = document.querySelector('.map').children[0]
@@ -47,10 +41,27 @@ mapContainerInner.appendChild(key)
 // Add inner comtainer
 mapContainer.appendChild(mapContainerInner)
 
+// Global values
+var url, lonLat, zoom, path, geoJson, feature
+
+// Codec used for compression
+var codec
+
 // Reference require to redraw map
 var map
 
 var init = function() {
+
+    // Default values
+    url = [location.protocol, '//', location.host, location.pathname].join('')
+    lonLat = getParameterByName('lonLat') || ''
+    zoom = getParameterByName('zoom') || 15
+    path = getParameterByName('path') || ''
+    geoJson = { }
+    feature = ''
+
+    // Set up compression codec
+    codec = JsonUrl('lzma')
 
     // Function used to style individual features
     var styleFunction = function(feature, resolution) {
@@ -133,7 +144,7 @@ var init = function() {
     var view = new ol.View({
         center: ol.proj.fromLonLat(centre),
         enableRotation: false,
-        zoom: 15
+        zoom: zoom
     });
 
     // Zoom buttons
@@ -173,6 +184,9 @@ var init = function() {
         drawStartElement.disabled = false
         // Remove previously drawn features
         vector.getSource().clear()
+        // Update url
+        feature = ''
+        updateUrl()
     })
     var drawReset = new ol.control.Control({
         element: drawResetElement
@@ -205,9 +219,16 @@ var init = function() {
     drawStartElement.setAttribute('title','Start drawing')
     drawStartElement.addEventListener('click', function(e) {
         e.preventDefault()
+        path = ''
+        updateUrl()
         map.addInteraction(draw)
         map.addInteraction(snap)
         map.addInteraction(modify)
+        document.addEventListener('keyup', function() {
+            if (event.keyCode === 27) {
+                draw.finishDrawing()
+            }
+        })
         this.disabled = true
     })
     var drawStart = new ol.control.Control({
@@ -254,49 +275,53 @@ var init = function() {
         */
     })
 
+    // Finish drawing on escape
+    draw.on('drawstart', function(e) { })
+
     // Deactivate draw interaction after first polygon
     draw.on('drawend', function (e) {
         map.removeInteraction(draw)
     })
 
-    // Finish drawing on escape
-    draw.on('drawstart', function(e) {
-        document.addEventListener('keyup', function() {
-            if (event.keyCode === 27) {
-                draw.finishDrawing()
-            }
-        })
+    // Update url when feature has been modified
+    modify.on('modifyend',function(e){
+        updateUrl()
     })
+
+    // Add feature from path
+    if (path) {
+        codec.decompress(path).then(result => {
+            // Check for valid geoJson
+            feature = new ol.format.GeoJSON().readFeature(result)
+            source.addFeature(feature)
+            map.addInteraction(snap)
+            map.addInteraction(modify)
+            drawStartElement.disabled = true
+        })
+    }
 
     // Feature added
     source.on('addfeature', function (e) {
-        var feature = e.feature
+
+        feature = e.feature
         var coordinates = feature.getGeometry().getCoordinates()[0]
+
+        // Update feature when it has been chnaged
+        feature.on('change', function(e) {
+            feature = e.target
+            //console.log(e.target)
+        })
+
         // Feature too small
         if (coordinates.length < 4) {
             source.removeFeature(feature)
             map.addInteraction(draw)
         } 
+
         // Feature ok
         else {
             drawResetElement.disabled = false
-            // Write feature as GeoJson
-            var writer = new ol.format.GeoJSON()
-            var geoJson = writer.writeFeature(feature,{
-                featureProjection : 'EPSG:4326',
-                decimals : 6 // This should reduce size of data and still gives +- 4inch precision
-            })
-
-            // Normal
-            console.log(geoJson)
-
-            // Compress the String
-            var codec = JsonUrl('lzma')
-            codec.compress(geoJson).then(result => 
-                console.log(result)
-            )
-
-
+            updateUrl()
         }
     })
 
@@ -311,8 +336,8 @@ init()
 
 // Function to get query string parameter
 function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    var v = window.location.search.match(new RegExp('(?:[\?\&]'+name+'=)([^&]+)'))
+    return v ? v[1] : null
 }
 
 // function applies greyscale to every pixel in canvas
@@ -337,4 +362,43 @@ function greyscale(context) {
         data[i+3] = 255 // Alpha
     }
     context.putImageData(imageData,0,0)
+}
+
+// Update url
+function updateUrl() {
+
+    // Get current map centre and zoom and reduce decimal places
+    var centreLonLat = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326')
+    centreLonLat[0] = centreLonLat[0].toFixed(6)
+    centreLonLat[1] = centreLonLat[1].toFixed(6)
+    var zoom = map.getView().getZoom().toFixed(6)
+
+    // If we have a new or modified feature update the path data
+    if (feature) {
+        // Write feature as GeoJson
+        var writer = new ol.format.GeoJSON()
+        geoJson = writer.writeFeature(feature,{
+            featureProjection : 'EPSG:4326',
+            decimals : 6 // This should reduce size of data and still gives +- 4inch precision
+        })
+        // Compress the String and update the url
+        codec.compress(geoJson).then(result => {
+            path = result
+            document.getElementById('path').value = path
+            // Add or update path in url
+            history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
+        })
+    }
+
+    // Clear the path value
+    document.getElementById('path').value = ''
+
+    // Remove path from url
+    history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
+
+}
+
+// Popstate event
+window.onpopstate = function(event) {
+    alert('location: ' + document.location + ', state: ' + JSON.stringify(event.state))
 }

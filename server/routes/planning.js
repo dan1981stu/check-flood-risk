@@ -122,11 +122,9 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getBoundary(
-					request.url.path,
+					request.query.path || '',
 					request.query.lonLat || '[]',
-					request.query.site || '',
-					'',
-					''
+					request.query.site || ''
 				)
 
 				return reply.view('planning/identify-site', {
@@ -154,15 +152,14 @@ module.exports = [
 					allowUnknown: true
 				},
 				payload: {
-					coordinates: Joi.string().required()
+					path: Joi.string().required()
 				},
 				failAction: function (request, reply, source, error) {
 					
 					var model = modelData.getBoundary(
-						request.url.path,
+						request.payload.path,
 						request.payload.lonLat,
 						'',
-						request.payload.geoJson,
 						'POST'
 					)
 

@@ -14,7 +14,7 @@
 			</div>
 			{{/if }}
 				
-			<form action="{{ model.path }}" autocomplete="off" class="form" method="post">
+			<form action="" autocomplete="off" class="form" method="post">
 
 				<fieldset>
 
@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<input id="scenario" name="scenario" type="hidden" value=""/>
 						<input id="lonLat" name="lonLat" type="hidden" value="{{ model.lonLat }}"/>
-						<input id="geoJson" name="geoJson" type="hidden" value="{{ model.geoJson }}"/>
+						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input class="button" type="submit" value="Get report">
 					</div>
 
