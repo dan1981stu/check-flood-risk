@@ -1,4 +1,4 @@
-// Setup fullscreen container and key elements
+// Setup fullscreen container and key (legend) elements
 
 var mapContainer = document.querySelector('.map').children[0]
 var mapContainerInner = document.createElement('div')
@@ -41,14 +41,14 @@ mapContainerInner.appendChild(key)
 // Add inner comtainer
 mapContainer.appendChild(mapContainerInner)
 
-// Global values
-var url, lonLat, zoom, path, geoJson, feature
+// Global variables
+var url, lonLat, zoom, path, geoJson
 
 // Codec used for compression
 var codec
 
-// Reference require to redraw map
-var map
+// Reference required to redraw map
+var map, vector
 
 var init = function() {
 
@@ -58,17 +58,11 @@ var init = function() {
     zoom = getParameterByName('zoom') || 15
     path = getParameterByName('path') || ''
     geoJson = { }
-    feature = ''
 
     // Set up compression codec
     codec = JsonUrl('lzma')
 
-    // Function used to style individual features
-    var styleFunction = function(feature, resolution) {
-        return style;
-    }
-
-    // Drawing styles
+    // Drawing styles for different polygon editing states
     var styleDraw = new ol.style.Style({
         fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.5)'
@@ -84,7 +78,7 @@ var init = function() {
             src: '/public/map-draw-cursor-2x.png'
         })
     })
-    var styleDrawComplate = new ol.style.Style({
+    var styleDrawComplete = new ol.style.Style({
         fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.5)'
         }),
@@ -99,7 +93,7 @@ var init = function() {
             src: '/public/map-draw-cursor-2x.png'
         })
     })
-    var styleDrawComplateGeometry = new ol.style.Style({
+    var styleDrawCompleteGeometry = new ol.style.Style({
         image: new ol.style.Icon({
             opacity: 1,
             size : [32,32],
@@ -128,16 +122,27 @@ var init = function() {
         })
     })
 
+    // Source: vector layer
+    var source = new ol.source.Vector()
+
+    // Feature: boundary
+    var feature = new ol.Feature({
+        name: 'Boundary'
+    })
+    feature.on('change', function(e) {
+        feature = e.target
+    })
+    source.addFeature(feature)
+
     // Layer: Background map
     var tile = new ol.layer.Tile({
         source: new ol.source.OSM()
     })
 
-    // Layer: Polygon vector
-    var source = new ol.source.Vector()
-    var vector = new ol.layer.Vector({
+    // Layer: vector
+    vector = new ol.layer.Vector({
         source: source,
-        style: [styleDrawComplate, styleDrawComplateGeometry]
+        style: [styleDrawComplete, styleDrawCompleteGeometry]
     })
 
     // The map view object
@@ -171,6 +176,29 @@ var init = function() {
         element: fullScreenElement
     })
 
+    // Draw start button
+
+    var drawStartElement = document.createElement('button')
+    drawStartElement.innerHTML = 'Start<span> drawing</span>'
+    drawStartElement.className = 'ol-draw-start'
+    drawStartElement.setAttribute('title','Start drawing')
+    drawStartElement.addEventListener('click', function(e) {
+        e.preventDefault()
+        map.addInteraction(draw)
+        map.addInteraction(snap)
+        map.addInteraction(modify)
+        // Finish drawing on escape key
+        document.addEventListener('keyup', function() {
+            if (event.keyCode === 27) {
+                draw.finishDrawing()
+            }
+        })
+        this.disabled = true
+    })
+    var drawStart = new ol.control.Control({
+        element: drawStartElement
+    })
+
     // Draw reset button
 
     var drawResetElement = document.createElement('button')
@@ -183,16 +211,16 @@ var init = function() {
         this.disabled = true
         drawStartElement.disabled = false
         // Remove previously drawn features
-        vector.getSource().clear()
+        vector.getSource().getFeatures()[0].setGeometry(null)
         // Update url
-        feature = ''
-        updateUrl()
+        updateUrl(feature)
     })
     var drawReset = new ol.control.Control({
         element: drawResetElement
     })
 
-    // Interactions
+    // Setup interactions
+
     var interactions = ol.interaction.defaults({
         altShiftDragRotate:false, 
         pinchRotate:false,
@@ -204,6 +232,7 @@ var init = function() {
     })
     var draw = new ol.interaction.Draw({
         source: source,
+        features: source.getFeatures(),
         type: 'Polygon',
         style: styleDraw
     })
@@ -211,31 +240,8 @@ var init = function() {
         source: source
     })
 
-    // Draw start button
-
-    var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Start<span> drawing</span>'
-    drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Start drawing')
-    drawStartElement.addEventListener('click', function(e) {
-        e.preventDefault()
-        path = ''
-        updateUrl()
-        map.addInteraction(draw)
-        map.addInteraction(snap)
-        map.addInteraction(modify)
-        document.addEventListener('keyup', function() {
-            if (event.keyCode === 27) {
-                draw.finishDrawing()
-            }
-        })
-        this.disabled = true
-    })
-    var drawStart = new ol.control.Control({
-        element: drawStartElement
-    })
-
     // Add and remove controls
+
     var controls = ol.control.defaults({
         zoom: false,
         rotate: false,
@@ -248,6 +254,7 @@ var init = function() {
     ])
 
     // Render map
+
     map = new ol.Map({
         target: 'map-container-inner',
         interactions: interactions,
@@ -275,17 +282,25 @@ var init = function() {
         */
     })
 
-    // Finish drawing on escape
-    draw.on('drawstart', function(e) { })
-
-    // Deactivate draw interaction after first polygon
+    // Deactivate draw interaction after first polygon is finished
     draw.on('drawend', function (e) {
-        map.removeInteraction(draw)
+        var coordinates = e.feature.getGeometry().getCoordinates()[0]
+        // Polygon is too small start again
+        if (coordinates.length < 4) {
+            drawStartElement.disabled = false
+            e.feature.setGeometry(null)
+        } 
+        // Polygon is ok
+        else {
+            drawResetElement.disabled = false
+            updateUrl(e.feature)
+            map.removeInteraction(this)
+        }
     })
 
     // Update url when feature has been modified
     modify.on('modifyend',function(e){
-        updateUrl()
+        updateUrl(feature)
     })
 
     // Add feature from path
@@ -293,42 +308,50 @@ var init = function() {
         codec.decompress(path).then(result => {
             // Check for valid geoJson
             feature = new ol.format.GeoJSON().readFeature(result)
-            source.addFeature(feature)
+            vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
             map.addInteraction(snap)
             map.addInteraction(modify)
             drawStartElement.disabled = true
+            drawResetElement.disabled = false
         })
     }
-
-    // Feature added
-    source.on('addfeature', function (e) {
-
-        feature = e.feature
-        var coordinates = feature.getGeometry().getCoordinates()[0]
-
-        // Update feature when it has been chnaged
-        feature.on('change', function(e) {
-            feature = e.target
-            //console.log(e.target)
-        })
-
-        // Feature too small
-        if (coordinates.length < 4) {
-            source.removeFeature(feature)
-            map.addInteraction(draw)
-        } 
-
-        // Feature ok
-        else {
-            drawResetElement.disabled = false
-            updateUrl()
-        }
-    })
 
     // Apply greyscale filter.
     tile.on('postcompose', function(event) {
         //greyscale(event.context);
     })
+
+    // Popstate event
+    window.onpopstate = function(e) {
+
+        // Set path to previous value
+        path = getParameterByName('path') || ''
+
+        // Add geometry if path exists
+        if (path) {
+            codec.decompress(path).then(result => {
+                // Get geometry from previous path
+                feature = new ol.format.GeoJSON().readFeature(result)
+                // Replace current geomtry with previous
+                vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
+                map.addInteraction(snap)
+                map.addInteraction(modify)
+                drawStartElement.disabled = true
+                drawResetElement.disabled = false
+            })
+        }
+
+        // Clear geometry if previous url had no path
+        else {
+            vector.getSource().getFeatures()[0].setGeometry(null)
+            map.removeInteraction(draw)
+            map.removeInteraction(snap)
+            map.removeInteraction(modify)
+            drawStartElement.disabled = false
+            drawResetElement.disabled = true
+        }
+        
+    }
 
 }
 
@@ -365,16 +388,20 @@ function greyscale(context) {
 }
 
 // Update url
-function updateUrl() {
+function updateUrl(feature) {
 
-    // Get current map centre and zoom and reduce decimal places
+    // Set current map centre and reduce decimal places
     var centreLonLat = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326')
     centreLonLat[0] = centreLonLat[0].toFixed(6)
     centreLonLat[1] = centreLonLat[1].toFixed(6)
-    var zoom = map.getView().getZoom().toFixed(6)
+    document.getElementById('lonLat').value = centreLonLat
 
-    // If we have a new or modified feature update the path data
-    if (feature) {
+    // Set current zoom level
+    zoom = map.getView().getZoom().toFixed(2)
+    document.getElementById('zoom').value = zoom
+
+    // We have a new or modified feature
+    if (feature.getGeometry()) {
         // Write feature as GeoJson
         var writer = new ol.format.GeoJSON()
         geoJson = writer.writeFeature(feature,{
@@ -389,16 +416,15 @@ function updateUrl() {
             history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
         })
     }
+    
+    // We don't have a feature
+    else {
+ 
+        // Clear the path value
+        document.getElementById('path').value = ''
+ 
+        // Remove path from url
+        history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
+    }
 
-    // Clear the path value
-    document.getElementById('path').value = ''
-
-    // Remove path from url
-    history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
-
-}
-
-// Popstate event
-window.onpopstate = function(event) {
-    alert('location: ' + document.location + ', state: ' + JSON.stringify(event.state))
 }

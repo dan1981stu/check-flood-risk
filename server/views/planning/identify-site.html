@@ -3,7 +3,9 @@
 	<div class="grid-row no-bottom">
 		<div class="column-two-thirds no-bottom">
 
-			<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
+			<nav class="nav-back" style="display:none" hidden>
+				<a href="/flood-risk-assessment/find-location" class="link-back">Back</a> 
+			</nav>
 
 			{{#if model.isError}}
 			<div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
@@ -57,6 +59,7 @@
 					<div class="form-group">
 						<input id="scenario" name="scenario" type="hidden" value=""/>
 						<input id="lonLat" name="lonLat" type="hidden" value="{{ model.lonLat }}"/>
+						<input id="zoom" name="zoom" type="hidden" value="{{ model.zoom }}"/>
 						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input class="button" type="submit" value="Get report">
 					</div>

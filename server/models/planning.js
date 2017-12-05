@@ -1,5 +1,4 @@
 const utilities = require('../utilities/utilities.js')
-const codec = require('json-url')('lzma');
 var data = require('../data/data.json')
 
 // Get a location by its name
@@ -124,33 +123,26 @@ exports.getLocation = function(path, type, place, ngr, easting, northing, scenar
 }
 
 // Get a location by its name
-exports.getBoundary = function(path, lonLat, site, method) {
+exports.getBoundary = function(lonLat, zoom, path, isError) {
 
 	// Defaults
 	var model = { }
 	path = path || ''
 	lonLat = '[' + lonLat + ']' || '[]'
-	method = method || 'GET'
+	isError = isError || false
+	zoom = zoom || 16
 
 	// Convert strings to JSON
 	lonLat = JSON.parse(lonLat)
 
+	model['lonLat'] = lonLat
+	model['zoom'] = zoom
+	model['path'] = path
+		
 	// Set error if no geoJson
-	if (!path && method == 'POST') {
+	if (isError) {
 		model['isError'] = true
 	}
-
-	model['lonLat'] = lonLat
-	model['path'] = path
-
-	/*
-	// Convert path to geoJson
-	if (path) {
-		codec.decompress(someCompressedString).then(geoJson => { 
-			model['geoJson'] = geoJson
-		})
-	}
-	*/
 
 	return model
 

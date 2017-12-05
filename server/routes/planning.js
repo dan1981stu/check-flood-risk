@@ -122,9 +122,10 @@ module.exports = [
 			handler: function (request, reply) {
 
 				var model = modelData.getBoundary(
-					request.query.path || '',
-					request.query.lonLat || '[]',
-					request.query.site || ''
+					request.query.lonLat,
+					request.query.path,
+					request.query.zoom,
+					request.query.isError
 				)
 
 				return reply.view('planning/identify-site', {
@@ -155,19 +156,9 @@ module.exports = [
 					path: Joi.string().required()
 				},
 				failAction: function (request, reply, source, error) {
-					
-					var model = modelData.getBoundary(
-						request.payload.path,
-						request.payload.lonLat,
-						'',
-						'POST'
-					)
 
-					return reply.view('planning/identify-site', {
-						'serviceName' : 'Check flood zone',
-						'pageTitle' : 'Error: Identify boundary - Check flood zone - GOV.UK',
-						'model' : model
-					}) // .code(error ? 400 : 200) // HTTP status code depending on error
+					return reply.redirect('/flood-risk-assessment/identify-site?lonLat=' + request.payload.lonLat + '&zoom=' + request.payload.zoom + '&isError=true')
+
 				}
 			}
 		}
