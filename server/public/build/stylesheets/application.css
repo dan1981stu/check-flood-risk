@@ -2494,6 +2494,7 @@ table.select-areas th {
   cursor: pointer;
   height: 40px;
   width: 40px;
+  border-radius: 0;
 }
 
 .ol-zoom-in,
@@ -2562,6 +2563,7 @@ table.select-areas th {
   height: 40px;
   width: 54px;
   padding: 0;
+  border-radius: 0;
   cursor: pointer;
 }
 
@@ -2592,7 +2594,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-reset {
     left: 222px;
-    width: 128px;
+    width: 82px;
     height: 30px;
     padding-right: 22px;
   }
@@ -2640,13 +2642,16 @@ table.select-areas th {
   height: 40px;
   width: 40px;
   text-indent: -5000px;
-  background: #005ea5 url("/public/map-controls-2x.png") no-repeat 0 75%;
-  background-size: 100%;
+  background: #005ea5 url("/public/map-controls-2x.png") no-repeat 50% 77.5%;
+  background-size: 30px 150px;
+  border-radius: 0;
   cursor: pointer;
 }
 
 @media (min-width: 641px) {
   .ol-full-screen {
+    background-size: 100%;
+    background-position: 0 75%;
     height: 30px;
     width: 30px;
   }

@@ -194,7 +194,7 @@ var init = function() {
     // Draw reset button
 
     var drawResetElement = document.createElement('button')
-    drawResetElement.innerHTML = '<span>Clear drawing</span>'
+    drawResetElement.innerHTML = '<span>Delete</span>'
     drawResetElement.className = 'ol-draw-reset'
     drawResetElement.setAttribute('title','Delete all of the points')
     drawResetElement.disabled = true
