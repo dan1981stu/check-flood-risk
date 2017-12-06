@@ -173,7 +173,7 @@ var init = function() {
     var drawStartElement = document.createElement('button')
     drawStartElement.innerHTML = 'Start<span> drawing</span>'
     drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Start drawing')
+    drawStartElement.setAttribute('title','Start a new drawing')
     drawStartElement.addEventListener('click', function(e) {
         e.preventDefault()
         map.addInteraction(draw)
@@ -196,7 +196,7 @@ var init = function() {
     var drawResetElement = document.createElement('button')
     drawResetElement.innerHTML = '<span>Clear drawing</span>'
     drawResetElement.className = 'ol-draw-reset'
-    drawResetElement.setAttribute('title','Clear this drawing')
+    drawResetElement.setAttribute('title','Delete all of the points')
     drawResetElement.disabled = true
     drawResetElement.addEventListener('click', function(e) {
         e.preventDefault()
