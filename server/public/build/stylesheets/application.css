@@ -2585,11 +2585,38 @@ table.select-areas th {
 
 .ol-draw-reset {
   left: 114px;
+  width: 40px;
+  height: 40px;
 }
 
 @media (min-width: 641px) {
   .ol-draw-reset {
     left: 222px;
+    width: 128px;
+    height: 30px;
+    padding-right: 22px;
+  }
+}
+
+.ol-draw-reset:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: transparent url("/public/map-delete-2x.png") no-repeat;
+  background-size: 100%;
+  background-position: top center;
+}
+
+@media (min-width: 641px) {
+  .ol-draw-reset:after {
+    margin-top: -8.5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
   }
 }
 

@@ -124,15 +124,7 @@ var init = function() {
 
     // Source: vector layer
     var source = new ol.source.Vector()
-
-    // Feature: boundary
-    var feature = new ol.Feature({
-        name: 'Boundary'
-    })
-    feature.on('change', function(e) {
-        feature = e.target
-    })
-    source.addFeature(feature)
+    source.addFeature(new ol.Feature())
 
     // Layer: Background map
     var tile = new ol.layer.Tile({
@@ -202,7 +194,7 @@ var init = function() {
     // Draw reset button
 
     var drawResetElement = document.createElement('button')
-    drawResetElement.innerHTML = 'Clear<span> drawing</span>'
+    drawResetElement.innerHTML = '<span>Clear drawing</span>'
     drawResetElement.className = 'ol-draw-reset'
     drawResetElement.setAttribute('title','Clear this drawing')
     drawResetElement.disabled = true
@@ -211,9 +203,9 @@ var init = function() {
         this.disabled = true
         drawStartElement.disabled = false
         // Remove previously drawn features
-        vector.getSource().getFeatures()[0].setGeometry(null)
+        vector.getSource().clear()
         // Update url
-        updateUrl(feature)
+        updateUrl(new ol.Feature())
     })
     var drawReset = new ol.control.Control({
         element: drawResetElement
@@ -232,7 +224,6 @@ var init = function() {
     })
     var draw = new ol.interaction.Draw({
         source: source,
-        features: source.getFeatures(),
         type: 'Polygon',
         style: styleDraw
     })
@@ -284,7 +275,7 @@ var init = function() {
 
     // Deactivate draw interaction after first polygon is finished
     draw.on('drawend', function (e) {
-        var coordinates = e.feature.getGeometry().getCoordinates()[0]
+        coordinates = e.feature.getGeometry().getCoordinates()[0]
         // Polygon is too small start again
         if (coordinates.length < 4) {
             drawStartElement.disabled = false
@@ -300,7 +291,16 @@ var init = function() {
 
     // Update url when feature has been modified
     modify.on('modifyend',function(e){
-        updateUrl(feature)
+        // Logic required to get the modified feature
+        var features = e.features.getArray(), counter
+        for (i = 0; i < features.length; i++) {
+            var rev = features[i].getRevision()
+            if (rev > 1) {
+                counter = i
+                break
+            }
+        }
+        updateUrl(features[counter])
     })
 
     // Add feature from path
@@ -333,6 +333,9 @@ var init = function() {
                 // Get geometry from previous path
                 feature = new ol.format.GeoJSON().readFeature(result)
                 // Replace current geomtry with previous
+                if (!vector.getSource().getFeatures().length) {
+                    vector.getSource().addFeature(new ol.Feature())
+                }
                 vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
                 map.addInteraction(snap)
                 map.addInteraction(modify)
@@ -343,7 +346,7 @@ var init = function() {
 
         // Clear geometry if previous url had no path
         else {
-            vector.getSource().getFeatures()[0].setGeometry(null)
+            vector.getSource().clear()
             map.removeInteraction(draw)
             map.removeInteraction(snap)
             map.removeInteraction(modify)
@@ -414,6 +417,7 @@ function updateUrl(feature) {
             document.getElementById('path').value = path
             // Add or update path in url
             history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
+            
         })
     }
     
@@ -425,6 +429,7 @@ function updateUrl(feature) {
  
         // Remove path from url
         history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
+        
     }
 
 }
