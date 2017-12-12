@@ -18,8 +18,8 @@ var key = document.createElement('div')
 key.classList.add('map-key')
 
 var keyToggle = document.createElement('button')
-keyToggle.appendChild(document.createTextNode('Show key'))
-keyToggle.setAttribute('title','Show key')
+keyToggle.innerHTML = '<span>Key</span>'
+keyToggle.setAttribute('title','Find out what the features are')
 keyToggle.classList.add('map-control','map-control-key')
 keyToggle.addEventListener('click', function(e) {
     e.preventDefault()

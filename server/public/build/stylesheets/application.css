@@ -2561,10 +2561,13 @@ table.select-areas th {
   z-index: 1;
   border: 0;
   height: 40px;
-  width: 56px;
+  width: 48px;
   padding: 0;
   border-radius: 0;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
 }
 
 .ol-draw-reset span,
@@ -2575,7 +2578,8 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-reset,
   .ol-draw-start {
-    left: 71px;
+    left: 69px;
+    width: 54px;
     height: 30px;
   }
   .ol-draw-reset span,
@@ -2585,31 +2589,87 @@ table.select-areas th {
 }
 
 .ol-draw-reset {
-  left: 114px;
+  left: 193px;
   width: 40px;
   position: absolute;
   background-image: url("/public/map-delete-2x.png");
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center center;
 }
 
 @media (min-width: 641px) {
   .ol-draw-reset {
     background-image: none;
-    left: 132px;
+    left: 241px;
     height: 30px;
-    width: 56px;
+    width: 54px;
+  }
+}
+
+.ol-draw-undo,
+.ol-draw-redo {
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  background-color: #005ea5;
+  line-height: 1em;
+  left: 108px;
+  top: 10px;
+  z-index: 1;
+  border: 0;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 0;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+  text-indent: -5000px;
+}
+
+@media (min-width: 641px) {
+  .ol-draw-undo,
+  .ol-draw-redo {
+    text-indent: 0;
+    left: 241px;
+    height: 30px;
+    width: 54px;
+  }
+}
+
+.ol-draw-undo {
+  background-image: url("/public/map-undo-2x.png");
+}
+
+@media (min-width: 641px) {
+  .ol-draw-undo {
+    background-image: none;
+    left: 128px;
+  }
+}
+
+.ol-draw-redo {
+  background-image: url("/public/map-redo-2x.png");
+  left: 148px;
+}
+
+@media (min-width: 641px) {
+  .ol-draw-redo {
+    background-image: none;
+    left: 182px;
   }
 }
 
 .ol-draw-reset:hover,
-.ol-draw-start:hover {
+.ol-draw-start:hover,
+.ol-draw-undo:hover,
+.ol-draw-redo:hover {
   background-color: #ffbf47;
 }
 
 .ol-draw-reset:disabled,
-.ol-draw-start:disabled {
+.ol-draw-start:disabled,
+.ol-draw-undo:disabled,
+.ol-draw-redo:disabled {
   background-color: #bfc1c3;
   cursor: default;
 }
@@ -2673,7 +2733,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .map-control-key {
     height: 30px;
-    width: 56px;
+    width: 54px;
     padding: 0px 22px 0px 7px;
   }
   .map-control-key span {

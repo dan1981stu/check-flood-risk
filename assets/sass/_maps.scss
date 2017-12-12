@@ -133,15 +133,19 @@ $path: "/public/";
   z-index:1;
   border:0;
   height:40px;
-  width:56px;
+  width:48px;
   padding:0;
   border-radius: 0;
   cursor:pointer;
+  background-repeat: no-repeat;
+  background-size:50%;
+  background-position:center center;
   span {
     display:none;
   }
   @include media(tablet) {
-    left:71px;
+    left:69px;
+    width:54px;
     height: 30px;
     span {
       display:inline;
@@ -149,32 +153,77 @@ $path: "/public/";
   }
 }
 .ol-draw-reset {
-  left:114px;
+  left:193px;
   width:40px;
   position: absolute;
-  background-image: url('#{$path}map-delete-2x.png');
-  background-repeat: no-repeat;
-  background-size:50%;
-  background-position:center center;  
+  background-image: url('#{$path}map-delete-2x.png');  
   @include media(tablet) {
     background-image:none;
-    left:132px;
+    left:241px;
     height:30px;
-    width:56px;
+    width:54px;
+  }
+}
+
+// Map control undo/redo
+
+.ol-draw-undo,
+.ol-draw-redo {
+  position:absolute;
+  font-size: 16px;
+  color:white;
+  background-color:$link-colour;
+  line-height:1em;
+  left:108px;
+  top:10px;
+  z-index:1;
+  border:0;
+  height:40px;
+  width:40px;
+  padding:0;
+  border-radius: 0;
+  cursor:pointer;
+  background-repeat: no-repeat;
+  background-size:50%;
+  background-position:center center;
+  text-indent:-5000px;
+  @include media(tablet) {
+    text-indent:0;
+    left:241px;
+    height:30px;
+    width:54px;
+  }
+}
+.ol-draw-undo {
+  background-image: url('#{$path}map-undo-2x.png');
+  @include media(tablet) {
+    background-image: none;
+    left:128px;
+  }
+}
+.ol-draw-redo {
+  background-image: url('#{$path}map-redo-2x.png');
+  left:148px;
+  @include media(tablet) {
+    background-image: none;
+    left:182px;
   }
 }
 
 .ol-draw-reset:hover,
-.ol-draw-start:hover {
+.ol-draw-start:hover,
+.ol-draw-undo:hover,
+.ol-draw-redo:hover {
   background-color:$focus-colour;
 }
 
 .ol-draw-reset:disabled,
-.ol-draw-start:disabled {
+.ol-draw-start:disabled,
+.ol-draw-undo:disabled,
+.ol-draw-redo:disabled {
   background-color:$border-colour;
   cursor:default;
 }
-
 
 // Map control fullscreen
 
@@ -221,7 +270,7 @@ $path: "/public/";
   }
   @include media(tablet) {
     height:30px;
-    width:56px;
+    width:54px;
     padding: 0px 22px 0px 7px;
     span {
       display:inline;

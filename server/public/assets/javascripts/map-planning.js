@@ -171,7 +171,7 @@ var init = function() {
     // Draw start button
 
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Start'
+    drawStartElement.innerHTML = 'Draw'
     drawStartElement.className = 'ol-draw-start'
     drawStartElement.setAttribute('title','Start a new drawing')
     drawStartElement.addEventListener('click', function(e) {
@@ -191,12 +191,40 @@ var init = function() {
         element: drawStartElement
     })
 
+    // Draw undo
+
+    var drawUndoElement = document.createElement('button')
+    drawUndoElement.innerHTML = 'Undo'
+    drawUndoElement.className = 'ol-draw-undo'
+    drawUndoElement.setAttribute('title','Undo the last change')
+    drawUndoElement.disabled = true
+    drawUndoElement.addEventListener('click', function(e) {
+        e.preventDefault()
+    })
+    var drawUndo = new ol.control.Control({
+        element: drawUndoElement
+    })
+
+    // Draw redo
+
+    var drawRedoElement = document.createElement('button')
+    drawRedoElement.innerHTML = 'Redo'
+    drawRedoElement.className = 'ol-draw-redo'
+    drawRedoElement.setAttribute('title','Redo the last change')
+    drawRedoElement.disabled = true
+    drawRedoElement.addEventListener('click', function(e) {
+        e.preventDefault()
+    })
+    var drawRedo = new ol.control.Control({
+        element: drawRedoElement
+    })
+
     // Draw reset button
 
     var drawResetElement = document.createElement('button')
-    drawResetElement.innerHTML = '<span>Delete</span>'
+    drawResetElement.innerHTML = '<span>Clear</span>'
     drawResetElement.className = 'ol-draw-reset'
-    drawResetElement.setAttribute('title','Delete the drawing')
+    drawResetElement.setAttribute('title','Clear the drawing')
     drawResetElement.disabled = true
     drawResetElement.addEventListener('click', function(e) {
         e.preventDefault()
@@ -238,8 +266,10 @@ var init = function() {
         rotate: false,
         attribution: false
     }).extend([
-        drawReset,
         drawStart,
+        drawUndo,
+        drawRedo,
+        drawReset,
         fullScreen,
         zoom
     ])
