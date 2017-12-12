@@ -2598,7 +2598,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-reset {
     background-image: none;
-    left: 241px;
+    left: 242px;
     height: 30px;
     width: 54px;
   }
@@ -2655,7 +2655,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-redo {
     background-image: none;
-    left: 182px;
+    left: 183px;
   }
 }
 

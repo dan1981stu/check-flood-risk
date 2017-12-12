@@ -159,7 +159,7 @@ $path: "/public/";
   background-image: url('#{$path}map-delete-2x.png');  
   @include media(tablet) {
     background-image:none;
-    left:241px;
+    left:242px;
     height:30px;
     width:54px;
   }
@@ -206,7 +206,7 @@ $path: "/public/";
   left:148px;
   @include media(tablet) {
     background-image: none;
-    left:182px;
+    left:183px;
   }
 }
 
