@@ -15,7 +15,7 @@ var key = document.createElement('div')
 key.classList.add('map-key')
 
 var keyToggle = document.createElement('button')
-keyToggle.innerHTML = '<span>Show key</span>'
+keyToggle.innerHTML = '<span>Key</span>'
 keyToggle.setAttribute('title','Find out what the features are')
 keyToggle.classList.add('map-control','map-control-key')
 keyToggle.addEventListener('click', function(e) {
@@ -171,7 +171,7 @@ var init = function() {
     // Draw start button
 
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Start<span> drawing</span>'
+    drawStartElement.innerHTML = 'Start'
     drawStartElement.className = 'ol-draw-start'
     drawStartElement.setAttribute('title','Start a new drawing')
     drawStartElement.addEventListener('click', function(e) {
@@ -196,7 +196,7 @@ var init = function() {
     var drawResetElement = document.createElement('button')
     drawResetElement.innerHTML = '<span>Delete</span>'
     drawResetElement.className = 'ol-draw-reset'
-    drawResetElement.setAttribute('title','Delete all of the points')
+    drawResetElement.setAttribute('title','Delete the drawing')
     drawResetElement.disabled = true
     drawResetElement.addEventListener('click', function(e) {
         e.preventDefault()
