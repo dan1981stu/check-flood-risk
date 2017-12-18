@@ -38,6 +38,11 @@ key.appendChild(keyCopy)
 
 mapContainerInner.appendChild(key)
 
+// Caption element
+var captionElement = document.createElement('div')
+captionElement.classList.add('ol-map-caption')
+captionElement.innerHTML = '<p>Zone 1</p>'
+
 // Add inner comtainer
 mapContainer.appendChild(mapContainerInner)
 
@@ -59,10 +64,72 @@ var init = function() {
     path = getParameterByName('path') || ''
     geoJson = { }
 
+    var interactionFeatureType = 'point'
+
+    // Start drawing boolean used to address finishDrawing bug
+    var drawingStarted = false
+
     // Set up compression codec
     codec = JsonUrl('lzma')
 
-    // Drawing styles for different polygon editing states
+    // Styles for features
+    var styleFunction = function(feature, resolution) {
+        
+        // Complete polygon drawing style
+        var styleDrawComplete = new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.5)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#B10E1E',
+                width: 3
+            }),
+            image: new ol.style.Icon({
+                opacity: 1,
+                size : [32,32],
+                scale: 0.5,
+                src: '/public/map-draw-cursor-2x.png'
+            })
+        })
+        // Complete polygon geometry style
+        var styleDrawCompleteGeometry = new ol.style.Style({
+            image: new ol.style.Icon({
+                opacity: 1,
+                size : [32,32],
+                scale: 0.5,
+                src: '/public/map-draw-cursor-2x.png'
+            }),
+            // Return the coordinates of the first ring of the polygon
+            geometry: function(feature) {
+                if (feature.getGeometry().getType() == 'Polygon'){
+                    var coordinates = feature.getGeometry().getCoordinates()[0]
+                    return new ol.geom.MultiPoint(coordinates)
+                } else {
+                    return null
+                }
+            }
+        })
+        // Markey style
+        var styleMarker = new ol.style.Style({
+            image: new ol.style.Icon({
+                src: '/public/icon-locator-blue-2x.png',
+                size: [53, 71],
+                anchor: [0.5, 1],
+                scale: 0.5
+            })
+        })
+
+        var featureType = feature.getGeometry().getType()
+
+        if (featureType == 'Polygon') {
+            return [styleDrawComplete, styleDrawCompleteGeometry]
+        } else if (featureType == 'Point') {
+            return [styleMarker]
+        }
+
+    }
+
+    // Start polygon drawing style
     var styleDraw = new ol.style.Style({
         fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.5)'
@@ -78,34 +145,8 @@ var init = function() {
             src: '/public/map-draw-cursor-2x.png'
         })
     })
-    var styleDrawComplete = new ol.style.Style({
-        fill: new ol.style.Fill({
-            color: 'rgba(255, 255, 255, 0.5)'
-        }),
-        stroke: new ol.style.Stroke({
-            color: '#B10E1E',
-            width: 3
-        }),
-        image: new ol.style.Icon({
-            opacity: 1,
-            size : [32,32],
-            scale: 0.5,
-            src: '/public/map-draw-cursor-2x.png'
-        })
-    })
-    var styleDrawCompleteGeometry = new ol.style.Style({
-        image: new ol.style.Icon({
-            opacity: 1,
-            size : [32,32],
-            scale: 0.5,
-            src: '/public/map-draw-cursor-2x.png'
-        }),
-        geometry: function(feature) {
-          // return the coordinates of the first ring of the polygon
-          var coordinates = feature.getGeometry().getCoordinates()[0];
-          return new ol.geom.MultiPoint(coordinates);
-        }
-    })
+
+    // Modify polygon drawing style
     var styleDrawModify = new ol.style.Style({
         fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.5)'
@@ -122,6 +163,16 @@ var init = function() {
         })
     })
 
+    // Modify polygon drawing style
+    var stylePointModify = new ol.style.Style({
+        image: new ol.style.Icon({
+            src: '/public/icon-locator-blue-2x.png',
+            size: [53, 71],
+            anchor: [0.5, 1],
+            scale: 0.5
+        })
+    })
+
     // Source: vector layer
     var source = new ol.source.Vector()
     source.addFeature(new ol.Feature())
@@ -134,7 +185,7 @@ var init = function() {
     // Layer: vector
     vector = new ol.layer.Vector({
         source: source,
-        style: [styleDrawComplete, styleDrawCompleteGeometry]
+        style: styleFunction
     })
 
     // The map view object
@@ -171,21 +222,17 @@ var init = function() {
     // Draw start button
 
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Draw'
+    drawStartElement.innerHTML = 'Start drawing'
     drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Start a new drawing')
+    drawStartElement.setAttribute('title','Start drawing a new area')
     drawStartElement.addEventListener('click', function(e) {
         e.preventDefault()
+        vector.getSource().clear()
         map.addInteraction(draw)
         map.addInteraction(snap)
-        map.addInteraction(modify)
-        // Finish drawing on escape key
-        document.addEventListener('keyup', function() {
-            if (event.keyCode === 27) {
-                draw.finishDrawing()
-            }
-        })
+        map.addInteraction(modifyPolygon)
         this.disabled = true
+        interactionFeatureType = 'polygon'
     })
     var drawStart = new ol.control.Control({
         element: drawStartElement
@@ -221,22 +268,24 @@ var init = function() {
 
     // Draw reset button
 
-    var drawResetElement = document.createElement('button')
-    drawResetElement.innerHTML = '<span>Clear</span>'
-    drawResetElement.className = 'ol-draw-reset'
-    drawResetElement.setAttribute('title','Clear the drawing')
-    drawResetElement.disabled = true
-    drawResetElement.addEventListener('click', function(e) {
+    var drawDeleteElement = document.createElement('button')
+    drawDeleteElement.innerHTML = '<span>Clear</span>'
+    drawDeleteElement.className = 'ol-draw-reset'
+    drawDeleteElement.setAttribute('title','Clear the drawing')
+    drawDeleteElement.disabled = true
+    drawDeleteElement.addEventListener('click', function(e) {
         e.preventDefault()
         this.disabled = true
-        drawStartElement.disabled = false
+        drawingStarted = false
         // Remove previously drawn features
         vector.getSource().clear()
         // Update url
         updateUrl(new ol.Feature())
+        drawStartElement.disabled = false
+        interactionFeatureType = 'point'
     })
-    var drawReset = new ol.control.Control({
-        element: drawResetElement
+    var drawDelete = new ol.control.Control({
+        element: drawDeleteElement
     })
 
     // Setup interactions
@@ -246,17 +295,30 @@ var init = function() {
         pinchRotate:false,
         doubleClickZoom :false
     })
-    var modify = new ol.interaction.Modify({
+    var modifyPolygon = new ol.interaction.Modify({
         source: source,
         style: styleDrawModify
     })
     var draw = new ol.interaction.Draw({
         source: source,
         type: 'Polygon',
-        style: styleDraw
+        style: styleDraw,
+        condition: function(e) {
+            // Hack to tackle finishDrawing with zero coordinates bug
+            if (e.type == 'pointerdown') {
+                drawingStarted = true
+            } else {
+                drawingStarted = false
+            }
+            return true
+        }
     })
     var snap = new ol.interaction.Snap({
         source: source
+    })
+    var modifyPoint = new ol.interaction.Modify({
+        source: source,
+        style: stylePointModify
     })
 
     // Add and remove controls
@@ -269,7 +331,7 @@ var init = function() {
         drawStart,
         drawUndo,
         drawRedo,
-        drawReset,
+        drawDelete,
         fullScreen,
         zoom
     ])
@@ -288,12 +350,41 @@ var init = function() {
     // Map events
     //
 
-    // Close key if map is clicked
+    // Close key or place marker if map is clicked
     map.on('click', function(e) {
+
+        console.log(interactionFeatureType)
+
         var keyOpen = document.getElementsByClassName('map-key-open')
+        
+        // Close key
         if (keyOpen.length) {
             keyOpen[0].classList.remove('map-key-open')   
         }
+        
+        // Place marker
+        else if (interactionFeatureType == 'point') {
+
+            vector.getSource().clear()
+
+            // Marker
+            pointGeometry = new ol.geom.Point(e.coordinate)
+            pointFeature = new ol.Feature({
+                geometry: pointGeometry
+            })
+            vector.getSource().addFeature(pointFeature)
+
+            // Caption
+            caption = new ol.Overlay({
+                element: captionElement
+            })
+            caption.setPosition(e.coordinate)
+            map.addOverlay(caption)
+
+            map.addInteraction(modifyPoint)
+
+        }
+
         // Get layer if needed
         /*
         map.forEachLayerAtPixel(e.pixel, function(layer){ 
@@ -303,25 +394,50 @@ var init = function() {
         */
     })
 
+    draw.on('drawstart', function (e) {
+        drawingStarted = true
+    })
+
     // Deactivate draw interaction after first polygon is finished
     draw.on('drawend', function (e) {
+        drawingStarted = false
         coordinates = e.feature.getGeometry().getCoordinates()[0]
-        // Polygon is too small start again
+        // Polygon is too small reset buttons and interaction feature type
         if (coordinates.length < 4) {
             drawStartElement.disabled = false
             e.feature.setGeometry(null)
+            interactionFeatureType = 'point'
         } 
         // Polygon is ok
         else {
-            drawResetElement.disabled = false
+            drawDeleteElement.disabled = false
+            drawStartElement.disabled = true
             updateUrl(e.feature)
             map.removeInteraction(this)
         }
     })
 
+     // Finish drawing on escape key
+     document.addEventListener('keyup', function() {
+        if (event.keyCode === 27) {
+            console.log(drawingStarted)
+            // Clear an reenable draw button 
+            if (!drawingStarted) {
+                map.removeInteraction(draw)
+                map.removeInteraction(snap)
+                map.removeInteraction(modifyPolygon)
+                drawStartElement.disabled = false
+            } 
+            // finishDrawing can now be called safely
+            else {
+                draw.finishDrawing()
+            }
+        }
+    })
+
     // Update url when feature has been modified
-    modify.on('modifyend',function(e){
-        // Logic required to get the modified feature
+    modifyPolygon.on('modifyend',function(e){
+        // Get the modified feature
         var features = e.features.getArray(), counter
         for (i = 0; i < features.length; i++) {
             var rev = features[i].getRevision()
@@ -340,18 +456,21 @@ var init = function() {
             feature = new ol.format.GeoJSON().readFeature(result)
             vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
             map.addInteraction(snap)
-            map.addInteraction(modify)
+            map.addInteraction(modifyPolygon)
             drawStartElement.disabled = true
-            drawResetElement.disabled = false
+            drawDeleteElement.disabled = false
         })
     }
 
     // Apply greyscale filter.
+    /*
     tile.on('postcompose', function(event) {
-        //greyscale(event.context);
+        greyscale(event.context);
     })
+    */
 
     // Popstate event
+    /*
     window.onpopstate = function(e) {
 
         // Set path to previous value
@@ -368,9 +487,9 @@ var init = function() {
                 }
                 vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
                 map.addInteraction(snap)
-                map.addInteraction(modify)
+                map.addInteraction(modifyPolygon)
                 drawStartElement.disabled = true
-                drawResetElement.disabled = false
+                drawDeleteElement.disabled = false
             })
         }
 
@@ -379,12 +498,13 @@ var init = function() {
             vector.getSource().clear()
             map.removeInteraction(draw)
             map.removeInteraction(snap)
-            map.removeInteraction(modify)
+            map.removeInteraction(modifyPolygon)
             drawStartElement.disabled = false
-            drawResetElement.disabled = true
+            drawDeleteElement.disabled = true
         }
         
     }
+    */
 
 }
 
@@ -446,7 +566,7 @@ function updateUrl(feature) {
             path = result
             document.getElementById('path').value = path
             // Add or update path in url
-            history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
+            history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
             
         })
     }
@@ -458,7 +578,7 @@ function updateUrl(feature) {
         document.getElementById('path').value = ''
  
         // Remove path from url
-        history.pushState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
+        history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
         
     }
 

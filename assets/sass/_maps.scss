@@ -121,8 +121,8 @@ $path: "/public/";
 
 // Map control start / reset drawing
 
-.ol-draw-reset,
-.ol-draw-start {
+.ol-draw-start,
+.ol-point-start {
   position:absolute;
   font-size: 16px;
   color:white;
@@ -133,7 +133,7 @@ $path: "/public/";
   z-index:1;
   border:0;
   height:40px;
-  width:48px;
+  width:110px;
   padding:0;
   border-radius: 0;
   cursor:pointer;
@@ -145,7 +145,6 @@ $path: "/public/";
   }
   @include media(tablet) {
     left:69px;
-    width:54px;
     height: 30px;
     span {
       display:inline;
@@ -153,15 +152,31 @@ $path: "/public/";
   }
 }
 .ol-draw-reset {
-  left:193px;
+  left:95px;
+  bottom:10px;
   width:40px;
+  height:40px;
   position: absolute;
-  background-image: url('#{$path}map-delete-2x.png');  
+  text-indent:-5000px;
+  font-size: 16px;
+  color:white;
+  background-color:$link-colour;
+  line-height:1em;
+  border-radius:0;
+  border:0;
+  padding:0;
+  background-image: url('#{$path}map-delete-2x.png');
+  background-repeat: no-repeat;
+  background-size:50%;
+  background-position:center center;
+  cursor:pointer;
   @include media(tablet) {
-    background-image:none;
-    left:242px;
+    top:10px;
+    bottom:auto;
+    left:249px;
     height:30px;
-    width:54px;
+    width:30px;
+    background-size:60%;
   }
 }
 
@@ -174,8 +189,8 @@ $path: "/public/";
   color:white;
   background-color:$link-colour;
   line-height:1em;
-  left:108px;
-  top:10px;
+  left:10px;
+  bottom:10px;
   z-index:1;
   border:0;
   height:40px;
@@ -188,30 +203,28 @@ $path: "/public/";
   background-position:center center;
   text-indent:-5000px;
   @include media(tablet) {
-    text-indent:0;
-    left:241px;
+    top:10px;
+    bottom:auto;
+    left:184px;
     height:30px;
-    width:54px;
+    width:30px;
+    background-size:75%;
   }
 }
 .ol-draw-undo {
   background-image: url('#{$path}map-undo-2x.png');
-  @include media(tablet) {
-    background-image: none;
-    left:128px;
-  }
 }
 .ol-draw-redo {
   background-image: url('#{$path}map-redo-2x.png');
-  left:148px;
+  left:50px;
   @include media(tablet) {
-    background-image: none;
-    left:183px;
+    left:214px;
   }
 }
 
 .ol-draw-reset:hover,
 .ol-draw-start:hover,
+.ol-point-start:hover,
 .ol-draw-undo:hover,
 .ol-draw-redo:hover {
   background-color:$focus-colour;
@@ -219,6 +232,7 @@ $path: "/public/";
 
 .ol-draw-reset:disabled,
 .ol-draw-start:disabled,
+.ol-point-start:disabled,
 .ol-draw-undo:disabled,
 .ol-draw-redo:disabled {
   background-color:$border-colour;
