@@ -2,6 +2,17 @@ const utilities = require('../utilities/utilities.js')
 const modelData = require('../models/planning')
 var Joi = require('joi')
 
+var identifySiteSchema = Joi.alternatives().try(
+	Joi.object().keys({
+		path: Joi.string().allow(''),
+		point: Joi.string()
+	}),
+	Joi.object().keys({
+		path: Joi.string(),
+		point: Joi.string().allow('')
+	})
+)
+
 module.exports = [
 	{
 		method: 'GET',
@@ -123,8 +134,8 @@ module.exports = [
 
 				var model = modelData.getBoundary(
 					request.query.lonLat,
-					request.query.path,
 					request.query.zoom,
+					request.query.path,
 					request.query.isError
 				)
 
@@ -142,23 +153,16 @@ module.exports = [
 		path: '/flood-risk-assessment/identify-site',
 		config: {
 			handler: function (request, reply) {
-				
 				const coordinates = request.payload.coordinates
-
 				return reply.redirect('/flood-risk-assessment/site-reference')
-
 			},
 			validate: {
 				options: {
 					allowUnknown: true
 				},
-				payload: {
-					path: Joi.string().required()
-				},
+				payload: identifySiteSchema,
 				failAction: function (request, reply, source, error) {
-
 					return reply.redirect('/flood-risk-assessment/identify-site?lonLat=' + request.payload.lonLat + '&zoom=' + request.payload.zoom + '&isError=true')
-
 				}
 			}
 		}

@@ -121,8 +121,7 @@ $path: "/public/";
 
 // Map control start / reset drawing
 
-.ol-draw-start,
-.ol-point-start {
+.ol-draw-start {
   position:absolute;
   font-size: 16px;
   color:white;
@@ -152,8 +151,8 @@ $path: "/public/";
   }
 }
 .ol-draw-reset {
-  left:95px;
-  bottom:10px;
+  left:10px;
+  top:150px;
   width:40px;
   height:40px;
   position: absolute;
@@ -173,7 +172,7 @@ $path: "/public/";
   @include media(tablet) {
     top:10px;
     bottom:auto;
-    left:249px;
+    left:244px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -190,7 +189,7 @@ $path: "/public/";
   background-color:$link-colour;
   line-height:1em;
   left:10px;
-  bottom:10px;
+  top:70px;
   z-index:1;
   border:0;
   height:40px;
@@ -204,11 +203,10 @@ $path: "/public/";
   text-indent:-5000px;
   @include media(tablet) {
     top:10px;
-    bottom:auto;
     left:184px;
     height:30px;
     width:30px;
-    background-size:75%;
+    background-size:60%;
   }
 }
 .ol-draw-undo {
@@ -216,8 +214,9 @@ $path: "/public/";
 }
 .ol-draw-redo {
   background-image: url('#{$path}map-redo-2x.png');
-  left:50px;
+  top:110px;
   @include media(tablet) {
+    top:10px;
     left:214px;
   }
 }
@@ -363,4 +362,31 @@ $path: "/public/";
 }
 .map-key-open .map-key-copy {
   display:block;
+}
+
+// Map caption/overlay
+
+.ol-overlay-container {
+  z-index:99;
+  background-color:white;
+  @include media(mobile) {
+    bottom:0 !important;
+    left:0 !important;
+    margin-left:0;
+    margin-bottom:0;
+    width:100%;
+  }
+  @include media(tablet) {
+    border: 1px solid $border-colour;
+    width:200px;
+    margin-left:-100px;
+    margin-bottom:45px;
+  }
+}
+.ol-map-label {
+  padding:10px;
+  @include core-16;
+  p {
+    margin: 0;
+  }
 }

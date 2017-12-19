@@ -2549,8 +2549,7 @@ table.select-areas th {
   z-index: 2;
 }
 
-.ol-draw-start,
-.ol-point-start {
+.ol-draw-start {
   position: absolute;
   font-size: 16px;
   color: white;
@@ -2570,26 +2569,23 @@ table.select-areas th {
   background-position: center center;
 }
 
-.ol-draw-start span,
-.ol-point-start span {
+.ol-draw-start span {
   display: none;
 }
 
 @media (min-width: 641px) {
-  .ol-draw-start,
-  .ol-point-start {
+  .ol-draw-start {
     left: 69px;
     height: 30px;
   }
-  .ol-draw-start span,
-  .ol-point-start span {
+  .ol-draw-start span {
     display: inline;
   }
 }
 
 .ol-draw-reset {
-  left: 95px;
-  bottom: 10px;
+  left: 10px;
+  top: 150px;
   width: 40px;
   height: 40px;
   position: absolute;
@@ -2612,7 +2608,7 @@ table.select-areas th {
   .ol-draw-reset {
     top: 10px;
     bottom: auto;
-    left: 249px;
+    left: 244px;
     height: 30px;
     width: 30px;
     background-size: 60%;
@@ -2627,7 +2623,7 @@ table.select-areas th {
   background-color: #005ea5;
   line-height: 1em;
   left: 10px;
-  bottom: 10px;
+  top: 70px;
   z-index: 1;
   border: 0;
   height: 40px;
@@ -2645,11 +2641,10 @@ table.select-areas th {
   .ol-draw-undo,
   .ol-draw-redo {
     top: 10px;
-    bottom: auto;
     left: 184px;
     height: 30px;
     width: 30px;
-    background-size: 75%;
+    background-size: 60%;
   }
 }
 
@@ -2659,11 +2654,12 @@ table.select-areas th {
 
 .ol-draw-redo {
   background-image: url("/public/map-redo-2x.png");
-  left: 50px;
+  top: 110px;
 }
 
 @media (min-width: 641px) {
   .ol-draw-redo {
+    top: 10px;
     left: 214px;
   }
 }
@@ -2845,6 +2841,50 @@ table.select-areas th {
 
 .map-key-open .map-key-copy {
   display: block;
+}
+
+.ol-overlay-container {
+  z-index: 99;
+  background-color: white;
+}
+
+@media (max-width: 640px) {
+  .ol-overlay-container {
+    bottom: 0 !important;
+    left: 0 !important;
+    margin-left: 0;
+    margin-bottom: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 641px) {
+  .ol-overlay-container {
+    border: 1px solid #bfc1c3;
+    width: 200px;
+    margin-left: -100px;
+    margin-bottom: 45px;
+  }
+}
+
+.ol-map-label {
+  padding: 10px;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+}
+
+@media (min-width: 641px) {
+  .ol-map-label {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.ol-map-label p {
+  margin: 0;
 }
 
 .rainfall {

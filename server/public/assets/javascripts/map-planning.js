@@ -38,16 +38,11 @@ key.appendChild(keyCopy)
 
 mapContainerInner.appendChild(key)
 
-// Caption element
-var captionElement = document.createElement('div')
-captionElement.classList.add('ol-map-caption')
-captionElement.innerHTML = '<p>Zone 1</p>'
-
 // Add inner comtainer
 mapContainer.appendChild(mapContainerInner)
 
 // Global variables
-var url, lonLat, zoom, path, geoJson
+var url, lonLat, zoom, path, point, geoJson
 
 // Codec used for compression
 var codec
@@ -64,10 +59,15 @@ var init = function() {
     path = getParameterByName('path') || ''
     geoJson = { }
 
+    // Used to determin whether a polygon or point is being drawn/placed
     var interactionFeatureType = 'point'
+
+    // Reference to polygon feature
+    var feature = null
 
     // Start drawing boolean used to address finishDrawing bug
     var drawingStarted = false
+    var drawingFinished = false
 
     // Set up compression codec
     codec = JsonUrl('lzma')
@@ -196,7 +196,6 @@ var init = function() {
     });
 
     // Zoom buttons
-
     var zoomElement = document.createElement('button')
     zoomElement.appendChild(document.createTextNode('Zoom'))
     zoomElement.className = 'ol-zoom'
@@ -205,7 +204,6 @@ var init = function() {
     })
 
     // Fullscreen button
-
     var fullScreenElement = document.createElement('button')
     fullScreenElement.appendChild(document.createTextNode('Full screen'))
     fullScreenElement.className = 'ol-full-screen'
@@ -220,7 +218,6 @@ var init = function() {
     })
 
     // Draw start button
-
     var drawStartElement = document.createElement('button')
     drawStartElement.innerHTML = 'Start drawing'
     drawStartElement.className = 'ol-draw-start'
@@ -228,18 +225,19 @@ var init = function() {
     drawStartElement.addEventListener('click', function(e) {
         e.preventDefault()
         vector.getSource().clear()
+        map.removeOverlay(label)
         map.addInteraction(draw)
         map.addInteraction(snap)
         map.addInteraction(modifyPolygon)
         this.disabled = true
         interactionFeatureType = 'polygon'
+        document.getElementById('point').value = ''
     })
     var drawStart = new ol.control.Control({
         element: drawStartElement
     })
 
     // Draw undo
-
     var drawUndoElement = document.createElement('button')
     drawUndoElement.innerHTML = 'Undo'
     drawUndoElement.className = 'ol-draw-undo'
@@ -253,7 +251,6 @@ var init = function() {
     })
 
     // Draw redo
-
     var drawRedoElement = document.createElement('button')
     drawRedoElement.innerHTML = 'Redo'
     drawRedoElement.className = 'ol-draw-redo'
@@ -267,7 +264,6 @@ var init = function() {
     })
 
     // Draw reset button
-
     var drawDeleteElement = document.createElement('button')
     drawDeleteElement.innerHTML = '<span>Clear</span>'
     drawDeleteElement.className = 'ol-draw-reset'
@@ -277,15 +273,35 @@ var init = function() {
         e.preventDefault()
         this.disabled = true
         drawingStarted = false
+        drawingFinished = false
         // Remove previously drawn features
         vector.getSource().clear()
+        map.removeOverlay(label)
+        map.removeInteraction(draw)
+        map.removeInteraction(snap)
+        map.removeInteraction(modifyPolygon)
         // Update url
-        updateUrl(new ol.Feature())
+        feature = new ol.Feature()
+        updateUrl(feature)
         drawStartElement.disabled = false
         interactionFeatureType = 'point'
     })
     var drawDelete = new ol.control.Control({
         element: drawDeleteElement
+    })
+
+    // Label
+    var labelElement = document.createElement('div')
+    labelElement.classList.add('ol-map-label')
+    labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></br><abbr title="Easting and northing">EN</abbr> 123456/123456</br>Flood zone 1</p>'
+    var label = new ol.Overlay({
+        element: labelElement,
+        positioning: 'bottom-left'
+    })
+
+    // Marker
+    var pointFeature = new ol.Feature({
+
     })
 
     // Setup interactions
@@ -315,10 +331,6 @@ var init = function() {
     })
     var snap = new ol.interaction.Snap({
         source: source
-    })
-    var modifyPoint = new ol.interaction.Modify({
-        source: source,
-        style: stylePointModify
     })
 
     // Add and remove controls
@@ -350,39 +362,36 @@ var init = function() {
     // Map events
     //
 
+    // Update url when zoom changes
+    map.on('moveend', function(e) {
+        console.log('moveend')
+        updateUrl(feature)
+    })
+
     // Close key or place marker if map is clicked
     map.on('click', function(e) {
-
-        console.log(interactionFeatureType)
-
         var keyOpen = document.getElementsByClassName('map-key-open')
-        
         // Close key
         if (keyOpen.length) {
             keyOpen[0].classList.remove('map-key-open')   
-        }
-        
-        // Place marker
-        else if (interactionFeatureType == 'point') {
-
-            vector.getSource().clear()
-
-            // Marker
-            pointGeometry = new ol.geom.Point(e.coordinate)
-            pointFeature = new ol.Feature({
-                geometry: pointGeometry
-            })
-            vector.getSource().addFeature(pointFeature)
-
-            // Caption
-            caption = new ol.Overlay({
-                element: captionElement
-            })
-            caption.setPosition(e.coordinate)
-            map.addOverlay(caption)
-
-            map.addInteraction(modifyPoint)
-
+        } 
+        // If key is closed
+        else {
+            // Place marker
+            if (interactionFeatureType == 'point') {
+                // Set form value
+                point = ol.proj.transform(e.coordinate, 'EPSG:3857', 'EPSG:4326')
+                document.getElementById('point').value = point
+                // Marker object
+                pointGeometry = new ol.geom.Point(e.coordinate)
+                pointFeature.setGeometry(pointGeometry)
+                labelElement.innerHTML = '<p><abbr title="Easting and northing">EN</abbr> 123456/123456</br>Flood zone 1</p>'
+                vector.getSource().clear()
+                vector.getSource().addFeature(pointFeature)
+                label.setPosition(e.coordinate)
+                map.addOverlay(label)
+                //drawDeleteElement.disabled = false
+            }
         }
 
         // Get layer if needed
@@ -412,27 +421,44 @@ var init = function() {
         else {
             drawDeleteElement.disabled = false
             drawStartElement.disabled = true
-            updateUrl(e.feature)
+            drawingFinished = true
+            feature = e.feature
+            updateUrl(feature)
             map.removeInteraction(this)
         }
     })
 
      // Finish drawing on escape key
      document.addEventListener('keyup', function() {
+
+        // Escape key pressed
         if (event.keyCode === 27) {
-            console.log(drawingStarted)
-            // Clear an reenable draw button 
-            if (!drawingStarted) {
-                map.removeInteraction(draw)
-                map.removeInteraction(snap)
-                map.removeInteraction(modifyPolygon)
-                drawStartElement.disabled = false
-            } 
-            // finishDrawing can now be called safely
-            else {
-                draw.finishDrawing()
+
+            // Escape drawing a polygon if it is not already finished
+            if (interactionFeatureType == 'polygon' && !drawingFinished) {
+                // Clear an reenable draw button 
+                if (!drawingStarted) {
+                    map.removeInteraction(draw)
+                    map.removeInteraction(snap)
+                    map.removeInteraction(modifyPolygon)
+                    drawStartElement.disabled = false
+                    interactionFeatureType = 'point'
+                } 
+                // finishDrawing can now be called safely
+                else {
+                    draw.finishDrawing()
+                }
             }
+
+            // Escape placing a marker
+            else if (interactionFeatureType == 'point') {
+                vector.getSource().clear()
+                map.removeOverlay(label)
+                document.getElementById('point').value = ''
+            }
+
         }
+
     })
 
     // Update url when feature has been modified
@@ -446,7 +472,8 @@ var init = function() {
                 break
             }
         }
-        updateUrl(features[counter])
+        feature = features[counter]
+        updateUrl(feature)
     })
 
     // Add feature from path
@@ -459,7 +486,21 @@ var init = function() {
             map.addInteraction(modifyPolygon)
             drawStartElement.disabled = true
             drawDeleteElement.disabled = false
+            drawingStarted = true
+            drawingFinished = true
         })
+    } 
+    // Add initial locator
+    else {
+        var pointLonLat = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326')
+        pointLonLat[0] = pointLonLat[0].toFixed(6)
+        pointLonLat[1] = pointLonLat[1].toFixed(6)
+        document.getElementById('point').value = pointLonLat
+        centreCoordinate = ol.proj.transform(centre, 'EPSG:4326','EPSG:3857')
+        pointFeature.setGeometry(new ol.geom.Point(centreCoordinate))
+        vector.getSource().addFeature(pointFeature)
+        label.setPosition(centreCoordinate)
+        map.addOverlay(label)
     }
 
     // Apply greyscale filter.
@@ -554,7 +595,7 @@ function updateUrl(feature) {
     document.getElementById('zoom').value = zoom
 
     // We have a new or modified feature
-    if (feature.getGeometry()) {
+    if (feature) {
         // Write feature as GeoJson
         var writer = new ol.format.GeoJSON()
         geoJson = writer.writeFeature(feature,{
