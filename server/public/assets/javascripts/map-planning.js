@@ -293,7 +293,7 @@ var init = function() {
     // Label
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
-    labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></br><abbr title="Easting and northing">EN</abbr> 123456/123456</br>Flood zone 1</p>'
+    labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></br><abbr title="Easting and northing">EN</abbr> 123456/123456</br>(Flood zone 1)</p>'
     var label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
@@ -385,7 +385,7 @@ var init = function() {
                 // Marker object
                 pointGeometry = new ol.geom.Point(e.coordinate)
                 pointFeature.setGeometry(pointGeometry)
-                labelElement.innerHTML = '<p><abbr title="Easting and northing">EN</abbr> 123456/123456</br>Flood zone 1</p>'
+                labelElement.innerHTML = '<p><abbr title="Easting and northing">EN</abbr> 123456/123456</br>(Flood zone 1)</p>'
                 vector.getSource().clear()
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)
