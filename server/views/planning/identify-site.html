@@ -24,7 +24,7 @@
 						<h1 class="heading-large">Identify the site</h1>
 					</legend>
 				
-					<p>Draw an outline of the site boundary on the map using the mouse. Alternatively click to map to identify a point.</p>
+					<p class="text">Draw an outline of the site boundary on the map using the mouse. Alternatively click the map to get a report for a point location.</p>
 
 					<details style="margin-bottom:1.5em">
 						<summary>
@@ -34,9 +34,7 @@
 							<p>Instructions</p>
 						</div>
 					</details>
-
-					<!--<p class="bold-small">Map centered on &apos;Mytholmroyd&apos;. <a href="/flood-risk-assessment/find-location">Change</a></p>-->
-						
+			
 					<div class="form-group{{#if model.isError}} form-group-map-error{{/if }}">
 						{{#if model.isError}}
 						<span class="error-message">Site has not been identified</span>

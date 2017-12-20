@@ -223,7 +223,6 @@ $path: "/public/";
 
 .ol-draw-reset:hover,
 .ol-draw-start:hover,
-.ol-point-start:hover,
 .ol-draw-undo:hover,
 .ol-draw-redo:hover {
   background-color:$focus-colour;
@@ -231,11 +230,17 @@ $path: "/public/";
 
 .ol-draw-reset:disabled,
 .ol-draw-start:disabled,
-.ol-point-start:disabled,
 .ol-draw-undo:disabled,
 .ol-draw-redo:disabled {
   background-color:$border-colour;
   cursor:default;
+}
+
+.ol-draw-reset:focus,
+.ol-draw-start:focus,
+.ol-draw-undo:focus,
+.ol-draw-redo:focus {
+  z-index:2;
 }
 
 // Map control fullscreen
@@ -267,7 +272,7 @@ $path: "/public/";
   @include core-16;
   position: absolute;
   background:$link-colour;
-  z-index:2;
+  z-index:3;
   left:10px;
   top:10px;
   text-align:left;
@@ -333,22 +338,63 @@ $path: "/public/";
   background:$focus-colour;
 }
 
-// Map copyright statement
+// Map key content
 
+.map-key-container {
+  display:none;
+  position:relative;
+  height:100%;
+  z-index:2;
+}
+.map-key-heading {
+  position:absolute;
+  left:0;
+  right:0;
+  height:35px;
+  z-index:2;
+  background-color:white;
+  padding-top:15px;
+  padding-left:10px;
+  padding-right:10px;
+  @include media(tablet) {
+    height:45px;
+    padding-left:15px;
+    padding-right:15px;  
+  }
+  h2 {
+    margin:0;
+  }
+}
+.map-key-features {
+  position:absolute;
+  top:50px;
+  bottom:44px;
+  left:0;
+  right:0;
+  padding:10px;
+  @include media(tablet) {
+    padding:15px;
+    bottom:49px;
+  }
+  overflow:hidden;
+  overflow:auto;
+}
 .map-key-copyright {
   @include core-16;
   position: absolute;
-  bottom:10px;
-  left: 10px;
-  width:100%;
-}
-
-// Map key copy
-
-.map-key-copy {
-  display:none;
-  padding:15px;
-  overflow:hidden;
+  bottom:0;
+  left:0;
+  right:0;
+  height:24px;
+  padding-top:20px;
+  padding-right:10px;
+  padding-left:10px;
+  @include media(tablet) {
+    padding-top:15px;
+    padding-right:15px;
+    padding-left:15px;
+    height:34px;
+  }
 }
 .map-key-open {
   position:absolute;
@@ -360,7 +406,7 @@ $path: "/public/";
   max-width:20em;
   background-color:white;
 }
-.map-key-open .map-key-copy {
+.map-key-open .map-key-container {
   display:block;
 }
 
@@ -388,5 +434,56 @@ $path: "/public/";
   @include core-16;
   p {
     margin: 0;
+  }
+}
+
+// Map key features
+
+.multiple-choice-key {
+  @extend .multiple-choice;
+  padding-left:28px;
+  margin-bottom:7px;
+  @include media(tablet) {
+    margin-bottom:10px;
+  }
+  input {
+    width:28px;
+    height:28px;
+  }
+  label {
+    padding: 7px 10px 5px 10px;
+    @include core-16;
+    @include media(tablet) {
+      padding: 5px 10px 4px 12px;
+    }
+  }
+}
+.multiple-choice-key .key-icon {
+  display:inline-block;
+  width:26px;
+  height:18px;
+  background-color:#ccc;
+  margin:0 8px 0 4px;
+  vertical-align:top;
+  margin-top:-2px;
+  @include media(tablet) {
+    margin-top:0;
+  }
+}
+.multiple-choice-key [type=checkbox] + label::before {
+  width: 24px;
+  height: 24px;
+}
+.multiple-choice-key [type=checkbox] + label::after {
+  top: 8px;
+  left: 6px;
+  width: 12px;
+  height: 5px;
+  border-width: 0 0 4px 4px;
+}
+.multiple-choice-key:last-child, .multiple-choice-key:last-of-type {
+  margin-bottom:7px;
+  @include media(tablet) {
+    margin-bottom:10px;
   }
 }

@@ -1,46 +1,3 @@
-// Setup fullscreen container and key (legend) elements
-
-var mapContainer = document.querySelector('.map').children[0]
-var mapContainerInner = document.createElement('div')
-mapContainerInner.classList.add('map-container-inner')
-mapContainerInner.id = 'map-container-inner'
-
-var copyright = document.createElement('span')
-copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-copyright.classList.add('map-key-copyright')
-
-// Add key
-
-var key = document.createElement('div')
-key.classList.add('map-key')
-
-var keyToggle = document.createElement('button')
-keyToggle.innerHTML = '<span>Key</span>'
-keyToggle.setAttribute('title','Find out what the features are')
-keyToggle.classList.add('map-control','map-control-key')
-keyToggle.addEventListener('click', function(e) {
-    e.preventDefault()
-    key.classList.toggle('map-key-open')
-})
-
-var keyCopy = document.createElement('div')
-keyCopy.classList.add('map-key-copy')
-
-var copyright = document.createElement('span')
-copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-copyright.classList.add('map-key-copyright')
-
-keyCopy.innerHTML = '<h2 class="bold-medium">Key</h2>'
-keyCopy.appendChild(copyright)
-
-key.appendChild(keyToggle)
-key.appendChild(keyCopy)
-
-mapContainerInner.appendChild(key)
-
-// Add inner comtainer
-mapContainer.appendChild(mapContainerInner)
-
 // Global variables
 var url, lonLat, zoom, path, point, geoJson
 
@@ -58,6 +15,89 @@ var init = function() {
     zoom = getParameterByName('zoom') || 15
     path = getParameterByName('path') || ''
     geoJson = { }
+
+    //
+    // Add html elements to map
+    //
+
+    // Setup fullscreen container and key (legend) elements
+
+    var mapContainer = document.querySelector('.map').children[0]
+    var mapContainerInner = document.createElement('div')
+    mapContainerInner.classList.add('map-container-inner')
+    mapContainerInner.id = 'map-container-inner'
+
+    // Add key
+
+    var key = document.createElement('div')
+    key.classList.add('map-key')
+
+    var keyToggle = document.createElement('button')
+    keyToggle.innerHTML = '<span>Key</span>'
+    keyToggle.setAttribute('title','Find out what the features are')
+    keyToggle.classList.add('map-control','map-control-key')
+    keyToggle.addEventListener('click', function(e) {
+        e.preventDefault()
+        key.classList.toggle('map-key-open')
+        vector.getSource().clear()
+        map.removeOverlay(label)
+    })
+
+    var keyContainer = document.createElement('div')
+    keyContainer.classList.add('map-key-container')
+
+    var keyHeading = document.createElement('div')
+    keyHeading.classList.add('map-key-heading')
+    keyHeading.innerHTML = '<h2 class="bold-medium">Key</h2>'
+
+    var keyFeatures = document.createElement('div')
+    keyFeatures.classList.add('map-key-features')
+    keyFeatures.innerHTML = `
+        <ul>
+            <li>
+                <div class="multiple-choice-key">
+                    <input id="flood-zones" name="flood-zones" type="checkbox" value="flood-zones" checked>
+                    <label for="flood-zones">Flood risk zones</label>
+                </div>
+                <ul>
+                    <li>
+                <ul>
+            </li>
+            <li>
+                <div class="multiple-choice-key">
+                    <input id="flood-defence" name="flood-defence" type="checkbox" value="flood-defence" checked>
+                    <label for="flood-defence"><span class="key-icon"></span>Flood defence</label>
+                </div>
+            </li>
+            <li>
+                <div class="multiple-choice-key">
+                    <input id="main-river" name="main-river" type="checkbox" value="main-river" checked>
+                    <label for="main-river"><span class="key-icon"></span>Main river</label>
+                </div>
+            </li>
+            <li>
+                <div class="multiple-choice-key">
+                    <input id="flood-storage" name="flood-storage" type="checkbox" value="flood-storage" checked>
+                    <label for="flood-storage"><span class="key-icon"></span>Flood storage</label>
+                </div>
+            </li>
+        </ul>
+    `
+
+    var keyCopyright = document.createElement('div')
+    keyCopyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    keyCopyright.classList.add('map-key-copyright')
+
+    keyContainer.appendChild(keyHeading)
+    keyContainer.appendChild(keyFeatures)
+    keyContainer.appendChild(keyCopyright)
+    key.appendChild(keyToggle)
+    key.appendChild(keyContainer)
+
+    mapContainerInner.appendChild(key)
+
+    // Add inner comtainer
+    mapContainer.appendChild(mapContainerInner)
 
     // Used to determin whether a polygon or point is being drawn/placed
     var interactionFeatureType = 'point'
@@ -203,6 +243,15 @@ var init = function() {
         element: zoomElement
     })
 
+    // Zoom reset button
+    var zoomResetElement = document.createElement('button')
+    zoomResetElement.appendChild(document.createTextNode('Zoom reset'))
+    zoomResetElement.className = 'ol-zoom-reset'
+    zoomResetElement.setAttribute('title','Reset location')
+    var zoomReset = new ol.control.Control({
+        element: zoomResetElement
+    })
+
     // Fullscreen button
     var fullScreenElement = document.createElement('button')
     fullScreenElement.appendChild(document.createTextNode('Full screen'))
@@ -293,16 +342,14 @@ var init = function() {
     // Label
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
-    labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></br><abbr title="Easting and northing">EN</abbr> 123456/123456</br>(Flood zone 1)</p>'
+    labelElement.innerHTML = '<p><strong class="bold-small">&apos;mytholmroyd&apos;</strong></br>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</br>Flood zone 1</p>'
     var label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
     })
 
     // Marker
-    var pointFeature = new ol.Feature({
-
-    })
+    var pointFeature = new ol.Feature()
 
     // Setup interactions
 
@@ -345,6 +392,7 @@ var init = function() {
         drawRedo,
         drawDelete,
         fullScreen,
+        zoomReset,
         zoom
     ])
 
@@ -385,7 +433,7 @@ var init = function() {
                 // Marker object
                 pointGeometry = new ol.geom.Point(e.coordinate)
                 pointFeature.setGeometry(pointGeometry)
-                labelElement.innerHTML = '<p><abbr title="Easting and northing">EN</abbr> 123456/123456</br>(Flood zone 1)</p>'
+                labelElement.innerHTML = '<p><strong class="bold-small"><abbr title="Easting and northing">EN</abbr> 123456/123456</strong></br>Flood zone 1</p>'
                 vector.getSource().clear()
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)
@@ -510,43 +558,6 @@ var init = function() {
     })
     */
 
-    // Popstate event
-    /*
-    window.onpopstate = function(e) {
-
-        // Set path to previous value
-        path = getParameterByName('path') || ''
-
-        // Add geometry if path exists
-        if (path) {
-            codec.decompress(path).then(result => {
-                // Get geometry from previous path
-                feature = new ol.format.GeoJSON().readFeature(result)
-                // Replace current geomtry with previous
-                if (!vector.getSource().getFeatures().length) {
-                    vector.getSource().addFeature(new ol.Feature())
-                }
-                vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
-                map.addInteraction(snap)
-                map.addInteraction(modifyPolygon)
-                drawStartElement.disabled = true
-                drawDeleteElement.disabled = false
-            })
-        }
-
-        // Clear geometry if previous url had no path
-        else {
-            vector.getSource().clear()
-            map.removeInteraction(draw)
-            map.removeInteraction(snap)
-            map.removeInteraction(modifyPolygon)
-            drawStartElement.disabled = false
-            drawDeleteElement.disabled = true
-        }
-        
-    }
-    */
-
 }
 
 init()
@@ -607,7 +618,7 @@ function updateUrl(feature) {
             path = result
             document.getElementById('path').value = path
             // Add or update path in url
-            history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
+            //history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom + '&path=' + path)
             
         })
     }
@@ -619,7 +630,7 @@ function updateUrl(feature) {
         document.getElementById('path').value = ''
  
         // Remove path from url
-        history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
+        // history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
         
     }
 
