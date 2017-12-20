@@ -458,12 +458,12 @@ $path: "/public/";
     }
   }
 }
-.multiple-choice-key .key-icon {
+.key-symbol {
   display:inline-block;
   width:26px;
   height:18px;
   background-color:#ccc;
-  margin:0 8px 0 4px;
+  margin-right:8px;
   vertical-align:top;
   margin-top:-2px;
   @include media(tablet) {
@@ -486,4 +486,9 @@ $path: "/public/";
   @include media(tablet) {
     margin-bottom:10px;
   }
+}
+.features-key {
+  float:left;
+  clear:left;
+  @include core-16;
 }

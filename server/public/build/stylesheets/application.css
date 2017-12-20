@@ -2986,18 +2986,18 @@ table.select-areas th {
   }
 }
 
-.multiple-choice-key .key-icon {
+.key-symbol {
   display: inline-block;
   width: 26px;
   height: 18px;
   background-color: #ccc;
-  margin: 0 8px 0 4px;
+  margin-right: 8px;
   vertical-align: top;
   margin-top: -2px;
 }
 
 @media (min-width: 641px) {
-  .multiple-choice-key .key-icon {
+  .key-symbol {
     margin-top: 0;
   }
 }
@@ -3022,6 +3022,23 @@ table.select-areas th {
 @media (min-width: 641px) {
   .multiple-choice-key:last-child, .multiple-choice-key:last-of-type {
     margin-bottom: 10px;
+  }
+}
+
+.features-key {
+  float: left;
+  clear: left;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+}
+
+@media (min-width: 641px) {
+  .features-key {
+    font-size: 16px;
+    line-height: 1.25;
   }
 }
 

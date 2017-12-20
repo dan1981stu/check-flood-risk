@@ -5,7 +5,7 @@ var url, lonLat, zoom, path, point, geoJson
 var codec
 
 // Reference required to redraw map
-var map, vector
+var map, vector, label
 
 var init = function() {
 
@@ -59,26 +59,28 @@ var init = function() {
                     <input id="flood-zones" name="flood-zones" type="checkbox" value="flood-zones" checked>
                     <label for="flood-zones">Flood risk zones</label>
                 </div>
-                <ul>
+                <ul class="features-key">
                     <li>
+                        <div class="feature-key"><span class="key-symbol"></span>Feature</div>
+                    </li>
                 <ul>
             </li>
             <li>
                 <div class="multiple-choice-key">
                     <input id="flood-defence" name="flood-defence" type="checkbox" value="flood-defence" checked>
-                    <label for="flood-defence"><span class="key-icon"></span>Flood defence</label>
+                    <label for="flood-defence"><span class="key-symbol"></span>Flood defence</label>
                 </div>
             </li>
             <li>
                 <div class="multiple-choice-key">
                     <input id="main-river" name="main-river" type="checkbox" value="main-river" checked>
-                    <label for="main-river"><span class="key-icon"></span>Main river</label>
+                    <label for="main-river"><span class="key-symbol"></span>Main river</label>
                 </div>
             </li>
             <li>
                 <div class="multiple-choice-key">
                     <input id="flood-storage" name="flood-storage" type="checkbox" value="flood-storage" checked>
-                    <label for="flood-storage"><span class="key-icon"></span>Flood storage</label>
+                    <label for="flood-storage"><span class="key-symbol"></span>Flood storage</label>
                 </div>
             </li>
         </ul>
@@ -343,7 +345,7 @@ var init = function() {
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
     labelElement.innerHTML = '<p><strong class="bold-small">&apos;mytholmroyd&apos;</strong></br>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</br>Flood zone 1</p>'
-    var label = new ol.Overlay({
+    label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
     })
