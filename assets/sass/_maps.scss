@@ -498,8 +498,10 @@ $path: "/public/";
   &.key-section {
     border-bottom:1px solid $border-colour;
     margin-bottom:10px;
+    padding-bottom:3px;
     @include media(tablet) {
       margin-bottom:15px;
+      padding-bottom:5px;
     }
   }
 }
