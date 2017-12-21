@@ -2,6 +2,7 @@ const utilities = require('../utilities/utilities.js')
 const modelData = require('../models/planning')
 var Joi = require('joi')
 
+/*
 var identifySiteSchema = Joi.alternatives().try(
 	Joi.object().keys({
 		path: Joi.string().allow(''),
@@ -12,6 +13,7 @@ var identifySiteSchema = Joi.alternatives().try(
 		point: Joi.string().allow('')
 	})
 )
+*/
 
 module.exports = [
 	{
@@ -160,7 +162,9 @@ module.exports = [
 				options: {
 					allowUnknown: true
 				},
-				payload: identifySiteSchema,
+				payload: {
+					path: Joi.string().required()	
+				},
 				failAction: function (request, reply, source, error) {
 					return reply.redirect('/flood-risk-assessment/identify-site?lonLat=' + request.payload.lonLat + '&zoom=' + request.payload.zoom + '&isError=true')
 				}
