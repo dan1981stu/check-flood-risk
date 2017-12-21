@@ -39,8 +39,6 @@ var init = function() {
     keyToggle.addEventListener('click', function(e) {
         e.preventDefault()
         key.classList.toggle('map-key-open')
-        vector.getSource().clear()
-        map.removeOverlay(label)
     })
 
     var keyContainer = document.createElement('div')
@@ -54,33 +52,42 @@ var init = function() {
     keyFeatures.classList.add('map-key-features')
     keyFeatures.innerHTML = `
         <ul>
-            <li>
+            <li class="key-feature key-section">
                 <div class="multiple-choice-key">
                     <input id="flood-zones" name="flood-zones" type="checkbox" value="flood-zones" checked>
                     <label for="flood-zones">Flood risk zones</label>
                 </div>
-                <ul class="features-key">
+                <ul class="key-feature-group">
                     <li>
-                        <div class="feature-key"><span class="key-symbol"></span>Feature</div>
+                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 3</span>
                     </li>
-                <ul>
+                    <li>
+                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 3 - Areas benefitting from flood defences</span>
+                    </li>
+                    <li>
+                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 2</span>
+                    </li>
+                    <li>
+                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 1</span>
+                    </li>
+                </ul>
             </li>
-            <li>
+            <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="flood-defence" name="flood-defence" type="checkbox" value="flood-defence" checked>
-                    <label for="flood-defence"><span class="key-symbol"></span>Flood defence</label>
+                    <label for="flood-defence"><span class="key-feature-label"><span class="key-symbol"></span>Flood defence</span></label>
                 </div>
             </li>
-            <li>
+            <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="main-river" name="main-river" type="checkbox" value="main-river" checked>
-                    <label for="main-river"><span class="key-symbol"></span>Main river</label>
+                    <label for="main-river"><span class="key-feature-label"><span class="key-symbol"></span>Main river</span></label>
                 </div>
             </li>
-            <li>
+            <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="flood-storage" name="flood-storage" type="checkbox" value="flood-storage" checked>
-                    <label for="flood-storage"><span class="key-symbol"></span>Flood storage</label>
+                    <label for="flood-storage"><span class="key-feature-label"><span class="key-symbol"></span>Flood storage area</span></label>
                 </div>
             </li>
         </ul>
@@ -344,7 +351,7 @@ var init = function() {
     // Label
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
-    labelElement.innerHTML = '<p><strong class="bold-small">&apos;mytholmroyd&apos;</strong></br>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</br>Flood zone 1</p>'
+    labelElement.innerHTML = '<p><strong class="bold-small">Flood risk zone 3</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
     label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
@@ -435,7 +442,7 @@ var init = function() {
                 // Marker object
                 pointGeometry = new ol.geom.Point(e.coordinate)
                 pointFeature.setGeometry(pointGeometry)
-                labelElement.innerHTML = '<p><strong class="bold-small"><abbr title="Easting and northing">EN</abbr> 123456/123456</strong></br>Flood zone 1</p>'
+                labelElement.innerHTML = '<p><strong class="bold-small">Flood risk zone 1</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
                 vector.getSource().clear()
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)

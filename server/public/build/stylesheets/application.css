@@ -2819,9 +2819,9 @@ table.select-areas th {
   position: absolute;
   left: 0;
   right: 0;
-  height: 35px;
+  height: 45px;
   z-index: 2;
-  background-color: white;
+  border-bottom: 1px solid #bfc1c3;
   padding-top: 15px;
   padding-left: 10px;
   padding-right: 10px;
@@ -2829,31 +2829,19 @@ table.select-areas th {
 
 @media (min-width: 641px) {
   .map-key-heading {
-    height: 45px;
     padding-left: 15px;
     padding-right: 15px;
   }
 }
 
 .map-key-heading h2 {
-  margin: 0;
-}
-
-.map-key-features {
-  position: absolute;
-  top: 50px;
-  bottom: 44px;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  overflow: hidden;
-  overflow: auto;
+  margin-top: 6px;
+  margin-bottom: 0;
 }
 
 @media (min-width: 641px) {
-  .map-key-features {
-    padding: 15px;
-    bottom: 49px;
+  .map-key-heading h2 {
+    margin-top: 0;
   }
 }
 
@@ -2891,12 +2879,12 @@ table.select-areas th {
 
 .map-key-open {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   top: 0px;
   bottom: 0px;
   width: 100%;
-  max-width: 20em;
+  max-width: 16em;
   background-color: white;
 }
 
@@ -2905,7 +2893,7 @@ table.select-areas th {
 }
 
 .ol-overlay-container {
-  z-index: 99;
+  z-index: 2;
   background-color: white;
 }
 
@@ -2948,6 +2936,24 @@ table.select-areas th {
   margin: 0;
 }
 
+.map-key-features {
+  position: absolute;
+  top: 61px;
+  bottom: 44px;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  overflow: hidden;
+  overflow: auto;
+}
+
+@media (min-width: 641px) {
+  .map-key-features {
+    padding: 15px 0;
+    bottom: 49px;
+  }
+}
+
 .multiple-choice-key {
   padding-left: 28px;
   margin-bottom: 7px;
@@ -2987,12 +2993,10 @@ table.select-areas th {
 }
 
 .key-symbol {
-  display: inline-block;
+  display: block;
   width: 26px;
   height: 18px;
   background-color: #ccc;
-  margin-right: 8px;
-  vertical-align: top;
   margin-top: -2px;
 }
 
@@ -3025,9 +3029,51 @@ table.select-areas th {
   }
 }
 
-.features-key {
+.key-feature {
+  display: block;
+  overflow: auto;
+  padding: 0 10px;
+}
+
+@media (min-width: 641px) {
+  .key-feature {
+    padding: 0 15px;
+  }
+}
+
+.key-feature.key-section {
+  border-bottom: 1px solid #bfc1c3;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 641px) {
+  .key-feature.key-section {
+    margin-bottom: 15px;
+  }
+}
+
+.key-feature:after {
+  content: '';
+}
+
+.key-feature-group {
   float: left;
   clear: left;
+}
+
+li .key-feature-group {
+  padding-left: 38px;
+}
+
+@media (min-width: 641px) {
+  li .key-feature-group {
+    padding-left: 40px;
+  }
+}
+
+.key-feature-group li {
+  margin-bottom: 7px;
+  padding: 7px 10px 5px 0;
   font-family: "nta", Arial, sans-serif;
   font-weight: 400;
   text-transform: none;
@@ -3036,10 +3082,30 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .features-key {
+  .key-feature-group li {
     font-size: 16px;
     line-height: 1.25;
   }
+}
+
+@media (min-width: 641px) {
+  .key-feature-group li {
+    margin-bottom: 10px;
+    padding: 5px 10px 4px 0;
+  }
+}
+
+.key-feature-label {
+  position: relative;
+  display: block;
+  margin-left: 34px;
+}
+
+.key-feature-label .key-symbol {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -34px;
 }
 
 .rainfall {
