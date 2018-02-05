@@ -2992,20 +2992,6 @@ table.select-areas th {
   }
 }
 
-.key-symbol {
-  display: block;
-  width: 26px;
-  height: 18px;
-  background-color: #ccc;
-  margin-top: -2px;
-}
-
-@media (min-width: 641px) {
-  .key-symbol {
-    margin-top: 0;
-  }
-}
-
 .multiple-choice-key [type=checkbox] + label::before {
   width: 24px;
   height: 24px;
@@ -3031,7 +3017,6 @@ table.select-areas th {
 
 .key-feature {
   display: block;
-  overflow: auto;
   padding: 0 10px;
 }
 
@@ -3055,7 +3040,9 @@ table.select-areas th {
 }
 
 .key-feature:after {
-  content: '';
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .key-feature-group {
@@ -3100,14 +3087,49 @@ li .key-feature-group {
 .key-feature-label {
   position: relative;
   display: block;
-  margin-left: 34px;
+  margin-left: 36px;
 }
 
-.key-feature-label .key-symbol {
+.key-symbol {
   position: absolute;
   top: 0;
   left: 0;
-  margin-left: -34px;
+  width: 26px;
+  height: 19px;
+  margin-left: -35px;
+  margin-top: -2px;
+  background-color: #ccc;
+  border: 0;
+}
+
+@media (min-width: 641px) {
+  .key-symbol {
+    margin-top: 0;
+  }
+}
+
+.key-symbol.key-symbol-zone3 {
+  background-color: #2E358B;
+}
+
+.key-symbol.key-symbol-zone3-benefitting {
+  background-color: transparent;
+}
+
+.key-symbol.key-symbol-zone2 {
+  background-color: #2B8CC4;
+}
+
+.key-symbol.key-symbol-flood-defence {
+  background-color: transparent;
+}
+
+.key-symbol.key-symbol-main-river {
+  background-color: transparent;
+}
+
+.key-symbol.key-symbol-flood-storage {
+  background-color: transparent;
 }
 
 .rainfall {

@@ -31,6 +31,7 @@ var init = function() {
 
     var key = document.createElement('div')
     key.classList.add('map-key')
+    //key.classList.add('map-key-open')
 
     var keyToggle = document.createElement('button')
     keyToggle.innerHTML = '<span>Key</span>'
@@ -59,35 +60,84 @@ var init = function() {
                 </div>
                 <ul class="key-feature-group">
                     <li>
-                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 3</span>
+                        <span class="key-feature-label">
+                            <span class="key-symbol key-symbol-zone3"></span>
+                            Zone 3
+                        </span>
                     </li>
                     <li>
-                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 3 - Areas benefitting from flood defences</span>
+                        <span class="key-feature-label">                            
+                            <span class="key-symbol key-symbol-zone3-benefitting">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <pattern id="hatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                                            <line x1="0" y1="0" x2="0" y2="10" style="stroke:#2E358B; stroke-width:5" />
+                                        </pattern>
+                                    </defs>
+                                    <rect x="1" y="1" width="24" height="17" stroke="#2E358B" stroke-width="2" fill="url(#hatch)" />
+                                </svg>
+                            </span>
+                            Zone 3 - Areas benefitting from flood defences
+                        </span>
                     </li>
                     <li>
-                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 2</span>
+                        <span class="key-feature-label"><span class="key-symbol key-symbol-zone2"></span>Zone 2</span>
                     </li>
+                    <!--
                     <li>
-                        <span class="key-feature-label"><span class="key-symbol"></span>Zone 1</span>
+                        <span class="key-feature-label"><span class="key-symbol key-symbol-zone1"></span>Zone 1</span>
                     </li>
+                    -->
                 </ul>
             </li>
             <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="flood-defence" name="flood-defence" type="checkbox" value="flood-defence" checked>
-                    <label for="flood-defence"><span class="key-feature-label"><span class="key-symbol"></span>Flood defence</span></label>
+                    <label for="flood-defence">
+                        <span class="key-feature-label">
+                            <span class="key-symbol key-symbol-flood-defence">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0" y="6" width="100%" height="7" fill="#F47738" />
+                                </svg>
+                            </span>
+                            Flood defence
+                        </span>
+                    </label>
                 </div>
             </li>
             <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="main-river" name="main-river" type="checkbox" value="main-river" checked>
-                    <label for="main-river"><span class="key-feature-label"><span class="key-symbol"></span>Main river</span></label>
+                    <label for="main-river">
+                        <span class="key-feature-label">
+                            <span class="key-symbol key-symbol-main-river">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0" y="6" width="100%" height="7" fill="#2B8CC4" />
+                                </svg>
+                            </span>
+                            Main river
+                        </span>
+                    </label>
                 </div>
             </li>
             <li class="key-feature">
                 <div class="multiple-choice-key">
                     <input id="flood-storage" name="flood-storage" type="checkbox" value="flood-storage" checked>
-                    <label for="flood-storage"><span class="key-feature-label"><span class="key-symbol"></span>Flood storage area</span></label>
+                    <label for="flood-storage">
+                        <span class="key-feature-label">
+                            <span class="key-symbol key-symbol-flood-storage">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <pattern id="dots" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse" >
+                                            <circle cx="2.5" cy="2.5" r="2.5" style="stroke: none; fill: #2B8CC4" />
+                                        </pattern>
+                                    </defs>
+                                    <rect x="0" y="0" width="100%" height="100%" fill="url(#dots)" />
+                                </svg>
+                            </span>
+                            Flood storage area
+                        </span>
+                    </label>
                 </div>
             </li>
         </ul>
