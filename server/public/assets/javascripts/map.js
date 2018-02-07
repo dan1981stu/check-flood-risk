@@ -11,11 +11,11 @@ var mapContainerInner = document.createElement('div')
 mapContainerInner.classList.add('map-container-inner')
 mapContainerInner.id = 'map-container-inner'
 
-
 // Add key
 
 var key = document.createElement('div')
 key.classList.add('map-key')
+//key.classList.add('map-key-open')
 
 var keyToggle = document.createElement('button')
 keyToggle.innerHTML = '<span>Key</span>'
@@ -26,20 +26,119 @@ keyToggle.addEventListener('click', function(e) {
     key.classList.toggle('map-key-open')
 })
 
-var keyCopy = document.createElement('div')
-keyCopy.classList.add('map-key-copy')
+var keyContainer = document.createElement('div')
+keyContainer.classList.add('map-key-container')
 
-var copyright = document.createElement('span')
-copyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-copyright.classList.add('map-key-copyright')
+var keyHeading = document.createElement('div')
+keyHeading.classList.add('map-key-heading')
+keyHeading.innerHTML = '<h2 class="bold-medium">Key</h2>'
 
-keyCopy.appendChild(document.createTextNode('Symbols and explanations'))
-keyCopy.appendChild(copyright)
+var keyFeatures = document.createElement('div')
+keyFeatures.classList.add('map-key-features')
+keyFeatures.innerHTML = `
+    <ul>
+        <li class="key-feature key-section">
+            <div class="multiple-choice-key">
+                <input id="flood-zones" name="flood-zones" type="checkbox" value="flood-zones" checked>
+                <label for="flood-zones">Flood risk zones</label>
+            </div>
+            <ul class="key-feature-group">
+                <li>
+                    <span class="key-feature-label">
+                        <span class="key-symbol key-symbol-zone3"></span>
+                        Zone 3
+                    </span>
+                </li>
+                <li>
+                    <span class="key-feature-label">                            
+                        <span class="key-symbol key-symbol-zone3-benefitting">
+                            <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="hatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                                        <line x1="0" y1="0" x2="0" y2="10" style="stroke:#2E358B; stroke-width:5" />
+                                    </pattern>
+                                </defs>
+                                <rect x="1" y="1" width="24" height="17" stroke="#2E358B" stroke-width="2" fill="url(#hatch)" />
+                            </svg>
+                        </span>
+                        Zone 3 - Areas benefitting from flood defences
+                    </span>
+                </li>
+                <li>
+                    <span class="key-feature-label"><span class="key-symbol key-symbol-zone2"></span>Zone 2</span>
+                </li>
+                <!--
+                <li>
+                    <span class="key-feature-label"><span class="key-symbol key-symbol-zone1"></span>Zone 1</span>
+                </li>
+                -->
+            </ul>
+        </li>
+        <li class="key-feature">
+            <div class="multiple-choice-key">
+                <input id="flood-defence" name="flood-defence" type="checkbox" value="flood-defence" checked>
+                <label for="flood-defence">
+                    <span class="key-feature-label">
+                        <span class="key-symbol key-symbol-flood-defence">
+                            <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="6" width="100%" height="7" fill="#F47738" />
+                            </svg>
+                        </span>
+                        Flood defence
+                    </span>
+                </label>
+            </div>
+        </li>
+        <li class="key-feature">
+            <div class="multiple-choice-key">
+                <input id="main-river" name="main-river" type="checkbox" value="main-river" checked>
+                <label for="main-river">
+                    <span class="key-feature-label">
+                        <span class="key-symbol key-symbol-main-river">
+                            <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="6" width="100%" height="7" fill="#2B8CC4" />
+                            </svg>
+                        </span>
+                        Main river
+                    </span>
+                </label>
+            </div>
+        </li>
+        <li class="key-feature">
+            <div class="multiple-choice-key">
+                <input id="flood-storage" name="flood-storage" type="checkbox" value="flood-storage" checked>
+                <label for="flood-storage">
+                    <span class="key-feature-label">
+                        <span class="key-symbol key-symbol-flood-storage">
+                            <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="dots" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse" >
+                                        <circle cx="2.5" cy="2.5" r="2.5" style="stroke: none; fill: #2B8CC4" />
+                                    </pattern>
+                                </defs>
+                                <rect x="0" y="0" width="100%" height="100%" fill="url(#dots)" />
+                            </svg>
+                        </span>
+                        Flood storage area
+                    </span>
+                </label>
+            </div>
+        </li>
+    </ul>
+`
 
+var keyCopyright = document.createElement('div')
+keyCopyright.innerHTML = '\u00A9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+keyCopyright.classList.add('map-key-copyright')
+
+keyContainer.appendChild(keyHeading)
+keyContainer.appendChild(keyFeatures)
+keyContainer.appendChild(keyCopyright)
 key.appendChild(keyToggle)
-key.appendChild(keyCopy)
+key.appendChild(keyContainer)
 
 mapContainerInner.appendChild(key)
+
 mapContainer.appendChild(mapContainerInner)
 
 // Reference require to redraw map
