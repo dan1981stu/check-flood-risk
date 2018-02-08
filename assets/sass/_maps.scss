@@ -132,7 +132,7 @@ $path: "/public/";
   z-index:1;
   border:0;
   height:40px;
-  width:110px;
+  width:70px;
   padding:0;
   border-radius: 0;
   cursor:pointer;
@@ -145,6 +145,37 @@ $path: "/public/";
   @include media(tablet) {
     left:69px;
     height: 30px;
+    width:68px;
+    span {
+      display:inline;
+    }
+  }
+}
+.ol-place-marker {
+  position:absolute;
+  font-size: 16px;
+  color:white;
+  background-color:$link-colour;
+  line-height:1em;
+  left:130px;
+  top:10px;
+  z-index:1;
+  border:0;
+  height:40px;
+  width:70px;
+  padding:0;
+  border-radius: 0;
+  cursor:pointer;
+  background-repeat: no-repeat;
+  background-size:50%;
+  background-position:center center;
+  span {
+    display:none;
+  }
+  @include media(tablet) {
+    left:142px;
+    height: 30px;
+    width:68px;
     span {
       display:inline;
     }
@@ -172,7 +203,7 @@ $path: "/public/";
   @include media(tablet) {
     top:10px;
     bottom:auto;
-    left:244px;
+    left:275px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -203,7 +234,7 @@ $path: "/public/";
   text-indent:-5000px;
   @include media(tablet) {
     top:10px;
-    left:184px;
+    left:215px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -217,12 +248,13 @@ $path: "/public/";
   top:110px;
   @include media(tablet) {
     top:10px;
-    left:214px;
+    left:245px;
   }
 }
 
 .ol-draw-reset:hover,
 .ol-draw-start:hover,
+.ol-place-marker:hover,
 .ol-draw-undo:hover,
 .ol-draw-redo:hover {
   background-color:$focus-colour;
@@ -230,6 +262,7 @@ $path: "/public/";
 
 .ol-draw-reset:disabled,
 .ol-draw-start:disabled,
+.ol-place-marker:disabled,
 .ol-draw-undo:disabled,
 .ol-draw-redo:disabled {
   background-color:$border-colour;

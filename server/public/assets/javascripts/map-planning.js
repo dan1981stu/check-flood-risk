@@ -325,11 +325,11 @@ var init = function() {
         element: fullScreenElement
     })
 
-    // Draw start button
+    // Draw shape button
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Start drawing'
+    drawStartElement.innerHTML = 'Shape'
     drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Start drawing a new area')
+    drawStartElement.setAttribute('title','Start drawing a new shape')
     drawStartElement.addEventListener('click', function(e) {
         e.preventDefault()
         vector.getSource().clear()
@@ -343,6 +343,19 @@ var init = function() {
     })
     var drawStart = new ol.control.Control({
         element: drawStartElement
+    })
+
+    // Place marker button
+    var placeMarkerElement = document.createElement('button')
+    placeMarkerElement.innerHTML = 'Marker'
+    placeMarkerElement.className = 'ol-place-marker'
+    placeMarkerElement.setAttribute('title','Place a marker')
+    placeMarkerElement.addEventListener('click', function(e) {
+        e.preventDefault()
+    })
+    placeMarkerElement.disabled = true
+    var placeMarker = new ol.control.Control({
+        element: placeMarkerElement
     })
 
     // Draw undo
@@ -447,6 +460,7 @@ var init = function() {
         attribution: false
     }).extend([
         drawStart,
+        placeMarker,
         drawUndo,
         drawRedo,
         drawDelete,
