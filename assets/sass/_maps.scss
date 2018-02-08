@@ -121,7 +121,7 @@ $path: "/public/";
 
 // Map control start / reset drawing
 
-.ol-draw-start {
+.ol-place-marker {
   position:absolute;
   font-size: 16px;
   color:white;
@@ -151,13 +151,13 @@ $path: "/public/";
     }
   }
 }
-.ol-place-marker {
+.ol-draw-start {
   position:absolute;
   font-size: 16px;
   color:white;
   background-color:$link-colour;
   line-height:1em;
-  left:130px;
+  left:125px;
   top:10px;
   z-index:1;
   border:0;
@@ -173,7 +173,7 @@ $path: "/public/";
     display:none;
   }
   @include media(tablet) {
-    left:142px;
+    left:137px;
     height: 30px;
     width:68px;
     span {
@@ -183,7 +183,7 @@ $path: "/public/";
 }
 .ol-draw-reset {
   left:10px;
-  top:150px;
+  top:155px;
   width:40px;
   height:40px;
   position: absolute;
@@ -234,7 +234,7 @@ $path: "/public/";
   text-indent:-5000px;
   @include media(tablet) {
     top:10px;
-    left:215px;
+    left:210px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -248,7 +248,7 @@ $path: "/public/";
   top:110px;
   @include media(tablet) {
     top:10px;
-    left:245px;
+    left:240px;
   }
 }
 

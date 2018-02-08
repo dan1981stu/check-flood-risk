@@ -24,14 +24,20 @@
 						<h1 class="heading-large">Identify the site</h1>
 					</legend>
 				
-					<p>Place a marker to identify the site centre. Alternatively draw a shape to identify the site boundary.</p>
+					<p>Place a marker on the map to identify the site centre alternatively draw a shape to identify the site boundary.</p>
 
 					<details style="margin-bottom:1.5em">
 						<summary>
-							<span class="summary">How to draw on the map</span>
+							<span class="summary">How to draw a shape</span>
 						</summary>
 						<div class="panel panel-border-narrow">
-							<p>Instructions</p>
+							<ol class="list list-number">
+								<li>Select ‘Shape’</li>
+								<li>Select any point on your site’s boundary</li>
+								<li>Select a second point on the boundary. You should see a line drawn between the first 2 points</li>
+								<li>Keep adding points until the boundary is defined</li>
+								<li>Double click or tap when you return to your first point</li>
+							</ol>
 						</div>
 					</details>
 			
@@ -58,7 +64,7 @@
 						<input id="zoom" name="zoom" type="hidden" value="{{ model.zoom }}"/>
 						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input id="point" name="point" type="hidden" value=""/>
-						<input class="button" type="submit" value="Continue">
+						<input class="button" type="submit" value="Get report">
 					</div>
 
 				</fieldset>

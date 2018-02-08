@@ -340,6 +340,7 @@ var init = function() {
         this.disabled = true
         interactionFeatureType = 'polygon'
         document.getElementById('point').value = ''
+        placeMarkerElement.disabled = false
     })
     var drawStart = new ol.control.Control({
         element: drawStartElement
@@ -352,6 +353,8 @@ var init = function() {
     placeMarkerElement.setAttribute('title','Place a marker')
     placeMarkerElement.addEventListener('click', function(e) {
         e.preventDefault()
+        this.disabled = true
+        drawStartElement.disabled = false
     })
     placeMarkerElement.disabled = true
     var placeMarker = new ol.control.Control({
@@ -393,19 +396,19 @@ var init = function() {
     drawDeleteElement.addEventListener('click', function(e) {
         e.preventDefault()
         this.disabled = true
-        drawingStarted = false
-        drawingFinished = false
+        //drawingStarted = false
+        //drawingFinished = false
         // Remove previously drawn features
         vector.getSource().clear()
         map.removeOverlay(label)
-        map.removeInteraction(draw)
-        map.removeInteraction(snap)
-        map.removeInteraction(modifyPolygon)
+        //map.removeInteraction(draw)
+        //map.removeInteraction(snap)
+        //map.removeInteraction(modifyPolygon)
         // Update url
         feature = new ol.Feature()
         updateUrl(feature)
-        drawStartElement.disabled = false
-        interactionFeatureType = 'point'
+        //drawStartElement.disabled = false
+        //interactionFeatureType = 'point'
     })
     var drawDelete = new ol.control.Control({
         element: drawDeleteElement
@@ -414,7 +417,7 @@ var init = function() {
     // Label
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
-    labelElement.innerHTML = '<p><strong class="bold-small">Flood risk zone 3</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
+    labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></p>'
     label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
@@ -459,8 +462,8 @@ var init = function() {
         rotate: false,
         attribution: false
     }).extend([
-        drawStart,
         placeMarker,
+        drawStart,
         drawUndo,
         drawRedo,
         drawDelete,
@@ -506,7 +509,7 @@ var init = function() {
                 // Marker object
                 pointGeometry = new ol.geom.Point(e.coordinate)
                 pointFeature.setGeometry(pointGeometry)
-                labelElement.innerHTML = '<p><strong class="bold-small">Flood risk zone 1</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
+                labelElement.innerHTML = '<p><strong class="bold-small">Site centre</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
                 vector.getSource().clear()
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)

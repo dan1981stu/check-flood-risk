@@ -2549,7 +2549,7 @@ table.select-areas th {
   z-index: 2;
 }
 
-.ol-draw-start {
+.ol-place-marker {
   position: absolute;
   font-size: 16px;
   color: white;
@@ -2569,28 +2569,28 @@ table.select-areas th {
   background-position: center center;
 }
 
-.ol-draw-start span {
+.ol-place-marker span {
   display: none;
 }
 
 @media (min-width: 641px) {
-  .ol-draw-start {
+  .ol-place-marker {
     left: 69px;
     height: 30px;
     width: 68px;
   }
-  .ol-draw-start span {
+  .ol-place-marker span {
     display: inline;
   }
 }
 
-.ol-place-marker {
+.ol-draw-start {
   position: absolute;
   font-size: 16px;
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 130px;
+  left: 125px;
   top: 10px;
   z-index: 1;
   border: 0;
@@ -2604,24 +2604,24 @@ table.select-areas th {
   background-position: center center;
 }
 
-.ol-place-marker span {
+.ol-draw-start span {
   display: none;
 }
 
 @media (min-width: 641px) {
-  .ol-place-marker {
-    left: 142px;
+  .ol-draw-start {
+    left: 137px;
     height: 30px;
     width: 68px;
   }
-  .ol-place-marker span {
+  .ol-draw-start span {
     display: inline;
   }
 }
 
 .ol-draw-reset {
   left: 10px;
-  top: 150px;
+  top: 155px;
   width: 40px;
   height: 40px;
   position: absolute;
@@ -2677,7 +2677,7 @@ table.select-areas th {
   .ol-draw-undo,
   .ol-draw-redo {
     top: 10px;
-    left: 215px;
+    left: 210px;
     height: 30px;
     width: 30px;
     background-size: 60%;
@@ -2696,7 +2696,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-redo {
     top: 10px;
-    left: 245px;
+    left: 240px;
   }
 }
 
