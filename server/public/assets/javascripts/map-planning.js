@@ -332,7 +332,7 @@ var init = function() {
 
     // Draw shape button
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Shape'
+    drawStartElement.innerHTML = '<span>Draw shape</span>'
     drawStartElement.className = 'ol-draw-start'
     drawStartElement.setAttribute('title','Start drawing a new shape')
     drawStartElement.addEventListener('click', function(e) {
@@ -353,7 +353,7 @@ var init = function() {
 
     // Place marker button
     var placeMarkerElement = document.createElement('button')
-    placeMarkerElement.innerHTML = 'Marker'
+    placeMarkerElement.innerHTML = '<span>Place marker</span>'
     placeMarkerElement.className = 'ol-place-marker'
     placeMarkerElement.setAttribute('title','Place a marker')
     placeMarkerElement.addEventListener('click', function(e) {

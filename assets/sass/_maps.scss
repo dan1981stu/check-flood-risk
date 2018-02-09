@@ -140,13 +140,19 @@ $path: "/public/";
   background-repeat: no-repeat;
   background-size:50%;
   background-position:center center;
+  &:before {
+    content:'Marker'
+  }
   span {
     display:none;
   }
   @include media(tablet) {
     left:10px;
     height: 30px;
-    width:68px;
+    width:104px;
+    &:before {
+      content:''
+    }
     span {
       display:inline;
     }
@@ -170,13 +176,19 @@ $path: "/public/";
   background-repeat: no-repeat;
   background-size:50%;
   background-position:center center;
+  &:before {
+    content:'Shape'
+  }
   span {
     display:none;
   }
   @include media(tablet) {
-    left:78px;
+    left:114px;
     height:30px;
-    width:68px;
+    width:96px;
+    &:before {
+      content:''
+    }
     span {
       display:inline;
     }
@@ -192,7 +204,7 @@ $path: "/public/";
   .ol-draw-start {
     left:125px;
     @include media(tablet) {
-      left:137px;
+      left:173px;
     }
   }
 }
@@ -221,7 +233,7 @@ $path: "/public/";
   @include media(tablet) {
     top:10px;
     bottom:auto;
-    left:216px;
+    left:280px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -229,7 +241,7 @@ $path: "/public/";
 }
 .map-has-key .ol-draw-reset {
   @include media(tablet) {
-    left:275px;
+    left:339px;
   }
 }
 
@@ -257,7 +269,7 @@ $path: "/public/";
   text-indent:-5000px;
   @include media(tablet) {
     top:10px;
-    left:151px;
+    left:215px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -271,18 +283,18 @@ $path: "/public/";
   top:110px;
   @include media(tablet) {
     top:10px;
-    left:181px;
+    left:245px;
   }
 }
 .map-has-key {
   .ol-draw-undo {
     @include media(tablet) {
-      left:210px;
+      left:274px;
     }
   }
   .ol-draw-redo {
     @include media(tablet) {
-      left:240px;
+      left:304px;
     }
   }
 }
