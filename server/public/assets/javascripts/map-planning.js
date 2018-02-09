@@ -408,7 +408,7 @@ var init = function() {
     var drawDeleteElement = document.createElement('button')
     drawDeleteElement.innerHTML = '<span>Clear</span>'
     drawDeleteElement.className = 'ol-draw-reset'
-    drawDeleteElement.setAttribute('title','Clear the drawing')
+    drawDeleteElement.setAttribute('title','Delete the shape or marker')
     drawDeleteElement.disabled = true
     drawDeleteElement.addEventListener('click', function(e) {
         e.preventDefault()
