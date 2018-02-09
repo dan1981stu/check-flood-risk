@@ -15,6 +15,9 @@ var init = function() {
     zoom = getParameterByName('zoom') || 15
     path = getParameterByName('path') || ''
     geoJson = { }
+    
+    // Map properties from html classes
+    hasKey = document.querySelector('.map').classList.contains('map-has-key')
 
     //
     // Add html elements to map
@@ -153,7 +156,9 @@ var init = function() {
     key.appendChild(keyToggle)
     key.appendChild(keyContainer)
 
-    mapContainerInner.appendChild(key)
+    if (hasKey) {
+        mapContainerInner.appendChild(key)
+    }
 
     // Add inner comtainer
     mapContainer.appendChild(mapContainerInner)
@@ -488,7 +493,6 @@ var init = function() {
 
     // Update url when zoom changes
     map.on('moveend', function(e) {
-        console.log('moveend')
         updateUrl(feature)
     })
 

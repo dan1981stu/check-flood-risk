@@ -2523,7 +2523,7 @@ table.select-areas th {
 .ol-zoom-reset {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  top: 60px;
   background-position: 0% 0%;
 }
 
@@ -2531,6 +2531,7 @@ table.select-areas th {
   .ol-zoom-reset {
     height: 30px;
     width: 30px;
+    top: auto;
     bottom: 70px;
   }
 }
@@ -2555,7 +2556,7 @@ table.select-areas th {
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 55px;
+  left: 10px;
   top: 10px;
   z-index: 1;
   border: 0;
@@ -2575,7 +2576,7 @@ table.select-areas th {
 
 @media (min-width: 641px) {
   .ol-place-marker {
-    left: 69px;
+    left: 10px;
     height: 30px;
     width: 68px;
   }
@@ -2590,7 +2591,7 @@ table.select-areas th {
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 125px;
+  left: 80px;
   top: 10px;
   z-index: 1;
   border: 0;
@@ -2610,12 +2611,32 @@ table.select-areas th {
 
 @media (min-width: 641px) {
   .ol-draw-start {
-    left: 137px;
+    left: 78px;
     height: 30px;
     width: 68px;
   }
   .ol-draw-start span {
     display: inline;
+  }
+}
+
+.map-has-key .ol-place-marker {
+  left: 55px;
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-place-marker {
+    left: 69px;
+  }
+}
+
+.map-has-key .ol-draw-start {
+  left: 125px;
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-start {
+    left: 137px;
   }
 }
 
@@ -2644,10 +2665,16 @@ table.select-areas th {
   .ol-draw-reset {
     top: 10px;
     bottom: auto;
-    left: 275px;
+    left: 216px;
     height: 30px;
     width: 30px;
     background-size: 60%;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-reset {
+    left: 275px;
   }
 }
 
@@ -2677,7 +2704,7 @@ table.select-areas th {
   .ol-draw-undo,
   .ol-draw-redo {
     top: 10px;
-    left: 210px;
+    left: 151px;
     height: 30px;
     width: 30px;
     background-size: 60%;
@@ -2696,6 +2723,18 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-redo {
     top: 10px;
+    left: 181px;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-undo {
+    left: 210px;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-redo {
     left: 240px;
   }
 }
