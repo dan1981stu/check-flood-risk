@@ -360,6 +360,18 @@ var init = function() {
         e.preventDefault()
         this.disabled = true
         drawStartElement.disabled = false
+        drawingStarted = false
+        drawingFinished = false
+        // Remove previously drawn features
+        vector.getSource().clear()
+        map.removeOverlay(label)
+        map.removeInteraction(draw)
+        map.removeInteraction(snap)
+        map.removeInteraction(modifyPolygon)
+        // Update url
+        feature = new ol.Feature()
+        //updateUrl(feature)
+        interactionFeatureType = 'point'
     })
     placeMarkerElement.disabled = true
     var placeMarker = new ol.control.Control({
@@ -518,7 +530,7 @@ var init = function() {
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)
                 map.addOverlay(label)
-                //drawDeleteElement.disabled = false
+                drawDeleteElement.disabled = false
             }
         }
 
