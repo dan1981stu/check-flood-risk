@@ -1,0 +1,35 @@
+<main {{#if model.isError}}class="js-error"{{/if }}>
+
+	<a href="/flood-risk-assessment/identify-site?lonLat={{ model.lonLat }}&zoom={{ model.zoom }}" class="link-back">Back</a> 
+
+    <div class="grid-row no-bottom">
+        <div class="column-two-thirds no-bottom">
+            <h1 class="heading-large">Report {{ model.lonLat }}</h1>
+        </div>
+    </div>
+		
+</main>
+
+{{#section 'bodyScripts'}}
+
+<!-- Add before closing body tag -->
+<!-- below uses GDS style guide javascript adapted to use html5 hidden instead of aria-hidden -->
+<script src="/public/javascripts/show-hide-content.js"></script>
+<script>
+$(document).ready(function () {
+
+	// Turn off jQuery animation
+	jQuery.fx.off = true
+	// Where .multiple-choice uses the data-target attribute
+	// to toggle hidden content
+	var showHideContent = new GOVUK.ShowHideContent()
+	showHideContent.init()
+
+	// If there is an error, set focus to the summary
+	$('.js-error .error-summary:visible').first().focus()
+
+})
+</script>
+<!-- end before closing body tag -->
+
+{{/section}}

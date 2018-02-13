@@ -1,0 +1,11 @@
+button.button-text {
+    background:none!important;
+    border:none; 
+    padding:0!important;
+    color:$link-colour;
+    text-decoration:underline;
+    cursor:pointer;
+}
+button.button-text:hover {
+    color:$link-colour;
+}

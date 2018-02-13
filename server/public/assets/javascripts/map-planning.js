@@ -509,7 +509,7 @@ var init = function() {
                 // Marker object
                 pointGeometry = new ol.geom.Point(e.coordinate)
                 pointFeature.setGeometry(pointGeometry)
-                labelElement.innerHTML = '<p><strong class="bold-small">Site centre</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
+                labelElement.innerHTML = '<p><strong class="bold-small">Flood zone 1</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
                 vector.getSource().clear()
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)

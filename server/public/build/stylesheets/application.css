@@ -3582,3 +3582,16 @@ a.subsection-header:focus .font-small {
     margin-bottom: 1.5em;
   }
 }
+
+button.button-text {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #005ea5;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button.button-text:hover {
+  color: #005ea5;
+}
