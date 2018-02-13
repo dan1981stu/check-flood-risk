@@ -15,6 +15,9 @@ var init = function() {
     zoom = getParameterByName('zoom') || 15
     path = getParameterByName('path') || ''
     geoJson = { }
+    
+    // Map properties from html classes
+    hasKey = document.querySelector('.map').classList.contains('map-has-key')
 
     //
     // Add html elements to map
@@ -153,7 +156,9 @@ var init = function() {
     key.appendChild(keyToggle)
     key.appendChild(keyContainer)
 
-    mapContainerInner.appendChild(key)
+    if (hasKey) {
+        mapContainerInner.appendChild(key)
+    }
 
     // Add inner comtainer
     mapContainer.appendChild(mapContainerInner)
@@ -327,7 +332,7 @@ var init = function() {
 
     // Draw shape button
     var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = 'Shape'
+    drawStartElement.innerHTML = '<span>Draw shape</span>'
     drawStartElement.className = 'ol-draw-start'
     drawStartElement.setAttribute('title','Start drawing a new shape')
     drawStartElement.addEventListener('click', function(e) {
@@ -348,13 +353,25 @@ var init = function() {
 
     // Place marker button
     var placeMarkerElement = document.createElement('button')
-    placeMarkerElement.innerHTML = 'Marker'
+    placeMarkerElement.innerHTML = '<span>Place marker</span>'
     placeMarkerElement.className = 'ol-place-marker'
     placeMarkerElement.setAttribute('title','Place a marker')
     placeMarkerElement.addEventListener('click', function(e) {
         e.preventDefault()
         this.disabled = true
         drawStartElement.disabled = false
+        drawingStarted = false
+        drawingFinished = false
+        // Remove previously drawn features
+        vector.getSource().clear()
+        map.removeOverlay(label)
+        map.removeInteraction(draw)
+        map.removeInteraction(snap)
+        map.removeInteraction(modifyPolygon)
+        // Update url
+        feature = new ol.Feature()
+        //updateUrl(feature)
+        interactionFeatureType = 'point'
     })
     placeMarkerElement.disabled = true
     var placeMarker = new ol.control.Control({
@@ -391,7 +408,7 @@ var init = function() {
     var drawDeleteElement = document.createElement('button')
     drawDeleteElement.innerHTML = '<span>Clear</span>'
     drawDeleteElement.className = 'ol-draw-reset'
-    drawDeleteElement.setAttribute('title','Clear the drawing')
+    drawDeleteElement.setAttribute('title','Delete the shape or marker')
     drawDeleteElement.disabled = true
     drawDeleteElement.addEventListener('click', function(e) {
         e.preventDefault()
@@ -488,7 +505,6 @@ var init = function() {
 
     // Update url when zoom changes
     map.on('moveend', function(e) {
-        console.log('moveend')
         updateUrl(feature)
     })
 
@@ -514,7 +530,7 @@ var init = function() {
                 vector.getSource().addFeature(pointFeature)
                 label.setPosition(e.coordinate)
                 map.addOverlay(label)
-                //drawDeleteElement.disabled = false
+                drawDeleteElement.disabled = false
             }
         }
 

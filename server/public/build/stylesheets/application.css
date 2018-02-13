@@ -2523,7 +2523,7 @@ table.select-areas th {
 .ol-zoom-reset {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  top: 60px;
   background-position: 0% 0%;
 }
 
@@ -2531,6 +2531,7 @@ table.select-areas th {
   .ol-zoom-reset {
     height: 30px;
     width: 30px;
+    top: auto;
     bottom: 70px;
   }
 }
@@ -2555,7 +2556,7 @@ table.select-areas th {
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 55px;
+  left: 10px;
   top: 10px;
   z-index: 1;
   border: 0;
@@ -2569,15 +2570,22 @@ table.select-areas th {
   background-position: center center;
 }
 
+.ol-place-marker:before {
+  content: 'Marker';
+}
+
 .ol-place-marker span {
   display: none;
 }
 
 @media (min-width: 641px) {
   .ol-place-marker {
-    left: 69px;
+    left: 10px;
     height: 30px;
-    width: 68px;
+    width: 104px;
+  }
+  .ol-place-marker:before {
+    content: '';
   }
   .ol-place-marker span {
     display: inline;
@@ -2590,7 +2598,7 @@ table.select-areas th {
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 125px;
+  left: 80px;
   top: 10px;
   z-index: 1;
   border: 0;
@@ -2604,18 +2612,45 @@ table.select-areas th {
   background-position: center center;
 }
 
+.ol-draw-start:before {
+  content: 'Shape';
+}
+
 .ol-draw-start span {
   display: none;
 }
 
 @media (min-width: 641px) {
   .ol-draw-start {
-    left: 137px;
+    left: 114px;
     height: 30px;
-    width: 68px;
+    width: 96px;
+  }
+  .ol-draw-start:before {
+    content: '';
   }
   .ol-draw-start span {
     display: inline;
+  }
+}
+
+.map-has-key .ol-place-marker {
+  left: 55px;
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-place-marker {
+    left: 69px;
+  }
+}
+
+.map-has-key .ol-draw-start {
+  left: 125px;
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-start {
+    left: 173px;
   }
 }
 
@@ -2644,10 +2679,16 @@ table.select-areas th {
   .ol-draw-reset {
     top: 10px;
     bottom: auto;
-    left: 275px;
+    left: 280px;
     height: 30px;
     width: 30px;
     background-size: 60%;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-reset {
+    left: 339px;
   }
 }
 
@@ -2677,7 +2718,7 @@ table.select-areas th {
   .ol-draw-undo,
   .ol-draw-redo {
     top: 10px;
-    left: 210px;
+    left: 215px;
     height: 30px;
     width: 30px;
     background-size: 60%;
@@ -2696,7 +2737,19 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-redo {
     top: 10px;
-    left: 240px;
+    left: 245px;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-undo {
+    left: 274px;
+  }
+}
+
+@media (min-width: 641px) {
+  .map-has-key .ol-draw-redo {
+    left: 304px;
   }
 }
 

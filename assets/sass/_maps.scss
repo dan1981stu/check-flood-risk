@@ -98,11 +98,12 @@ $path: "/public/";
 .ol-zoom-reset {
   position: absolute;
   right:10px;
-  bottom:10px;
+  top:60px;
   background-position:0% 0%;
   @include media(tablet) {
     height: 30px;
     width: 30px;
+    top:auto;
     bottom:70px;
   }
 }
@@ -127,7 +128,7 @@ $path: "/public/";
   color:white;
   background-color:$link-colour;
   line-height:1em;
-  left:55px;
+  left:10px;
   top:10px;
   z-index:1;
   border:0;
@@ -139,13 +140,19 @@ $path: "/public/";
   background-repeat: no-repeat;
   background-size:50%;
   background-position:center center;
+  &:before {
+    content:'Marker'
+  }
   span {
     display:none;
   }
   @include media(tablet) {
-    left:69px;
+    left:10px;
     height: 30px;
-    width:68px;
+    width:104px;
+    &:before {
+      content:''
+    }
     span {
       display:inline;
     }
@@ -157,7 +164,7 @@ $path: "/public/";
   color:white;
   background-color:$link-colour;
   line-height:1em;
-  left:125px;
+  left:80px;
   top:10px;
   z-index:1;
   border:0;
@@ -169,18 +176,41 @@ $path: "/public/";
   background-repeat: no-repeat;
   background-size:50%;
   background-position:center center;
+  &:before {
+    content:'Shape'
+  }
   span {
     display:none;
   }
   @include media(tablet) {
-    left:137px;
-    height: 30px;
-    width:68px;
+    left:114px;
+    height:30px;
+    width:96px;
+    &:before {
+      content:''
+    }
     span {
       display:inline;
     }
   }
 }
+.map-has-key {
+  .ol-place-marker {
+    left:55px;
+    @include media(tablet) {
+      left:69px;
+    }
+  }
+  .ol-draw-start {
+    left:125px;
+    @include media(tablet) {
+      left:173px;
+    }
+  }
+}
+
+// Reset / delete button
+
 .ol-draw-reset {
   left:10px;
   top:155px;
@@ -203,10 +233,15 @@ $path: "/public/";
   @include media(tablet) {
     top:10px;
     bottom:auto;
-    left:275px;
+    left:280px;
     height:30px;
     width:30px;
     background-size:60%;
+  }
+}
+.map-has-key .ol-draw-reset {
+  @include media(tablet) {
+    left:339px;
   }
 }
 
@@ -234,7 +269,7 @@ $path: "/public/";
   text-indent:-5000px;
   @include media(tablet) {
     top:10px;
-    left:210px;
+    left:215px;
     height:30px;
     width:30px;
     background-size:60%;
@@ -248,7 +283,19 @@ $path: "/public/";
   top:110px;
   @include media(tablet) {
     top:10px;
-    left:240px;
+    left:245px;
+  }
+}
+.map-has-key {
+  .ol-draw-undo {
+    @include media(tablet) {
+      left:274px;
+    }
+  }
+  .ol-draw-redo {
+    @include media(tablet) {
+      left:304px;
+    }
   }
 }
 
