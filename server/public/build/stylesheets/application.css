@@ -2592,7 +2592,7 @@ table.select-areas th {
   }
 }
 
-.ol-draw-start {
+.ol-draw-shape {
   position: absolute;
   font-size: 16px;
   color: white;
@@ -2612,24 +2612,24 @@ table.select-areas th {
   background-position: center center;
 }
 
-.ol-draw-start:before {
+.ol-draw-shape:before {
   content: 'Shape';
 }
 
-.ol-draw-start span {
+.ol-draw-shape span {
   display: none;
 }
 
 @media (min-width: 641px) {
-  .ol-draw-start {
+  .ol-draw-shape {
     left: 114px;
     height: 30px;
     width: 96px;
   }
-  .ol-draw-start:before {
+  .ol-draw-shape:before {
     content: '';
   }
-  .ol-draw-start span {
+  .ol-draw-shape span {
     display: inline;
   }
 }
@@ -2644,17 +2644,17 @@ table.select-areas th {
   }
 }
 
-.map-has-key .ol-draw-start {
+.map-has-key .ol-draw-shape {
   left: 125px;
 }
 
 @media (min-width: 641px) {
-  .map-has-key .ol-draw-start {
+  .map-has-key .ol-draw-shape {
     left: 173px;
   }
 }
 
-.ol-draw-reset {
+.ol-draw-delete {
   left: 10px;
   top: 155px;
   width: 40px;
@@ -2676,7 +2676,7 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .ol-draw-reset {
+  .ol-draw-delete {
     top: 10px;
     bottom: auto;
     left: 280px;
@@ -2687,7 +2687,7 @@ table.select-areas th {
 }
 
 @media (min-width: 641px) {
-  .map-has-key .ol-draw-reset {
+  .map-has-key .ol-draw-delete {
     left: 339px;
   }
 }
@@ -2753,16 +2753,16 @@ table.select-areas th {
   }
 }
 
-.ol-draw-reset:hover,
-.ol-draw-start:hover,
+.ol-draw-delete:hover,
+.ol-draw-shape:hover,
 .ol-place-marker:hover,
 .ol-draw-undo:hover,
 .ol-draw-redo:hover {
   background-color: #ffbf47;
 }
 
-.ol-draw-reset:disabled,
-.ol-draw-start:disabled,
+.ol-draw-delete:disabled,
+.ol-draw-shape:disabled,
 .ol-place-marker:disabled,
 .ol-draw-undo:disabled,
 .ol-draw-redo:disabled {
@@ -2770,8 +2770,8 @@ table.select-areas th {
   cursor: default;
 }
 
-.ol-draw-reset:focus,
-.ol-draw-start:focus,
+.ol-draw-delete:focus,
+.ol-draw-shape:focus,
 .ol-draw-undo:focus,
 .ol-draw-redo:focus {
   z-index: 2;

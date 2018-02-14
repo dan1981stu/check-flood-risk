@@ -5,7 +5,7 @@ var url, lonLat, zoom, path, point, geoJson
 var codec
 
 // Reference required to redraw map
-var map, vector, label
+var map, layerShape, label
 
 var init = function() {
 
@@ -163,12 +163,6 @@ var init = function() {
     // Add inner comtainer
     mapContainer.appendChild(mapContainerInner)
 
-    // Used to determin whether a polygon or point is being drawn/placed
-    var interactionFeatureType = 'point'
-
-    // Reference to polygon feature
-    var feature = null
-
     // Start drawing boolean used to address finishDrawing bug
     var drawingStarted = false
     var drawingFinished = false
@@ -277,20 +271,33 @@ var init = function() {
         })
     })
 
-    // Source: vector layer
-    var source = new ol.source.Vector()
-    source.addFeature(new ol.Feature())
+    // Source: shape
+    var sourceMarker = new ol.source.Vector()
+
+    // Source: shape
+    var sourceShape = new ol.source.Vector()
+    sourceShape.addFeature(new ol.Feature())
 
     // Layer: Background map
     var tile = new ol.layer.Tile({
         source: new ol.source.OSM()
     })
 
-    // Layer: vector
-    vector = new ol.layer.Vector({
-        source: source,
-        style: styleFunction
+    // Layer: marker
+    layerMarker = new ol.layer.Vector({
+        source: sourceMarker,
+        style: styleFunction,
+        visibility: false
     })
+    layerMarker.setVisible(false)
+
+    // Layer: shape
+    layerShape = new ol.layer.Vector({
+        source: sourceShape,
+        style: styleFunction,
+        visibility: false
+    })
+    layerShape.setVisible(false)
 
     // The map view object
     var view = new ol.View({
@@ -331,24 +338,30 @@ var init = function() {
     })
 
     // Draw shape button
-    var drawStartElement = document.createElement('button')
-    drawStartElement.innerHTML = '<span>Draw shape</span>'
-    drawStartElement.className = 'ol-draw-start'
-    drawStartElement.setAttribute('title','Start drawing a new shape')
-    drawStartElement.addEventListener('click', function(e) {
+    var drawShapeElement = document.createElement('button')
+    drawShapeElement.innerHTML = '<span>Draw shape</span>'
+    drawShapeElement.className = 'ol-draw-shape'
+    drawShapeElement.setAttribute('title','Start drawing a new shape')
+    drawShapeElement.addEventListener('click', function(e) {
         e.preventDefault()
-        vector.getSource().clear()
-        map.removeOverlay(label)
+        // Add shape interactions
         map.addInteraction(draw)
         map.addInteraction(snap)
         map.addInteraction(modifyPolygon)
+        // Hide marker and show shape
         this.disabled = true
-        interactionFeatureType = 'polygon'
-        document.getElementById('point').value = ''
         placeMarkerElement.disabled = false
+        layerMarker.setVisible(false)
+        layerShape.setVisible(true)
+        document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'hidden'
+        deleteFeatureElement.disabled = true
+        // Enable delete if feature on this layer exists
+        if(layerShape.getSource().getFeatures()[0].getGeometry()){
+            deleteFeatureElement.disabled = false
+        }
     })
-    var drawStart = new ol.control.Control({
-        element: drawStartElement
+    var drawShape = new ol.control.Control({
+        element: drawShapeElement
     })
 
     // Place marker button
@@ -356,24 +369,33 @@ var init = function() {
     placeMarkerElement.innerHTML = '<span>Place marker</span>'
     placeMarkerElement.className = 'ol-place-marker'
     placeMarkerElement.setAttribute('title','Place a marker')
+    placeMarkerElement.disabled = true
     placeMarkerElement.addEventListener('click', function(e) {
         e.preventDefault()
-        this.disabled = true
-        drawStartElement.disabled = false
+        // End drawing if started
+        if(drawingStarted){
+            draw.finishDrawing()
+        }
+        // Reset draw properties
         drawingStarted = false
         drawingFinished = false
-        // Remove previously drawn features
-        vector.getSource().clear()
-        map.removeOverlay(label)
+        // Remove shape interactions
         map.removeInteraction(draw)
         map.removeInteraction(snap)
         map.removeInteraction(modifyPolygon)
-        // Update url
-        feature = new ol.Feature()
-        //updateUrl(feature)
-        interactionFeatureType = 'point'
+        // Hide shape and show marker
+        this.disabled = true
+        drawShapeElement.disabled = false
+        layerShape.setVisible(false)
+        layerMarker.setVisible(true)
+        document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
+        deleteFeatureElement.disabled = true
+        // Enable delete if feature on this layer exists
+        console.log(layerMarker.getSource().getFeatures().length)
+        if(layerMarker.getSource().getFeatures().length){
+            deleteFeatureElement.disabled = false
+        }
     })
-    placeMarkerElement.disabled = true
     var placeMarker = new ol.control.Control({
         element: placeMarkerElement
     })
@@ -404,58 +426,59 @@ var init = function() {
         element: drawRedoElement
     })
 
-    // Draw reset button
-    var drawDeleteElement = document.createElement('button')
-    drawDeleteElement.innerHTML = '<span>Clear</span>'
-    drawDeleteElement.className = 'ol-draw-reset'
-    drawDeleteElement.setAttribute('title','Delete the shape or marker')
-    drawDeleteElement.disabled = true
-    drawDeleteElement.addEventListener('click', function(e) {
+    // Delete button
+    var deleteFeatureElement = document.createElement('button')
+    deleteFeatureElement.innerHTML = '<span>Clear</span>'
+    deleteFeatureElement.className = 'ol-draw-delete'
+    deleteFeatureElement.setAttribute('title','Delete the shape or marker')
+    deleteFeatureElement.addEventListener('click', function(e) {
         e.preventDefault()
         this.disabled = true
-        //drawingStarted = false
-        //drawingFinished = false
-        // Remove previously drawn features
-        vector.getSource().clear()
-        map.removeOverlay(label)
-        //map.removeInteraction(draw)
-        //map.removeInteraction(snap)
-        //map.removeInteraction(modifyPolygon)
+        console.log('Shape ' + layerShape.getVisible() + ' Marker ' + layerMarker.getVisible())
+        // If marker layer
+        if(layerShape.getVisible()) {
+            layerShape.getSource().clear()
+            drawingStarted = false
+            drawingFinished = false
+        }
+        // If shape layer
+        else {
+            layerMarker.getSource().clear()
+            map.removeOverlay(label)
+        }
         // Update url
-        feature = new ol.Feature()
-        updateUrl(feature)
-        //drawStartElement.disabled = false
-        //interactionFeatureType = 'point'
+        //feature = new ol.Feature()
+        //updateUrl(feature)
     })
-    var drawDelete = new ol.control.Control({
-        element: drawDeleteElement
+    var deleteFeature = new ol.control.Control({
+        element: deleteFeatureElement
     })
 
     // Label
     var labelElement = document.createElement('div')
     labelElement.classList.add('ol-map-label')
     labelElement.innerHTML = '<p><strong class="bold-small">Mytholmroyd</strong></p>'
+    labelElement.style.visibility = 'false'
     label = new ol.Overlay({
         element: labelElement,
         positioning: 'bottom-left'
     })
 
     // Marker
-    var pointFeature = new ol.Feature()
+    var featureMarker = new ol.Feature()
 
     // Setup interactions
-
     var interactions = ol.interaction.defaults({
         altShiftDragRotate:false, 
         pinchRotate:false,
         doubleClickZoom :false
     })
     var modifyPolygon = new ol.interaction.Modify({
-        source: source,
+        source: sourceShape,
         style: styleDrawModify
     })
     var draw = new ol.interaction.Draw({
-        source: source,
+        source: sourceShape,
         type: 'Polygon',
         style: styleDraw,
         condition: function(e) {
@@ -469,7 +492,7 @@ var init = function() {
         }
     })
     var snap = new ol.interaction.Snap({
-        source: source
+        source: sourceShape
     })
 
     // Add and remove controls
@@ -480,10 +503,10 @@ var init = function() {
         attribution: false
     }).extend([
         placeMarker,
-        drawStart,
+        drawShape,
         drawUndo,
         drawRedo,
-        drawDelete,
+        deleteFeature,
         fullScreen,
         zoomReset,
         zoom
@@ -495,9 +518,41 @@ var init = function() {
         target: 'map-container-inner',
         interactions: interactions,
         controls: controls,
-        layers: [tile, vector],
+        layers: [tile, layerShape, layerMarker],
         view: view
     })
+
+    // Setup
+
+    // Add feature from path
+    if (path) {
+        codec.decompress(path).then(result => {
+            // Check for valid geoJson
+            feature = new ol.format.GeoJSON().readFeature(result)
+            layerShape.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
+            map.addInteraction(snap)
+            map.addInteraction(modifyPolygon)
+            drawShapeElement.disabled = true
+            deleteFeatureElement.disabled = false
+            drawingStarted = true
+            drawingFinished = true
+            layerShape.setVisible(true)
+        })
+    } 
+    // Add initial locator
+    else {
+        var pointLonLat = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326')
+        pointLonLat[0] = pointLonLat[0].toFixed(6)
+        pointLonLat[1] = pointLonLat[1].toFixed(6)
+        document.getElementById('point').value = pointLonLat
+        centreCoordinate = ol.proj.transform(centre, 'EPSG:4326','EPSG:3857')
+        featureMarker.setGeometry(new ol.geom.Point(centreCoordinate))
+        layerMarker.getSource().addFeature(featureMarker)
+        label.setPosition(centreCoordinate)
+        map.addOverlay(label)
+        layerMarker.setVisible(true)
+        document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
+    }
 
     //
     // Map events
@@ -505,7 +560,7 @@ var init = function() {
 
     // Update url when zoom changes
     map.on('moveend', function(e) {
-        updateUrl(feature)
+        //updateUrl(feature)
     })
 
     // Close key or place marker if map is clicked
@@ -518,20 +573,22 @@ var init = function() {
         // If key is closed
         else {
             // Place marker
-            if (interactionFeatureType == 'point') {
+            if (layerMarker.getVisible()) {
                 // Set form value
                 point = ol.proj.transform(e.coordinate, 'EPSG:3857', 'EPSG:4326')
                 document.getElementById('point').value = point
                 // Marker object
-                pointGeometry = new ol.geom.Point(e.coordinate)
-                pointFeature.setGeometry(pointGeometry)
+                geometryPoint = new ol.geom.Point(e.coordinate)
+                featureMarker.setGeometry(geometryPoint)
                 labelElement.innerHTML = '<p><strong class="bold-small">Flood zone 1</strong><br/>(<abbr title="Easting and northing">EN</abbr> 123456/123456)</p>'
-                vector.getSource().clear()
-                vector.getSource().addFeature(pointFeature)
+                layerMarker.getSource().clear()
+                layerMarker.getSource().addFeature(featureMarker)
                 label.setPosition(e.coordinate)
                 map.addOverlay(label)
-                drawDeleteElement.disabled = false
+                document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
             }
+            // Enable delete
+            deleteFeatureElement.disabled = false
         }
 
         // Get layer if needed
@@ -543,7 +600,7 @@ var init = function() {
         */
     })
 
-    draw.on('drawstart', function (e) {
+    draw.on('drawShape', function (e) {
         drawingStarted = true
     })
 
@@ -553,14 +610,13 @@ var init = function() {
         coordinates = e.feature.getGeometry().getCoordinates()[0]
         // Polygon is too small reset buttons and interaction feature type
         if (coordinates.length < 4) {
-            drawStartElement.disabled = false
+            drawShapeElement.disabled = false
             e.feature.setGeometry(null)
-            interactionFeatureType = 'point'
         } 
         // Polygon is ok
         else {
-            drawDeleteElement.disabled = false
-            drawStartElement.disabled = true
+            deleteFeatureElement.disabled = false
+            drawShapeElement.disabled = true
             drawingFinished = true
             feature = e.feature
             updateUrl(feature)
@@ -575,26 +631,18 @@ var init = function() {
         if (event.keyCode === 27) {
 
             // Escape drawing a polygon if it is not already finished
-            if (interactionFeatureType == 'polygon' && !drawingFinished) {
+            if (layerShape.getVisible() && !drawingFinished) {
                 // Clear an reenable draw button 
                 if (!drawingStarted) {
                     map.removeInteraction(draw)
                     map.removeInteraction(snap)
                     map.removeInteraction(modifyPolygon)
-                    drawStartElement.disabled = false
-                    interactionFeatureType = 'point'
+                    drawShapeElement.disabled = false
                 } 
                 // finishDrawing can now be called safely
                 else {
                     draw.finishDrawing()
                 }
-            }
-
-            // Escape placing a marker
-            else if (interactionFeatureType == 'point') {
-                vector.getSource().clear()
-                map.removeOverlay(label)
-                document.getElementById('point').value = ''
             }
 
         }
@@ -615,33 +663,6 @@ var init = function() {
         feature = features[counter]
         updateUrl(feature)
     })
-
-    // Add feature from path
-    if (path) {
-        codec.decompress(path).then(result => {
-            // Check for valid geoJson
-            feature = new ol.format.GeoJSON().readFeature(result)
-            vector.getSource().getFeatures()[0].setGeometry(feature.getGeometry())
-            map.addInteraction(snap)
-            map.addInteraction(modifyPolygon)
-            drawStartElement.disabled = true
-            drawDeleteElement.disabled = false
-            drawingStarted = true
-            drawingFinished = true
-        })
-    } 
-    // Add initial locator
-    else {
-        var pointLonLat = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326')
-        pointLonLat[0] = pointLonLat[0].toFixed(6)
-        pointLonLat[1] = pointLonLat[1].toFixed(6)
-        document.getElementById('point').value = pointLonLat
-        centreCoordinate = ol.proj.transform(centre, 'EPSG:4326','EPSG:3857')
-        pointFeature.setGeometry(new ol.geom.Point(centreCoordinate))
-        vector.getSource().addFeature(pointFeature)
-        label.setPosition(centreCoordinate)
-        map.addOverlay(label)
-    }
 
     // Apply greyscale filter.
     /*
