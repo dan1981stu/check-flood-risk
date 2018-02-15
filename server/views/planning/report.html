@@ -2,11 +2,37 @@
 
 	<a href="/flood-risk-assessment/identify-site?lonLat={{ model.lonLat }}&zoom={{ model.zoom }}" class="link-back">Back</a> 
 
-    <div class="grid-row no-bottom">
-        <div class="column-two-thirds no-bottom">
-            <h1 class="heading-large">Report {{ model.lonLat }}</h1>
-        </div>
-    </div>
+    <div class="grid-row">
+
+        <div class="column-two-thirds">
+            <h1 class="heading-large">Flood zone report</h1>
+		</div>
+		
+	</div>
+
+	<div class="grid-row">
+
+		<div class="column-two-thirds">
+			<div class="panel panel-border-wide">
+				<p>
+					The point at EN 123456,123456 is in Flood Zone 1 and within 10m of flood zone 2.
+				</p>
+			</div>
+			<div class="panel panel-border-wide">
+				<p>
+					The area denotated by the red line encompases Flood Zone 3.
+				</p>
+			</div>
+		</div>
+
+		<div class="column-one-third">
+			<figure class="map" id="map">
+				<div class="map-container"></div>
+				<figcaption>Map showing [point|area] with flood zones</figcaption>
+			</figure>
+		</div>
+
+	</div>
 		
 </main>
 

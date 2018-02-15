@@ -157,7 +157,8 @@ module.exports = [
 			handler: function (request, reply) {
 				const coordinates = request.payload.coordinates
 				return reply.redirect('/flood-risk-assessment/report?lonLat=' + request.payload.lonLat + '&zoom=' + request.payload.zoom)
-			},
+			}
+			/*
 			validate: {
 				options: {
 					allowUnknown: true
@@ -169,6 +170,7 @@ module.exports = [
 					return reply.redirect('/flood-risk-assessment/identify-site?lonLat=' + request.payload.lonLat + '&zoom=' + request.payload.zoom + '&isError=true')
 				}
 			}
+			*/
 		}
 	},
 	{
@@ -186,7 +188,7 @@ module.exports = [
 				return reply.view('planning/report', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Report - Check flood zone - GOV.UK',
-					
+					'model' : model
 				})
 
 			}

@@ -24,7 +24,7 @@
 						<h1 class="heading-large">Identify the flood zone</h1>
 					</legend>
 				
-					<p>Place a marker on the map to find out the flood zone. You can also draw a shape to get a flood zone report.</p>
+					<p>You can also place a marker on the map or draw a shape to get a flood zone report.</p>
 
 					<details style="margin-bottom:1.5em">
 						<summary>
@@ -67,12 +67,16 @@
 					-->
 
 					<div class="form-group">
+						<input class="button" value="Download map (PDF)">
+					</div>
+
+					<div class="form-group">
 						<input id="scenario" name="scenario" type="hidden" value=""/>
 						<input id="lonLat" name="lonLat" type="hidden" value="{{ model.lonLat }}"/>
 						<input id="zoom" name="zoom" type="hidden" value="{{ model.zoom }}"/>
 						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input id="point" name="point" type="hidden" value=""/>
-						<input class="button" type="submit" value="Get flood zone report">
+						<button type="submit" class="button-text font-small">Get a flood zone report</button>
 					</div>
 
 				</fieldset>
