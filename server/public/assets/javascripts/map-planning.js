@@ -19,6 +19,9 @@ var init = function() {
     // Map properties from html classes
     hasKey = document.querySelector('.map').classList.contains('map-has-key')
 
+    // JSON for features
+    var floodZonesJSON = '/public/data/flood-zones.json';
+
     //
     // Add html elements to map
     //
@@ -170,7 +173,40 @@ var init = function() {
     // Set up compression codec
     codec = JsonUrl('lzma')
 
-    // Styles for features
+    // Style function for marker and shape
+    var styleFunctionFloodZones = function(feature, resolution) {
+
+        console.log(feature.get('type'))
+
+        // Defaults
+        var strokeColour = 'transparent';
+        var fillColour = 'transparent';
+        var zIndex = 1
+
+        //Flood zone 1
+        if (feature.get('type') == 1) {
+            fillColour = '#2E3585';
+            zIndex = 3;
+        }
+
+        // Flood zone 2
+        else if (feature.get('type') == 2) {
+            fillColour = '#2A8DC5';
+            zIndex = 2;
+        }
+
+        // Generate style
+        var styleFloodZones = new ol.style.Style({
+            fill: new ol.style.Fill({ color: fillColour }),			
+            stroke: new ol.style.Stroke({ color: strokeColour, width: 0, miterLimit: 2, lineJoin: 'round' }),
+            zIndex: zIndex 
+        })
+
+        return styleFloodZones
+
+    }
+
+    // Style function for marker and shape
     var styleFunction = function(feature, resolution) {
         
         // Complete polygon drawing style
@@ -271,16 +307,33 @@ var init = function() {
         })
     })
 
-    // Source: shape
+    // Source: flood zones
+    var sourceFloodZones = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: floodZonesJSON,
+        projection: 'EPSG:3857'
+    })
+
+    // Source: marker
     var sourceMarker = new ol.source.Vector()
 
     // Source: shape
     var sourceShape = new ol.source.Vector()
     sourceShape.addFeature(new ol.Feature())
 
-    // Layer: Background map
+    // Layer: background map
     var tile = new ol.layer.Tile({
         source: new ol.source.OSM()
+    })
+
+    // Layer: flood zones
+    var layerFloodZones = new ol.layer.Image({
+        source: new ol.source.ImageVector({
+            source: sourceFloodZones,
+            // Use custom style function to colour individual features accordingley
+            style: styleFunctionFloodZones
+        }),
+        opacity: 0.7
     })
 
     // Layer: marker
@@ -373,7 +426,6 @@ var init = function() {
     placeMarkerElement.disabled = true
     placeMarkerElement.addEventListener('click', function(e) {
         e.preventDefault()
-        console.log('clicked')
         // End drawing if started
         if(drawingStarted){
             draw.finishDrawing()
@@ -394,7 +446,6 @@ var init = function() {
         document.getElementsByClassName('map')[0].classList.add('has-overlay')
         deleteFeatureElement.disabled = true
         // Enable delete if feature on this layer exists
-        console.log(layerMarker.getSource().getFeatures().length)
         if(layerMarker.getSource().getFeatures().length){
             deleteFeatureElement.disabled = false
         }
@@ -437,7 +488,6 @@ var init = function() {
     deleteFeatureElement.addEventListener('click', function(e) {
         e.preventDefault()
         this.disabled = true
-        console.log('Shape ' + layerShape.getVisible() + ' Marker ' + layerMarker.getVisible())
         // If marker layer
         if(layerShape.getVisible()) {
             layerShape.getSource().clear()
@@ -522,7 +572,7 @@ var init = function() {
         target: 'map-container-inner',
         interactions: interactions,
         controls: controls,
-        layers: [tile, layerShape, layerMarker],
+        layers: [tile, layerFloodZones, layerShape, layerMarker],
         view: view
     })
 
@@ -557,7 +607,6 @@ var init = function() {
         layerMarker.setVisible(true)
         document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
         document.getElementsByClassName('map')[0].classList.add('has-overlay')
-        console.log('has-overlay')
     }
 
     //
