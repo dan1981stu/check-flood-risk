@@ -21,7 +21,7 @@
 				<fieldset>
 
 					<legend>
-						<h1 class="heading-large">Identify the flood zone</h1>
+						<h1 class="heading-large">View the flood zones</h1>
 					</legend>
 				
 					<p>You can also place a marker on the map or draw a shape to get a flood zone report.</p>
@@ -76,6 +76,7 @@
 						<input id="zoom" name="zoom" type="hidden" value="{{ model.zoom }}"/>
 						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input id="point" name="point" type="hidden" value=""/>
+						<p>Find out what implications flood zones may have on proposed developments in this location.</p>
 						<button type="submit" class="button-text font-small">Get a flood zone report</button>
 					</div>
 
@@ -90,7 +91,7 @@
 
 {{#section 'bodyScripts' }}
 <!-- Add before closing body tag -->
-<script src="https://openlayers.org/en/v4.5.0/build/ol.js"></script>
+<script src="/public/javascripts/ol-v4.5.0.js"></script>
 <script>
 
 	// Set centre variable for map control

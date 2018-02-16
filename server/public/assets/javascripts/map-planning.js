@@ -354,6 +354,7 @@ var init = function() {
         layerMarker.setVisible(false)
         layerShape.setVisible(true)
         document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('map')[0].classList.remove('has-overlay')
         deleteFeatureElement.disabled = true
         // Enable delete if feature on this layer exists
         if(layerShape.getSource().getFeatures()[0].getGeometry()){
@@ -372,6 +373,7 @@ var init = function() {
     placeMarkerElement.disabled = true
     placeMarkerElement.addEventListener('click', function(e) {
         e.preventDefault()
+        console.log('clicked')
         // End drawing if started
         if(drawingStarted){
             draw.finishDrawing()
@@ -389,6 +391,7 @@ var init = function() {
         layerShape.setVisible(false)
         layerMarker.setVisible(true)
         document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
+        document.getElementsByClassName('map')[0].classList.add('has-overlay')
         deleteFeatureElement.disabled = true
         // Enable delete if feature on this layer exists
         console.log(layerMarker.getSource().getFeatures().length)
@@ -445,6 +448,7 @@ var init = function() {
         else {
             layerMarker.getSource().clear()
             map.removeOverlay(label)
+            document.getElementsByClassName('map')[0].classList.remove('has-overlay')
         }
         // Update url
         //feature = new ol.Feature()
@@ -552,6 +556,8 @@ var init = function() {
         map.addOverlay(label)
         layerMarker.setVisible(true)
         document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
+        document.getElementsByClassName('map')[0].classList.add('has-overlay')
+        console.log('has-overlay')
     }
 
     //
@@ -586,6 +592,7 @@ var init = function() {
                 label.setPosition(e.coordinate)
                 map.addOverlay(label)
                 document.getElementsByClassName('ol-overlay-container')[0].style.visibility = 'visible'
+                document.getElementsByClassName('map')[0].classList.add('has-overlay')
             }
             // Enable delete
             deleteFeatureElement.disabled = false

@@ -2523,7 +2523,7 @@ table.select-areas th {
 .ol-zoom-reset {
   position: absolute;
   right: 10px;
-  top: 60px;
+  bottom: 10px;
   background-position: 0% 0%;
 }
 
@@ -2557,7 +2557,7 @@ table.select-areas th {
   background-color: #005ea5;
   line-height: 1em;
   left: 10px;
-  top: 10px;
+  bottom: 10px;
   z-index: 1;
   border: 0;
   height: 40px;
@@ -2580,7 +2580,6 @@ table.select-areas th {
 
 @media (min-width: 641px) {
   .ol-place-marker {
-    left: 10px;
     height: 30px;
     width: 104px;
   }
@@ -2599,7 +2598,7 @@ table.select-areas th {
   background-color: #005ea5;
   line-height: 1em;
   left: 80px;
-  top: 10px;
+  bottom: 10px;
   z-index: 1;
   border: 0;
   height: 40px;
@@ -2634,29 +2633,9 @@ table.select-areas th {
   }
 }
 
-.map-has-key .ol-place-marker {
-  left: 55px;
-}
-
-@media (min-width: 641px) {
-  .map-has-key .ol-place-marker {
-    left: 69px;
-  }
-}
-
-.map-has-key .ol-draw-shape {
-  left: 125px;
-}
-
-@media (min-width: 641px) {
-  .map-has-key .ol-draw-shape {
-    left: 173px;
-  }
-}
-
 .ol-draw-delete {
-  left: 10px;
-  top: 155px;
+  bottom: 10px;
+  left: 155px;
   width: 40px;
   height: 40px;
   position: absolute;
@@ -2677,8 +2656,6 @@ table.select-areas th {
 
 @media (min-width: 641px) {
   .ol-draw-delete {
-    top: 10px;
-    bottom: auto;
     left: 280px;
     height: 30px;
     width: 30px;
@@ -2686,21 +2663,16 @@ table.select-areas th {
   }
 }
 
-@media (min-width: 641px) {
-  .map-has-key .ol-draw-delete {
-    left: 339px;
-  }
-}
-
 .ol-draw-undo,
 .ol-draw-redo {
   position: absolute;
+  display: none;
   font-size: 16px;
   color: white;
   background-color: #005ea5;
   line-height: 1em;
-  left: 10px;
-  top: 70px;
+  left: 155px;
+  bottom: 10px;
   z-index: 1;
   border: 0;
   height: 40px;
@@ -2717,7 +2689,7 @@ table.select-areas th {
 @media (min-width: 641px) {
   .ol-draw-undo,
   .ol-draw-redo {
-    top: 10px;
+    display: block;
     left: 215px;
     height: 30px;
     width: 30px;
@@ -2731,25 +2703,11 @@ table.select-areas th {
 
 .ol-draw-redo {
   background-image: url("/public/map-redo-2x.png");
-  top: 110px;
 }
 
 @media (min-width: 641px) {
   .ol-draw-redo {
-    top: 10px;
     left: 245px;
-  }
-}
-
-@media (min-width: 641px) {
-  .map-has-key .ol-draw-undo {
-    left: 274px;
-  }
-}
-
-@media (min-width: 641px) {
-  .map-has-key .ol-draw-redo {
-    left: 304px;
   }
 }
 
@@ -2771,10 +2729,21 @@ table.select-areas th {
 }
 
 .ol-draw-delete:focus,
+.ol-place-marker:focus,
 .ol-draw-shape:focus,
 .ol-draw-undo:focus,
 .ol-draw-redo:focus {
   z-index: 2;
+}
+
+@media (max-width: 640px) {
+  .has-overlay .ol-place-marker,
+  .has-overlay .ol-draw-shape,
+  .has-overlay .ol-draw-undo,
+  .has-overlay .ol-draw-redo,
+  .has-overlay .ol-draw-delete {
+    bottom: 4.125em;
+  }
 }
 
 .ol-full-screen {
@@ -2995,6 +2964,7 @@ table.select-areas th {
     margin-left: 0;
     margin-bottom: 0;
     width: 100%;
+    height: 3.5em;
   }
 }
 
@@ -3004,6 +2974,7 @@ table.select-areas th {
     width: 200px;
     margin-left: -100px;
     margin-bottom: 45px;
+    height: auto;
   }
 }
 
