@@ -176,8 +176,6 @@ var init = function() {
     // Style function for marker and shape
     var styleFunctionFloodZones = function(feature, resolution) {
 
-        console.log(feature.get('type'))
-
         // Defaults
         var strokeColour = 'transparent';
         var fillColour = 'transparent';
