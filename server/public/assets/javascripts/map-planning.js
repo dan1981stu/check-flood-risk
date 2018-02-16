@@ -207,6 +207,8 @@ var init = function() {
     // Style function for interactions
     var styleFunctionInteractions = function(feature, resolution) {
         
+        var featureType = feature.getGeometry().getType()
+        
         // Complete polygon drawing style
         var styleDrawComplete = new ol.style.Style({
             fill: new ol.style.Fill({
@@ -250,8 +252,6 @@ var init = function() {
                 scale: 0.5
             })
         })
-
-        var featureType = feature.getGeometry().getType()
 
         if (featureType == 'Polygon') {
             return [styleDrawComplete, styleDrawCompleteGeometry]
