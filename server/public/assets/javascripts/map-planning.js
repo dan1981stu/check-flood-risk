@@ -173,7 +173,7 @@ var init = function() {
     // Set up compression codec
     codec = JsonUrl('lzma')
 
-    // Style function for marker and shape
+    // Style function for flood zones
     var styleFunctionFloodZones = function(feature, resolution) {
 
         // Defaults
@@ -204,8 +204,8 @@ var init = function() {
 
     }
 
-    // Style function for marker and shape
-    var styleFunction = function(feature, resolution) {
+    // Style function for interactions
+    var styleFunctionInteractions = function(feature, resolution) {
         
         // Complete polygon drawing style
         var styleDrawComplete = new ol.style.Style({
@@ -337,7 +337,7 @@ var init = function() {
     // Layer: marker
     layerMarker = new ol.layer.Vector({
         source: sourceMarker,
-        style: styleFunction,
+        style: styleFunctionInteractions,
         visibility: false
     })
     layerMarker.setVisible(false)
@@ -345,7 +345,7 @@ var init = function() {
     // Layer: shape
     layerShape = new ol.layer.Vector({
         source: sourceShape,
-        style: styleFunction,
+        style: styleFunctionInteractions,
         visibility: false
     })
     layerShape.setVisible(false)
