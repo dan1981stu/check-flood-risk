@@ -100,6 +100,7 @@ $path: "/public/";
   right:10px;
   bottom:10px;
   background-position:0% 0%;
+  font-size:16px;
   @include media(tablet) {
     height: 30px;
     width: 30px;
@@ -296,7 +297,8 @@ $path: "/public/";
   .ol-draw-shape,
   .ol-draw-undo,
   .ol-draw-redo,
-  .ol-draw-delete {
+  .ol-draw-delete,
+  .ol-zoom-reset {
     @include media(mobile) {
       bottom:4.125em;
     }

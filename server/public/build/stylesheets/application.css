@@ -2525,6 +2525,7 @@ table.select-areas th {
   right: 10px;
   bottom: 10px;
   background-position: 0% 0%;
+  font-size: 16px;
 }
 
 @media (min-width: 641px) {
@@ -2741,7 +2742,8 @@ table.select-areas th {
   .has-overlay .ol-draw-shape,
   .has-overlay .ol-draw-undo,
   .has-overlay .ol-draw-redo,
-  .has-overlay .ol-draw-delete {
+  .has-overlay .ol-draw-delete,
+  .has-overlay .ol-zoom-reset {
     bottom: 4.125em;
   }
 }
