@@ -77,10 +77,10 @@ var init = function() {
                                 <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
                                         <pattern id="hatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-                                            <line x1="0" y1="0" x2="0" y2="10" style="stroke:#2E358B; stroke-width:5" />
+                                            <line x1="0" y1="0" x2="0" y2="10" style="stroke:#464D95; stroke-width:5" />
                                         </pattern>
                                     </defs>
-                                    <rect x="1" y="1" width="24" height="17" stroke="#2E358B" stroke-width="2" fill="url(#hatch)" />
+                                    <rect x="1" y="1" width="24" height="17" stroke="#464D95" stroke-width="2" fill="url(#hatch)" />
                                 </svg>
                             </span>
                             Zone 3 - Areas benefitting from flood defences
@@ -182,14 +182,14 @@ var init = function() {
         var zIndex = 1
 
         //Flood zone 1
-        if (feature.get('type') == 1) {
-            fillColour = '#2E3585';
+        if (feature.get('type') == 3) {
+            fillColour = '#464D95';
             zIndex = 3;
         }
 
         // Flood zone 2
         else if (feature.get('type') == 2) {
-            fillColour = '#2A8DC5';
+            fillColour = '#ABD6FF';
             zIndex = 2;
         }
 
