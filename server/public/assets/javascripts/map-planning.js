@@ -725,6 +725,30 @@ var init = function() {
     })
     */
 
+    // Redraw map before and after print style sheet change
+    var beforePrint = function() {
+        map.updateSize()
+    }
+    var afterPrint = function() {
+        map.updateSize()
+    }
+    // Webkit
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print')
+        mediaQueryList.addListener(function(e){
+            if (e.matches) {
+                beforePrint()
+            } else {
+                afterPrint()
+            }
+        })
+    }
+    // Mozilla
+    else if (window.onbeforeprint) {
+        window.onbeforeprint = beforePrint
+        window.onafterprint = afterPrint
+    }
+
 }
 
 init()
