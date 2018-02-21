@@ -2421,18 +2421,17 @@ table.select-areas th {
   border: 1px solid #bfc1c3;
 }
 
-.map-container-planning {
+.flood-zones .map-container {
   border: 1px solid #bfc1c3;
 }
 
 @media (min-width: 641px) {
-  .map-container-planning {
+  .flood-zones .map-container {
     height: 576px;
   }
 }
 
-.map-container.map-container-fullscreen,
-.map-container-planning.map-container-fullscreen {
+.map-container-fullscreen {
   position: fixed;
   z-index: 99;
   top: 0;
@@ -3158,7 +3157,7 @@ li .key-feature-group {
   height: 19px;
   margin-left: -35px;
   margin-top: -2px;
-  background-color: #ccc;
+  background-color: transparent;
   border: 0;
 }
 
@@ -3169,7 +3168,7 @@ li .key-feature-group {
 }
 
 .key-symbol.key-symbol-zone3 {
-  background-color: #464D95;
+  background-color: transparent;
 }
 
 .key-symbol.key-symbol-zone3-benefitting {
@@ -3177,7 +3176,7 @@ li .key-feature-group {
 }
 
 .key-symbol.key-symbol-zone2 {
-  background-color: #ABD6FF;
+  background-color: transparent;
 }
 
 .key-symbol.key-symbol-flood-defence {

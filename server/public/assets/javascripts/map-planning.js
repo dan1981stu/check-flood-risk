@@ -67,7 +67,11 @@ var init = function() {
                 <ul class="key-feature-group">
                     <li>
                         <span class="key-feature-label">
-                            <span class="key-symbol key-symbol-zone3"></span>
+                            <span class="key-symbol key-symbol-zone3">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0" y="0" width="100%" height="100%" fill="#464D95" />
+                                </svg>
+                            </span>
                             Zone 3
                         </span>
                     </li>
@@ -87,7 +91,14 @@ var init = function() {
                         </span>
                     </li>
                     <li>
-                        <span class="key-feature-label"><span class="key-symbol key-symbol-zone2"></span>Zone 2</span>
+                        <span class="key-feature-label">
+                            <span class="key-symbol key-symbol-zone2">
+                                <svg width="100%" height="100%" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0" y="0" width="100%" height="100%" fill="#ABD6FF" />
+                                </svg>
+                            </span>
+                            Zone 2
+                        </span>
                     </li>
                     <!--
                     <li>
@@ -725,30 +736,6 @@ var init = function() {
     })
     */
 
-    // Redraw map before and after print style sheet change
-    var beforePrint = function() {
-        map.updateSize()
-    }
-    var afterPrint = function() {
-        map.updateSize()
-    }
-    // Webkit
-    if (window.matchMedia) {
-        var mediaQueryList = window.matchMedia('print')
-        mediaQueryList.addListener(function(e){
-            if (e.matches) {
-                beforePrint()
-            } else {
-                afterPrint()
-            }
-        })
-    }
-    // Mozilla
-    else if (window.onbeforeprint) {
-        window.onbeforeprint = beforePrint
-        window.onafterprint = afterPrint
-    }
-
 }
 
 init()
@@ -816,10 +803,8 @@ function updateUrl(feature) {
     
     // We don't have a feature
     else {
- 
         // Clear the path value
         document.getElementById('path').value = ''
- 
         // Remove path from url
         // history.replaceState(null, null, url + '?lonLat=' + centreLonLat + '&zoom=' + zoom)
         

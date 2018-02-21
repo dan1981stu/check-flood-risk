@@ -16,16 +16,13 @@ $path: "/public/";
   height:275px;
   border:1px solid $border-colour;
 }
-
-.map-container-planning {
+.flood-zones .map-container {
   border:1px solid $border-colour;
   @include media(tablet) {
     height:576px;
   }
 }
-
-.map-container.map-container-fullscreen,
-.map-container-planning.map-container-fullscreen {
+.map-container-fullscreen {
   position:fixed;
   z-index: 99;
   top:0;
@@ -596,19 +593,19 @@ li .key-feature-group {
   height:19px;
   margin-left:-35px;
   margin-top:-2px;
-  background-color: #ccc;
+  background-color:transparent;
   border:0;
   @include media(tablet) {
     margin-top:0;
   }
   &.key-symbol-zone3 {
-    background-color: #464D95;
+    background-color:transparent;
   }
   &.key-symbol-zone3-benefitting {
     background-color: transparent;
   }
   &.key-symbol-zone2 {
-    background-color:#ABD6FF;
+    background-color:transparent;
   }
   &.key-symbol-flood-defence {
     background-color:transparent;
