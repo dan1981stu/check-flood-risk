@@ -1,0 +1,7 @@
+.link-back {
+  display: none;
+}
+
+.flood-zones form p, .flood-zones form details, .flood-zones form button, .flood-zones form input, .flood-zones form .ol-overlay-container {
+  display: none;
+}
