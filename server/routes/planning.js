@@ -144,6 +144,7 @@ module.exports = [
 				return reply.view('planning/identify-site', {
 					'serviceName' : 'Check flood zone',
 					'pageTitle' : 'Identify boundary - Check flood zone - GOV.UK',
+					'pageClass' : 'flood-zone',
 					'model' : model
 				})
 

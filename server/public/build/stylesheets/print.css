@@ -2,6 +2,40 @@
   display: none;
 }
 
-.flood-zones form p, .flood-zones form details, .flood-zones form button, .flood-zones form input, .flood-zones form .ol-overlay-container {
+.flood-zone {
+  margin: 0 !important;
+}
+
+.flood-zone .heading-large {
+  margin-top: 0;
+  font-size: 36px;
+}
+
+.flood-zone form legend + p, .flood-zone form details, .flood-zone form button, .flood-zone form input {
   display: none;
+}
+
+.flood-zone .map-container-planning {
+  height: 20cm;
+  width: 19cm;
+}
+
+.flood-zone .map-has-key .map-container-planning {
+  width: 14cm;
+  margin-left: 5cm;
+}
+
+.flood-zone .map-has-key .map-key {
+  position: absolute;
+  z-index: 3;
+  left: -5cm;
+  top: 0;
+  bottom: 0;
+  width: 5cm;
+  max-width: auto;
+  background-color: white;
+}
+
+.flood-zone .map-has-key .map-key-container {
+  display: block;
 }

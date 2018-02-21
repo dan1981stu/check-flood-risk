@@ -1,8 +1,38 @@
 .link-back {
     display:none;
 }
-.flood-zones form {
-    p, details, button, input, .ol-overlay-container {
-        display:none;
+.flood-zone {
+    margin:0 !important;
+    .heading-large {
+        margin-top:0;
+        font-size:36px;
+    }
+    form {
+        legend + p, details, button, input {
+            display:none;
+        }
+    }
+    .map-container-planning {
+        height:20cm;
+        width:19cm;
+    }
+    .map-has-key {
+        .map-container-planning {
+            width:14cm;
+            margin-left: 5cm;
+        }
+        .map-key {
+            position: absolute;
+            z-index: 3;
+            left: -5cm;
+            top: 0;
+            bottom: 0;
+            width: 5cm;
+            max-width: auto;
+            background-color: white;
+        }
+        .map-key-container {
+            display:block;
+        }
     }
 }
