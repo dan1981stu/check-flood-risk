@@ -15,12 +15,12 @@
   display: none;
 }
 
-.flood-zone .map-container-planning {
+.flood-zone .map-container {
   height: 20cm;
   width: 19cm;
 }
 
-.flood-zone .map-has-key .map-container-planning {
+.flood-zone .map-has-key .map-container {
   width: 14cm;
   margin-left: 5cm;
 }
