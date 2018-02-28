@@ -3616,3 +3616,16 @@ button.button-text {
 button.button-text:hover {
   color: #005ea5;
 }
+
+.flood-zone-location-edit {
+  display: block;
+  margin-top: -1.75em;
+  margin-bottom: 1.75em;
+}
+
+@media (min-width: 641px) {
+  .flood-zone-location-edit {
+    margin-top: -3.2em;
+    margin-bottom: 3.2em;
+  }
+}

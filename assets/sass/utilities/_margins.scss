@@ -1,0 +1,9 @@
+.flood-zone-location-edit {
+    display:block;
+    margin-top:-1.75em;
+    margin-bottom:1.75em;
+    @include media(tablet) {
+        margin-top:-3.2em;
+        margin-bottom:3.2em;
+    }
+}
