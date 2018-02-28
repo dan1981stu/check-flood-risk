@@ -1,11 +1,14 @@
 <main {{#if model.isError}}class="js-error"{{/if }}>
 
-	<a href="/flood-risk-assessment/identify-site?lonLat={{ model.lonLat }}&zoom={{ model.zoom }}" class="link-back">Back</a> 
+	<a href="/flood-risk-assessment/identify-site?lonLat={{ model.lonLat }}&zoom={{ model.zoom }}" class="link-back">Edit location</a> 
 
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <h1 class="heading-large">Flood zone report</h1>
+            <h1 class="heading-xlarge">
+				Flood zone report
+				<span class="heading-secondary">for point at EN 123456 123456</span>
+			</h1>
 		</div>
 		
 	</div>
@@ -13,22 +16,33 @@
 	<div class="grid-row">
 
 		<div class="column-two-thirds">
-			<div class="panel panel-border-wide">
-				<p>
-					The point at EN 123456,123456 is in Flood Zone 1 and within 10m of flood zone 2.
-				</p>
-			</div>
-			<div class="panel panel-border-wide">
-				<p>
-					The area denotated by the red line encompases Flood Zone 3.
-				</p>
-			</div>
+			<p class="bold-medium">The location is in flood zone 2, an area with a medium probability of flooding.</p>
+			<form action="">
+				<div class="form-group">
+					<button type="submit" class="button-text font-small">Download report (PDF)</button>
+				</div>
+			</form>
+			<h2 class="heading-medium">This means:</h2>
+			<ul class="list list-bullet">
+				<li>you must complete a flood risk assessment for development in this area</li>
+				<li>you should follow the Environment Agency's <a href="https://www.gov.uk/guidance/flood-risk-assessment-standing-advice">standing advice</a> for carrying out a flood risk assessment</li>
+			</ul>
+			<details style="margin-bottom:2em">
+				<summary><span class="summary">Show map of flood zones</span></summary>
+				<div class="panel panel-border-narrow">
+					<p>Map</p>
+				</div>
+			</details>
+			<p>Find out about <a href="https://www.gov.uk/guidance/flood-risk-assessment-for-planning-applications">flood risk assessments for planning applications</a>.</p>
+			<h2 class="heading-small body-text">Notes</h2>
+			<p>The flood map for planning shows river and sea flooding data only. It doesn’t include other sources of flooding. It is for use in development planning and flood risk assessments.</p>
+			<p>This information relates to the selected location and is not specific to any property within it.</p>
 		</div>
 
 		<div class="column-one-third">
 			<figure class="map" id="map">
 				<div class="map-container"></div>
-				<figcaption>Map showing [point|area] with flood zones</figcaption>
+				<figcaption>Map showing location with flood zones</figcaption>
 			</figure>
 		</div>
 
