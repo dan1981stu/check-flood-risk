@@ -3,7 +3,9 @@ $path: "/public/";
 .column-two-thirds-map {
   position:relative;
 }
-
+.form-group-map {
+  position:relative;
+}
 .map {
   margin-top:-1px;
   @include media(tablet) {
@@ -33,13 +35,11 @@ $path: "/public/";
   width:100%;
   background-color:white;
 }
-
 .map-link {
   @include media(tablet) {
     display:none;
   }
 }
-
 .map-container-inner {
   position: relative;
   z-index:1;
