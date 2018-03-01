@@ -4,16 +4,16 @@ $path: "/public/";
 @import 'gov-uk';
 @import 'banner';
 @import 'message';
-@import 'related-items';
-@import 'tables';
-@import 'maps';
 @import 'rainfall';
 @import 'filter';
 @import 'accordion';
 @import 'notices';
-@import 'forms';
-@import 'panels';
-@import 'buttons';
+
+@import 'components/related-items';
+@import 'components/tables';
+@import 'components/forms';
+@import 'components/maps';
+@import 'components/buttons';
 
 @import 'utilities/margins';
 
