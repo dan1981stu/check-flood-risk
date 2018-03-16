@@ -142,10 +142,10 @@ module.exports = [
 	// Prepare
 	{
 		method: 'GET',
-		path: '/prepare-for-flooding',
+		path: '/preparing-for-a-flood',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('gov-uk/prepare-for-flooding', {
+				return reply.view('gov-uk/preparing-for-a-flood', {
 					'pageTitle' : 'Preparing for a flood - GOV.UK',
 					'pageDescription' : 'What to do before a flood.',
 					'serviceName' : ''
@@ -157,10 +157,10 @@ module.exports = [
 	// Respond
 	{
 		method: 'GET',
-		path: '/respond-to-flooding',
+		path: '/responding-to-a-flood',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('gov-uk/respond-to-flooding', {
+				return reply.view('gov-uk/responding-to-a-flood', {
 					'pageTitle' : 'Responding to a flood - GOV.UK',
 					'pageDescription' : 'What to do during a flood.',
 					'serviceName' : ''
@@ -172,10 +172,10 @@ module.exports = [
 	// Recover
 	{
 		method: 'GET',
-		path: '/recover-from-flooding',
+		path: '/recovering-from-a-flood',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('gov-uk/recover-from-flooding', {
+				return reply.view('gov-uk/recovering-from-a-flood', {
 					'pageTitle' : 'Recovering from a flood - GOV.UK',
 					'pageDescription' : 'What to do after a flood.',
 					'serviceName' : ''
