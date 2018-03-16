@@ -147,7 +147,7 @@ module.exports = [
 			handler: function (request, reply) {
 				return reply.view('gov-uk/preparing-for-a-flood', {
 					'pageTitle' : 'Preparing for a flood - GOV.UK',
-					'pageDescription' : 'What to do before a flood.',
+					'pageDescription' : 'What to do before a flood: how to protect your porpeorty; get insurance; sign up to flood warnings and make a flood plan.',
 					'serviceName' : ''
 				})
 			}
