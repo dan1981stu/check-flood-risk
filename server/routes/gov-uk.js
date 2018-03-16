@@ -146,7 +146,7 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				return reply.view('gov-uk/prepare-for-flooding', {
-					'pageTitle' : 'What to do before before a flood - GOV.UK',
+					'pageTitle' : 'Prepare for flooding - GOV.UK',
 					'serviceName' : ''
 				})
 			}
@@ -160,7 +160,7 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				return reply.view('gov-uk/respond-to-flooding', {
-					'pageTitle' : 'What to do during a flood - GOV.UK',
+					'pageTitle' : 'Respond to flooding - GOV.UK',
 					'serviceName' : ''
 				})
 			}
@@ -174,7 +174,7 @@ module.exports = [
 		config: {
 			handler: function (request, reply) {
 				return reply.view('gov-uk/recover-from-flooding', {
-					'pageTitle' : 'What to do after a flood - GOV.UK',
+					'pageTitle' : 'Recover from flooding - GOV.UK',
 					'serviceName' : ''
 				})
 			}
