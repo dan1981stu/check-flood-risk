@@ -15,3 +15,6 @@ var application = {};
 
 }).call(application);
 
+$(document).ready(function(){
+  GOVUK.modules.start()
+});
