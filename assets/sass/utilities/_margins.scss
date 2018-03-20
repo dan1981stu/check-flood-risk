@@ -1,0 +1,17 @@
+// Flood zone
+.flood-zone-location-edit {
+    display:block;
+    margin-top:-1.75em;
+    margin-bottom:1.75em;
+    @include media(tablet) {
+        margin-top:-3.1em;
+        margin-bottom:3.1em;
+    }
+}
+
+// Check flood risk
+.panel-warning-message {
+    @include media(tablet) {
+        margin-bottom:1.5em;
+      }
+}

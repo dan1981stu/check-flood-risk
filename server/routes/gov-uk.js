@@ -137,6 +137,51 @@ module.exports = [
 				})
 			}
 		}
+	},
+
+	// Prepare
+	{
+		method: 'GET',
+		path: '/preparing-for-a-flood',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/preparing-for-a-flood', {
+					'pageTitle' : 'Preparing for a flood - GOV.UK',
+					'pageDescription' : 'What to do before a flood: how to protect your porpeorty; get insurance; sign up to flood warnings and make a flood plan.',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Respond
+	{
+		method: 'GET',
+		path: '/responding-to-a-flood',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/responding-to-a-flood', {
+					'pageTitle' : 'Responding to a flood - GOV.UK',
+					'pageDescription' : 'What to do during a flood.',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Recover
+	{
+		method: 'GET',
+		path: '/recovering-from-a-flood',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/recovering-from-a-flood', {
+					'pageTitle' : 'Recovering from a flood - GOV.UK',
+					'pageDescription' : 'What to do after a flood.',
+					'serviceName' : ''
+				})
+			}
+		}
 	}
 
 ]

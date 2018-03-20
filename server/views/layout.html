@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>{{ pageTitle }}</title>
-
+    <meta name="description" content="{{ pageDescription }}"/>
     {{#if isGuidance}}
     
     <!--[if gt IE 8]><!--><link rel="stylesheet" media="screen" href="https://assets.publishing.service.gov.uk/static/govuk-template-2775f99eaec64ff8121bfbfb3eb67b0c2b4b7c3fc78d25da30e12db2a09d30d6.css" crossorigin="anonymous" integrity="sha256-J3X5nq7GT/gSG/v7PrZ7DCtLfD/HjSXaMOEtsqCdMNY=">
@@ -197,13 +197,14 @@
     <div id="global-app-error" class="app-error hidden"></div>
 
     <script src="{{{ assetPath }}}javascripts/govuk-template.js?0.22.2"></script>
-    <script src="{{{ assetPath }}}javascripts/application.js"></script>
 
     {{> bodyEnd }}
 
     <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
 
     {{{_sections.bodyScripts}}}
+
+    <script src="{{{ assetPath }}}javascripts/application.js"></script>
 
   </body>
 </html>

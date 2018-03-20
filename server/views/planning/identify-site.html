@@ -41,7 +41,7 @@
 						</div>
 					</details>
 			
-					<div class="form-group{{#if model.isError}} form-group-map-error{{/if }}">
+					<div class="form-group{{#if model.isError}} form-group-map-error{{/if }} form-group-map">
 						{{#if model.isError}}
 						<span class="error-message">Shape has not been drawn</span>
 						{{/if }}
@@ -53,12 +53,6 @@
 
 					<!--
 					<div class="form-group">
-						<button class="button-text font-small">Download (PDF, 200KB approx)</button>
-					</div>
-					-->
-
-					<!--
-					<div class="form-group">
 						<label class="form-label" for="link">
 							Bookmark or share the boundary
 						</label>
@@ -67,21 +61,23 @@
 					-->
 
 					<div class="form-group">
-						<input class="button" value="Download map (PDF)">
+						<button type="submit" class="button-download" onlclick="return false">Download printable map (PDF)</button>
 					</div>
-
+					
 					<div class="form-group">
 						<input id="scenario" name="scenario" type="hidden" value=""/>
 						<input id="lonLat" name="lonLat" type="hidden" value="{{ model.lonLat }}"/>
 						<input id="zoom" name="zoom" type="hidden" value="{{ model.zoom }}"/>
 						<input id="path" name="path" type="hidden" value="{{ model.path }}"/>
 						<input id="point" name="point" type="hidden" value=""/>
-						<button type="submit" class="button-text font-small">Get a flood zone report</button>
+						<button type="submit" class="button-text" >Get a flood zone report</button>
 					</div>
 
 				</fieldset>
 
 			</form>
+
+			<p>Find out about <a href="https://www.gov.uk/guidance/flood-risk-assessment-for-planning-applications">flood risk assessments for planning applications</a>.</p>
 
 		</div>
 	</div>
