@@ -154,15 +154,60 @@ module.exports = [
 		}
 	},
 
-	// Respond
+	// Responding to a flood - Overview
 	{
 		method: 'GET',
 		path: '/responding-to-a-flood',
 		config: {
 			handler: function (request, reply) {
-				return reply.view('gov-uk/responding-to-a-flood', {
+				return reply.view('gov-uk/responding-to-a-flood/overview', {
 					'pageTitle' : 'Responding to a flood - GOV.UK',
 					'pageDescription' : 'What to do during a flood.',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Responding to a flood - Getting a flood alert
+	{
+		method: 'GET',
+		path: '/responding-to-a-flood/getting-a-flood-alert',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/responding-to-a-flood/getting-a-flood-alert', {
+					'pageTitle' : 'Getting a flood alert - GOV.UK',
+					'pageDescription' : 'What to do if you get a flood alert.',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Responding to a flood - Getting a flood warning
+	{
+		method: 'GET',
+		path: '/responding-to-a-flood/getting-a-flood-warning',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/responding-to-a-flood/getting-a-flood-warning', {
+					'pageTitle' : 'Getting a flood warning - GOV.UK',
+					'pageDescription' : 'What to do if you get a flood warning.',
+					'serviceName' : ''
+				})
+			}
+		}
+	},
+
+	// Responding to a flood - Getting a severe flood warning
+	{
+		method: 'GET',
+		path: '/responding-to-a-flood/getting-a-severe-flood-warning',
+		config: {
+			handler: function (request, reply) {
+				return reply.view('gov-uk/responding-to-a-flood/getting-a-severe-flood-warning', {
+					'pageTitle' : 'Getting a severe flood warning - GOV.UK',
+					'pageDescription' : 'What to do if you get a severe flood warning.',
 					'serviceName' : ''
 				})
 			}

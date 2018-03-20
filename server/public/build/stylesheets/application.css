@@ -2166,6 +2166,16 @@ input[type=number] {
   }
 }
 
+.responsive-bottom-margin {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 641px) {
+  .responsive-bottom-margin {
+    margin-bottom: 45px;
+  }
+}
+
 .button, .button-download {
   width: auto;
 }
@@ -2638,26 +2648,13 @@ a.subsection-header:focus .font-small {
 }
 
 .govuk-related-items {
-  border-top: 10px solid #005ea5;
+  border-top: 2px solid #005ea5;
   padding-top: 5px;
-  margin-top: 30px;
 }
 
 .govuk-related-items h2 {
-  font-family: "nta", Arial, sans-serif;
-  font-weight: 700;
-  text-transform: none;
-  font-size: 18px;
-  line-height: 1.2;
   margin-top: 0.3em;
   margin-bottom: 0.5em;
-}
-
-@media (min-width: 641px) {
-  .govuk-related-items h2 {
-    font-size: 24px;
-    line-height: 1.25;
-  }
 }
 
 .govuk-related-items .description {
@@ -2701,6 +2698,301 @@ a.subsection-header:focus .font-small {
 
 .govuk-related-items ul li.related-items-more {
   font-weight: bold;
+}
+
+.part-navigation-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #bfc1c3;
+}
+
+@media (min-width: 641px) {
+  .part-navigation-container {
+    margin-bottom: 0;
+  }
+}
+
+.part-navigation {
+  margin-bottom: 15px;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+@media (min-width: 641px) {
+  .part-navigation {
+    font-size: 19px;
+    line-height: 1.31579;
+  }
+}
+
+@media (min-width: 641px) {
+  .part-navigation {
+    font-family: "nta", Arial, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 14px;
+    line-height: 1.14286;
+  }
+}
+
+@media (min-width: 641px) and (min-width: 641px) {
+  .part-navigation {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.part-navigation li {
+  list-style: none;
+  margin-bottom: 0.75em;
+}
+
+.part-navigation li a {
+  display: block;
+}
+
+.part-navigation li {
+  list-style: decimal;
+  margin-left: 1.5em;
+  padding-left: 0.3em;
+}
+
+.part-title {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 20px;
+  line-height: 1.11111;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 641px) {
+  .part-title {
+    font-size: 27px;
+    line-height: 1.11111;
+  }
+}
+
+@media (min-width: 641px) {
+  .part-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.govuk-govspeak h2 {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+@media (min-width: 641px) {
+  .govuk-govspeak h2 {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+
+.pub-c-title {
+  margin-top: 15px;
+}
+
+@media (min-width: 641px) {
+  .pub-c-title {
+    margin-top: 45px;
+  }
+}
+
+.pub-c-title--bottom-margin {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 641px) {
+  .pub-c-title--bottom-margin {
+    margin-bottom: 45px;
+  }
+}
+
+.pub-c-title--inverse {
+  color: #fff;
+}
+
+.pub-c-title--inverse .pub-c-title__context {
+  color: inherit;
+}
+
+.pub-c-title__context {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #6f777b;
+}
+
+@media (min-width: 641px) {
+  .pub-c-title__context {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+
+.pub-c-title__context-link {
+  text-decoration: none;
+}
+
+.pub-c-title__context-link:link, .pub-c-title__context-link:visited {
+  color: inherit;
+}
+
+.pub-c-title__context-link:link:focus, .pub-c-title__context-link:visited:focus {
+  color: #0b0c0c;
+}
+
+.pub-c-title__context-link:hover, .pub-c-title__context-link:focus {
+  text-decoration: underline;
+}
+
+.pub-c-title__text {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 32px;
+  line-height: 1.09375;
+}
+
+@media (min-width: 641px) {
+  .pub-c-title__text {
+    font-size: 48px;
+    line-height: 1.04167;
+  }
+}
+
+.pub-c-title__text--long {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 24px;
+  line-height: 1.04167;
+}
+
+@media (min-width: 641px) {
+  .pub-c-title__text--long {
+    font-size: 36px;
+    line-height: 1.11111;
+  }
+}
+
+.pub-c-pagination {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.pub-c-pagination__list {
+  margin: 0;
+  padding: 0;
+}
+
+.pub-c-pagination__list:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.pub-c-pagination__item {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 14px;
+  line-height: 1.14286;
+  float: left;
+  list-style: none;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+}
+
+@media (min-width: 641px) {
+  .pub-c-pagination__item {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.pub-c-pagination__link {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.pub-c-pagination__link:visited {
+  color: #005ea5;
+}
+
+.pub-c-pagination__link:hover, .pub-c-pagination__link:active {
+  background-color: #f8f8f8;
+}
+
+.pub-c-pagination__link-title {
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 20px;
+  line-height: 1.11111;
+  display: block;
+}
+
+@media (min-width: 641px) {
+  .pub-c-pagination__link-title {
+    font-size: 27px;
+    line-height: 1.25;
+  }
+}
+
+.pub-c-pagination__item--previous {
+  float: left;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .pub-c-pagination__item--previous {
+    float: none;
+    width: 100%;
+  }
+}
+
+.pub-c-pagination__item--next {
+  float: right;
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .pub-c-pagination__item--next {
+    float: none;
+    width: 100%;
+  }
+}
+
+.pub-c-pagination__link-icon {
+  display: inline-block;
+  margin-bottom: 1px;
+  height: .482em;
+  width: .63em;
+}
+
+.pub-c-pagination__link-label {
+  display: inline-block;
+  margin-top: 0.1em;
+  text-decoration: underline;
 }
 
 table th, table td {
